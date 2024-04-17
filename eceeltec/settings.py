@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     'app_client',
     'app_company',
+    'rolepermissions',
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,9 @@ STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Config auth
+AUTH_USER_MODEL = 'app_company.Users'
+
+# Role permissions
+ROLEPERMISSIONS_MODULE = 'eceeltec.roles'
