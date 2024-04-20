@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+} 
+
+.employee-list {
+    list-style-type: none; 
+    padding: 0; 
+}
+
+.employee-box {
+    background-color: #f0f0f0; 
+    border: 1px solid #d3d3d3; 
+    border-radius: 5px; 
+    padding: 8px 12px; 
+    margin-bottom: 10px; 
+    width: 200px; 
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.messages {
+    list-style-type: none; 
+    padding: 0; 
+    margin-top: 20px; 
+}
+
+.messages li {
+    color: red; 
+    margin-bottom: 5px; 
+}

@@ -3,7 +3,7 @@ from rolepermissions.roles import AbstractUserRole
 class Administrador(AbstractUserRole):
     available_permissions = {
         'register_employee': True,
-        'view_functionaries':True,
+        'view_employees':True,
     }
 
 class Funcionario(AbstractUserRole):

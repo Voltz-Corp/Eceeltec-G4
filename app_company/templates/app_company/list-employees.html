@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'app_company/css/list-employees.css' %}"> 
+</head>
+
+<body>
+    {% block content %}
+    <h2>Colaboradores</h2>
+    <ul class="employee-list">
+        {% for employee in employees %}
+        <li class="employee-box">{{ employee.username }}</li>
+        {% endfor %}
+    </ul>
+    
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>
