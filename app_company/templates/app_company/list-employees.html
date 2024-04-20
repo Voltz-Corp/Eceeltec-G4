@@ -9,21 +9,23 @@
 </head>
 
 <body>
-    {% block content %}
-    <h2>Colaboradores</h2>
-    <ul class="employee-list">
-        {% for employee in employees %}
-        <li class="employee-box">{{ employee.username }}</li>
-        {% endfor %}
-    </ul>
-    
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li class="{{ message.tags }}">{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endblock %}
+    <div class="content">
+        <h2 class="header">Colaboradores</h2>
+        <div class="sheet">
+            <ul class="employee-list">
+                {% for employee in employees %}
+                <li class="employee-box">{{ employee.username }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
 </body>
 </html>
