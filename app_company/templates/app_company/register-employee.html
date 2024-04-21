@@ -27,6 +27,9 @@
             </div>
             <button type="submit">Registrar</button>
         </form>
+        <form action="{% url 'company:list_employees' %}" method="get">
+            <button type="submit" class="new-employee-button">Voltar</button>
+        </form>
         {% if messages %}
         <ul>
             {% for message in messages %}
