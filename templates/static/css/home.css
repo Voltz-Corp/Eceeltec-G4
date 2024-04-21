@@ -65,6 +65,12 @@ li > a {
     justify-content: center;
     text-align: center;
     width: 200;
+    transition: all 0.3s;
+}
+
+#employee:hover, #client:hover {
+    scale: 1.1;
+    cursor: pointer;
 }
 
 #employee img, #client img {
@@ -73,6 +79,10 @@ li > a {
 
 #employee span, #client span {
     font-size: 20px;
+}
+
+#employee a, #client a {
+    text-decoration: none;
 }
 
 footer {

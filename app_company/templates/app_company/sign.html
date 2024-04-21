@@ -49,16 +49,15 @@
     </div>
     {% endfor %}
       <section id="login">
-        <img src="https://pbs.twimg.com/media/GKBB7s4WAAAA2FQ?format=jpg&name=large" id="backLogin" alt="">
+        {% comment %} <img src="https://pbs.twimg.com/media/GKBB7s4WAAAA2FQ?format=jpg&name=large" id="backLogin" alt=""> {% endcomment %}
         <section class="left">
         </section>
         <section class="right active" id="loginzao">
-          <img src="https://i.imgur.com/FShMthn.png" alt="Logo Eceel-tec">
           <div id="loginzinho" class="active">
-            <h3>Bem vindo, colaborador!</h3>
+            <h3>Bem-vindo(a)<br>colaborador!</h3>
             <form action="{% url 'company:sign' %}" method="POST">
               {% csrf_token %}
-              <label for="user">Usuário: </label>
+              <label for="user">Login: </label>
               <input type="text" id="user" name="userL" value="{{usernameL}}" required>
               <label for="password">Senha: </label>
               <input type="password" id="password" name="password" required>
