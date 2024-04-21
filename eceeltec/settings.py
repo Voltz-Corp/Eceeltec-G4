@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     'app_client',
     'app_company',
+    'rolepermissions',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,7 @@ ROOT_URLCONF = 'eceeltec.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':  [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,6 +136,7 @@ USE_TZ = True
 
 STATIC_URL = os.environ.get('DJANGO_STATIC_URL', "/static/")
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'templates/static'),)
 
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 
@@ -142,3 +144,9 @@ STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Config auth
+AUTH_USER_MODEL = 'app_company.Users'
+
+# Role permissions
+ROLEPERMISSIONS_MODULE = 'eceeltec.roles'

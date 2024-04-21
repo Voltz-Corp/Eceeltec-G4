@@ -1,0 +1,34 @@
+{% extends "./base-utilities.html" %}
+{% load static %}
+
+{% block 'head' %}
+  <link rel="stylesheet" type="text/css" href="{% static 'app_company/css/sign.css' %}">
+  <link rel="shortcut icon" href="https://i.imgur.com/cwTGnjY.png" type="image/x-icon">
+{% endblock %}
+
+{% block 'title' %}
+  ForgeSheets - Explore um mundo de aventuras
+{% endblock %}
+
+{% block 'body' %}
+  <main>
+      <section id="login">
+        <img src="https://pbs.twimg.com/media/GKBB7s4WAAAA2FQ?format=jpg&name=large" id="backLogin" alt="">
+        <section class="left">
+        </section>
+        <section class="right active" id="loginzao">
+          <img src="https://i.imgur.com/FShMthn.png" alt="Logo Eceel-tec">
+          <div id="loginzinho" class="active">
+            <h1>Você já está logado(a)</h1>
+            <a href="{% url 'company:list_employees' %}"><button id="enter">Entrar</button></a>
+            <form action="{% url 'company:sign' %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="logout">
+              <input type="submit" value="Sair" id="logout">
+            </form>
+          </div>
+        </section>
+      </section>
+  </main> 
+  <script src="{% static 'company_app/js/script.js' %}"></script>   
+{% endblock %}
