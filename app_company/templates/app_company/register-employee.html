@@ -11,7 +11,7 @@
 <div class="content">
     <div class="form-card">
         <h2>Colaborador</h2>
-        <form action="{% url 'register_employee' %}" method="post">
+        <form action="{% url 'company:register_employee' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
                 <label for="username">Nome do colaborador:</label>
@@ -26,6 +26,9 @@
                 <input type="password" name="password" id="password" required>
             </div>
             <button type="submit">Registrar</button>
+        </form>
+        <form action="{% url 'company:list_employees' %}" method="get">
+            <button type="submit" class="new-employee-button">Voltar</button>
         </form>
         {% if messages %}
         <ul>

@@ -9,6 +9,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from .utils import register, login
 from django.contrib.auth import logout
+from rolepermissions.roles import assign_role
 
 
 class SignView(View):
@@ -30,9 +31,12 @@ class SignView(View):
 
         if 'login' in request.POST: 
             username = request.POST.get('userL')
+            
             login_result = login(request, username, password)
             if login_result == 1:
-                return redirect('company:list_employees')
+                    return redirect('company:list_employees')
+            elif login_result == 3:
+                return redirect('company:employee_template')
             elif login_result == 0:
                 messages.error(request, 'Usuário ou senha inválidos')
                 return redirect('company:sign')
@@ -41,7 +45,7 @@ class SignView(View):
                 messages.error(request, 'Preencha todos os campos')
                 return render(request, 'app_company/sign.html', ctx)
 
-        elif 'register' in request.POST:
+        '''elif 'register' in request.POST:
             username = request.POST.get('userR')
             register_result = register(username, email, password)
             if register_result == 1:
@@ -67,7 +71,9 @@ class SignView(View):
                 messages.error(request, 'Usuário já cadastrado')
                 ctx = {'email': email, 'register': 1}
                 return render(request, 'app_company/sign.html', ctx)
-
+        '''
+        
+         
 @method_decorator(has_permission_decorator('register_employee'), name='dispatch')
 class RegisterEmployeeView(View):
     def get(self, request):
@@ -87,14 +93,15 @@ class RegisterEmployeeView(View):
             messages.error(request, "Esse email já está registrado.")
             return render(request, 'app_company/register-employee.html')
 
-        Users.objects.create_user(
+        user=Users.objects.create_user(
             username=username,
             email=email,
             password=make_password(password),
             role=role
         )
+        user.save()
         messages.success(request, "Colaborador registrado com sucesso.")
-        return redirect('list_employees')
+        return redirect('company:list_employees')
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')
 class ListEmployeesView(View):
@@ -107,3 +114,8 @@ class EmployeeDetailView(View):
     def get(self, request, pk):
         employee = get_object_or_404(Users, pk=pk)
         return render(request, 'app_company/employee-detail.html', {'employee': employee})
+    
+@method_decorator(has_permission_decorator('fazer_coisas'), name='dispatch')
+class EmployeeBasicView(View):
+    def get(self, request):
+        return render(request, 'app_company/employee-temppage.html')

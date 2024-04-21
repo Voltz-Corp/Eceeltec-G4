@@ -10,6 +10,9 @@
 {% block 'body' %}
     <div class="content">
         <h2 class="header">Colaboradores</h2>
+        <form action="{% url 'company:register_employee' %}" method="get">
+            <button type="submit" class="new-employee-button">+ Novo</button>
+        </form>
         <div class="sheet">
             <ul class="employee-list">
                 {% for employee in employees %}
