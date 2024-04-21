@@ -4,6 +4,7 @@ class Administrador(AbstractUserRole):
     available_permissions = {
         'register_employee': True,
         'view_employees':True,
+        'employee_details':True,
     }
 
 class Funcionario(AbstractUserRole):

@@ -62,3 +62,12 @@ body {
     font-size: 1.5em;  
     margin-bottom: 15px;  
 }
+
+.info-link {
+    color: #007bff; 
+    text-decoration: none; 
+}
+
+.info-link:hover {
+    text-decoration: underline; 
+}

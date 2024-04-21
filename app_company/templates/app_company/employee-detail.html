@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'app_company/css/employee-detail.css' %}">
+</head>
+<body>
+    <div class="content">
+        <h1>{{ employee.username }}</h1>
+        <div class="employee-info">
+            <p><strong>Email:</strong> {{ employee.email }}</p>
+        </div>
+        <a href="{% url 'list_employees' %}">Voltar à lista</a>
+    </div>
+</body>
+</html>

@@ -5,6 +5,7 @@ from django.contrib.auth.hashers import make_password
 from .models import Users
 from rolepermissions.decorators import has_permission_decorator
 from django.utils.decorators import method_decorator
+from django.shortcuts import render, get_object_or_404
 
 
 
@@ -42,3 +43,9 @@ class ListEmployeesView(View):
     def get(self, request):
         employees = Users.objects.filter(role='F')  
         return render(request, 'app_company/list-employees.html', {'employees': employees})
+    
+@method_decorator(has_permission_decorator('employee_details'), name='dispatch')
+class EmployeeDetailView(View):
+    def get(self, request, pk):
+        employee = get_object_or_404(Users, pk=pk)
+        return render(request, 'app_company/employee-detail.html', {'employee': employee})
