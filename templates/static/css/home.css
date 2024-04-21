@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+ul {
+    display: flex;
+}
+
+#image {
+    width: 300px;
+    margin-right: 50px;
+}
+
+li {
+    list-style: none;
+    text-decoration: none;
+    margin-right: 50px;
+    font-size: 20px;
+}
+
+li > a {
+    text-decoration: none;
+}
+
+#banner {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    height: 300px;
+    width: 700px;
+    background-image: url("https://eceel-tec.com.br/wp-content/uploads/2020/08/Faxada-finalizada-768x576.png");
+    background-position: center;
+}
+
+#users {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 200px;
+    margin-top: 30px;
+    gap: 100px;
+    margin-bottom: 30px;
+}
+
+#div {
+    background-color: #011627;
+    color: #011627;
+}
+
+#employee, #client {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 200;
+}
+
+#employee img, #client img {
+    width: 150px;
+}
+
+#employee span, #client span {
+    font-size: 20px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
