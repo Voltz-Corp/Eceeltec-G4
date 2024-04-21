@@ -2,6 +2,7 @@ from app_company.models import Users
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 import re
+from django.contrib.auth import authenticate, login as auth_login
 
 def register(username, email, password):
 
@@ -34,13 +35,18 @@ def register(username, email, password):
     return 1
 
 def login(request, username, password):
-    user = authenticate(username=username, password=password)
+    user = Users.objects.filter(username=username).first()
+    print(user)
 
     if len(username) < 1 or len(password) < 1:
         return 2
 
-    if user:
-        login_django(request, user)
-        return 1
+    if not user:
+        return 0
 
-    return 0
+    auth_login(request, user)
+    if user.role == 'A':
+        return 1 
+    elif user.role == 'F':
+        return 3 
+    
