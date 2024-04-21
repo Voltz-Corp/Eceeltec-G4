@@ -96,7 +96,6 @@ class RegisterEmployeeView(View):
         messages.success(request, "Colaborador registrado com sucesso.")
         return redirect('list_employees')
 
-
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')
 class ListEmployeesView(View):
     def get(self, request):
