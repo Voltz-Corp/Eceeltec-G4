@@ -90,3 +90,12 @@ footer {
     justify-content: center;
     padding: 20px;
 }
+
+footer img {
+    width: 70px;
+    transition: all .3s;
+}
+
+footer img:hover {
+    transform: translateY(-4px);
+}
