@@ -32,3 +32,17 @@
 <br/>
 
 # Status Report 1
+
+---
+
+# Equipe
+
+![0d5e8392-678f-4fdf-9a2f-30980d970307](https://github.com/Voltz-Corp/.github/assets/117609505/2a0900d8-27de-4dc8-849f-1e21f58ae4ab)
+
+<div align=center>Ana Clara Gomes da Silva / Arthur Vinícius / Gabriel Albuquerque / Gustavo “yoq” Mourato / Karol Calixto / Luan H. Kato / Paulo Rosado / Sophia Gallindo / Sophia “Sopa” Jardelino / Théo Michelis / Vinícius de Andrade Jordão / Vinicius Freitas / Veridiana Almeida
+</div>
+
+---
+
+<p align="center"><img src="https://github.com/Taverna-Hub/ForgeSheets/assets/117609505/9287638f-8716-4e62-9989-a40882fbfed6" width="40px"></p>
+<p align="center">Projeto para a disciplina de <strong>Projetos 2</strong> na <strong>CESAR School‎‎</strong></p>
