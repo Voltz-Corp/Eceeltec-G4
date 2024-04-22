@@ -5,7 +5,6 @@ from django.views import View
 
 from app_company.models import Users
 # from django.contrib.auth.hashers import make_password
-from .models import Order
 # from rolepermissions.decorators import has_permission_decorator
 # from django.utils.decorators import method_decorator
 from django.contrib.auth.hashers import make_password
@@ -59,7 +58,8 @@ class SignUpClient(View):
         if not password_treated:
             return messages.error(request, 'O campo de senha não pode ser vazio!')
 
-        user = Users(name=name, phone=phone, email=email, password=password, cep=cep, 
+        # first name é o nome completo
+        user = Users(first_name=name, phone=phone, email=email, password=password, cep=cep, 
                     uf=uf, city=city, neighborhood= neighborhood, address=address, 
                     number=number, complement=complement, role="C")
         user.save()
