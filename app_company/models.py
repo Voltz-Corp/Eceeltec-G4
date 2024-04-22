@@ -16,3 +16,4 @@ class Users(AbstractUser):
     complement = models.CharField(max_length=75, default='', null=True)
     identity_number = models.CharField(max_length=20, default='', null=True)
     phone = models.CharField(max_length=15, default='', null=True)
+    dob = models.DateField(null=True, blank=True) 

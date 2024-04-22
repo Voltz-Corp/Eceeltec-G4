@@ -66,6 +66,8 @@ class RegisterEmployeeView(View):
         address = request.POST.get('address')
         number = request.POST.get('number')
         complement = request.POST.get('complement')
+        position = request.POST.get('position')
+        dob = request.POST.get('dob')
 
         if Users.objects.filter(username=username).exists():
             messages.error(request, "Já existe um funcionário com esse nome de usuário.")
@@ -75,9 +77,9 @@ class RegisterEmployeeView(View):
             messages.error(request, "Esse email já está registrado.")
             return render(request, 'app_company/register-employee.html')
 
-        user = Users(username=username, phone=phone, email=email, password=password, cep=cep, 
+        user = Users(username=username, phone=phone, email=email, password=make_password(password), cep=cep, 
                     uf=uf, city=city, neighborhood= neighborhood, address=address, 
-                    number=number, complement=complement, role=role)
+                    number=number, complement=complement, role=role, position=position, dob=dob)
         user.save()
         messages.success(request, "Colaborador registrado com sucesso.")
         return redirect('company:list_employees')

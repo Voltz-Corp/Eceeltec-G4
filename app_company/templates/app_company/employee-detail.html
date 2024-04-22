@@ -12,6 +12,11 @@
         <h1>{{ employee.username }}</h1>
         <div class="employee-info">
             <p><strong>Email:</strong> {{ employee.email }}</p>
+            <p><strong>Telefone:</strong> {{ employee.number }}</p>
+            <p><strong>Data de Nascimento:</strong> {{ employee.dob|date:"d/m/Y" }}</p>
+            <p><strong>Cargo:</strong> {{ employee.position }}</p>
+            <p><strong>Endereço:</strong> {{ employee.address }}, {{ employee.complement }}, {{ employee.neighborhood }}, {{ employee.city }} - {{ employee.uf }}</p>
+            <p><strong>CEP:</strong> {{ employee.cep }}</p>
         </div>
         <a href="{% url 'company:list_employees' %}">Voltar à lista</a>
     </div>
