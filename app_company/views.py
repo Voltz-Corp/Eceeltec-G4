@@ -21,7 +21,6 @@ class SignView(View):
             return render(request, 'app_company/sign.html')
 
     def post(self, request):
-
         if 'logout' in request.POST:
             logout(request)
             return redirect('company:sign')
