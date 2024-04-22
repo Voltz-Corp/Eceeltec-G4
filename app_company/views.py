@@ -28,11 +28,11 @@ class SignView(View):
 
         password = request.POST.get('password')
         email = request.POST.get('email')
-
+        username=request.POST.get('username')
         if 'login' in request.POST: 
-            username = request.POST.get('userL')
+            email = request.POST.get('email')
             
-            login_result = login(request, username, password)
+            login_result = login(request, email, password)
             if login_result == 1:
                     return redirect('company:list_employees')
             elif login_result == 3:
@@ -45,33 +45,7 @@ class SignView(View):
                 messages.error(request, 'Preencha todos os campos')
                 return render(request, 'app_company/sign.html', ctx)
 
-        '''elif 'register' in request.POST:
-            username = request.POST.get('userR')
-            register_result = register(username, email, password)
-            if register_result == 1:
-                messages.success(request, 'Usuário cadastrado com sucesso')
-                return redirect('company:sign')
-            elif register_result == 0:
-                messages.error(request, 'Usuário inválido')
-                ctx = {'email': email, 'register': 1}
-                return render(request, 'app_company/sign.html', ctx)
-            elif register_result == 2:
-                messages.error(request, 'E-mail inválido')
-                ctx = {'usernameR': username, 'register': 1}
-                return render(request, 'app_company/sign.html', ctx)
-            elif register_result == 3:
-                messages.error(request, 'Preencha todos os campos')
-                ctx = {'usernameR': username, 'email': email, 'register': 1}
-                return render(request, 'app_company/sign.html', ctx)
-            elif register_result == 4:
-                messages.error(request, 'E-mail já cadastrado')
-                ctx = {'usernameR': username, 'register': 1}
-                return render(request, 'app_company/sign.html', ctx)
-            elif register_result == 5:
-                messages.error(request, 'Usuário já cadastrado')
-                ctx = {'email': email, 'register': 1}
-                return render(request, 'app_company/sign.html', ctx)
-        '''
+        
         
          
 @method_decorator(has_permission_decorator('register_employee'), name='dispatch')

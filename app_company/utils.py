@@ -34,11 +34,11 @@ def register(username, email, password):
 
     return 1
 
-def login(request, username, password):
-    user = Users.objects.filter(username=username).first()
-    print(user)
+def login(request, email, password):
+    user = Users.objects.filter(email=email).first()
+   
 
-    if len(username) < 1 or len(password) < 1:
+    if len(email) < 1 or len(password) < 1:
         return 2
 
     if not user:
