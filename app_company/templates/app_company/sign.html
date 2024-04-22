@@ -57,8 +57,8 @@
             <h3>Bem-vindo(a)<br>colaborador!</h3>
             <form action="{% url 'company:sign' %}" method="POST">
               {% csrf_token %}
-              <label for="user">Login: </label>
-              <input type="text" id="user" name="userL" value="{{usernameL}}" required>
+              <label for="email">Login: </label>
+              <input type="text" id="email" name="email" value="{{email}}" required>
               <label for="password">Senha: </label>
               <input type="password" id="password" name="password" required>
               <input type="hidden" name="login">
