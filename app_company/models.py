@@ -5,6 +5,7 @@ class Users(AbstractUser):
     choices_role = (('A', 'Administrador'),
                     ('F', 'Funcionario'),
                     ('C', 'Cliente'))
+    position = models.CharField(max_length=100, blank=True)
     role = models.CharField(max_length=1, choices=choices_role)
     cep = models.CharField(max_length=9, default='', null=True)
     uf = models.CharField(max_length=2, default='', null=True)
