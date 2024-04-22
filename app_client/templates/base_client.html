@@ -4,42 +4,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "css/base_client.css" %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="shortcut icon" href="https://eceel-tec.com.br/wp-content/uploads/2020/06/cropped-logo_favicon-192x192.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   {% block 'head' %}{% endblock %}
 
   <title>{% block 'title' %}{% endblock %}</title>
 </head>
 <body>
-  <main class="{% if app_name == 'app_company' %}mainCompany{% endif %}">
+  <main class="{% if app_name == 'app_client' %}mainclient{% endif %}">
     <button id="menuHamburguer">Menu</button>
     <nav id="sidebarNav">
-      <img src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
-      <h1 class="usuario">Olá, {{user}}!</h1>
+      <img class="logo" src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
       <ul>
-        <li class="drawers {% if app_name == 'app_company' %}active{% endif %}">
+        <li class="drawers {% if app_name == 'app_client' %}active{% endif %}">
           <a href="#">
-            <i data-lucide="rows-3"></i>
-            Gavetas
+            <i data-lucide="users-round"></i>
+            Perfil
           </a>
         </li>
-        <li class="employees {% if app_name == 'app_company' %}active{% endif %}">
-         <a href="{% url 'company:list_employees'%}">
-          <i data-lucide="users-round"></i>
-          Colaboradores
+        <li class="employees {% if app_name == 'app_client' %}active{% endif %}">
+         <a href="{% url 'client:view_orders'%}">
+          <i data-lucide="rows-3"></i>
+          Pedidos
          </a>
         </li>
-        <li class="configs {% if app_name == 'app_company' %}active{% endif %}">
+        <li class="configs {% if app_name == 'app_client' %}active{% endif %}">
           <a href="#">
            <i data-lucide="settings"></i>
            Configurações
           </a>
          </li>
       </ul>
-      <form  class="logout" action="{% url 'company:sign' %}" method='POST'>
+      <form  class="logout" action="" method='POST'>
         {% csrf_token %}
         <input type="hidden" name="logout">
         <button type="submit"> 

@@ -81,6 +81,13 @@ class ListEmployeesView(View):
     def get(self, request):
         employees = Users.objects.filter(role='F')  
         return render(request, 'app_company/list-employees.html', {'employees': employees})
+
+@method_decorator(has_permission_decorator('view_employees'), name='dispatch')    
+class DeleteEmployeeView(View):
+    def post(self,request, pk): 
+        employee = Users.objects.get(pk=pk)
+        employee.delete()
+        return redirect('company:list_employees')
     
 @method_decorator(has_permission_decorator('employee_details'), name='dispatch')
 class EmployeeDetailView(View):

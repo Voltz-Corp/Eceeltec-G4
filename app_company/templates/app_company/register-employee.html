@@ -13,18 +13,100 @@
         <h2>Colaborador</h2>
         <form action="{% url 'company:register_employee' %}" method="post">
             {% csrf_token %}
+            
             <div class="form-group">
-                <label for="username">Nome do colaborador:</label>
+                <label for="username">Nome do colaborador</label>
                 <input type="text" name="username" id="username" required>
-            </div>
+            </div> 
+
             <div class="form-group">
-                <label for="email">Email:</label>
+                <label for="number_input">Telefone</label>
+                <input type="number" name="number_input" id="number_input" required>
+            </div>   
+
+            <div class="form-group">
+                <label for="dob">Data de nascimento</label>
+                <input type="date" name="dob" id="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="position">Cargo na empresa</label>
+                <input type="text" name="position" id="position">
+            </div>
+
+            <div class="form-group">
+                <label for="postal_code">CEP</label>
+                <input type="text" name="postal_code" id="postal_code" required>
+            </div>
+
+            <div class="form-group">
+                <label for="street">Rua</label>
+                <input type="text" name="street" id="street">
+            </div class="form-group">
+
+            <div class="form-group">
+                <label for="address_complement">Complemento</label>
+                <input type="text" name="address_complement" id="address_complement">
+            </div>
+
+            <div class="form-group">
+                <label for="district">Bairro</label>
+                <input type="text" name="district" id="district" required>
+            </div>
+
+            <div class="form-group">
+                <label for="city">Cidade</label>
+                <input type="text" name="city" id="city" required>
+            </div>
+
+            <div class="form-group">
+                <label for="state">Estado</label>
+                <select name="state" id="state" required>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Destrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minhas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernamuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
                 <input type="email" name="email" id="email" required>
             </div>
+
             <div class="form-group">
-                <label for="password">Senha:</label>
+                <label for="password">Senha</label>
                 <input type="password" name="password" id="password" required>
             </div>
+
+            <div class="form-group">
+                <label for="repeat_password">Digite a senha novamente</label>
+                <input type="password" id="repeat_password" name="repeat_password" required>
+            </div>
+
             <button type="submit">Registrar</button>
         </form>
         <form action="{% url 'company:list_employees' %}" method="get">
