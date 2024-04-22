@@ -27,18 +27,19 @@
     </header>
     <main>
         <div id="banner">
-        </div>
+            <img src="https://eceel-tec.com.br/wp-content/uploads/2020/08/Faxada-finalizada-768x576.png" alt="">
+        </div> 
         <div id="users">
             <div id="employee">
                 <a href="{% url 'company:sign' %}">
-                    <img src="https://pbs.twimg.com/media/GLtwv6lWwAA8jWf?format=png&name=900x900" alt="Ícone de funcionário">
+                    <i data-lucide="user-cog" width="200" height="200" stroke-width="1.2"></i>
                     <span>Sou colaborador</span>
                 </a>
             </div>
             <div id="div">.</div>
             <div id="client">
                 <a href="#">
-                    <img src="https://pbs.twimg.com/media/GLtwv6nW4AAl9a2?format=png&name=900x900" alt="Ícone de cliente">
+                    <i data-lucide="user" width="200" height="200" stroke-width="1.2"></i>
                     <span>Sou cliente</span>
                 </a>
             </div>
@@ -47,5 +48,10 @@
     <footer>
         <p>Eceel-Tec © 2024 | Desenvolvido por <a href="https://github.com/Voltz-Corp" target="_blank"><img src="https://pbs.twimg.com/media/GLuJIxaXUAEjLH9?format=png&name=900x900" alt="Logo Voltz"></a></p>
     </footer>
+    <!-- Development version -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <!-- Production version -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="{% static 'js/script.js' %}"></script>   
 </body>
 </html>
