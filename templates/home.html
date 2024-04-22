@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eceel-Tec</title>
+    <link rel="shortcut icon" href="https://eceel-tec.com.br/wp-content/uploads/2020/06/cropped-logo_favicon-192x192.png" type="image/x-icon">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="https://eceel-tec.com.br/wp-content/uploads/2020/07/logo-1.png" alt="Logo Eceel-Tec" id="image">
+            <ul>
+                <li>
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li>
+                    <a href="#">Fale conosco</a>
+                </li>
+                <li>
+                    <a href="#">FAQ</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="banner">
+        </div>
+        <div id="users">
+            <div id="employee">
+                <a href="{% url 'company:sign' %}">
+                    <img src="https://pbs.twimg.com/media/GLtwv6lWwAA8jWf?format=png&name=900x900" alt="Ícone de funcionário">
+                    <span>Sou colaborador</span>
+                </a>
+            </div>
+            <div id="div">.</div>
+            <div id="client">
+                <a href="#">
+                    <img src="https://pbs.twimg.com/media/GLtwv6nW4AAl9a2?format=png&name=900x900" alt="Ícone de cliente">
+                    <span>Sou cliente</span>
+                </a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Eceel-Tec © 2024 | Desenvolvido por <a href="https://github.com/Voltz-Corp" target="_blank"><img src="https://pbs.twimg.com/media/GLuJIxaXUAEjLH9?format=png&name=900x900" alt="Logo Voltz"></a></p>
+    </footer>
+</body>
+</html>
