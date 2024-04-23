@@ -28,6 +28,7 @@ class SignView(View):
         password = request.POST.get('password')
         email = request.POST.get('email')
         username=request.POST.get('username')
+        
         if 'login' in request.POST: 
             email = request.POST.get('email')
             
@@ -56,7 +57,17 @@ class RegisterEmployeeView(View):
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        role = 'F'  
+        role = 'F'
+        phone = request.POST.get('phone')
+        cep = request.POST.get('cep')
+        uf = request.POST.get('uf')
+        city = request.POST.get('city')
+        neighborhood = request.POST.get('neighborhood')
+        address = request.POST.get('address')
+        number = request.POST.get('number')
+        complement = request.POST.get('complement')
+        position = request.POST.get('position')
+        dob = request.POST.get('dob')
 
         if Users.objects.filter(username=username).exists():
             messages.error(request, "Já existe um funcionário com esse nome de usuário.")
@@ -66,12 +77,9 @@ class RegisterEmployeeView(View):
             messages.error(request, "Esse email já está registrado.")
             return render(request, 'app_company/register-employee.html')
 
-        user=Users.objects.create_user(
-            username=username,
-            email=email,
-            password=make_password(password),
-            role=role
-        )
+        user = Users(username=username, phone=phone, email=email, password=make_password(password), cep=cep, 
+                    uf=uf, city=city, neighborhood= neighborhood, address=address, 
+                    number=number, complement=complement, role=role, position=position, dob=dob)
         user.save()
         messages.success(request, "Colaborador registrado com sucesso.")
         return redirect('company:list_employees')

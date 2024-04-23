@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block 'body' %}
+
 <div class="content">
     <div class="form-card">
         <h2>Colaborador</h2>
@@ -20,8 +21,8 @@
             </div> 
 
             <div class="form-group">
-                <label for="number_input">Telefone</label>
-                <input type="number" name="number_input" id="number_input" required>
+                <label for="number">Telefone</label>
+                <input type="text" name="number" id="number" required>
             </div>   
 
             <div class="form-group">
@@ -35,23 +36,23 @@
             </div>
 
             <div class="form-group">
-                <label for="postal_code">CEP</label>
-                <input type="text" name="postal_code" id="postal_code" required>
+                <label for="cep">CEP</label>
+                <input type="text" name="cep" id="cep" required>
             </div>
 
             <div class="form-group">
-                <label for="street">Rua</label>
-                <input type="text" name="street" id="street">
+                <label for="address">Rua</label>
+                <input type="text" name="address" id="address">
             </div class="form-group">
 
             <div class="form-group">
-                <label for="address_complement">Complemento</label>
-                <input type="text" name="address_complement" id="address_complement">
+                <label for="complement">Complemento</label>
+                <input type="text" name="complement" id="complement">
             </div>
 
             <div class="form-group">
-                <label for="district">Bairro</label>
-                <input type="text" name="district" id="district" required>
+                <label for="neighborhood">Bairro</label>
+                <input type="text" name="neighborhood" id="neighborhood" required>
             </div>
 
             <div class="form-group">
@@ -60,8 +61,8 @@
             </div>
 
             <div class="form-group">
-                <label for="state">Estado</label>
-                <select name="state" id="state" required>
+                <label for="uf">Estado</label>
+                <select name="uf" id="uf" required>
                 <option value="AC">Acre</option>
                 <option value="AL">Alagoas</option>
                 <option value="AP">Amapá</option>
@@ -102,10 +103,6 @@
                 <input type="password" name="password" id="password" required>
             </div>
 
-            <div class="form-group">
-                <label for="repeat_password">Digite a senha novamente</label>
-                <input type="password" id="repeat_password" name="repeat_password" required>
-            </div>
 
             <button type="submit">Registrar</button>
         </form>
@@ -121,4 +118,6 @@
         {% endif %}
     </div>
 </div>
+
+<script src="{% static 'app_company/js/api.js' %}"></script>
 {% endblock %}

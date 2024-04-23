@@ -10,6 +10,10 @@ body {
     font-size: 20px;  
 }
 
+li {
+    display: flex;
+}
+
 .header {
     align-self: flex-start;
     width: 90%;  
@@ -33,58 +37,66 @@ body {
     
     padding: 0%;
     
-    margin: 15%;
+    margin: 25%;
     margin-top: 30px;  
     margin-bottom: 10px;  
     height: fit-content;
     /* overflow: scroll; */
 
-
 }
+
 
 .employee-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
+
 }
 
+.icons{
+    border-left: 1.5px solid #d1d5db;
+    padding-left: 1%;
+}
+
+
 .employee-box {
+    display: flex;
     padding: 15px 20px;  
     margin-bottom: 5px;  
     text-align: left;
     border-bottom: 2px solid #d3d3d3;  
+
+    justify-content: space-between;
 }
 
 .employee-box:last-child {
     border-bottom: none;
 }
 
-.messages {
-    list-style-type: none;
-    padding: 0;
-    width: 90%;  
-    max-width: 600px; 
-    text-align: center;
-    margin-top: 30px;  
-}
-
-.messages li {
-    color: #d9534f;
-    font-size: 1.5em;  
-    margin-bottom: 15px;  
-}
 
 .info-link {
     color: #007bff; 
     text-decoration: none; 
 }
 
-.info-link:hover {
-    text-decoration: underline; 
+/* .info-link:hover {
+    transform: translateY(-4px);
+} */
+
+.delete-employee-button{
+    background-color: transparent;
+    color: #d9534f;
+    border: none;
+
+}
+
+.form-button {
+    display: contents;
 }
 
 .new-employee-button {
     background-color: #007bff; 
+    color: #fff;
     border: none;
     padding: 10px 20px;
 
@@ -105,3 +117,31 @@ body {
 .new-employee-button:hover {
     background-color: #0056b3; 
 }
+
+.toast {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px;
+  
+    /* background-color: #f7f7f7; */
+    background-color: #f0fcf1;
+    color: #1f2937;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+  
+    animation: slideInLeft ease .5s, fadeOut linear 1s .5s forwards;
+  }
+  
+  .success {
+    border-left: 4px solid #22c55e;
+  }
+  
+  .success>svg {
+    color: #22c55e;
+  }
