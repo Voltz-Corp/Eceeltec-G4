@@ -2,7 +2,7 @@
   --red-600: #dc2626;
   --red-700: #b91c1c;
   --red-950: #450a0a;
-  --green-500: #22c55e;
+  --green-500: #129D1E;
   --white: #f7f7f7;
   --gray-200: #e5e7eb;
   --gray-300: #d1d5db;
@@ -20,7 +20,7 @@
   background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--green-500);
+  background-color: var(--gray-400);
   border-radius: 6px;
 }
 
@@ -112,6 +112,10 @@ button {
   padding: 10px;
 }
 
+.description label {
+  color: var(--gray-700);
+}
+
 #description {
   margin-top: 8px;
 }
@@ -144,7 +148,21 @@ button {
   color: var(--gray-200);
 }
 
+#submit_button {
+  transition: all .3s;
+}
 
+#submit_button:hover {
+  background-color: #108519;
+}
+
+#cancel {
+  transition: all .3s;
+}
+
+#cancel:hover {
+  background-color: var(--gray-200);
+}
 
 @media (max-width: 1230px) {
   .sheetHeader {
