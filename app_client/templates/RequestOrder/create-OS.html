@@ -5,8 +5,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\styles.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\choose-order.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\create_order.css' %}">
-    <link rel="shortcut icon" href="https://i.imgur.com/cwTGnjY.png" type="image/x-icon">
-    <title>Solicitação de Pedido</title>
+<link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
+    <title>Eceel-Tec | Solicitar serviço</title>
 {% endblock %}
 
 {% block 'body' %}
@@ -18,8 +18,8 @@
             {% csrf_token %}
             <section class="sheetHeader">
                 <div>
-                    <label for="name">tipo do produto: </label>
-                    <input type="text" name="name" id="" value="{{name}}">
+                    <label for="name">Tipo do produto*</label>
+                    <input type="text" name="name" id="" value="{{name}}" placeholder="Ex: Ventilador">
                     {% for error in errors %}
                         {% if error.field == 'name'%}
                             <span>
@@ -32,7 +32,7 @@
                 </div>
 
                 <div>
-                    <label for="race">outro: (opcional) </label>
+                    <label for="race">Outro</label>
                     <input type="text" name="race" value="{{race}}">
                     {% for error in errors %}
                     {% if error.field == 'race'%}
@@ -47,8 +47,8 @@
             </section>
             <section class="sheetHeader">
                 <div>
-                    <label for="name">Marca: </label>
-                    <input type="text" name="name" id="" value="{{name}}">
+                    <label for="name">Marca do produto*</label>
+                    <input type="text" name="name" id="" value="{{name}}" placeholder="Ex: Mondial">
                     {% for error in errors %}
                         {% if error.field == 'name'%}
                             <span>
@@ -61,8 +61,8 @@
                 </div>
 
                 <div>
-                    <label for="race">Modelo: </label>
-                    <input type="text" name="race" value="{{race}}">
+                    <label for="race">Modelo do produto</label>
+                    <input type="text" name="race" value="{{race}}" placeholder="Ex: VSP40C">
                     {% for error in errors %}
                     {% if error.field == 'race'%}
                     <span>
@@ -77,7 +77,7 @@
           
             <div class="sheetSideBySide"> 
                <section class="description">
-                    <label for="description">Explique qual o problema apresentado pelo produto</label>
+                    <label for="description">Explique qual o problema apresentado pelo produto*</label>
                     <textarea name="description" id="description">
                         {{description}}
                     </textarea>
@@ -105,7 +105,7 @@
                         button.disabled = true;
                     }
                 </script>
-                <button type="submit" id="submit_button">Criar</button>
+                <button type="submit" id="submit_button">Solicitar</button>
             </div>
         </form>
     </section>
