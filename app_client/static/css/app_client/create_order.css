@@ -148,7 +148,21 @@ button {
   color: var(--gray-200);
 }
 
+#submit_button {
+  transition: all .3s;
+}
 
+#submit_button:hover {
+  background-color: #108519;
+}
+
+#cancel {
+  transition: all .3s;
+}
+
+#cancel:hover {
+  background-color: var(--gray-200);
+}
 
 @media (max-width: 1230px) {
   .sheetHeader {
