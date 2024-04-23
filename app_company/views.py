@@ -45,9 +45,7 @@ class SignView(View):
                 messages.error(request, 'Preencha todos os campos')
                 return render(request, 'app_company/sign.html', ctx)
 
-        
-        
-         
+
 @method_decorator(has_permission_decorator('register_employee'), name='dispatch')
 class RegisterEmployeeView(View):
     def get(self, request):
@@ -77,24 +75,28 @@ class RegisterEmployeeView(View):
         messages.success(request, "Colaborador registrado com sucesso.")
         return redirect('company:list_employees')
 
+
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')
 class ListEmployeesView(View):
     def get(self, request):
         employees = Users.objects.filter(role='F')  
         return render(request, 'app_company/list-employees.html', {'employees': employees})
 
+
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')    
 class DeleteEmployeeView(View):
-    def post(self,request, pk): 
+    def post(self, pk): 
         employee = Users.objects.get(pk=pk)
         employee.delete()
         return redirect('company:list_employees')
     
+
 @method_decorator(has_permission_decorator('employee_details'), name='dispatch')
 class EmployeeDetailView(View):
     def get(self, request, pk):
         employee = get_object_or_404(Users, pk=pk)
         return render(request, 'app_company/employee-detail.html', {'employee': employee})
+    
     
 @method_decorator(has_permission_decorator('fazer_coisas'), name='dispatch')
 class EmployeeBasicView(View):
