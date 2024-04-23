@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block 'body' %}
-<input type="hidden" id="context" data-errors="{{ errors }}" data-magics="{{ magics }}">
+<input type="hidden" id="context" data-errors="{{ errors }}">
 
 <section class="mainSheet">
     <section class="sheet">
@@ -18,10 +18,10 @@
             {% csrf_token %}
             <section class="sheetHeader">
                 <div>
-                    <label for="name">Tipo do produto*</label>
-                    <input type="text" name="name" id="" value="{{name}}" placeholder="Ex: Ventilador">
+                    <label for="productType">tipo do produto: </label>
+                    <input type="text" name="productType" id="" value="{{productType}}">
                     {% for error in errors %}
-                        {% if error.field == 'name'%}
+                        {% if error.field == 'type'%}
                             <span>
                                 <i data-lucide="octagon-alert"></i>
                                 {{ error.message }}
@@ -32,10 +32,10 @@
                 </div>
 
                 <div>
-                    <label for="race">Outro</label>
-                    <input type="text" name="race" value="{{race}}">
+                    <label for="productOther">outro: (opcional) </label>
+                    <input type="text" name="productOther" value="{{productOther}}">
                     {% for error in errors %}
-                    {% if error.field == 'race'%}
+                    {% if error.field == 'other'%}
                     <span>
                         <i data-lucide="octagon-alert"></i>
                         {{ error.message }}
@@ -47,10 +47,10 @@
             </section>
             <section class="sheetHeader">
                 <div>
-                    <label for="name">Marca do produto*</label>
-                    <input type="text" name="name" id="" value="{{name}}" placeholder="Ex: Mondial">
+                    <label for="productBrand">Marca: </label>
+                    <input type="text" name="productBrand" id="" value="{{productBrand}}">
                     {% for error in errors %}
-                        {% if error.field == 'name'%}
+                        {% if error.field == 'brand'%}
                             <span>
                                 <i data-lucide="octagon-alert"></i>
                                 {{ error.message }}
@@ -61,10 +61,10 @@
                 </div>
 
                 <div>
-                    <label for="race">Modelo do produto</label>
-                    <input type="text" name="race" value="{{race}}" placeholder="Ex: VSP40C">
+                    <label for="productModel">Modelo: </label>
+                    <input type="text" name="productModel" value="{{productModel}}">
                     {% for error in errors %}
-                    {% if error.field == 'race'%}
+                    {% if error.field == 'model'%}
                     <span>
                         <i data-lucide="octagon-alert"></i>
                         {{ error.message }}
@@ -77,9 +77,9 @@
           
             <div class="sheetSideBySide"> 
                <section class="description">
-                    <label for="description">Explique qual o problema apresentado pelo produto*</label>
-                    <textarea name="description" id="description">
-                        {{description}}
+                    <label for="description">Explique qual o problema apresentado pelo produto</label>
+                    <textarea name="productDescription" id="description">
+                        {{productDescription}}
                     </textarea>
                     {% for error in errors %}
                         {% if error.field == 'description'%}
@@ -97,7 +97,7 @@
 
             <div class="createSheetActions">
                 <button type="button">
-                    <a href="">Cancelar</a>
+                    <a href="{%url 'client:view_orders' %}">Cancelar</a>
                 </button>
                 <script>
                     function disableButton() {
@@ -110,8 +110,4 @@
         </form>
     </section>
 </section>
-<script type="module" src="{% static 'sheets_app/js/equipment.js' %}"></script>
-<script type="module" src="{% static 'sheets_app/js/image.js' %}"></script>
-<script type="module" src="{% static 'sheets_app/js/magic.js' %}"></script>
-<script type="module" src="{% static 'sheets_app/js/manage_magic.js' %}"></script>
 {% endblock %}
