@@ -106,4 +106,5 @@ class RequestOrderView(View):
         product_list = []
 
         errors = product_verify( productBrand, productType, productModel, productOther, productDescription)
+        # if errors:
 

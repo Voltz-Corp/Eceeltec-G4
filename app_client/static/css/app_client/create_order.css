@@ -61,7 +61,7 @@ button {
 }
 
 .sheet span {
-  color: var(--red-600);
+  color: var(--green-500);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -86,28 +86,6 @@ button {
   margin-bottom: 8px;
 }
 
-.atributos, .status {
-  width: 100%;
-}
-
-.status {
-  margin-top: 40px;
-}
-
-.atributosInputs div, .statusInputs div {
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  
-  background-color: var(--gray-800);
-  color: var(--white);
-  margin-bottom: 16px; 
-  
-  border-radius: 2px;
-}
-
 .image_svg {
   color: var(--gray-800);
 }
@@ -123,14 +101,6 @@ button {
   align-items: flex-end;
 }
 
-.under {
-  width: 100%;
-}
-
-.openImageBtn {
-  color: var(--gray-500);
-}
-
 .description {
   width: 100%;
 }
@@ -144,164 +114,6 @@ button {
 
 #description {
   margin-top: 8px;
-}
-
-.equipamentos {
-  background-color: var(--gray-800);
-  padding: 16px;
-  padding-top: 0px;
-  color: var(--white);
-  width: 100%;
-  border-radius: 4px;
-  margin-top: 1rem;
-  
-  display: flex;
-  flex-direction: column;
-  gap: 10%;
-}
-
-.equipamentos div {
-  width: 100%; 
-} 
-
-.equipamentos .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 3px;
-  padding-bottom: 3px;
-}
-
-.equipamentos button {
-  background: none;
-  border: none;
-  color: var(--white);
-}
-
-.equipamentos .equipmentsListContainer {
-  height: 250px;
-  background-color: var(--gray-200);
-}
-
-.equipmentsListContainer {
-  overflow-y: scroll;
-}
-
-.equipmentList {
-  color: var(--gray-700);
-  list-style-type: circle;
-  padding: 0 24px 16px;
-  position: relative;
-}
-
-.equipmentList li {
-  margin-top: 16px;
-  position: relative;
-}
-
-
-.equipmentList button {
-  position: absolute;
-  right: 40px;
-  color: var(--gray-800);
-}
-
-.equipmentList button:nth-child(2) {
-  position: absolute;
-  right: 0;
-  color: var(--red-600);
-}
-
-/* css de magia */
-.magics {
-  background-color: var(--gray-800);
-  padding: 16px;
-  padding-top: 0px;
-  color: var(--white);
-  width: 100%;
-  border-radius: 4px;
-  margin-top: 1rem;
-  
-  display: flex;
-  flex-direction: column;
-  gap: 10%;
-}
-
-.magics div {
-  width: 100%; 
-} 
-
-.magics .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 3px;
-  padding-bottom: 3px;
-}
-
-.magics button {
-  background: none;
-  border: none;
-  color: var(--white);
-}
-
-.magics .magicListContainer {
-  height: 250px;
-  background-color: var(--gray-200);
-}
-
-.magicListContainer {
-  overflow-y: scroll;
-}
-
-.magicList {
-  color: var(--gray-700);
-  list-style-type: circle;
-  padding: 0 24px 16px;
-  position: relative;
-}
-
-.magicList li {
-  margin-top: 16px;
-  position: relative;
-}
-
-.magicList button {
-  position: absolute;
-  right: 40px;
-  color: var(--gray-800);
-}
-
-.magicList button:nth-child(2) {
-  position: absolute;
-  right: 0;
-  color: var(--red-600);
-}
-
-.addEquip {
-  color: var(--gray-600);
-}
-
-.add_image_div button {
-  border-radius: 100%;
-  background-color: var(--gray-300);
-  margin: auto;
-  border: none;
-  width: 230px;
-  height: 230px;
-}
-
-.add_image_div {
-  border-radius: 50%;
-  text-align: center;
-}
-
-.add_image_div img {
-  width: 230px;
-  height: 230px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 5px solid var(--red-600);
 }
 
 .createSheetActions {
@@ -328,24 +140,11 @@ button {
 }
 
 .createSheetActions button:last-child {
-  background-color: var(--red-600);
+  background-color: var(--green-500 );
   color: var(--gray-200);
 }
 
-@media (max-width: 1540px) {
-  .atributos, .status {
-    width: 100%;
-  }
 
-  .atributosInputs div {
-    width: 100%;
-  }
-
-  .atributosInputs div input, .statusInputs div input {
-    max-width: 50%;
-    width: 100%;
-  }
-}
 
 @media (max-width: 1230px) {
   .sheetHeader {
@@ -359,19 +158,6 @@ button {
     align-items: baseline;
     justify-content: baseline;
     height: fit-content;
-  }
-
-  .atributos {
-    margin-top: 24px;
-  }
-
-  .status {
-    margin: 0;
-  }
-
-  .atributos, .status, .equipamentos, .description {
-    min-width: 100%;
-    width: 100%;
   }
 }
 
