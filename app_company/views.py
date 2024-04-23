@@ -109,7 +109,7 @@ class ListEmployeesView(View):
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')    
 class DeleteEmployeeView(View):
-    def post(self, pk): 
+    def post(self,request, pk): 
         employee = Users.objects.get(pk=pk)
         employee.delete()
         return redirect('company:list_employees')
