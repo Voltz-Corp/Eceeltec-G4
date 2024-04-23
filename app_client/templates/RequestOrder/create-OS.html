@@ -1,0 +1,113 @@
+{% extends 'base_client.html' %}
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\choose-order.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\create_order.css' %}">
+<link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
+    <title>Eceel-Tec | Solicitar serviço</title>
+{% endblock %}
+
+{% block 'body' %}
+<input type="hidden" id="context" data-errors="{{ errors }}">
+
+<section class="mainSheet">
+    <section class="sheet">
+        <form action="" method="post" onsubmit="disableButton()">
+            {% csrf_token %}
+            <section class="sheetHeader">
+                <div>
+                    <label for="productType">tipo do produto: </label>
+                    <input type="text" name="productType" id="" value="{{productType}}">
+                    {% for error in errors %}
+                        {% if error.field == 'type'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+
+                <div>
+                    <label for="productOther">outro: (opcional) </label>
+                    <input type="text" name="productOther" value="{{productOther}}">
+                    {% for error in errors %}
+                    {% if error.field == 'other'%}
+                    <span>
+                        <i data-lucide="octagon-alert"></i>
+                        {{ error.message }}
+                    </span>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+            </section>
+            <section class="sheetHeader">
+                <div>
+                    <label for="productBrand">Marca: </label>
+                    <input type="text" name="productBrand" id="" value="{{productBrand}}">
+                    {% for error in errors %}
+                        {% if error.field == 'brand'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+
+                <div>
+                    <label for="productModel">Modelo: </label>
+                    <input type="text" name="productModel" value="{{productModel}}">
+                    {% for error in errors %}
+                    {% if error.field == 'model'%}
+                    <span>
+                        <i data-lucide="octagon-alert"></i>
+                        {{ error.message }}
+                    </span>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+            </section>
+          
+            <div class="sheetSideBySide"> 
+               <section class="description">
+                    <label for="description">Explique qual o problema apresentado pelo produto</label>
+                    <textarea name="productDescription" id="description">
+                        {{productDescription}}
+                    </textarea>
+                    {% for error in errors %}
+                        {% if error.field == 'description'%}
+                        <span>
+                            <i data-lucide="octagon-alert"></i>
+                            {{ error.message }}
+                        </span>
+                        {% endif %}
+                    {% endfor %}
+                </section> 
+ 
+              
+             </div>
+
+
+            <div class="createSheetActions">
+                <button type="button">
+                    <a href="{%url 'client:view_orders' %}">Cancelar</a>
+                </button>
+                <script>
+                    function disableButton() {
+                        const button = document.getElementById("submit_button");
+                        button.disabled = true;
+                    }
+                </script>
+                <button type="submit" id="submit_button">Solicitar</button>
+            </div>
+        </form>
+    </section>
+</section>
+{% endblock %}

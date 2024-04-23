@@ -1,0 +1,188 @@
+:root {
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --red-950: #450a0a;
+  --green-500: #129D1E;
+  --white: #f7f7f7;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--gray-400);
+  border-radius: 6px;
+}
+
+a {
+  text-decoration: none;
+}
+
+label {
+  font-weight: 500;
+}
+
+input {
+  height: 35px;
+  border: 2px solid var(--gray-200);
+  padding: 8px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.mainSheet {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  z-index: 999;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.sheet {
+  background-color: var(--white);
+  border-radius: 4px;
+  padding: 32px;
+  margin: 15%;
+  margin-top: 5%;
+  overflow: scroll;
+  height: fit-content;
+}
+
+.sheet span {
+  color: var(--green-500);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 8px;
+}
+
+.sheetHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.sheetHeader div, .sheetHeader input {
+  width: 100%;
+}
+
+.sheetHeader label {
+  display: block;
+  color: var(--gray-700);
+  margin-bottom: 8px;
+}
+
+.image_svg {
+  color: var(--gray-800);
+}
+
+.sheetSideBySide {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10%;
+
+  margin-top: 40px;
+  margin-bottom: 40px;
+  align-items: flex-end;
+}
+
+.description {
+  width: 100%;
+}
+
+.description textarea {
+  height: 280px;
+  width: 100%;
+  resize: none;
+  padding: 10px;
+}
+
+.description label {
+  color: var(--gray-700);
+}
+
+#description {
+  margin-top: 8px;
+}
+
+.createSheetActions {
+  margin-top: 16px;
+  float: right;
+}
+
+.createSheetActions button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.createSheetActions button:first-child {
+  background-color: var(--gray-200);
+  color: var(--gray-700);
+}
+
+.createSheetActions button:first-child a {
+  color: var(--gray-700);
+}
+
+.createSheetActions button:last-child {
+  background-color: var(--green-500 );
+  color: var(--gray-200);
+}
+
+#submit_button {
+  transition: all .3s;
+}
+
+#submit_button:hover {
+  background-color: #108519;
+}
+
+#cancel {
+  transition: all .3s;
+}
+
+#cancel:hover {
+  background-color: var(--gray-200);
+}
+
+@media (max-width: 1230px) {
+  .sheetHeader {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1180px) {
+  .sheetSideBySide {
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: baseline;
+    height: fit-content;
+  }
+}
+
+@media (max-width: 800px) {
+  .sheet {
+    margin: 8%;
+    height: 100%;
+  }
+}
+

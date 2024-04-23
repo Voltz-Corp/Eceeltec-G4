@@ -10,6 +10,7 @@
     --gray-600: #4b5563;
     --gray-700: #374151;
     --gray-800: #1f2937;
+    --blue-300: #155ec8;
   }
   
   ::-webkit-scrollbar {
@@ -19,13 +20,13 @@
     background-color: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: var(--red-700);
+    background-color: var(--green-500);
     border-radius: 6px;
   }
   
   .listSheetsContainer{
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(12px);
+    background-color: var(--white);
+    backdrop-filter: blur(120px);
     z-index: 999;
     height: 100vh;
   
@@ -55,55 +56,44 @@
   
   .sheetCard>div, .createSheet {
     width: 300px;
-    height: 200px;
+    height: 20px;
     padding: 24px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: var(--gray-200);
     position: relative;
     border-radius: 4px;
+    border: none;
     padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
+  a {
+    text-decoration: none;
+  }
   
   .createSheet {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px dashed var(--red-700);
     cursor: pointer;
-  
+    text-decoration: none;
     background-size: cover;
     background-repeat: no-repeat;
   
     transition: all .3s;
   }
-  
+ 
   .createSheet:hover {
-    transform: translateY(-4px);
-    box-shadow: rgba(185, 28, 28, 0.3) 0px 8px 24px;
+    background-color: var(--gray-300);
   }
-  
-  .createSheet div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-  
-    border: 3px dashed var(--red-700);
-    color: var(--red-700);
+
+ .createSheet:hover h2 {
+    filter: saturate(2);
   }
-  
-  .createSheet:hover {
-    transform: translateY(-4px);
-  }
-  
   .sheetCard h2 {
     text-align: center;
+    
     color: var(--gray-300);
   } 
   

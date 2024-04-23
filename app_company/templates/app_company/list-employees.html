@@ -2,38 +2,50 @@
 {% load static %}
 
 {% block 'head' %}
-    
-    <title></title>
-    <link rel="stylesheet" href="{% static 'app_company/css/list-employees.css' %}"> 
+
+<title></title>
+<link rel="stylesheet" href="{% static 'app_company/css/list-employees.css' %}"> 
 {% endblock %}
 
 {% block 'body' %}
-    <div class="content">
-        <h2 class="header">Colaboradores</h2>
-        <form action="{% url 'company:register_employee' %}" method="get">
-            <button type="submit" class="new-employee-button">+ Novo</button>
-        </form>
-        <div class="sheet">
+<div class="content">
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="toast {{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h2 class="header">Colaboradores</h2>
+    
+    <form class="form-button" action="{% url 'company:register_employee' %}" method="get">
+        <button type="submit" class="new-employee-button">+ Novo</button>
+    </form>
+
+        <div class="list">
             <ul class="employee-list">
                 {% for employee in employees %}
                 <li class="employee-box">
-                    {{ employee.username }}
-                    <a href="{% url 'company:employee_details' employee.id %}" class="info-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5z"/>
-                        </svg>
-                    </a>
+                
+                    <p>{{ employee.username }}</p>
+
+                    <div class="icons">
+                        <a href="{% url 'company:employee_details' employee.id %}" class="info-link">
+                            <i class="file-text" data-lucide="file-text" width="24" height="24"></i>
+                        </a>
+                        <form class="form-button" action="{% url 'company:delete_employee' employee.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-employee-button">
+                                <i data-lucide="trash-2" width="24" height="24"></i>
+                            </button>
+                        </form>
+                    </div>
+                
                 </li>
                 {% endfor %}
             </ul>
         </div>
-
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li class="{{ message.tags }}">{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
     </div>
 {% endblock %}

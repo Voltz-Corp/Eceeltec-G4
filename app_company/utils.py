@@ -34,11 +34,10 @@ def register(username, email, password):
 
     return 1
 
-def login(request, username, password):
-    user = Users.objects.filter(username=username).first()
-    print(user)
-
-    if len(username) < 1 or len(password) < 1:
+def login(request, email, password):
+    user = Users.objects.filter(email=email).first()
+   
+    if len(email) < 1 or len(password) < 1:
         return 2
 
     if not user:
@@ -50,3 +49,16 @@ def login(request, username, password):
     elif user.role == 'F':
         return 3 
     
+def validate_inputs(email, number, cep, dob):
+        errors = []
+        if not re.match(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}', email):
+            errors.append("Email inválido.")
+        if not re.match(r'^\d{8}$', cep):  
+            errors.append("CEP inválido. Deve ser uma sequência de 8 dígitos.")
+        if not re.match(r'^\d{10}$', number):
+            errors.append("Número de telefone deve ter 10 dígitos.")
+        try:
+            pass
+        except ValueError:
+            errors.append("Data de nascimento inválida.")
+        return errors
