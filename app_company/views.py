@@ -7,7 +7,7 @@ from rolepermissions.decorators import has_permission_decorator
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
-from .utils import register, login
+from .utils import register, login,validate_inputs
 from django.contrib.auth import logout
 from rolepermissions.roles import assign_role
 
@@ -52,32 +52,49 @@ class RegisterEmployeeView(View):
         return render(request, 'app_company/register-employee.html')
 
     def post(self, request):
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        role = 'F'
-        phone = request.POST.get('phone')
-        cep = request.POST.get('cep')
-        uf = request.POST.get('uf')
-        city = request.POST.get('city')
-        neighborhood = request.POST.get('neighborhood')
-        address = request.POST.get('address')
-        number = request.POST.get('number')
-        complement = request.POST.get('complement')
-        position = request.POST.get('position')
-        dob = request.POST.get('dob')
+        ctx = {
+            'username': request.POST.get('username'),
+            'email': request.POST.get('email'),
+            'password': request.POST.get('password'),
+            'role': 'F',  
+            'cep': request.POST.get('cep'),
+            'uf': request.POST.get('uf'),
+            'city': request.POST.get('city'),
+            'neighborhood': request.POST.get('neighborhood'),
+            'address': request.POST.get('address'),
+            'number': request.POST.get('number'),
+            'complement': request.POST.get('complement'),
+            'position': request.POST.get('position'),
+            'dob': request.POST.get('dob')
+        }
+        errors = validate_inputs(email=ctx['email'], number=ctx['number'], cep=ctx['cep'], dob=ctx['dob'])
+        if errors:
+            for error in errors:
+                messages.error(request, error)
+            print("erro")
+            return render(request, 'app_company/register-employee.html', ctx)
 
-        if Users.objects.filter(username=username).exists():
+        if Users.objects.filter(username=ctx['username']).exists():
             messages.error(request, "Já existe um funcionário com esse nome de usuário.")
-            return render(request, 'app_company/register-employee.html')
+            return render(request, 'app_company/register-employee.html', ctx)
 
-        if Users.objects.filter(email=email).exists():
+        if Users.objects.filter(email=ctx['email']).exists():
             messages.error(request, "Esse email já está registrado.")
-            return render(request, 'app_company/register-employee.html')
+            return render(request, 'app_company/register-employee.html', ctx)
 
-        user = Users(username=username, phone=phone, email=email, password=make_password(password), cep=cep, 
-                    uf=uf, city=city, neighborhood= neighborhood, address=address, 
-                    number=number, complement=complement, role=role, position=position, dob=dob)
+        user = Users( username=ctx['username'],
+            email=ctx['email'],
+            password=make_password(ctx['password']),
+            cep=ctx['cep'],
+            uf=ctx['uf'],
+            city=ctx['city'],
+            neighborhood=ctx['neighborhood'],
+            address=ctx['address'],
+            number=ctx['number'],
+            complement=ctx['complement'],
+            role=ctx['role'],
+            position=ctx['position'],
+            dob=ctx['dob'])
         user.save()
         messages.success(request, "Colaborador registrado com sucesso.")
         return redirect('company:list_employees')
