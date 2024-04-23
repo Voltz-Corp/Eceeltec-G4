@@ -62,11 +62,4 @@ def validate_inputs(email, number, cep, dob):
         except ValueError:
             errors.append("Data de nascimento inválida.")
         return errors
-
-def personalize_employee(password): # por enquanto recebendo somente password, vai escalar pra config de pref..(eu acho) - Luan
-    if len(password) < 1:
-        return 2
-    if password.count(' ') == len(password):
-        return 3
-    
     

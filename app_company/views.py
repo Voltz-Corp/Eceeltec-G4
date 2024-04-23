@@ -2,7 +2,7 @@ from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
-from .models import Users, UserProfile
+from .models import Users
 from rolepermissions.decorators import has_permission_decorator
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
@@ -100,13 +100,26 @@ class RegisterEmployeeView(View):
         return redirect('company:list_employees')
 
 @method_decorator(has_permission_decorator('register_employee'), name='dispatch')
-class EmployeeConfigView():
+class EmployeeConfigView(View):
     def get(self, request):
         return render(request, 'app_company/personalize-employee.html')
     def post(self, request):
         return render(request, 'app_company/personalize-employee.html')
        
+@method_decorator(has_permission_decorator('register_employee'), name='dispatch')
+class ConfigEmployeeView(View):
+    def post(self, request):
+        new_password = request.POST.get('password')
 
+        if new_password:
+            user = request.user
+            user.set_newpassword(new_password)
+            user.save()
+
+            return redirect('company:employee_details')
+        
+        else:
+            return render(request, 'app_company/personalize-employee.html', {'error_message': 'A nova senha não pode estar vazia.'})
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')
 class ListEmployeesView(View):
