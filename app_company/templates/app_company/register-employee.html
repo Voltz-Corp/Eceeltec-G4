@@ -8,23 +8,102 @@
 {% endblock %}
 
 {% block 'body' %}
+
 <div class="content">
     <div class="form-card">
         <h2>Colaborador</h2>
         <form action="{% url 'company:register_employee' %}" method="post">
             {% csrf_token %}
+            
             <div class="form-group">
-                <label for="username">Nome do colaborador:</label>
+                <label for="username">Nome do colaborador</label>
                 <input type="text" name="username" id="username" required>
-            </div>
+            </div> 
+
             <div class="form-group">
-                <label for="email">Email:</label>
+                <label for="number">Telefone</label>
+                <input type="text" name="number" id="number" required>
+            </div>   
+
+            <div class="form-group">
+                <label for="dob">Data de nascimento</label>
+                <input type="date" name="dob" id="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="position">Cargo na empresa</label>
+                <input type="text" name="position" id="position">
+            </div>
+
+            <div class="form-group">
+                <label for="cep">CEP</label>
+                <input type="text" name="cep" id="cep" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Rua</label>
+                <input type="text" name="address" id="address">
+            </div class="form-group">
+
+            <div class="form-group">
+                <label for="complement">Complemento</label>
+                <input type="text" name="complement" id="complement">
+            </div>
+
+            <div class="form-group">
+                <label for="neighborhood">Bairro</label>
+                <input type="text" name="neighborhood" id="neighborhood" required>
+            </div>
+
+            <div class="form-group">
+                <label for="city">Cidade</label>
+                <input type="text" name="city" id="city" required>
+            </div>
+
+            <div class="form-group">
+                <label for="uf">Estado</label>
+                <select name="uf" id="uf" required>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Destrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minhas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernamuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
                 <input type="email" name="email" id="email" required>
             </div>
+
             <div class="form-group">
-                <label for="password">Senha:</label>
+                <label for="password">Senha</label>
                 <input type="password" name="password" id="password" required>
             </div>
+
+
             <button type="submit">Registrar</button>
         </form>
         <form action="{% url 'company:list_employees' %}" method="get">
@@ -39,4 +118,6 @@
         {% endif %}
     </div>
 </div>
+
+<script src="{% static 'app_company/js/api.js' %}"></script>
 {% endblock %}

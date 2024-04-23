@@ -37,7 +37,6 @@ def register(username, email, password):
 def login(request, email, password):
     user = Users.objects.filter(email=email).first()
    
-
     if len(email) < 1 or len(password) < 1:
         return 2
 

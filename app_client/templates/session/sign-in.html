@@ -1,17 +1,18 @@
-{% extends "./base-utilities.html" %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/session/sign.css' %}">
 
-{% block 'head' %}
-  <link rel="stylesheet" type="text/css" href="{% static 'app_company/css/sign.css' %}">
-  <link rel="shortcut icon" href="https://eceel-tec.com.br/wp-content/uploads/2020/06/cropped-logo_favicon-192x192.png" type="image/x-icon">
-{% endblock %}
-
-{% block 'title' %}
-  Eceel-Tec - Login Coladorador
-{% endblock %}
-
-{% block 'body' %}
-   <main>
+  <title>Login Cliente | Eceel-tec</title>
+</head>
+<body>
+  <main>
     {% for message in messages %}
     <div class="toast {{ message.tags }}">
       {% if message.tags  == 'success' %}
@@ -48,19 +49,25 @@
       <span>{{ message }}</span>
     </div>
     {% endfor %}
-      <section id="login">
-        {% comment %} <img src="https://pbs.twimg.com/media/GKBB7s4WAAAA2FQ?format=jpg&name=large" id="backLogin" alt=""> {% endcomment %}
+      <section id="register">
         <section class="left">
+          <img src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
         </section>
-        <section class="right active" id="loginzao">
-          <div id="loginzinho" class="active">
-            <h3>Bem-vindo(a)<br>colaborador!</h3>
-            <form action="{% url 'company:sign' %}" method="POST">
+        <section class="right">
+          <div>
+            <h3>Bem-vindo(a), Cliente!</h3>
+            <form action="{% url 'client:sign_in' %}" method="POST">
               {% csrf_token %}
-              <label for="email">Login: </label>
-              <input type="text" id="email" name="email" value="{{email}}" required>
-              <label for="password">Senha: </label>
-              <input type="password" id="password" name="password" required>
+                <div class="registerEmail">
+                  <label for="email">Email: </label>
+                  <input type="text" id="email" name="email">
+                </div>
+  
+                <div class="registerPassword">
+                  <label for="password">Senha: </label>
+                  <input type="password" id="password" name="password">
+                </div>
+
               <input type="hidden" name="login">
               <button type="submit">ENTRAR</button>
               
@@ -68,8 +75,7 @@
           </div>
         </section>
       </section>
-
-     
   </main> 
-  <script src="{% static 'app_company/js/script.js' %}"></script>   
-{% endblock %}
+  <script src="{% static 'js/cep.js' %}" ></script>
+</body>
+</html>

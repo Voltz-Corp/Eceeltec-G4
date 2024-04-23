@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/session/sign.css' %}">
+
+  <title>Cadastro Cliente | Eceel-tec</title>
+</head>
+<body>
+  <main>
+    {% for message in messages %}
+    <div class="toast {{ message.tags }}">
+      {% if message.tags  == 'success' %}
+      <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-circle-check"
+        ><circle cx="12" cy="12" r="10"/>
+        <path
+          d="m9 12 2 2 4-4"
+        />
+      </svg>
+      {% elif message.tags == 'error' %}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-circle-alert"
+      ><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+      {% endif %}
+      <span>{{ message }}</span>
+    </div>
+    {% endfor %}
+      <section id="register">
+        <section class="left">
+          <img src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
+        </section>
+        <section class="right">
+          <div>
+            <h3>Venha, Cliente!</h3>
+            <form action="{% url 'client:sign_up' %}" method="POST">
+              {% csrf_token %}
+              <div class="clientPersonalInfoContainer">
+                <div class="registerName">
+                  <label for="name">Nome completo</label>
+                  <input type="text" id="name" name="name">
+                </div>
+  
+                <div class="registerPhone">
+                  <label for="phone">Telefone: </label>
+                  <input type="text" id="phone" name="phone">
+                </div>
+  
+                <div class="registerEmail">
+                  <label for="email">Email: </label>
+                  <input type="text" id="email" name="email">
+                </div>
+  
+                <div class="registerPassword">
+                  <label for="password">Senha: </label>
+                  <input type="password" id="password" name="password">
+                </div>
+              </div>
+
+              <div class="clientAddressContainer">
+                <div class="registerCep">
+                  <label for="cep">CEP: </label>
+                  <input type="text" id="cep" name="cep">
+                </div>
+
+                <div class="registerUf">
+                  <label for="uf">Estado: </label>
+                  <input type="text" id="uf" name="uf">
+                </div>
+
+                <div class="registerCity">
+                  <label for="city">Cidade: </label>
+                  <input type="text" id="city" name="city">
+                </div>
+
+                <div class="registerNeighborhood">
+                  <label for="neighborhood">Bairro: </label>
+                  <input type="text" id="neighborhood" name="neighborhood">
+                </div>
+
+                <div class="registerAddress">
+                  <label for="address">Logradouro: </label>
+                  <input type="text" id="address" name="address">
+                </div>
+
+                <div class="registerNumber">
+                  <label for="number">Número: </label>
+                  <input type="text" id="number" name="number">
+                </div>
+
+                <div class="registerComplement">
+                  <label for="complement">Complemento: </label>
+                  <input type="text" id="complement" name="complement">
+                </div>
+              </div>
+
+              <input type="hidden" name="login">
+              <button type="submit">CADASTRAR</button>
+              
+            </form>
+          </div>
+        </section>
+      </section>
+  </main> 
+  <script src="{% static 'js/cep.js' %}" ></script>
+</body>
+</html>

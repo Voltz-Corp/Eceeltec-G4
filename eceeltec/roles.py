@@ -11,3 +11,9 @@ class Funcionario(AbstractUserRole):
     available_permissions = {
         'fazer_coisas': True,
     }
+
+class Cliente(AbstractUserRole):
+    available_permissions = {
+        'fazer_coisas': True,
+        'fazer_coisas': True,
+    }
