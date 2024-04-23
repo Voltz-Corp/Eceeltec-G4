@@ -10,16 +10,14 @@
 {% endblock %}
 
 {% block 'body' %}
-<input type="hidden" id="context" data-errors="{{ errors }}">
-
 <section class="mainSheet">
     <section class="sheet">
         <form action="" method="post" onsubmit="disableButton()">
             {% csrf_token %}
             <section class="sheetHeader">
                 <div>
-                    <label for="productType">tipo do produto: </label>
-                    <input type="text" name="productType" id="" value="{{productType}}">
+                    <label for="productType">tipo do produto*</label>
+                    <input type="text" name="productType"  value="{{productType}}">
                     {% for error in errors %}
                         {% if error.field == 'type'%}
                             <span>
@@ -32,7 +30,7 @@
                 </div>
 
                 <div>
-                    <label for="productOther">outro: (opcional) </label>
+                    <label for="productOther">Outro</label>
                     <input type="text" name="productOther" value="{{productOther}}">
                     {% for error in errors %}
                     {% if error.field == 'other'%}
@@ -47,7 +45,7 @@
             </section>
             <section class="sheetHeader">
                 <div>
-                    <label for="productBrand">Marca: </label>
+                    <label for="productBrand">Marca*</label>
                     <input type="text" name="productBrand" id="" value="{{productBrand}}">
                     {% for error in errors %}
                         {% if error.field == 'brand'%}
@@ -61,7 +59,7 @@
                 </div>
 
                 <div>
-                    <label for="productModel">Modelo: </label>
+                    <label for="productModel">Modelo*</label>
                     <input type="text" name="productModel" value="{{productModel}}">
                     {% for error in errors %}
                     {% if error.field == 'model'%}
@@ -77,10 +75,8 @@
           
             <div class="sheetSideBySide"> 
                <section class="description">
-                    <label for="description">Explique qual o problema apresentado pelo produto</label>
-                    <textarea name="productDescription" id="description">
-                        {{productDescription}}
-                    </textarea>
+                    <label for="description">Explique qual o problema apresentado pelo produto*</label>
+                    <textarea name="productDescription" id="description">{{productDescription}}</textarea>
                     {% for error in errors %}
                         {% if error.field == 'description'%}
                         <span>
