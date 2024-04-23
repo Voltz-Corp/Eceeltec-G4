@@ -10,18 +10,16 @@
 {% endblock %}
 
 {% block 'body' %}
-<input type="hidden" id="context" data-errors="{{ errors }}" data-magics="{{ magics }}">
-
-<section class="mainSheet">
-    <section class="sheet">
+<section class="mainorder">
+    <section class="order">
         <form action="" method="post" onsubmit="disableButton()">
             {% csrf_token %}
-            <section class="sheetHeader">
+            <section class="orderHeader">
                 <div>
-                    <label for="name">Tipo do produto*</label>
-                    <input type="text" name="name" id="" value="{{name}}" placeholder="Ex: Ventilador">
+                    <label for="productType">Tipo do produto* </label>
+                    <input type="text" name="productType" placeholder="Ex: Ventilador" id="" value="{{productType}}">
                     {% for error in errors %}
-                        {% if error.field == 'name'%}
+                        {% if error.field == 'type'%}
                             <span>
                                 <i data-lucide="octagon-alert"></i>
                                 {{ error.message }}
@@ -32,10 +30,10 @@
                 </div>
 
                 <div>
-                    <label for="race">Outro</label>
-                    <input type="text" name="race" value="{{race}}">
+                    <label for="productOther">Outro </label>
+                    <input type="text" name="productOther" value="{{productOther}}">
                     {% for error in errors %}
-                    {% if error.field == 'race'%}
+                    {% if error.field == 'other'%}
                     <span>
                         <i data-lucide="octagon-alert"></i>
                         {{ error.message }}
@@ -45,12 +43,12 @@
                 </div>
 
             </section>
-            <section class="sheetHeader">
+            <section class="orderHeader">
                 <div>
-                    <label for="name">Marca do produto*</label>
-                    <input type="text" name="name" id="" value="{{name}}" placeholder="Ex: Mondial">
+                    <label for="productBrand">Marca do Produto* </label>
+                    <input type="text" name="productBrand" placeholder="Ex: Mondial" id="" value="{{productBrand}}">
                     {% for error in errors %}
-                        {% if error.field == 'name'%}
+                        {% if error.field == 'brand'%}
                             <span>
                                 <i data-lucide="octagon-alert"></i>
                                 {{ error.message }}
@@ -61,10 +59,10 @@
                 </div>
 
                 <div>
-                    <label for="race">Modelo do produto</label>
-                    <input type="text" name="race" value="{{race}}" placeholder="Ex: VSP40C">
+                    <label for="productModel">Modelo do Produto* </label>
+                    <input type="text" name="productModel" placeholder="Ex: VSP40C" value="{{productModel}}">
                     {% for error in errors %}
-                    {% if error.field == 'race'%}
+                    {% if error.field == 'model'%}
                     <span>
                         <i data-lucide="octagon-alert"></i>
                         {{ error.message }}
@@ -75,12 +73,10 @@
 
             </section>
           
-            <div class="sheetSideBySide"> 
+            <div class="orderSideBySide"> 
                <section class="description">
                     <label for="description">Explique qual o problema apresentado pelo produto*</label>
-                    <textarea name="description" id="description">
-                        {{description}}
-                    </textarea>
+                    <textarea name="productDescription" id="description">{{productDescription}}</textarea>
                     {% for error in errors %}
                         {% if error.field == 'description'%}
                         <span>
@@ -95,9 +91,9 @@
              </div>
 
 
-            <div class="createSheetActions">
-                <button type="button" id="cancel">
-                    <a href="">Cancelar</a>
+            <div class="createorderActions">
+                <button type="button">
+                    <a href="{%url 'client:view_orders' %}">Cancelar</a>
                 </button>
                 <script>
                     function disableButton() {
@@ -110,8 +106,4 @@
         </form>
     </section>
 </section>
-<script type="module" src="{% static 'sheets_app/js/equipment.js' %}"></script>
-<script type="module" src="{% static 'sheets_app/js/image.js' %}"></script>
-<script type="module" src="{% static 'sheets_app/js/magic.js' %}"></script>
-<script type="module" src="{% static 'sheets_app/js/manage_magic.js' %}"></script>
 {% endblock %}

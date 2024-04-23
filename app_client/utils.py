@@ -1,19 +1,24 @@
 from app_company.models import Users
 from .models import OrderRequest
-def product_verify(brand, type, model, other, description):
+def product_verify(brand, type, model, other, description, user_id):
     errors = []
 
-    if str(type) == "outro" and str(other).count(' ') == len(other):
+    if str(type).count(' ') == len(type):
         errors.append({
-            'field': 'other',
+            'field': 'type',
             'message' : 'Este campo não pode ser vazio!'
             })
-    elif 2 > len(other) or len(other) > 75:
+    elif 2 > len(type) or len(type) > 75:
         errors.append({
-            'field':'other',
+            'field':'type',
             'message': 'Insira de 2 a 75 caracteres!'
             })
-    if 2 > len(model) or len(model) > 75:
+    if str(brand).count(' ') == len(brand):
+        errors.append({
+            'field':'model',
+            'message': 'Este campo não pode ser vazio!'
+            })
+    elif 2 > len(model) or len(model) > 75:
         errors.append({
             'field':'model',
             'message': 'Insira de 2 a 75 caracteres!'
@@ -42,9 +47,17 @@ def product_verify(brand, type, model, other, description):
     if len(errors) > 0:
         return errors
 
-    product = OrderRequest(productbrand = brand, productType = type, productModel = model, otherProductType = other, productProblemDescription = description)
+    user = Users.objects.get(id=user_id)
+    product = OrderRequest(
+        productbrand=brand,
+        productType=type,
+        productModel=model,
+        otherProductType=other,
+        productProblemDescription=description,
+        userClient=user  
+    )
     product.save()
-    return  product
+    return product
 
 
         
