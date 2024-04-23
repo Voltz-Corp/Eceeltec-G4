@@ -12,10 +12,10 @@ from .models import OrderRequest
 from rolepermissions.decorators import has_permission_decorator
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
-from .utils import Product_verify
+from .utils import product_verify
+from django.contrib.auth import authenticate, login as auth_login
 
 
-#falta o login
 class SignUpClient(View): 
     def get(self, request):
         return render(request, 'session/sign-up.html')
@@ -59,12 +59,26 @@ class SignUpClient(View):
             return messages.error(request, 'O campo de senha não pode ser vazio!')
 
         # first name é o nome completo
-        user = Users(first_name=name, phone=phone, email=email, password=password, cep=cep, 
-                    uf=uf, city=city, neighborhood= neighborhood, address=address, 
-                    number=number, complement=complement, role="C")
+        user = Users(first_name=name, username=email, phone=phone, email=email, password=make_password(password), cep=cep, uf=uf, city=city, neighborhood= neighborhood, address=address, number=number, complement=complement, role="C")
         user.save()
         
-        return render(request, 'session/sign-up.html')
+        return redirect('client:view_orders')
+
+class SignInView(View):
+    def get(self, request):
+        return render(request, 'session/sign-in.html')
+    
+    def post(self, request):
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(username=email, password=password)
+
+        if not user:
+            messages.error(request, 'Usuário ou senha errados!')
+            return redirect('client:sign_in')
+
+        auth_login(request, user)
+        return redirect('client:view_orders')
 
 class OrderViewView(View):
     def get(self, request):
@@ -91,5 +105,5 @@ class RequestOrderView(View):
 
         product_list = []
 
-        errors = Product_verify( productBrand, productType, productModel, productOther, productDescription)
+        errors = product_verify( productBrand, productType, productModel, productOther, productDescription)
 

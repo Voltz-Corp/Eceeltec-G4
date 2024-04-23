@@ -1,7 +1,6 @@
+from app_company.models import Users
 from .models import OrderRequest
-import re
-
-def Product_verify(brand, type, model, other, description):
+def product_verify(brand, type, model, other, description):
     errors = []
 
     if str(type) == "outro" and str(other).count(' ') == len(other):
