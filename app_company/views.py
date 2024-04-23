@@ -23,7 +23,7 @@ class SignView(View):
     def post(self, request):
         if 'logout' in request.POST:
             logout(request)
-            return redirect('company:sign')
+            return redirect('home')
 
         password = request.POST.get('password')
         email = request.POST.get('email')
