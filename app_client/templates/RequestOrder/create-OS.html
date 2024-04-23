@@ -10,11 +10,11 @@
 {% endblock %}
 
 {% block 'body' %}
-<section class="mainSheet">
-    <section class="sheet">
+<section class="mainorder">
+    <section class="order">
         <form action="" method="post" onsubmit="disableButton()">
             {% csrf_token %}
-            <section class="sheetHeader">
+            <section class="orderHeader">
                 <div>
                     <label for="productType">Tipo do produto* </label>
                     <input type="text" name="productType" placeholder="Ex: Ventilador" id="" value="{{productType}}">
@@ -43,7 +43,7 @@
                 </div>
 
             </section>
-            <section class="sheetHeader">
+            <section class="orderHeader">
                 <div>
                     <label for="productBrand">Marca do Produto* </label>
                     <input type="text" name="productBrand" placeholder="Ex: Mondial" id="" value="{{productBrand}}">
@@ -73,7 +73,7 @@
 
             </section>
           
-            <div class="sheetSideBySide"> 
+            <div class="orderSideBySide"> 
                <section class="description">
                     <label for="description">Explique qual o problema apresentado pelo produto*</label>
                     <textarea name="productDescription" id="description">{{productDescription}}</textarea>
@@ -91,7 +91,7 @@
              </div>
 
 
-            <div class="createSheetActions">
+            <div class="createorderActions">
                 <button type="button">
                     <a href="{%url 'client:view_orders' %}">Cancelar</a>
                 </button>
