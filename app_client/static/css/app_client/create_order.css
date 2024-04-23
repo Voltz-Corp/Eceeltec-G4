@@ -3,6 +3,7 @@
   --red-700: #b91c1c;
   --red-950: #450a0a;
   --green-500: #129D1E;
+  --green-700: #108519;
   --white: #f7f7f7;
   --gray-200: #e5e7eb;
   --gray-300: #d1d5db;
@@ -42,7 +43,7 @@ button {
   cursor: pointer;
 }
 
-.mainSheet {
+.mainorder {
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(12px);
   z-index: 999;
@@ -50,7 +51,7 @@ button {
   height: 100%;
 }
 
-.sheet {
+.order {
   background-color: var(--white);
   border-radius: 4px;
   padding: 32px;
@@ -60,8 +61,8 @@ button {
   height: fit-content;
 }
 
-.sheet span {
-  color: var(--green-500);
+.order span {
+  color: var(--red-600);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -69,18 +70,18 @@ button {
   margin-top: 8px;
 }
 
-.sheetHeader {
+.orderHeader {
   display: flex;
   align-items: flex-start;
   gap: 16px;
   margin-bottom: 20px;
 }
 
-.sheetHeader div, .sheetHeader input {
+.orderHeader div, .orderHeader input {
   width: 100%;
 }
 
-.sheetHeader label {
+.orderHeader label {
   display: block;
   color: var(--gray-700);
   margin-bottom: 8px;
@@ -90,7 +91,7 @@ button {
   color: var(--gray-800);
 }
 
-.sheetSideBySide {
+.orderSideBySide {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -108,6 +109,7 @@ button {
 .description textarea {
   height: 280px;
   width: 100%;
+  border: 2px solid var(--gray-200);
   resize: none;
   padding: 10px;
 }
@@ -120,12 +122,12 @@ button {
   margin-top: 8px;
 }
 
-.createSheetActions {
+.createorderActions {
   margin-top: 16px;
   float: right;
 }
 
-.createSheetActions button {
+.createorderActions button {
   padding: 8px 16px;
   border-radius: 4px;
   border: none;
@@ -134,16 +136,16 @@ button {
   font-size: 16px;
 }
 
-.createSheetActions button:first-child {
+.createorderActions button:first-child {
   background-color: var(--gray-200);
   color: var(--gray-700);
 }
 
-.createSheetActions button:first-child a {
+.createorderActions button:first-child a {
   color: var(--gray-700);
 }
 
-.createSheetActions button:last-child {
+.createorderActions button:last-child {
   background-color: var(--green-500 );
   color: var(--gray-200);
 }
@@ -165,13 +167,13 @@ button {
 }
 
 @media (max-width: 1230px) {
-  .sheetHeader {
+  .orderHeader {
     flex-direction: column;
   }
 }
 
 @media (max-width: 1180px) {
-  .sheetSideBySide {
+  .orderSideBySide {
     flex-direction: column;
     align-items: baseline;
     justify-content: baseline;
@@ -180,7 +182,7 @@ button {
 }
 
 @media (max-width: 800px) {
-  .sheet {
+  .order {
     margin: 8%;
     height: 100%;
   }

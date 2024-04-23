@@ -4,9 +4,9 @@ from django.contrib import messages
 from django.views import View
 
 from app_company.models import Users
-# from django.contrib.auth.hashers import make_password
-# from rolepermissions.decorators import has_permission_decorator
-# from django.utils.decorators import method_decorator
+from django.contrib.auth.hashers import make_password
+from rolepermissions.decorators import has_permission_decorator
+from django.utils.decorators import method_decorator
 from django.contrib.auth.hashers import make_password
 from .models import OrderRequest
 from rolepermissions.decorators import has_permission_decorator
@@ -62,7 +62,7 @@ class SignUpClient(View):
         user = Users(first_name=name, username=email, phone=phone, email=email, password=make_password(password), cep=cep, uf=uf, city=city, neighborhood= neighborhood, address=address, number=number, complement=complement, role="C")
         user.save()
         
-        return redirect('client:view_orders')
+        return redirect('client:sign_in')
 
 class SignInView(View):
     def get(self, request):
@@ -82,6 +82,7 @@ class SignInView(View):
 
 class OrderViewView(View):
     def get(self, request):
+        
         # orders_view = Order.objects.filter (user_id=request.user.id)
         # ctx = {
         #     'orders_view': orders_view,
@@ -95,16 +96,35 @@ class RequestOrderView(View):
 
         return render(request, 'RequestOrder/create-OS.html')
     def post(self, request):
-        productBrand = request.POST.get('brand')
-        productType = request.POST.get('type')
-        productModel = request.POST.get('model')
-        productOther = request.POST.get('other')
-        productDescription = request.POST.get('description')
+        productBrand = request.POST.get('productBrand')
+        productType = request.POST.get('productType')
+        productModel = request.POST.get('productModel')
+        productOther = request.POST.get('productOther')
+        productDescription = request.POST.get('productDescription')
 
         user_id = request.user.id
+        
+        print(user_id)
 
         product_list = []
-
-        errors = product_verify( productBrand, productType, productModel, productOther, productDescription)
-        # if errors:
-
+        
+        errors = product_verify(productBrand, productType, productModel, productOther, productDescription, user_id)
+        ctx = {     'errors': errors,
+                    'app_name': 'client',
+                    }
+        if errors:
+            if str(type(errors)) != "<class 'app_client.models.OrderRequest'>":
+                if 'other' not in errors:
+                    ctx['productOther'] = productOther
+                if 'brand' not in errors:
+                    ctx['productBrand'] = productBrand
+                if 'type' not in errors:
+                    ctx['productType'] = productType
+                if 'model' not in errors:
+                    ctx['productModel'] = productModel
+                if 'description' not in errors:
+                    ctx['productDescription'] = productDescription
+                    return render(request, 'RequestOrder/create-OS.html', ctx)
+                print(ctx)
+            print(ctx)
+            return redirect('client:view_orders')

@@ -23,7 +23,7 @@ class SignView(View):
     def post(self, request):
         if 'logout' in request.POST:
             logout(request)
-            return redirect('company:sign')
+            return redirect('home')
 
         password = request.POST.get('password')
         email = request.POST.get('email')
@@ -130,7 +130,7 @@ class ListEmployeesView(View):
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')    
 class DeleteEmployeeView(View):
-    def post(self, pk): 
+    def post(self,request, pk): 
         employee = Users.objects.get(pk=pk)
         employee.delete()
         return redirect('company:list_employees')
