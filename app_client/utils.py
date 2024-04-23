@@ -47,14 +47,14 @@ def product_verify(brand, type, model, other, description, user_id):
     if len(errors) > 0:
         return errors
 
-    user = Users.objects.get(id=user_id)  # Retrieve the user instance
+    user = Users.objects.get(id=user_id)
     product = OrderRequest(
         productbrand=brand,
         productType=type,
         productModel=model,
         otherProductType=other,
         productProblemDescription=description,
-        userClient=user  # Assign the user instance
+        userClient=user  
     )
     product.save()
     return product

@@ -55,7 +55,7 @@ li {
 
 .icons{
     border-left: 1.5px solid #d1d5db;
-    padding-left: 1%;
+    padding-left: 10px;
 }
 
 
@@ -64,7 +64,8 @@ li {
     padding: 15px 20px;  
     margin-bottom: 5px;  
     text-align: left;
-    border-bottom: 2px solid #d3d3d3;  
+    border-bottom: 2px solid #d3d3d3; 
+    align-items: center;
 
     justify-content: space-between;
 }
@@ -145,3 +146,44 @@ li {
   .success>svg {
     color: #22c55e;
   }
+
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 10000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 500px;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-delete-confirm, .btn-delete-cancel {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}

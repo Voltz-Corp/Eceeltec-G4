@@ -62,7 +62,7 @@ class SignUpClient(View):
         user = Users(first_name=name, username=email, phone=phone, email=email, password=make_password(password), cep=cep, uf=uf, city=city, neighborhood= neighborhood, address=address, number=number, complement=complement, role="C")
         user.save()
         
-        return redirect('client:view_orders')
+        return redirect('client:sign_in')
 
 class SignInView(View):
     def get(self, request):
@@ -115,16 +115,24 @@ class RequestOrderView(View):
         if errors:
             if str(type(errors)) != "<class 'app_client.models.OrderRequest'>":
                 if 'other' not in errors:
-                    ctx['other'] = productOther
+                    ctx['productOther'] = productOther
                 if 'brand' not in errors:
-                    ctx['brand'] = productBrand
+                    ctx['productBrand'] = productBrand
                 if 'type' not in errors:
-                    ctx['type'] = productType
+                    ctx['productType'] = productType
                 if 'model' not in errors:
-                    ctx['model'] = productModel
+                    ctx['productModel'] = productModel
                 if 'description' not in errors:
-                    ctx['description'] = productDescription
+                    ctx['productDescription'] = productDescription
                     return render(request, 'RequestOrder/create-OS.html', ctx)
-
+                print(ctx)
+            print(ctx)
             return redirect('client:view_orders')
-        
+
+class ProfileView(View):
+    def get(self, request):
+        user = request.user
+        ctx = {'user': user}
+        print(user)
+        return render(request, 'session/profile.html', ctx)
+

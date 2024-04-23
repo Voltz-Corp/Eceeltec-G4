@@ -23,7 +23,7 @@ class SignView(View):
     def post(self, request):
         if 'logout' in request.POST:
             logout(request)
-            return redirect('company:sign')
+            return redirect('home')
 
         password = request.POST.get('password')
         email = request.POST.get('email')
@@ -99,6 +99,27 @@ class RegisterEmployeeView(View):
         messages.success(request, "Colaborador registrado com sucesso.")
         return redirect('company:list_employees')
 
+@method_decorator(has_permission_decorator('register_employee'), name='dispatch')
+class EmployeeConfigView(View):
+    def get(self, request):
+        return render(request, 'app_company/personalize-employee.html')
+    def post(self, request):
+        return render(request, 'app_company/personalize-employee.html')
+       
+@method_decorator(has_permission_decorator('register_employee'), name='dispatch')
+class ConfigEmployeeView(View):
+    def post(self, request):
+        new_password = request.POST.get('password')
+
+        if new_password:
+            user = request.user
+            user.set_newpassword(new_password)
+            user.save()
+
+            return redirect('company:employee_details')
+        
+        else:
+            return render(request, 'app_company/personalize-employee.html', {'error_message': 'A nova senha não pode estar vazia.'})
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')
 class ListEmployeesView(View):

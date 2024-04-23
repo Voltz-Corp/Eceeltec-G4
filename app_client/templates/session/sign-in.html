@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/session/sign.css' %}">
-
+  <link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
   <title>Login Cliente | Eceel-tec</title>
 </head>
 <body>
@@ -70,7 +70,8 @@
 
               <input type="hidden" name="login">
               <button type="submit">ENTRAR</button>
-              
+              <p class="footer">Ainda não tem uma conta? <a href="{% url 'client:sign_up'%}"> Clique aqui</a>  para cadastrar-se</p>
+
             </form>
           </div>
         </section>

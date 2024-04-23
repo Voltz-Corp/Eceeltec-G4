@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/session/sign.css' %}">
-
+  <link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
   <title>Cadastro Cliente | Eceel-tec</title>
 </head>
 <body>
@@ -60,7 +60,7 @@
               {% csrf_token %}
               <div class="clientPersonalInfoContainer">
                 <div class="registerName">
-                  <label for="name">Nome completo</label>
+                  <label for="name">Nome completo: </label>
                   <input type="text" id="name" name="name">
                 </div>
   
@@ -119,7 +119,8 @@
 
               <input type="hidden" name="login">
               <button type="submit">CADASTRAR</button>
-              
+              <p class="footer">Já tem uma conta? <a href="{% url 'client:sign_in'%}"> Clique aqui</a> para fazer login</p>
+
             </form>
           </div>
         </section>

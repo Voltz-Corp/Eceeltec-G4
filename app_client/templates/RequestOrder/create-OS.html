@@ -10,16 +10,14 @@
 {% endblock %}
 
 {% block 'body' %}
-<input type="hidden" id="context" data-errors="{{ errors }}">
-
-<section class="mainSheet">
-    <section class="sheet">
+<section class="mainorder">
+    <section class="order">
         <form action="" method="post" onsubmit="disableButton()">
             {% csrf_token %}
-            <section class="sheetHeader">
+            <section class="orderHeader">
                 <div>
-                    <label for="productType">tipo do produto: </label>
-                    <input type="text" name="productType" id="" value="{{productType}}">
+                    <label for="productType">Tipo do produto* </label>
+                    <input type="text" name="productType" placeholder="Ex: Ventilador" id="" value="{{productType}}">
                     {% for error in errors %}
                         {% if error.field == 'type'%}
                             <span>
@@ -32,7 +30,7 @@
                 </div>
 
                 <div>
-                    <label for="productOther">outro: (opcional) </label>
+                    <label for="productOther">Outro </label>
                     <input type="text" name="productOther" value="{{productOther}}">
                     {% for error in errors %}
                     {% if error.field == 'other'%}
@@ -45,10 +43,10 @@
                 </div>
 
             </section>
-            <section class="sheetHeader">
+            <section class="orderHeader">
                 <div>
-                    <label for="productBrand">Marca: </label>
-                    <input type="text" name="productBrand" id="" value="{{productBrand}}">
+                    <label for="productBrand">Marca do Produto* </label>
+                    <input type="text" name="productBrand" placeholder="Ex: Mondial" id="" value="{{productBrand}}">
                     {% for error in errors %}
                         {% if error.field == 'brand'%}
                             <span>
@@ -61,8 +59,8 @@
                 </div>
 
                 <div>
-                    <label for="productModel">Modelo: </label>
-                    <input type="text" name="productModel" value="{{productModel}}">
+                    <label for="productModel">Modelo do Produto* </label>
+                    <input type="text" name="productModel" placeholder="Ex: VSP40C" value="{{productModel}}">
                     {% for error in errors %}
                     {% if error.field == 'model'%}
                     <span>
@@ -75,12 +73,10 @@
 
             </section>
           
-            <div class="sheetSideBySide"> 
+            <div class="orderSideBySide"> 
                <section class="description">
-                    <label for="description">Explique qual o problema apresentado pelo produto</label>
-                    <textarea name="productDescription" id="description">
-                        {{productDescription}}
-                    </textarea>
+                    <label for="description">Explique qual o problema apresentado pelo produto*</label>
+                    <textarea name="productDescription" id="description">{{productDescription}}</textarea>
                     {% for error in errors %}
                         {% if error.field == 'description'%}
                         <span>
@@ -95,7 +91,7 @@
              </div>
 
 
-            <div class="createSheetActions">
+            <div class="createorderActions">
                 <button type="button">
                     <a href="{%url 'client:view_orders' %}">Cancelar</a>
                 </button>
