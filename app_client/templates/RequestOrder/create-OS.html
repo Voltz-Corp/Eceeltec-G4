@@ -10,8 +10,6 @@
 {% endblock %}
 
 {% block 'body' %}
-<input type="hidden" id="context" data-errors="{{ errors }}">
-
 <section class="mainSheet">
     <section class="sheet">
         <form action="" method="post" onsubmit="disableButton()">
@@ -77,10 +75,8 @@
           
             <div class="sheetSideBySide"> 
                <section class="description">
-                    <label for="description">Explique qual o problema apresentado pelo produto</label>
-                    <textarea name="productDescription" id="description">
-                        {{productDescription}}
-                    </textarea>
+                    <label for="description">Explique qual o problema apresentado pelo produto*</label>
+                    <textarea name="productDescription" id="description">{{productDescription}}</textarea>
                     {% for error in errors %}
                         {% if error.field == 'description'%}
                         <span>
