@@ -2,7 +2,7 @@ from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
-from .models import Users
+from .models import Users, UserProfile
 from rolepermissions.decorators import has_permission_decorator
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
@@ -98,6 +98,14 @@ class RegisterEmployeeView(View):
         user.save()
         messages.success(request, "Colaborador registrado com sucesso.")
         return redirect('company:list_employees')
+
+@method_decorator(has_permission_decorator('register_employee'), name='dispatch')
+class EmployeeConfigView():
+    def get(self, request):
+        return render(request, 'app_company/personalize-employee.html')
+    def post(self, request):
+        return render(request, 'app_company/personalize-employee.html')
+       
 
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')

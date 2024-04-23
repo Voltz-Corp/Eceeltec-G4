@@ -8,4 +8,5 @@ urlpatterns = [
     path('delete_colaborador/<int:pk>/', views.DeleteEmployeeView.as_view(), name='delete_employee'),
     path('colaborador/<int:pk>/', views.EmployeeDetailView.as_view(), name='employee_details'),
     path('colaboradortemp/',views.EmployeeBasicView.as_view(), name='employee_template'),
+    path('configuracoes/', views.EmployeeConfigView.as_view(), name='employee_config'),
 ]
