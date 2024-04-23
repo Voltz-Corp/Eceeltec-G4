@@ -62,3 +62,4 @@ def validate_inputs(email, number, cep, dob):
         except ValueError:
             errors.append("Data de nascimento inválida.")
         return errors
+    

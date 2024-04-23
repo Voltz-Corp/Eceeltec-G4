@@ -37,7 +37,7 @@
           </a>
          </li>
       </ul>
-      <form  class="logout" action="" method='POST'>
+      <form  class="logout" action="{% url 'company:sign' %}" method='POST'>
         {% csrf_token %}
         <input type="hidden" name="logout">
         <button type="submit"> 

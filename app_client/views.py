@@ -62,7 +62,7 @@ class SignUpClient(View):
         user = Users(first_name=name, username=email, phone=phone, email=email, password=make_password(password), cep=cep, uf=uf, city=city, neighborhood= neighborhood, address=address, number=number, complement=complement, role="C")
         user.save()
         
-        return redirect('client:view_orders')
+        return redirect('client:sign_in')
 
 class SignInView(View):
     def get(self, request):
