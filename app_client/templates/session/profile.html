@@ -1,0 +1,68 @@
+{% extends 'base_client.html' %}
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\choose-order.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\create_order.css' %}">
+<link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
+    <title>Eceel-Tec | Solicitar serviço</title>
+{% endblock %}
+
+{% block 'body' %}
+<input type="hidden" id="context" data-errors="{{ errors }}" data-magics="{{ magics }}">
+
+<section class="mainorder">
+    <section class="order">
+        <div>
+            <ul>
+                <h1>Nome:</h1>
+                <div class="profileItems">
+                    <li>{{user.first_name}}</li> <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></a>
+                </div>
+                <h1>Telefone:</h1>
+                <div class="profileItems">
+                    <li>{{user.phone}}</li> <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></a>
+                </div>
+                <h1>E-mail:</h1>
+                <div class="profileItems">
+                    <li>{{user.email}}</li> <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></a>
+                </div>
+                <h1>Endereço</h1>
+                <h5>CEP:</h5>
+                <div class="profileItems">
+                    <li>{{user.cep}}</li> <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></a>
+                </div>
+                <h5>Estado:</h5>
+                <div class="profileItems">
+                    <li>{{user.uf}}</li> <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></a>
+                </div>
+                <h5>Cidade:</h5>
+                <div class="profileItems">
+                    <li>{{user.city}}</li> <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></a>
+                </div>
+                <h5>Bairro:</h5>
+                <div class="profileItems">
+                    <li>{{user.neighborhood}}</li> <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></a>
+                </div>
+                <h5>Logradouro:</h5>
+                <div class="profileItems">
+                    <li>{{user.address}}</li> <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></a>
+                </div>
+                <h5>Número:</h5>
+                <div class="profileItems">
+                    <li>{{user.number}}</li> <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></a>
+                </div>
+                <h5>Complemento:</h5>
+                <div class="profileItems">
+                    <li>{{user.complement}}</li> <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></a>
+                </div>
+            </ul>
+        </div>
+    </section>
+</section>
+<script type="module" src="{% static 'sheets_app/js/equipment.js' %}"></script>
+<script type="module" src="{% static 'sheets_app/js/image.js' %}"></script>
+<script type="module" src="{% static 'sheets_app/js/magic.js' %}"></script>
+<script type="module" src="{% static 'sheets_app/js/manage_magic.js' %}"></script>
+{% endblock %}

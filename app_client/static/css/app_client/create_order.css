@@ -59,6 +59,7 @@ button {
   margin-top: 5%;
   overflow: scroll;
   height: fit-content;
+  overflow: hidden;
 }
 
 .order span {
@@ -188,3 +189,10 @@ button {
   }
 }
 
+ul {
+  list-style-type: none;
+}
+
+.profileItems{
+  display: flex;
+}
