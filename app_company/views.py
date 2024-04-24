@@ -100,7 +100,7 @@ class RegisterEmployeeView(View):
         messages.success(request, "Colaborador registrado com sucesso.")
         return redirect('company:list_employees')
        
-@method_decorator(has_permission_decorator('register_employee'), name='dispatch')
+@method_decorator(has_permission_decorator('config_p-user'), name='dispatch')
 class ConfigEmployeeView(View):
     def get(self, request):
         return render(request, 'app_company/personalize-employee.html')
@@ -143,4 +143,4 @@ class EmployeeDetailView(View):
 @method_decorator(has_permission_decorator('fazer_coisas'), name='dispatch')
 class EmployeeBasicView(View):
     def get(self, request):
-        return HttpResponse('Olá')
+        return render(request, 'app_company/employee-temppage.html')
