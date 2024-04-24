@@ -103,7 +103,8 @@ class RegisterEmployeeView(View):
 @method_decorator(has_permission_decorator('config_p-user'), name='dispatch')
 class ConfigEmployeeView(View):
     def get(self, request):
-        return render(request, 'app_company/personalize-employee.html')
+        return redirect('company:list_employees')
+        # return render(request, 'app_company/personalize-employee.html')
     
     def post(self, request):
         old_password = request.POST.get('password')

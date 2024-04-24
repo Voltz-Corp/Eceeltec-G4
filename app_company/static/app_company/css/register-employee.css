@@ -40,27 +40,23 @@ body {
 }
 
 .content {
-    display: grid;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    flex-direction: column;
     height: 100vh;
     overflow: scroll;
 }
 
 .header {
-    align-self: flex-start;
-    width: 90%;  
-    max-width: 600px; 
-    
     font-size: 2.5em;  
     color: var(--blue-500);
-
-    margin: 5% 0% 1% 0%;
-    padding-bottom: 15px; 
+    /* align-self: flex-start; */
 }
 
 .form-card {
-    max-height: 90vh;
-    background: white;
+    height: fit-content;
+    background: var(--white);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -86,17 +82,21 @@ form {
 }
 
 label {
-    margin-right: 10px; 
     text-align: left; 
+    margin-bottom: 8px;
+    color: var(--gray-700);
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    flex: 1; 
-    padding: 10px;
-    border: 1px solid #ccc;
+input,
+select {
+    padding: 12px;
+    border: 1px solid var(--gray-200);
     border-radius: 4px;
+    background-color: transparent;
+}
+
+button {
+    transition: all .3s;
 }
 
 .info-container{
