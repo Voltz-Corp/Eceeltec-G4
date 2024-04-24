@@ -3,6 +3,7 @@
     margin: 0;
     box-sizing: border-box;
     font-family: 'Montserrat';
+    font-size: 16px;
   }
   
   :root {
@@ -50,7 +51,10 @@
   
     position: relative;
   }
-  
+  .logo{
+    margin-top: 32px;
+    margin-bottom: 16px;
+  }
   #sidebarNav img {
     width: 70%;
     align-self: center;
@@ -89,11 +93,11 @@
   }
   
   #sidebarNav li.active {
-    background-color: rgba(252, 251, 251, 0.2);
+    background-color: rgba(220,38, 38, 0.2);
   }
   
   #sidebarNav li.active a {
-    color: var(--red-600);
+    color: var(--green-500);
   }
   
   #sidebarNav form:last-child {
@@ -118,7 +122,7 @@
     grid-template-columns: 280px 1fr;
     width: 100vw;
     height: 100vh;
-    /*background-image: url('https://pbs.twimg.com/media/GKWA-b8WAAAMFBY?format=jpg&name=large');*/
+    background-color: var(--white);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: relative;
@@ -160,7 +164,7 @@
       position: absolute;
       top: 16px;
       left: 16px;
-      border: 1px solid red;
+      border: 1px solid green;
       z-index: 99999;
     }
   }

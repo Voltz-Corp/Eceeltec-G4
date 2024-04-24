@@ -76,14 +76,18 @@ class SignInView(View):
         if not user:
             messages.error(request, 'Usuário ou senha errados!')
             return redirect('client:sign_in')
-
+        
+        if user.role != 'C':
+            messages.error(request, 'Você não tem permissão para acessar essa página')
+            return redirect('client:sign_in')
+        
         auth_login(request, user)
         return redirect('client:view_orders')
 
 class OrderViewView( View):
     def get(self, request):
         
-        orders = Users.objects.filter(pk=request.user.id)
+        orders = OrderRequest.objects.filter(userClient_id=request.user.id)
         ctx = {
             'orders': orders,
             'user': request.user,

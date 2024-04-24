@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from .utils import register, login,validate_inputs
-from django.contrib.auth import logout
+from django.contrib.auth import logout, update_session_auth_hash
 from rolepermissions.roles import assign_role
 from django.http import HttpResponse
 
@@ -63,12 +63,12 @@ class RegisterEmployeeView(View):
             'city': request.POST.get('city'),
             'neighborhood': request.POST.get('neighborhood'),
             'address': request.POST.get('address'),
-            'number': request.POST.get('number'),
+            'phone': request.POST.get('phone'),
             'complement': request.POST.get('complement'),
             'position': request.POST.get('position'),
             'dob': request.POST.get('dob')
         }
-        errors = validate_inputs(email=ctx['email'], number=ctx['number'], cep=ctx['cep'], dob=ctx['dob'])
+        errors = validate_inputs(email=ctx['email'], phone=ctx['phone'], cep=ctx['cep'], dob=ctx['dob'])
         if errors:
             for error in errors:
                 messages.error(request, error)
@@ -91,7 +91,7 @@ class RegisterEmployeeView(View):
             city=ctx['city'],
             neighborhood=ctx['neighborhood'],
             address=ctx['address'],
-            number=ctx['number'],
+            phone=ctx['phone'],
             complement=ctx['complement'],
             role=ctx['role'],
             position=ctx['position'],
@@ -100,23 +100,27 @@ class RegisterEmployeeView(View):
         messages.success(request, "Colaborador registrado com sucesso.")
         return redirect('company:list_employees')
        
-@method_decorator(has_permission_decorator('register_employee'), name='dispatch')
+@method_decorator(has_permission_decorator('config_p-user'), name='dispatch')
 class ConfigEmployeeView(View):
     def get(self, request):
         return render(request, 'app_company/personalize-employee.html')
     
     def post(self, request):
-        new_password = request.POST.get('password')
+        old_password = request.POST.get('password')
+        new_password = request.POST.get('new_password')
+        confirm = request.POST.get('confirm')
 
-        if new_password:
-            user = request.user
-            user.password = make_password(new_password)
-            user.save()
-
-            return redirect('company:employee_details')
-        
+        if not request.userr.check_password(old_password):
+            messages.error(request, 'Sua senha antiga foi digitada errado. Tente novamente!')
+        elif new_password != confirm:
+            messages.error(request, 'Por favor, digite sua senha igual ao escrito no primeiro campo.')
         else:
-            return render(request, 'app_company/personalize-employee.html', {'error_message': 'A nova senha não pode estar vazia.'})
+            request.user.password = make_password(new_password)
+            request.user.save()
+            update_session_auth_hash(request, request.user)
+            messages.sucess(request, 'Sua senha foi atualizada com sucesso!')
+            return redirect('company:employee_details')
+        return render(request, 'app_company/personalize-employee.html')
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')
 class ListEmployeesView(View):
@@ -143,4 +147,4 @@ class EmployeeDetailView(View):
 @method_decorator(has_permission_decorator('fazer_coisas'), name='dispatch')
 class EmployeeBasicView(View):
     def get(self, request):
-        return HttpResponse('Olá')
+        return render(request, 'app_company/employee-temppage.html')

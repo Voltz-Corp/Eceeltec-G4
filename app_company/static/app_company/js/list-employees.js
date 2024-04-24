@@ -1,8 +1,8 @@
 const modal = document.getElementById('deleteModal');
 const openDeleteModalBtn = document.querySelector('.openDeleteModal')
-const span = document.getElementsByClassName("close")[0];
-const cancelBtn = document.getElementsByClassName("cancel-button")[0];
-const form = document.getElementById('confirmDeleteForm');
+const closeModalXBtn = document.querySelector(".closeModalX");
+const cancelBtn = document.querySelector(".cancelBtn");
+const form = document.querySelector('#confirmDeleteForm');
 const deleteEmployeeBtn = document.querySelector('.delete-employee-button')
 
 function handleOpenDeleteModal() {
@@ -14,11 +14,19 @@ function handleCloseDeleteModal() {
 }
 
 openDeleteModalBtn?.addEventListener('click', () => {
-  handleOpenDeleteModal()
+  handleOpenDeleteModal();
+})
+
+closeModalXBtn?.addEventListener('click', () => {
+  handleCloseDeleteModal();
+})
+
+cancelBtn?.addEventListener('click', () => {
+  handleCloseDeleteModal();
 })
 
 deleteEmployeeBtn?.addEventListener('click', () => {
-const deleteUrl = openDeleteModalBtn.getAttribute('data-url')
-form.action = deleteUrl;
+  const deleteUrl = openDeleteModalBtn.getAttribute('data-url');
+  form.action = deleteUrl;
 })
 
