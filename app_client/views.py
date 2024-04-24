@@ -83,7 +83,7 @@ class SignInView(View):
 class OrderViewView( View):
     def get(self, request):
         
-        orders = Users.objects.filter(pk=request.user.id)
+        orders = OrderRequest.objects.filter(userClient_id=request.user.id)
         ctx = {
             'orders': orders,
             'user': request.user,
