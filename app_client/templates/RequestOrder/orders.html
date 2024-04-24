@@ -3,7 +3,6 @@
 
 {% block 'head' %}
     <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\choose-order.css' %}">
     <link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
     <title>Eccel-tec | Seus serviços</title>
 {% endblock %}
@@ -46,27 +45,34 @@
         {% comment %} {% endfor %}  {% endcomment %}
     </section>
 
-    <br><br><br><br><br>
-    <table>
-        <tr>
-            <th>Status</th>
-            <th>Identificação</th>
-            <th>Solicitação</th>
-            <th>Cancelar</th>
-        </tr>
+    <section class="tableContainer">
+        <div>
+          <h3>Suas solicitações</h3>
+        </div>
 
-        {% comment %} literalmente ver se a tabela se repete se ficar dentro do for {% endcomment %}
-        {% for request in orders %}
-        <tr>
-            <td><i data-lucide="circle" width="32" height="32"></i></td>
-            <td>{{productType}}, {{productModel}},{{productBrand}}</td>
-            <td><i data-lucide="file-search" width="32" height="32"></i></td>
-            <td><i data-lucide="circle-x" width="32" height="32"></i></td>
-        </tr>
-        
-        {% endfor %}
-    </table>
-    
+        <table>
+          <thead>
+            <tr>
+                <th>Status</th>
+                <th>Identificação</th>
+                <th></th>
+                <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>
+                        <div> Aguardando </div>
+                    </td>
+                    <td>{{order.productType}} | {{order.productModel}}</td>
+                    <td><i data-lucide="search" width="32" height="32" color="#155ec8"></i></td>
+                    <td><i data-lucide="trash" width="32" height="32" color="#DC2626"></i></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
 </section>
 <script src="{% static 'sheets_app/js/sheet.js' %}"></script>
 {% endblock %}
