@@ -39,7 +39,7 @@ class SignUpClient(View):
         password_treated = password.strip()
         
         if Users.objects.filter(first_name=name).exists():
-            messages.error(request, "O usuário com esse nome já existe.")
+            messages.error(request, "Um usuário com esse nome já existe.")
             return render(request, 'session/sign-up.html')
         
         if not name_treated:
