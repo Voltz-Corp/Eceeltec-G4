@@ -21,13 +21,13 @@
     <h2 class="header">Colaboradores</h2>
     
     <form class="form-button" action="{% url 'company:register_employee' %}" method="get">
-        <button type="submit" class="new-employee-button">+ Novo</button>
+        <button type="submit" class="new-employee-button"><h2>Adicionar novo colaborador</h2></button>
     </form>
 
+    {% for employee in employees %}
         <div class="list">
             <ul class="employee-list">
-                {% for employee in employees %}
-                <li class="employee-box">
+                    <li class="employee-box">
                 
                     <p>{{ employee.username }}</p>
 
@@ -38,7 +38,7 @@
                         <form class="form-button" action="{% url 'company:delete_employee' employee.id %}" method="post">
                             {% csrf_token %}
                             <button type="button" data-url="{% url 'company:delete_employee' employee.id %}" class="openDeleteModal">
-                                <i data-lucide="trash-2" width="24" height="24"></i>
+                                <i data-lucide="trash" width="24" height="24"></i>
                             </button>
                         </form>
                     </div>

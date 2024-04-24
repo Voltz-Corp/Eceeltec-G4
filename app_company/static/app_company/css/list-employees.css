@@ -1,3 +1,23 @@
+:root {
+    --red-600: #DC2626;
+    --red-700: #b91c1c;
+    --green-500: #22c55e;
+    --white: #f7f7f7;
+    --gray-50: #f9fafb;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --blue-500: #155ec8;
+    --blue-200: #bfdbfe;
+    --yellow-700: #a16207;
+    --yellow-100: #fef9c3;
+  }
+
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -20,7 +40,7 @@ li {
     max-width: 600px; 
     
     font-size: 2.5em;  
-    color: #333;
+    color: var(--blue-500);
 
     margin: 5% 0% 3% 5%;
     padding-bottom: 15px; 
@@ -33,7 +53,7 @@ li {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.15);  
+    /* box-shadow: 0 4px 6px rgba(0,0,0,0.15);   */
     
     padding: 0%;
     
@@ -80,11 +100,11 @@ li {
     text-decoration: none; 
 }
 
-/* .info-link:hover {
+.info-link:hover {
     transform: translateY(-4px);
-} */
+} 
 
-.delete-employee-button{
+.openDeleteModal{
     background-color: transparent;
     color: #d9534f;
     border: none;
@@ -96,8 +116,8 @@ li {
 }
 
 .new-employee-button {
-    background-color: #007bff; 
-    color: #fff;
+    background-color: var(--gray-200); 
+    color: black;
     border: none;
     padding: 10px 20px;
 
@@ -116,7 +136,7 @@ li {
 }
 
 .new-employee-button:hover {
-    background-color: #0056b3; 
+    background-color: var(--gray-300); 
 }
 
 .toast {

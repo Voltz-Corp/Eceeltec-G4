@@ -85,9 +85,6 @@ a {
   filter: saturate(2);
 }
 
-.title {
-  padding-bottom: 20px;
-}
 
 .tableContainer {
   background-color: var(--gray-50);
@@ -165,7 +162,7 @@ tbody td:first-child div {
   .card-list {
     grid-template-columns: repeat(3, 1fr);
   }
-
+  
   .sheetCard > div, .new-request {
     width: 100%;
   }
@@ -183,3 +180,7 @@ tbody td:first-child div {
   }
 }
 
+.title {
+  padding-bottom: 20px;
+  font-size: xx-large;
+}
