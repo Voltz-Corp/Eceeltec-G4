@@ -195,4 +195,15 @@ ul {
 
 .profileItems{
   display: flex;
+  padding-bottom: 10px;
+}
+
+.editProfileButton{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: var(--blue-300);
+  width: 7.5%;
+  height: 30px;
+  border-radius: 4px;
+  color: #f0f0f0;
 }

@@ -134,6 +134,43 @@ class ProfileView(View):
     def get(self, request):
         user = request.user
         ctx = {'user': user}
-        print(user)
         return render(request, 'session/profile.html', ctx)
 
+class EditProfileView(View):
+    def get(self, request):
+        user = request.user
+        ctx = {'user': user}
+        return render(request, 'session/edit_profile.html', ctx)
+
+    def post(self, request):
+        
+        user = request.user
+        user.first_name = request.POST.get('first_name')
+        user.phone = request.POST.get('phone')
+        user.email = request.POST.get('email')
+        user.cep = request.POST.get('cep')
+        user.uf = request.POST.get('uf')
+        user.city = request.POST.get('city')
+        user.neighborhood = request.POST.get('neighborhood')
+        user.address = request.POST.get('address')
+        user.number = request.POST.get('number')
+        user.complement = request.POST.get('complement')
+
+        user.save()
+
+        return redirect('client:profile')
+        # name = request.POST.get('first_name')
+        # phone = request.POST.get('phone')
+        # email = request.POST.get('email')
+        # cep = request.POST.get('cep')
+        # uf = request.POST.get('uf')
+        # city = request.POST.get('city')
+        # neighborhood = request.POST.get('neighborhood')
+        # address = request.POST.get('address')
+        # number = request.POST.get('number')
+        # complement = request.POST.get('complement')
+
+        # user = Users(first_name=name, phone=phone, email=email, cep=cep, uf=uf, city=city, neighborhood=neighborhood, address=address, number=number, complement=complement)
+        # user.save()
+
+        # return redirect('client:profile')
