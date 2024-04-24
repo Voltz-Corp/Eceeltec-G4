@@ -50,7 +50,9 @@
     </div>
     <section id="deleteModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <button type="button" class="closeModalX">
+                <i data-lucide="x"></i>
+            </button>
             <h3>Confirmar deleção</h3>
             <p>Você tem certeza que deseja apagar o perfil desse funcionário?</p>
             <form id="confirmDeleteForm" method="post" action="">
@@ -58,7 +60,7 @@
                 <button type="submit" class="delete-employee-button">
                     Confirmar
                 </button>
-                <button type="button" class="cancel-button">
+                <button type="button" class="cancelBtn">
                     Cancelar
                 </button>
             </form>

@@ -76,7 +76,7 @@ class SignInView(View):
         if not user:
             messages.error(request, 'Usuário ou senha errados!')
             return redirect('client:sign_in')
-
+        
         auth_login(request, user)
         return redirect('client:view_orders')
 
