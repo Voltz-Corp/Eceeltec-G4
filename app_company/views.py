@@ -47,7 +47,7 @@ class SignView(View):
 
 
 @method_decorator(has_permission_decorator('register_employee'), name='dispatch')
-class RegisterEmployeeView(View):
+class RegisterEmployeeView(View):   
     def get(self, request):
         return render(request, 'app_company/register-employee.html')
 
