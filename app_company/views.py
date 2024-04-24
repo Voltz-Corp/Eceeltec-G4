@@ -10,6 +10,7 @@ from django.contrib import messages
 from .utils import register, login,validate_inputs
 from django.contrib.auth import logout
 from rolepermissions.roles import assign_role
+from django.http import HttpResponse
 
 
 class SignView(View):
@@ -142,4 +143,4 @@ class EmployeeDetailView(View):
 @method_decorator(has_permission_decorator('fazer_coisas'), name='dispatch')
 class EmployeeBasicView(View):
     def get(self, request):
-        return render(request, 'app_company/employee-temppage.html')
+        return HttpResponse('Olá')
