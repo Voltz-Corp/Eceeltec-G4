@@ -60,10 +60,7 @@ main {
   height: 100%;
   max-width: 100vw;
   width: 100%;
-  background-image: url('https://pbs.twimg.com/media/GLuFsOJXMAA5REU?format=jpg&name=4096x4096');
-  background-size: cover;
-  background-position: bottom;
-  background-repeat: no-repeat;
+  background-color: var(--gray-700);
 } 
 
 
@@ -287,3 +284,4 @@ main {
   background-color: var(--gray-200);
   transition: all .3s;
 }
+

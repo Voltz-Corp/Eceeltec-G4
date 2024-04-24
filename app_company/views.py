@@ -47,7 +47,7 @@ class SignView(View):
 
 
 @method_decorator(has_permission_decorator('register_employee'), name='dispatch')
-class RegisterEmployeeView(View):
+class RegisterEmployeeView(View):   
     def get(self, request):
         return render(request, 'app_company/register-employee.html')
 
@@ -98,22 +98,18 @@ class RegisterEmployeeView(View):
         user.save()
         messages.success(request, "Colaborador registrado com sucesso.")
         return redirect('company:list_employees')
-
-@method_decorator(has_permission_decorator('register_employee'), name='dispatch')
-class EmployeeConfigView(View):
-    def get(self, request):
-        return render(request, 'app_company/personalize-employee.html')
-    def post(self, request):
-        return render(request, 'app_company/personalize-employee.html')
        
 @method_decorator(has_permission_decorator('register_employee'), name='dispatch')
 class ConfigEmployeeView(View):
+    def get(self, request):
+        return render(request, 'app_company/personalize-employee.html')
+    
     def post(self, request):
         new_password = request.POST.get('password')
 
         if new_password:
             user = request.user
-            user.set_newpassword(new_password)
+            user.password = make_password(new_password)
             user.save()
 
             return redirect('company:employee_details')
