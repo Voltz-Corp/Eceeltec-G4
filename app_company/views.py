@@ -63,12 +63,12 @@ class RegisterEmployeeView(View):
             'city': request.POST.get('city'),
             'neighborhood': request.POST.get('neighborhood'),
             'address': request.POST.get('address'),
-            'number': request.POST.get('number'),
+            'phone': request.POST.get('phone'),
             'complement': request.POST.get('complement'),
             'position': request.POST.get('position'),
             'dob': request.POST.get('dob')
         }
-        errors = validate_inputs(email=ctx['email'], number=ctx['number'], cep=ctx['cep'], dob=ctx['dob'])
+        errors = validate_inputs(email=ctx['email'], phone=ctx['phone'], cep=ctx['cep'], dob=ctx['dob'])
         if errors:
             for error in errors:
                 messages.error(request, error)
@@ -91,7 +91,7 @@ class RegisterEmployeeView(View):
             city=ctx['city'],
             neighborhood=ctx['neighborhood'],
             address=ctx['address'],
-            number=ctx['number'],
+            phone=ctx['phone'],
             complement=ctx['complement'],
             role=ctx['role'],
             position=ctx['position'],
