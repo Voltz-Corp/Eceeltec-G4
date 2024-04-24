@@ -77,6 +77,10 @@ class SignInView(View):
             messages.error(request, 'Usuário ou senha errados!')
             return redirect('client:sign_in')
         
+        if user.role != 'C':
+            messages.error(request, 'Você não tem permissão para acessar essa página')
+            return redirect('client:sign_in')
+        
         auth_login(request, user)
         return redirect('client:view_orders')
 
