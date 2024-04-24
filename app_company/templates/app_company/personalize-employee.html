@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <title></title>
+    <link rel="stylesheet" href="{% static 'app_company\css\config-employee.css' %}">
+{% endblock %}
+
+{% block 'body' %}
+
+<div class="content">
+    <div class="form-card">
+        <h2>Configurações</h2>
+        <form action="{% url 'company:employee_config' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="password">Alterar Senha: </label>
+                <input type="password" name="password" value="{{password}}" id="password" required>
+            </div>
+            <button type="submit">Registrar</button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
