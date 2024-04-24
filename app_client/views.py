@@ -128,3 +128,11 @@ class RequestOrderView(View):
                 print(ctx)
             print(ctx)
             return redirect('client:view_orders')
+
+class ProfileView(View):
+    def get(self, request):
+        user = request.user
+        ctx = {'user': user}
+        print(user)
+        return render(request, 'session/profile.html', ctx)
+

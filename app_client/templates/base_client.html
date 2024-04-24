@@ -19,7 +19,7 @@
       <img class="logo" src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
       <ul>
         <li class="drawers {% if app_name == 'app_client' %}active{% endif %}">
-          <a href="#">
+          <a href="{% url 'client:profile' %}">
             <i data-lucide="users-round"></i>
             Perfil
           </a>
