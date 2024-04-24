@@ -2,6 +2,7 @@
     --red-600: #DC2626;
     --red-700: #b91c1c;
     --green-500: #22c55e;
+    --green-700: #108519;
     --white: #f7f7f7;
     --gray-50: #f9fafb;
     --gray-200: #e5e7eb;
@@ -15,7 +16,7 @@
     --blue-200: #bfdbfe;
     --yellow-700: #a16207;
     --yellow-100: #fef9c3;
-  }
+}
 
 
 body {
