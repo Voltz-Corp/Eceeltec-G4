@@ -10,6 +10,7 @@
     --gray-600: #4b5563;
     --gray-700: #374151;
     --gray-800: #1f2937;
+    --blue-300: #155ec8;
   }
   
   ::-webkit-scrollbar {
@@ -24,8 +25,8 @@
   }
   
   .listSheetsContainer{
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(12px);
+    background-color: var(--white);
+    backdrop-filter: blur(120px);
     z-index: 999;
     height: 100vh;
   
@@ -67,6 +68,9 @@
     align-items: center;
     justify-content: center;
   }
+  a {
+    text-decoration: none;
+  }
   
   .createSheet {
     display: flex;
@@ -79,19 +83,14 @@
   
     transition: all .3s;
   }
-  
+ 
   .createSheet:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--gray-700) 0px 8px 24px; 
-    /* mude */
+    background-color: var(--gray-300);
   }
-  
 
-  
-  .createSheet:hover {
-    transform: translateY(-4px);
+ .createSheet:hover h2 {
+    filter: saturate(2);
   }
-  
   .sheetCard h2 {
     text-align: center;
     

@@ -29,7 +29,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: var(--red-700);
+    background-color: var(--gray-400);
     border-radius: 6px;
   }
 
@@ -127,8 +127,6 @@
   #menuHamburguer {
     display: none;
   }
-  
-  
   
   .usuario {
     text-align: center;

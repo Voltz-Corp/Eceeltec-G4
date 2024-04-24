@@ -1,16 +1,63 @@
 from app_company.models import Users
 from .models import OrderRequest
-def product_verify(brand, type, model, other, description):
+def product_verify(brand, type, model, other, description, user_id):
     errors = []
 
-    if str(type) == "outro" and str(other).count(' ') == len(other):
+    if str(type).count(' ') == len(type):
         errors.append({
-            'field': 'other',
+            'field': 'type',
             'message' : 'Este campo não pode ser vazio!'
             })
-    elif 2 > len(type) or len(type) > 50:
+    elif 2 > len(type) or len(type) > 75:
         errors.append({
-            'field':'other',
+            'field':'type',
             'message': 'Insira de 2 a 75 caracteres!'
             })
+    if str(brand).count(' ') == len(brand):
+        errors.append({
+            'field':'model',
+            'message': 'Este campo não pode ser vazio!'
+            })
+    elif 2 > len(model) or len(model) > 75:
+        errors.append({
+            'field':'model',
+            'message': 'Insira de 2 a 75 caracteres!'
+            })
+    if str(brand).count(' ') == len(brand):
+        errors.append({
+            'field':'brand',
+            'message': 'Este campo não pode ser vazio!'
+            })
+    elif 2 > len(brand) or len(brand) > 75:
+        errors.append({
+            'field':'brand',
+            'message': 'Insira de 2 a 75 caracteres!'
+            })
+    if str(description).count(' ') == len(description):
+        errors.append({
+            'field':'description',
+            'message': 'Este campo não pode ser vazio!'
+            })
+    elif 2 > len(description) or len(description) > 200:
+        errors.append({
+            'field':'description',
+            'message': 'Insira de 2 a 200 caracteres!'
+            })
+    
+    if len(errors) > 0:
+        return errors
 
+    user = Users.objects.get(id=user_id)
+    product = OrderRequest(
+        productbrand=brand,
+        productType=type,
+        productModel=model,
+        otherProductType=other,
+        productProblemDescription=description,
+        userClient=user  
+    )
+    product.save()
+    return product
+
+
+        

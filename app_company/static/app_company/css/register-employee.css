@@ -1,4 +1,4 @@
-body, html {
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -11,14 +11,17 @@ body, html {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: scroll;
 }
 
 .form-card {
+    max-height: 90vh;
     background: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 400px; 
+    width: 800px;
+    overflow-y:scroll
 }
 
 h2 {

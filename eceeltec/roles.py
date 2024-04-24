@@ -9,7 +9,7 @@ class Administrador(AbstractUserRole):
 
 class Funcionario(AbstractUserRole):
     available_permissions = {
-        'fazer_coisas': True,
+        'config_p-user': True,
     }
 
 class Cliente(AbstractUserRole):

@@ -19,15 +19,15 @@
       <img class="logo" src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
       <ul>
         <li class="drawers {% if app_name == 'app_client' %}active{% endif %}">
-          <a href="#">
+          <a href="{% url 'client:profile' %}">
             <i data-lucide="users-round"></i>
             Perfil
           </a>
         </li>
         <li class="employees {% if app_name == 'app_client' %}active{% endif %}">
          <a href="{% url 'client:view_orders'%}">
-          <i data-lucide="rows-3"></i>
-          Pedidos
+          <i data-lucide="file-text"></i>
+          Serviços
          </a>
         </li>
         <li class="configs {% if app_name == 'app_client' %}active{% endif %}">
@@ -37,7 +37,7 @@
           </a>
          </li>
       </ul>
-      <form  class="logout" action="" method='POST'>
+      <form  class="logout" action="{% url 'company:sign' %}" method='POST'>
         {% csrf_token %}
         <input type="hidden" name="logout">
         <button type="submit"> 
