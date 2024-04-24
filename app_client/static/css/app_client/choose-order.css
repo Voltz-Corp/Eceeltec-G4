@@ -102,3 +102,12 @@
   font-weight: 600;
   margin-top: 28px;
 }
+
+table, th, td{
+  border: solid 1px;
+}
+
+td{
+  text-align: center;
+  border: solid var(--gray-200) 1px;
+}
