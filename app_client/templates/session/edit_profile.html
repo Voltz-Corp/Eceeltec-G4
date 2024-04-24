@@ -1,0 +1,87 @@
+{% extends 'base_client.html' %}
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\choose-order.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\create_order.css' %}">
+<link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
+    <title>Eceel-Tec | Solicitar serviço</title>
+{% endblock %}
+
+{% block 'body' %}
+<input type="hidden" id="context" data-errors="{{ errors }}" data-magics="{{ magics }}">
+
+<section class="mainorder">
+    <section class="order">
+        <div>
+            <form action="{% url 'client:edit_profile' %}" method="POST">
+                {% csrf_token %}
+                <div>
+                    <ul>
+
+                        <li>
+                            <label for="first_name">Nome:</label><br>
+                            <input type="text" id="first_name" name="first_name" value="{{user.first_name}}">
+                        </li>
+                        <li>
+                            <br>
+                            <label for="phone">Telefone:</label><br>
+                            <input type="text" id="phone" name="phone" value="{{user.phone}}">
+                        </li>
+                        <li>
+                            <br>
+                            <label for="email">Email:</label><br>
+                            <input type="text" id="email" name="email" value="{{user.email}}">
+                        </li>
+                        <li>
+                            <br>
+                            <label for="cep">CEP:</label><br>
+                            <input type="text" id="cep" name="cep" value="{{user.cep}}">
+                        </li>
+                        <li>
+                            <br>
+                            <label for="uf">Estado:</label><br>
+                            <input type="text" id="uf" name="uf" value="{{user.uf}}">
+                        </li>
+                        <li>
+                            <br>
+                            <label for="city">Cidade:</label><br>
+                            <input type="text" id="city" name="city" value="{{user.city}}">
+                        </li>
+                        <li>
+                            <br>
+                            <label for="neighborhood">Bairro:</label><br>
+                            <input type="text" id="neighborhood" name="neighborhood" value="{{user.neighborhood}}">
+                        </li>
+                        <li>
+                            <br>
+                            <label for="address">Logradouro:</label><br>
+                            <input type="text" id="address" name="address" value="{{user.address}}">
+                        </li>
+                        <li>
+                            <br>
+                            <label for="number">Número:</label><br>
+                            <input type="text" id="number" name="number" value="{{user.number}}">
+
+                        </li>
+                        <li>
+                            <br>
+                            <label for="complement">Complemento:</label><br>
+                            <input type="text" id="complement" name="complement" value="{{user.complement}}">
+                        </li>
+                        
+                    </ul>
+
+                    <br>
+                    <button type="submit" class="submitEdit">Editar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </section>
+    <script type="module" src="{% static 'sheets_app/js/equipment.js' %}"></script>
+    <script type="module" src="{% static 'sheets_app/js/image.js' %}"></script>
+<script type="module" src="{% static 'sheets_app/js/magic.js' %}"></script>
+<script type="module" src="{% static 'sheets_app/js/manage_magic.js' %}"></script>
+{% endblock %}
