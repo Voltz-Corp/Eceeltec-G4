@@ -80,16 +80,17 @@ class SignInView(View):
         auth_login(request, user)
         return redirect('client:view_orders')
 
-class OrderViewView(View):
+class OrderViewView( View):
     def get(self, request):
         
-        # orders_view = Order.objects.filter (user_id=request.user.id)
-        # ctx = {
-        #     'orders_view': orders_view,
-        #     'app_name': 'orders',
-        #     'user': request.user,
-        # }
-        return render(request, 'RequestOrder/orders.html')
+        orders = Users.objects.filter(pk=request.user.id)
+        ctx = {
+            'orders': orders,
+            'user': request.user,
+        }
+
+        return render(request, 'RequestOrder/orders.html', ctx)
+        # return render(request, 'RequestOrder/orders.html')
 
 class RequestOrderView(View):
     def get(self,request):

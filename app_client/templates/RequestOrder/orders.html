@@ -10,54 +10,62 @@
 
 {% block 'body' %}
 
-<section class="listSheetsContainer">
+<section class="list-requests-container">
     <h1 class="title">Seus serviços</h1>
-    <section class="cardList">
+
+    <section class="card-list">
         <a href="{% url 'client:request_os' %}" >
-            <button class="createSheet">
+            <button class="new-request">
                 
                    <h2>Solicitar serviço</h2> 
                 
             </button>
         </a>
-        {% for sheet in sheets_view%}
-        <div class="sheetCard" style="{% if sheet.image %}
-                background-image: url({{ sheet.image }});  
-                background-position: center;
-                {% endif %}">
-            <div style="{% if sheet.image %}
-                        background-color: rgba(0,0,0,0.5);
-                        backdrop-filter: blur(2px); 
-                        {% endif %}">
-                    <h2>{{sheet.name}}</h2>
-
-                <div class="sheet_info">
-                    <div class="sideBySide">
-                        <p><b>Nível:</b></p>
-                        {% if sheet.level == 20 %}
-                            <p>{{sheet.level}} (Nível Max.)</p>
-                        {% else %}
-                            <p>{{sheet.level}} ({{sheet.exp}}/{{sheet.expMax}}xp)</p>
-                        {% endif %}
-                    </div>
-                    <div class="sideBySide">
-                        <p><b>Raça:</b></p>
-                        <p>{{sheet.race}}</p>
-                    </div>
-                    <div class="sideBySide">
-                        <p><b>Classe:</b></p>
-                        <p>{{sheet.role}}</p>
-                    </div>
-
-                    <div class="bar">
-                        <span class="hp-bar"></span>
-                        <span class="mana-bar"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
     </section>
+
+    <section class="list-requests">
+        {% comment %} {% for order in orders %} {% endcomment %}
+        {% comment %} 
+            <li class="product-box">
+                <div class="status">
+                    <i data-lucide="circle" width="16" height="16"></i>
+
+                </div>
+
+                <p>{{productType}}, {{productModel}}, {{productBrand}}</p>
+
+                <div class="icons">
+
+                    <i data-lucide="file-text" width="16" height="16"></i>
+                </div>
+
+                <div class="cancel">
+                    <i data-lucide="ban" width="16" height="16"></i>
+                </div>
+            </li> {% endcomment %}
+        {% comment %} {% endfor %}  {% endcomment %}
+    </section>
+
+    <br><br><br><br><br>
+    <table>
+        <tr>
+            <th>Status</th>
+            <th>Identificação</th>
+            <th>Solicitação</th>
+            <th>Cancelar</th>
+        </tr>
+
+        {% comment %} literalmente ver se a tabela se repete se ficar dentro do for {% endcomment %}
+        {% for request in orders %}
+        <tr>
+            <td><i data-lucide="circle" width="32" height="32"></i></td>
+            <td>{{productType}}, {{productModel}},{{productBrand}}</td>
+            <td><i data-lucide="file-search" width="32" height="32"></i></td>
+            <td><i data-lucide="circle-x" width="32" height="32"></i></td>
+        </tr>
+        
+        {% endfor %}
+    </table>
     
 </section>
 <script src="{% static 'sheets_app/js/sheet.js' %}"></script>

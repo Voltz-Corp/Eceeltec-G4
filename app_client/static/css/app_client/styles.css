@@ -24,7 +24,7 @@
     border-radius: 6px;
   }
   
-  .listSheetsContainer{
+  .list-requests-container{
     background-color: var(--white);
     backdrop-filter: blur(120px);
     z-index: 999;
@@ -34,7 +34,7 @@
     overflow: auto;
   }
   
-  .cardList {
+  .card-list {
     display: grid;
     grid-template-columns: repeat(4, 300px);
     justify-content: space-between;
@@ -42,19 +42,8 @@
     gap: 16px;
   }
   
-  .sheetCard {
-    border-radius: 4px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    backdrop-filter: blur(3px);
-    background-color: rgba(0, 0, 0, 0.7);
-    overflow: hidden;
-    width: 100%;
-    transition: all .3s;
-  }
   
-  .sheetCard>div, .createSheet {
+  .sheetCard>div, .new-request {
     width: 300px;
     height: 20px;
     padding: 24px;
@@ -72,7 +61,7 @@
     text-decoration: none;
   }
   
-  .createSheet {
+  .new-request {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -84,95 +73,38 @@
     transition: all .3s;
   }
  
-  .createSheet:hover {
+  .new-request:hover {
     background-color: var(--gray-300);
   }
 
- .createSheet:hover h2 {
+ .new-request:hover h2 {
     filter: saturate(2);
-  }
-  .sheetCard h2 {
-    text-align: center;
-    
-    color: var(--gray-300);
-  } 
-  
-  .sheet_info {
-    margin-top: 24px;
-    width: 100%;
-  }
-  
-  .sheet_info span {
-    color: var(--gray-200);
-    font-weight: 600;
-  }
-  
-  .sheet_info p {
-    margin-top: 4px;
-    color: var(--white);
-    word-break: break-word;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
   }
   
   .title {
     padding-bottom: 20px;
   }
   
-  .sideBySide {
-    display: flex;
-    align-items: center;
-    /* justify-content: space-between; */
-    
-    width: 100%;
-    gap: 16px;
-  }
-  
-  .bar {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 10px;
-    padding: 5px 0;
-  }
-  
-  .hp-bar {
-    background-color: rgba(238, 67, 67, 0.8);
-    height: 5px;
-    margin-bottom: 15px;
-  }
-  
-  .mana-bar {
-    background-color: rgba(86, 86, 227, 0.8);
-    height: 5px;
-  }
   
   @media (max-width: 1653px) {
-    .cardList {
+    .card-list {
       grid-template-columns: repeat(3, 1fr);
     }
   
-    .sheetCard > div, .createSheet {
+    .sheetCard > div, .new-request {
       width: 100%;
     }
   }
   
   @media (max-width: 1333px) {
-    .cardList {
+    .card-list {
       grid-template-columns: repeat(2, 1fr);
     }
   }
   
   @media (max-width: 1080px) {
-    .cardList {
+    .card-list {
       grid-template-columns: repeat(1, 1fr);
     }
   }
   
-  .sheetCard:hover {
-    transform: translateY(-4px);
-    cursor: pointer;
-    filter: saturate(120%);
-    box-shadow: rgba(53, 11, 11, 0.3) 0px 8px 24px;
-  }
