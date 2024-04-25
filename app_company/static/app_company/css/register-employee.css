@@ -51,6 +51,7 @@ body {
 .header {
     font-size: 2.5em;  
     color: var(--blue-500);
+    margin: 20px;
     /* align-self: flex-start; */
 }
 
