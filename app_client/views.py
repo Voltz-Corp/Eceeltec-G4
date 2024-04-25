@@ -37,7 +37,11 @@ class SignUpClient(View):
         phone_treated = phone.strip()
         email_treated = email.strip()
         password_treated = password.strip()
-
+        
+        if Users.objects.filter(first_name=name).exists():
+            messages.error(request, "Um usuário com esse nome já existe.")
+            return render(request, 'session/sign-up.html')
+        
         if not name_treated:
             messages.error(request, 'O campo de nome não pode ser vazio!')
             return render(request, 'session/sign-up.html')
@@ -76,14 +80,18 @@ class SignInView(View):
         if not user:
             messages.error(request, 'Usuário ou senha errados!')
             return redirect('client:sign_in')
-
+        
+        if user.role != 'C':
+            messages.error(request, 'Você não tem permissão para acessar essa página')
+            return redirect('client:sign_in')
+        
         auth_login(request, user)
         return redirect('client:view_orders')
 
 class OrderViewView( View):
     def get(self, request):
         
-        orders = Users.objects.filter(pk=request.user.id)
+        orders = OrderRequest.objects.filter(userClient_id=request.user.id)
         ctx = {
             'orders': orders,
             'user': request.user,
@@ -134,6 +142,43 @@ class ProfileView(View):
     def get(self, request):
         user = request.user
         ctx = {'user': user}
-        print(user)
         return render(request, 'session/profile.html', ctx)
 
+class EditProfileView(View):
+    def get(self, request):
+        user = request.user
+        ctx = {'user': user}
+        return render(request, 'session/edit_profile.html', ctx)
+
+    def post(self, request):
+        
+        user = request.user
+        user.first_name = request.POST.get('first_name')
+        user.phone = request.POST.get('phone')
+        user.email = request.POST.get('email')
+        user.cep = request.POST.get('cep')
+        user.uf = request.POST.get('uf')
+        user.city = request.POST.get('city')
+        user.neighborhood = request.POST.get('neighborhood')
+        user.address = request.POST.get('address')
+        user.number = request.POST.get('number')
+        user.complement = request.POST.get('complement')
+
+        user.save()
+
+        return redirect('client:profile')
+        # name = request.POST.get('first_name')
+        # phone = request.POST.get('phone')
+        # email = request.POST.get('email')
+        # cep = request.POST.get('cep')
+        # uf = request.POST.get('uf')
+        # city = request.POST.get('city')
+        # neighborhood = request.POST.get('neighborhood')
+        # address = request.POST.get('address')
+        # number = request.POST.get('number')
+        # complement = request.POST.get('complement')
+
+        # user = Users(first_name=name, phone=phone, email=email, cep=cep, uf=uf, city=city, neighborhood=neighborhood, address=address, number=number, complement=complement)
+        # user.save()
+
+        # return redirect('client:profile')

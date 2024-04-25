@@ -3,7 +3,6 @@
 
 {% block 'head' %}
     <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\choose-order.css' %}">
     <link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
     <title>Eccel-tec | Seus serviços</title>
 {% endblock %}
@@ -13,60 +12,40 @@
 <section class="list-requests-container">
     <h1 class="title">Seus serviços</h1>
 
-    <section class="card-list">
-        <a href="{% url 'client:request_os' %}" >
-            <button class="new-request">
-                
-                   <h2>Solicitar serviço</h2> 
-                
-            </button>
-        </a>
+    <a href="{% url 'client:request_os' %}" >
+        <button class="new-request">
+            Solicitar serviço 
+        </button>
+    </a>
+
+    <section class="tableContainer">
+        <div>
+          <h3>Suas solicitações</h3>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+                <th>Status</th>
+                <th>Identificação</th>
+                <th></th>
+                <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>
+                        <div> Em análise </div>
+                    </td>
+                    <td>{{order.productType}} | {{order.productModel}}</td>
+                    <td><i data-lucide="search" width="28" height="28" color="#155ec8"></i></td>
+                    <td><i data-lucide="trash" width="28" height="28" color="#DC2626"></i></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </section>
-
-    <section class="list-requests">
-        {% comment %} {% for order in orders %} {% endcomment %}
-        {% comment %} 
-            <li class="product-box">
-                <div class="status">
-                    <i data-lucide="circle" width="16" height="16"></i>
-
-                </div>
-
-                <p>{{productType}}, {{productModel}}, {{productBrand}}</p>
-
-                <div class="icons">
-
-                    <i data-lucide="file-text" width="16" height="16"></i>
-                </div>
-
-                <div class="cancel">
-                    <i data-lucide="ban" width="16" height="16"></i>
-                </div>
-            </li> {% endcomment %}
-        {% comment %} {% endfor %}  {% endcomment %}
-    </section>
-
-    <br><br><br><br><br>
-    <table>
-        <tr>
-            <th>Status</th>
-            <th>Identificação</th>
-            <th>Solicitação</th>
-            <th>Cancelar</th>
-        </tr>
-
-        {% comment %} literalmente ver se a tabela se repete se ficar dentro do for {% endcomment %}
-        {% for request in orders %}
-        <tr>
-            <td><i data-lucide="circle" width="32" height="32"></i></td>
-            <td>{{productType}}, {{productModel}},{{productBrand}}</td>
-            <td><i data-lucide="file-search" width="32" height="32"></i></td>
-            <td><i data-lucide="circle-x" width="32" height="32"></i></td>
-        </tr>
-        
-        {% endfor %}
-    </table>
-    
 </section>
 <script src="{% static 'sheets_app/js/sheet.js' %}"></script>
 {% endblock %}

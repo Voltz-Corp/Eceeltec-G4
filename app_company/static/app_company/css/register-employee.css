@@ -1,3 +1,36 @@
+:root {
+    --red-600: #DC2626;
+    --red-700: #b91c1c;
+    --green-500: #22c55e;
+    --green-700: #108519;
+    --white: #f7f7f7;
+    --gray-50: #f9fafb;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --blue-500: #155ec8;
+    --blue-200: #bfdbfe;
+    --yellow-700: #a16207;
+    --yellow-100: #fef9c3;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--gray-400);
+    border-radius: 6px;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -8,15 +41,22 @@ body {
 
 .content {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
     height: 100vh;
     overflow: scroll;
 }
 
+.header {
+    font-size: 2.5em;  
+    color: var(--blue-500);
+    /* align-self: flex-start; */
+}
+
 .form-card {
-    max-height: 90vh;
-    background: white;
+    height: fit-content;
+    background: var(--white);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -37,26 +77,36 @@ form {
 
 .form-group { 
     display: flex;
-    align-items: center;
+    flex-direction: column;
     margin-bottom: 15px;
 }
 
 label {
-    flex: 0 0 120px; 
-    margin-right: 10px; 
-    text-align: right; 
+    text-align: left; 
+    margin-bottom: 8px;
+    color: var(--gray-700);
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    flex: 1; 
-    padding: 10px;
-    border: 1px solid #ccc;
+input,
+select {
+    padding: 12px;
+    border: 1px solid var(--gray-200);
     border-radius: 4px;
+    background-color: transparent;
 }
 
 button {
+    transition: all .3s;
+}
+
+.info-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 16px;
+    
+}
+
+.back-button, .new-employee-button {
     width: 100%; 
     padding: 10px;
     background-color: #0056b3;
@@ -67,9 +117,17 @@ button {
     margin-top: 20px; 
 }
 
-button:hover {
+.back-button:hover {
     background-color: #004494;
 }
+
+.new-employee-button{
+    background-color: var(--green-500);
+}
+.new-employee-button:hover{
+    background-color: var(--green-700);
+}
+
 
 .messages {
     list-style-type: none;

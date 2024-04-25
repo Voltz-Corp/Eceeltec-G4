@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
   font-family: 'Montserrat';
+  font-size: 16px;
 }
 
 :root {
@@ -163,11 +164,7 @@ h1 {
     position: absolute;
     top: 16px;
     left: 16px;
-    border: 1px solid red;
+    border: 1px solid green;
     z-index: 99999;
   }
-}
-
-.dice {
-  margin-left: 500px;
 }
