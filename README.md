@@ -75,30 +75,35 @@
 <br/>
 
 
-### Histórias do Usuário
+### Histórias de Usuário
 ---
 
 - <strong>H1 - Cadastro de funcionários pelo Administrador </strong>
+
 ![H1](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/6e45e9c1-3864-4f41-8580-aa38a3328713)
 
 <br>
 
 - <strong>H2 - Solicitação de serviço pelo cliente </strong>
+
 ![H2](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/67824a95-f1e8-439f-8631-2bc18febe7d3)
 
 <br>
 
 - <strong>H3 - Criação de Orçamento e Ordem de Serviço </strong>
+
 ![H3](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/7233e369-22da-44e7-a370-6b7bd83c5918)
 
 <br>
 
 - <strong>H4 - Acompanhamento de OS pelo cliente </strong>
+
 ![H4](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/4958ba3a-e789-4edc-8cea-e0daad4dd59b)
 
 <br>
 
 - <strong>H5 - Gerenciamento das Ordens de Serviço pelo administrador</strong>
+
 ![H5](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/31de65b1-7dce-4efa-98cd-b50d5f30969d)
 
 
@@ -106,18 +111,21 @@
 <br>
 
 - <strong>Backlog</strong>
+
 ![Backlog](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/e732de00-88f2-486b-8574-11c9591c886c)
 
 
 <br>
 
 - <strong>Board</strong>
+
 ![Board](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/cfc8d134-85d8-4ad4-87af-9f924aeea4db)
 
 
 <br>
 
 - <strong>Issue/Bug tracker</strong>
+
 ![issue/bug tracker1](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/fed9a939-c3cc-44ae-9dc4-e8d9a5e75374)
 ![issue/bug tracker2](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/1f50399a-ac61-4552-ae7c-9cea3bfa801c)
 
@@ -126,6 +134,7 @@
 <br>
 
 - <strong>Diagrama de Atividades</strong>
+
 ![Diagrama de atividade (4)](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/b3c87b2a-130b-440d-92be-39388379c50f)
 
 
