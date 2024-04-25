@@ -38,7 +38,7 @@
 <br/>
 <p align="center" style="">
 <a href="--falta-link--">
-  <img src="https://img.shields.io/badge/screencast-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
+  <img src="https://img.shields.io/badge/screencast das histórias-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
 </a>
 <a href="https://docs.google.com/document/d/18NOUklwlPUHPYoXYBvkR8hp8xUGy1oOvBzqqz7yVbRM/edit?usp=sharing">
   <img src="https://img.shields.io/badge/relatório programação em par-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
