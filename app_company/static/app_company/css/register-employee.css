@@ -81,6 +81,10 @@ form div {
     margin-bottom: 16px;
 }
 
+form .actions {
+    display: flex;
+}
+
 .info-container span {
     display: flex;
     align-items: center;
@@ -117,11 +121,17 @@ button {
     width: 100%; 
     padding: 10px;
     background-color: #0056b3;
-    color: white;
+    color: var(--white);
     border: none;
     border-radius: 4px;
     cursor: pointer;
     margin-top: 20px; 
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    text-decoration: none;
 }
 
 .back-button:hover {

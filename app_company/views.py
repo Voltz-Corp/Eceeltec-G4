@@ -67,7 +67,7 @@ class RegisterEmployeeView(View):
         complement = request.POST.get('complement')
         position = request.POST.get('position')
         dob = request.POST.get('dob')
-        errors = validate_inputs(email, phone, cep, dob, username, password, position, identity_number)
+        errors = validate_inputs(username, position, phone, identity_number, email, dob, cep, uf, city, neighborhood, address, complement, password)
         ctx = {
             'username': username,
             'email': email,
@@ -87,16 +87,10 @@ class RegisterEmployeeView(View):
         if errors:
             ctx['errors'] = errors
             return render(request, 'app_company/register-employee.html', ctx)
-
-        if Users.objects.filter(username=ctx['username']).exists():
-            messages.error(request, "Já existe um funcionário com esse nome de usuário.")
-            return render(request, 'app_company/register-employee.html', ctx)
-
-        if Users.objects.filter(email=ctx['email']).exists():
-            messages.error(request, "Esse email já está registrado.")
-            return render(request, 'app_company/register-employee.html', ctx)
-
-        user = Users( username=username,
+        
+        user = Users(
+            first_name=username,
+            username=email,
             email=email,
             identity_number=identity_number,
             password=make_password(password),
@@ -109,7 +103,8 @@ class RegisterEmployeeView(View):
             complement=complement,
             role=role,
             position=position,
-            dob=dob)
+            dob=None if not dob.strip() else dob
+            )
         user.save()
         messages.success(request, "Colaborador registrado com sucesso.")
         return redirect('company:list_employees')
@@ -165,6 +160,6 @@ class EmployeeBasicView(View):
         id = request.user.id
         user = Users.objects.filter(id=id).first()
         ctx = {
-            'username': user.username
+            'name': user.first_name
         }
         return render(request, 'app_company/employee-temppage.html', ctx)

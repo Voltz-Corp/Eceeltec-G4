@@ -45,20 +45,6 @@
                     {% endfor %}
                 </div>
 
-                <div class="dobContainer">
-                    <label for="dob">Data de nascimento</label>
-                    <input type="date" name="dob" value="{{dob}}" id="dob" >
-
-                    {% for error in errors %}
-                        {% if error.field == 'dob'%}
-                            <span>
-                                <i data-lucide="octagon-alert"></i>
-                                {{ error.message }}
-                            </span>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                
                 <div class="phoneContainer">
                     <label for="phone">Telefone</label>
                     <input type="text" name="phone" value="{{phone}}" id="phone">
@@ -101,12 +87,12 @@
                     {% endfor %}
                 </div>
 
-                <div class="passwordContainer">
-                    <label for="password">Senha</label>
-                    <input type="password" name="password" id="password">
+                <div class="dobContainer">
+                    <label for="dob">Data de nascimento</label>
+                    <input type="date" name="dob" value="{{dob}}" id="dob" >
 
                     {% for error in errors %}
-                        {% if error.field == 'password'%}
+                        {% if error.field == 'dob'%}
                             <span>
                                 <i data-lucide="octagon-alert"></i>
                                 {{ error.message }}
@@ -114,7 +100,6 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-
 
                 <div class="cepContainer">
                     <label for="cep">CEP</label>
@@ -201,7 +186,6 @@
                     {% endfor %}
                 </div>
 
-
                 <div class="addressContainer">
                     <label for="address">Logradouro</label>
                     <input type="text" name="address" value="{{address}}" id="address">
@@ -229,13 +213,30 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-            </section>
 
-            <button type="submit" class="new-employee-button">Registrar</button>
+                <div class="passwordContainer">
+                    <label for="password">Senha do colaborador</label>
+                    <input type="password" name="password" id="password">
+
+                    {% for error in errors %}
+                        {% if error.field == 'password'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+            
+            <div class="actions">
+                <button type="submit" class="new-employee-button">Registrar</button>
+                <a href="{% url 'company:list_employees' %}" class="back-button">
+                    Voltar
+                </a>
+            </div>
         </form>
-        <form action="{% url 'company:list_employees' %}" method="get">
-            <button type="submit" class="back-button">Voltar</button>
-        </form>
+
         {% if messages %}
         <ul>
             {% for message in messages %}
