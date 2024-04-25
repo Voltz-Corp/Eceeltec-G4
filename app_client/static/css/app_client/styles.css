@@ -28,6 +28,15 @@
   border-radius: 6px;
 }
 
+button {
+  border: none;
+}
+
+.title {
+  padding-bottom: 20px;
+  font-size: 40px;
+}
+
 .list-requests-container{
   background-color: var(--white);
   backdrop-filter: blur(120px);
@@ -38,50 +47,25 @@
   overflow: auto;
 }
 
-.card-list {
-  display: grid;
-  grid-template-columns: repeat(4, 300px);
-  justify-content: space-between;
-
-  gap: 16px;
-}
-
-
-.sheetCard>div, .new-request {
-  width: 300px;
-  height: 20px;
-  padding: 24px;
+ .new-request {
+  padding: 12px 20px;
   
   background-color: var(--gray-200);
-  position: relative;
   border-radius: 4px;
-  border: none;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-a {
-  text-decoration: none;
-}
-
-.new-request {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  text-decoration: none;
-  background-size: cover;
-  background-repeat: no-repeat;
-
+  font-weight: 600;
   transition: all .3s;
 }
 
 .new-request:hover {
-  background-color: var(--gray-300);
+  background-color: var(--gray-300); 
 }
 
+a {
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: all .3s;
+}
 
 .tableContainer {
   background-color: var(--gray-50);
@@ -173,9 +157,4 @@ tbody td:first-child div {
   .card-list {
     grid-template-columns: repeat(1, 1fr);
   }
-}
-
-.title {
-  padding-bottom: 20px;
-  font-size: xx-large;
 }

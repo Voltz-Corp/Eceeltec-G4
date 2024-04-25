@@ -53,9 +53,9 @@ def validate_inputs(email, phone, cep, dob):
         errors = []
         if not re.match(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}', email):
             errors.append("Email inválido.")
-        if not re.match(r'^\d{8}$', cep):  
+        if len(cep) != 9:  
             errors.append("CEP inválido. Deve ser uma sequência de 8 dígitos.")
-        if not re.match(r'^\d{11}$', phone):
+        if len(phone) != 15:
             errors.append("Número de telefone deve ter 11 dígitos.")
         try:
             pass

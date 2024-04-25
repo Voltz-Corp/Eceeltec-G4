@@ -3,8 +3,10 @@
 
 {% block 'head' %}
 
-<title></title>
 <link rel="stylesheet" href="{% static 'app_company/css/list-employees.css' %}"> 
+<title>
+    Colaboradores | Eceel-tec
+</title>
 {% endblock %}
 
 {% block 'body' %}
@@ -18,50 +20,63 @@
         </ul>
     {% endif %}
 
-    <h2 class="header">Colaboradores</h2>
+    <h1 class="title">Colaboradores</h1>
     
     <form class="form-button" action="{% url 'company:register_employee' %}" method="get">
-        <button type="submit" class="new-employee-button"><h2>Adicionar novo colaborador</h2></button>
+        <button type="submit" class="new-employee-button">Adicionar novo colaborador</button>
     </form>
 
-    {% for employee in employees %}
-        <div class="list">
-            <ul class="employee-list">
-                    <li class="employee-box">
-                
-                    <p>{{ employee.username }}</p>
-
-                    <div class="icons">
-                        <a href="{% url 'company:employee_details' employee.id %}" class="info-link">
-                            <i class="file-text" data-lucide="file-text" width="24" height="24"></i>
-                        </a>
-                        <form class="form-button" action="{% url 'company:delete_employee' employee.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="button" data-url="{% url 'company:delete_employee' employee.id %}" class="openDeleteModal">
-                                <i data-lucide="trash" width="24" height="24"></i>
-                            </button>
-                        </form>
-                    </div>
-                
-                </li>
-            </ul>
+    <section class="tableContainer">
+        <div>
+          <h3>Seus funcionários</h3>
         </div>
-        {% endfor %}
+
+        <table>
+          <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th></th>
+                <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <td>
+                        {{ employee.username }}
+                    </td>
+                    <td> {{ employee.position }} </td>
+                    <td>
+                        <a href="{% url 'company:employee_details' employee.id %}" class="info-link">
+                            <i class="file-text" data-lucide="user-search" width="28" height="28"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <button type="button" data-url="{% url 'company:delete_employee' employee.id %}" class="openDeleteModal">
+                            <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
     </div>
     <section id="deleteModal" class="modal">
         <div class="modal-content">
             <button type="button" class="closeModalX">
                 <i data-lucide="x"></i>
             </button>
-            <h3>Confirmar deleção</h3>
+            <strong>Confirmar deleção</strong>
             <p>Você tem certeza que deseja apagar o perfil desse funcionário?</p>
             <form id="confirmDeleteForm" method="post" action="">
                 {% csrf_token %}
-                <button type="submit" class="delete-employee-button">
-                    Confirmar
-                </button>
                 <button type="button" class="cancelBtn">
                     Cancelar
+                </button>
+                <button type="submit" class="deleteEmployeeBtn">
+                    Confirmar
                 </button>
             </form>
         </div>
