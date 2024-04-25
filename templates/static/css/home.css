@@ -4,6 +4,10 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+a {
+    color: #374151;
+}
+
 nav {
     display: flex;
     align-items: center;
@@ -68,8 +72,12 @@ li > a {
     transition: all 0.3s;
 }
 
+#users a {
+    color: #374151;
+}
+
 #employee:hover, #client:hover {
-    scale: 1.1;
+    scale: 1.06;
     cursor: pointer;
 }
 
@@ -88,12 +96,20 @@ li > a {
 footer {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 20px;
+    color: #374151;
 }
 
 footer img {
-    width: 70px;
+    width: 90px;
     transition: all .3s;
+    align-items: center;
+}
+
+footer a {
+    justify-content: center;
+    align-items: center;
 }
 
 footer img:hover {
