@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block 'head' %}
-    <title></title>
+    <title>Registrar colaborador | Eceel-tec </title>
     <link rel="stylesheet" href="{% static 'app_company/css/register-employee.css' %}">
 
 {% endblock %}
@@ -17,100 +17,219 @@
             {% csrf_token %}
             
             <section class="info-container">
-
-                <div class="form-group">
+                <div class="usernameContainer">
                     <label for="username">Nome do colaborador</label>
-                    <input type="text" name="username" value="{{username}}" id="username" required>
+                    <input type="text" name="username" value="{{username}}" id="username" >
+
+                    {% for error in errors %}
+                        {% if error.field == 'username'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
 
-                <div class="form-group">
+                <div class="positionContainer">
                     <label for="position">Cargo na empresa</label>
                     <input type="text" name="position" value="{{position}}" id="position">
+
+                    {% for error in errors %}
+                        {% if error.field == 'position'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
 
-                <div class="form-group">
+                <div class="dobContainer">
                     <label for="dob">Data de nascimento</label>
-                    <input type="date" name="dob" value="{{dob}}" id="dob" required>
+                    <input type="date" name="dob" value="{{dob}}" id="dob" >
+
+                    {% for error in errors %}
+                        {% if error.field == 'dob'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
                 
-                <div class="form-group">
+                <div class="phoneContainer">
                     <label for="phone">Telefone</label>
-                    <input type="text" name="phone" value="{{phone}}" id="phone" required>
+                    <input type="text" name="phone" value="{{phone}}" id="phone">
+
+                    {% for error in errors %}
+                        {% if error.field == 'phone'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="identityNumberContainer">
+                    <label for="identity_number">CPF</label>
+                    <input type="text" name="identity_number" value="{{identity_number}}" id="identity_number">
+
+                    {% for error in errors %}
+                        {% if error.field == 'identity_number'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
                 
-                <div class="form-group">
+                <div class="emailContainer">
                     <label for="email">Email</label>
-                    <input type="email" name="email" value="{{email}}" id="email" required>
+                    <input type="email" name="email" value="{{email}}" id="email">
+
+                    {% for error in errors %}
+                        {% if error.field == 'email'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
 
-                <div class="form-group">
+                <div class="passwordContainer">
                     <label for="password">Senha</label>
-                    <input type="password" name="password" id="password" required>
+                    <input type="password" name="password" id="password">
+
+                    {% for error in errors %}
+                        {% if error.field == 'password'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
 
 
-                <div class="form-group">
+                <div class="cepContainer">
                     <label for="cep">CEP</label>
-                    <input type="text" name="cep" value="{{cep}}" id="cep" required>
+                    <input type="text" name="cep" value="{{cep}}" id="cep" >
+
+                    {% for error in errors %}
+                        {% if error.field == 'cep'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
 
-                <div class="form-group">
+                <div class="ufContainer">
                     <label for="uf">Estado</label>
-                    <select name="uf" value="{{uf}}" id="uf" required>
-                    <option value="AC">Acre</option>
-                    <option value="AL">Alagoas</option>
-                    <option value="AP">Amapá</option>
-                    <option value="AM">Amazonas</option>
-                    <option value="BA">Bahia</option>
-                    <option value="CE">Ceará</option>
-                    <option value="DF">Distrito Federal</option>
-                    <option value="ES">Espírito Santo</option>
-                    <option value="GO">Goiás</option>
-                    <option value="MA">Maranhão</option>
-                    <option value="MT">Mato Grosso</option>
-                    <option value="MS">Mato Grosso do Sul</option>
-                    <option value="MG">Minhas Gerais</option>
-                    <option value="PA">Pará</option>
-                    <option value="PB">Paraíba</option>
-                    <option value="PR">Paraná</option>
-                    <option value="PE">Pernambuco</option>
-                    <option value="PI">Piauí</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                    <option value="RN">Rio Grande do Norte</option>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="RO">Rondônia</option>
-                    <option value="RR">Roraima</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="SE">Sergipe</option>
-                    <option value="TO">Tocantins</option>
+                    <select name="uf" value="{{uf}}" id="uf" >
+                        <option value="">Selecione</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
                     </select>
+
+                    {% for error in errors %}
+                        {% if error.field == 'uf'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
 
-                <div class="form-group">
+                <div class="cityContainer">
                     <label for="city">Cidade</label>
-                    <input type="text" name="city" value="{{city}}" id="city" required>
+                    <input type="text" name="city" value="{{city}}" id="city" >
+
+                    {% for error in errors %}
+                        {% if error.field == 'city'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
 
-                <div class="form-group">
+                <div class="neighborhoodContainer">
                     <label for="neighborhood">Bairro</label>
-                    <input type="text" name="neighborhood" value="{{neighborhood}}" id="neighborhood" required>
+                    <input type="text" name="neighborhood" value="{{neighborhood}}" id="neighborhood" >
+
+                    {% for error in errors %}
+                        {% if error.field == 'neighborhood'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
 
 
-                <div class="form-group">
+                <div class="addressContainer">
                     <label for="address">Logradouro</label>
                     <input type="text" name="address" value="{{address}}" id="address">
-                </div class="form-group">
 
-                <div class="form-group">
-                    <label for="complement">Complemento (opcional)</label>
-                    <input type="text" name="complement" value="{{complement}}" id="complement">
+                    {% for error in errors %}
+                        {% if error.field == 'address'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
 
+                <div class="complementContainer">
+                    <label for="complement">Complemento (opcional)</label>
+                    <input type="text" name="complement" value="{{complement}}" id="complement">
+
+                    {% for error in errors %}
+                        {% if error.field == 'complement'%}
+                            <span>
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </section>
-
-
 
             <button type="submit" class="new-employee-button">Registrar</button>
         </form>
