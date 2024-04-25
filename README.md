@@ -125,7 +125,8 @@
 <br>
 
 - <strong>Diagrama de Atividades</strong>
-![Diagrama de atividade (3)](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/32584550-6dbb-4cbd-922a-46795e77742f)
+![Diagrama de atividade (4)](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/b3c87b2a-130b-440d-92be-39388379c50f)
+
 
 
 
