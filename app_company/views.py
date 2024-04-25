@@ -53,49 +53,58 @@ class RegisterEmployeeView(View):
         return render(request, 'app_company/register-employee.html')
 
     def post(self, request):
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        identity_number = request.POST.get('identity_number')
+        password = request.POST.get('password')
+        role = 'F'  
+        cep = request.POST.get('cep')
+        uf = request.POST.get('uf')
+        city = request.POST.get('city')
+        neighborhood = request.POST.get('neighborhood')
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
+        complement = request.POST.get('complement')
+        position = request.POST.get('position')
+        dob = request.POST.get('dob')
+        errors = validate_inputs(username, position, phone, identity_number, email, dob, cep, uf, city, neighborhood, address, complement, password)
         ctx = {
-            'username': request.POST.get('username'),
-            'email': request.POST.get('email'),
-            'password': request.POST.get('password'),
-            'role': 'F',  
-            'cep': request.POST.get('cep'),
-            'uf': request.POST.get('uf'),
-            'city': request.POST.get('city'),
-            'neighborhood': request.POST.get('neighborhood'),
-            'address': request.POST.get('address'),
-            'phone': request.POST.get('phone'),
-            'complement': request.POST.get('complement'),
-            'position': request.POST.get('position'),
-            'dob': request.POST.get('dob')
+            'username': username,
+            'email': email,
+            'password': password,
+            'cep': cep,
+            'uf': uf,
+            'city': city,
+            'neighborhood': neighborhood,
+            'address': address,
+            'phone': phone,
+            'complement': complement,
+            'position': position,
+            'dob': dob,
+            'identity_number': identity_number
         }
-        errors = validate_inputs(email=ctx['email'], phone=ctx['phone'], cep=ctx['cep'], dob=ctx['dob'])
+
         if errors:
-            for error in errors:
-                messages.error(request, error)
-            print("erro")
+            ctx['errors'] = errors
             return render(request, 'app_company/register-employee.html', ctx)
-
-        if Users.objects.filter(username=ctx['username']).exists():
-            messages.error(request, "Já existe um funcionário com esse nome de usuário.")
-            return render(request, 'app_company/register-employee.html', ctx)
-
-        if Users.objects.filter(email=ctx['email']).exists():
-            messages.error(request, "Esse email já está registrado.")
-            return render(request, 'app_company/register-employee.html', ctx)
-
-        user = Users( username=ctx['username'],
-            email=ctx['email'],
-            password=make_password(ctx['password']),
-            cep=ctx['cep'],
-            uf=ctx['uf'],
-            city=ctx['city'],
-            neighborhood=ctx['neighborhood'],
-            address=ctx['address'],
-            phone=ctx['phone'],
-            complement=ctx['complement'],
-            role=ctx['role'],
-            position=ctx['position'],
-            dob=ctx['dob'])
+        
+        user = Users(
+            first_name=username,
+            username=email,
+            email=email,
+            identity_number=identity_number,
+            password=make_password(password),
+            cep=cep,
+            uf=uf,
+            city=city,
+            neighborhood=neighborhood,
+            address=address,
+            phone=phone,
+            complement=complement,
+            role=role,
+            position=position,
+            dob=None if not dob.strip() else dob
+            )
         user.save()
         messages.success(request, "Colaborador registrado com sucesso.")
         return redirect('company:list_employees')
@@ -151,6 +160,6 @@ class EmployeeBasicView(View):
         id = request.user.id
         user = Users.objects.filter(id=id).first()
         ctx = {
-            'username': user.username
+            'name': user.first_name
         }
         return render(request, 'app_company/employee-temppage.html', ctx)
