@@ -54,13 +54,15 @@ class SignUpClient(View):
             return render(request, 'session/sign-up.html')
 
         if not email_treated:
-            return messages.error(request, 'O campo de email não pode ser vazio!')
+            messages.error(request, 'O campo de email não pode ser vazio!')
+            return render(request, 'session/sign-up.html')
         elif not re.match(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}', email):
             messages.error(request, 'Formato de email inválido!')
             return render(request, 'session/sign-up.html')
 
         if not password_treated:
-            return messages.error(request, 'O campo de senha não pode ser vazio!')
+            messages.error(request, 'O campo de senha não pode ser vazio!')
+            return render(request, 'session/sign-up.html')
 
         # first name é o nome completo
         user = Users(first_name=name, username=email, phone=phone, email=email, password=make_password(password), cep=cep, uf=uf, city=city, neighborhood= neighborhood, address=address, number=number, complement=complement, role="C")
