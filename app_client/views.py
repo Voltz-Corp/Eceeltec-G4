@@ -37,7 +37,11 @@ class SignUpClient(View):
         phone_treated = phone.strip()
         email_treated = email.strip()
         password_treated = password.strip()
-
+        
+        if Users.objects.filter(first_name=name).exists():
+            messages.error(request, "Um usuário com esse nome já existe.")
+            return render(request, 'session/sign-up.html')
+        
         if not name_treated:
             messages.error(request, 'O campo de nome não pode ser vazio!')
             return render(request, 'session/sign-up.html')
