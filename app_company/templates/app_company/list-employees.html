@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="{% static 'app_company/css/list-employees.css' %}"> 
 <title>
-    Colaboradores | Eceel-tec
+    Eceel-tec | Colaboradores
 </title>
 {% endblock %}
 
@@ -70,7 +70,7 @@
             </button>
             <strong>Confirmar deleção</strong>
             <p>Você tem certeza que deseja apagar o perfil desse funcionário?</p>
-            <form id="confirmDeleteForm" method="post" action="">
+            <form id="confirmDeleteForm" method="POST" action="">
                 {% csrf_token %}
                 <button type="button" class="cancelBtn">
                     Cancelar

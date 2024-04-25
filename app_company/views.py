@@ -132,11 +132,11 @@ class ListEmployeesView(View):
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')    
 class DeleteEmployeeView(View):
-    def post(self,request, pk): 
+    def post(self, request, pk): 
         employee = Users.objects.get(pk=pk)
         employee.delete()
         return redirect('company:list_employees')
-    
+
 
 @method_decorator(has_permission_decorator('employee_details'), name='dispatch')
 class EmployeeDetailView(View):
@@ -148,4 +148,9 @@ class EmployeeDetailView(View):
 @method_decorator(has_permission_decorator('fazer_coisas'), name='dispatch')
 class EmployeeBasicView(View):
     def get(self, request):
-        return render(request, 'app_company/employee-temppage.html')
+        id = request.user.id
+        user = Users.objects.filter(id=id).first()
+        ctx = {
+            'username': user.username
+        }
+        return render(request, 'app_company/employee-temppage.html', ctx)
