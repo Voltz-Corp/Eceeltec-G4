@@ -38,7 +38,7 @@
 <br/>
 <p align="center" style="">
 <a href="https://www.youtube.com/watch?v=VUxwg0lhavE">
-  <img src="https://img.shields.io/badge/screencast-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
+  <img src="https://img.shields.io/badge/screencast das histórias-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
 </a>
 <a href="https://www.youtube.com/watch?v=Z4pSNX_3fw4">
   <img src="https://img.shields.io/badge/screencast dos protótipos-3C3744?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
