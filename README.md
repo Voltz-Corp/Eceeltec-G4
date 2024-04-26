@@ -40,14 +40,17 @@
 <a href="https://www.youtube.com/watch?v=VUxwg0lhavE">
   <img src="https://img.shields.io/badge/screencast-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
 </a>
+<a href="https://www.youtube.com/watch?v=Z4pSNX_3fw4">
+  <img src="https://img.shields.io/badge/screencast dos protótipos-3C3744?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
+</a>
 <a href="https://docs.google.com/document/d/18NOUklwlPUHPYoXYBvkR8hp8xUGy1oOvBzqqz7yVbRM/edit?usp=sharing">
-  <img src="https://img.shields.io/badge/relatório programação em par-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+  <img src="https://img.shields.io/badge/relatório programação em par-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
 <a href="https://voltz-eceeltec.azurewebsites.net/">
-  <img src="https://img.shields.io/badge/site na azure-F46036?style=for-the-badge&logo=microsoft-azure&logoColor=white" height="35px"/>
+  <img src="https://img.shields.io/badge/site na azure-3C3744?style=for-the-badge&logo=microsoft-azure&logoColor=white" height="35px"/>
 </a>
 <a href="https://www.figma.com/file/AeNV6pbnJTaBbTGgkIKSiI/Protótipo-Interativo---VOLTZ?type=design&node-id=0-1&mode=design&t=g0bR8OqODOcVs48y-0">
-<img src="https://img.shields.io/badge/figma com sketches-3C3744?style=for-the-badge&logo=figma&logoColor=white" height="35px"/>
+<img src="https://img.shields.io/badge/figma com sketches-F46036?style=for-the-badge&logo=figma&logoColor=white" height="35px"/>
 </a>
 </p>
 <br/>
@@ -64,11 +67,11 @@
 </a>
 
 <a href="https://scribehow.com/shared/Cadastro_de_funcionarios_pelo_Administrador__Ygk2Jg8mRBCWQBgyd5hhkw?referrer=documents">
-  <img src="https://img.shields.io/badge/Cadastro de funcionários pelo Administrador-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+  <img src="https://img.shields.io/badge/Cadastro de funcionários pelo Administrador-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
 
 <a href="https://scribehow.com/shared/Como_fazer_log-in_como_colaborador_na_Eceel-tec___p7tNDNSSren-a3JPecBig">
-  <img src="https://img.shields.io/badge/Login como colaborador-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+  <img src="https://img.shields.io/badge/Login como colaborador-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
 
 </p>
