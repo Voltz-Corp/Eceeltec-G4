@@ -6,6 +6,7 @@ class Administrador(AbstractUserRole):
         'view_employees':True,
         'employee_details':True,
         'config_p-user': True,
+        'manage_os': True,
     }
 
 class Funcionario(AbstractUserRole):

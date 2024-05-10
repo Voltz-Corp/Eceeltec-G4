@@ -10,4 +10,5 @@ urlpatterns = [
     path('colaborador/<int:pk>/', views.EmployeeDetailView.as_view(), name='employee_details'),
     path('colaboradortemp/',views.EmployeeBasicView.as_view(), name='employee_template'),
     path('configuracoes/', views.ConfigEmployeeView.as_view(), name='employee_config'),
+    #path('gerenciar_os/', views.ManageOrder.as_view(), name='order_manage'),
 ]

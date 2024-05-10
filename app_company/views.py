@@ -163,3 +163,9 @@ class EmployeeBasicView(View):
             'name': user.first_name
         }
         return render(request, 'app_company/employee-temppage.html', ctx)
+    
+#@method_decorator(has_permission_decorator('manage_os'), name='dispatch')
+#class ManageOrder(View):
+    #def get(self,request):
+        
+    #def post(self,request):
