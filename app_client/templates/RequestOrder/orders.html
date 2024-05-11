@@ -36,10 +36,10 @@
             {% for order in orders %}
                 <tr>
                     <td>
-                        <div> Em análise </div>
+                        <div class="{{order.status}}"> {{order.get_status_display}} </div>
                     </td>
                     <td>{{order.productType}} | {{order.productModel}}</td>
-                    <td><i data-lucide="search" width="28" height="28" color="#155ec8"></i></td>
+                    <td><a href="{% url 'client:view_order' order.id %}"><i data-lucide="search" width="28" height="28" color="#155ec8"></i></a></td>
                     <td><i data-lucide="trash" width="28" height="28" color="#DC2626"></i></td>
                 </tr>
             {% endfor %}

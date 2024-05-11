@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1> {{order.productType}} | {{order.productModel}}</h1>
+        <p>{{ order.get_status_display }}</p>
+        <form action="{% url 'client:update_status' order.id %}" method="POST">
+            {% csrf_token %}
+            <label for="status">Status: </label>
+            <select name="status" id="status">
+                <option value="EM_ANALISE">Em análise</option>
+                <option value="AGENDADO">Agendado</option>
+                <option value="AGUARDANDO_ORCAMENTO">Aguardando orçamento</option>
+                <option value="AGUARDANDO_CONFIRMACAO">Aguardando confirmação</option>
+                <option value="ACEITO">Aceito</option>
+                <option value="RECUSADO">Recusado</option>
+                <option value="CANCELADA">Cancelada</option>
+            </select>
+            <input type="submit" value="Alterar">
+        </form>
+    </div>
+
+</body>
+</html>

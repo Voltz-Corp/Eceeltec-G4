@@ -131,12 +131,25 @@ tbody td {
 }
 
 tbody td:first-child div {
-  background-color: var(--yellow-100);
-  color: var(--yellow-700);
   font-weight: 700;
   width: fit-content;
   padding: 8px 12px;
   border-radius: 99999px;
+}
+
+.EM_ANALISE {
+  background-color: var(--yellow-100);
+  color: var(--yellow-700);
+}
+
+.ACEITO {
+  background-color: var(--green-500);
+  color: white;
+}
+
+.RECUSADO {
+  background-color: var(--red-700);
+  color: white;
 }
 
 @media (max-width: 1653px) {
