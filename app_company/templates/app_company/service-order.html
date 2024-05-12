@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <title></title>
+{% endblock %}
+
+{% block 'body' %}
+<div class="content">
+    <h1>Ordem de serviço {{pk}}</h1>
+    <p></p>
+    <p>Descrição: {{ service_order.detailed_problem_description }}</p>
+    <p>Partes necessárias: {{ service_order.necessary_parts }}</p>
+    <p>Orçamento: {{ service_order.budget }}</p>
+    <p>Status: {{ service_order.status }}</p>
+</div>
+{% endblock %}

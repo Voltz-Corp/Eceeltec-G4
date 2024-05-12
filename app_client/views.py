@@ -140,7 +140,7 @@ class UpdateStatus(View):
         html_content = render_to_string('email/emailtemplate.html', ctx)
         text_content = strip_tags(html_content)
 
-        email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'paulohenrique110803@gmail.com', ['phrf@cesar.school'])
+        email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'paulohenrique110803@gmail.com', [user.username])
         email.attach_alternative(html_content, 'text/html')
         email.send()
 

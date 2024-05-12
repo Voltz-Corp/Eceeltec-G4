@@ -10,5 +10,8 @@ urlpatterns = [
     path('colaborador/<int:pk>/', views.EmployeeDetailView.as_view(), name='employee_details'),
     path('colaboradortemp/',views.EmployeeBasicView.as_view(), name='employee_template'),
     path('configuracoes/', views.ConfigEmployeeView.as_view(), name='employee_config'),
-    #path('gerenciar_os/', views.ManageOrder.as_view(), name='order_manage'),
+    path('solicitacoes/', views.OrderRequestListView.as_view(), name='order_request_list'),
+    path('solicitacao/<int:pk>/', views.OrderRequestDetailView.as_view(), name='order_request_details'),
+    path('confirmar_os/<int:pk>/', views.CreateSOView.as_view(), name='create_os'),
+    path('os/<int:pk>/', views.ServiceOrderDetailView.as_view(), name='service_order_details'),
 ]

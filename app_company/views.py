@@ -12,6 +12,8 @@ from django.contrib.auth import logout, update_session_auth_hash
 from rolepermissions.roles import assign_role
 from django.http import HttpResponse
 
+from app_client.models import OrderRequest
+
 
 class SignView(View):
     def get(self, request):
@@ -35,7 +37,7 @@ class SignView(View):
             
             login_result = login(request, email, password)
             if login_result == 1:
-                    return redirect('company:list_employees')
+                return redirect('company:list_employees')
             elif login_result == 3:
                 return redirect('company:employee_template')
             elif login_result == 0:
@@ -45,6 +47,7 @@ class SignView(View):
                 ctx = {'usernameL': username}
                 messages.error(request, 'Preencha todos os campos')
                 return render(request, 'app_company/sign.html', ctx)
+                
 
 
 @method_decorator(has_permission_decorator('register_employee'), name='dispatch')
@@ -169,3 +172,69 @@ class EmployeeBasicView(View):
     #def get(self,request):
         
     #def post(self,request):
+
+class OrderRequestListView(View):
+    def get(self, request):
+        order_requests = OrderRequest.objects.all()
+    
+        order_requests_data = [{
+            'id': order.id,
+            'productType': order.productType,
+            'productModel': order.productModel,
+            'status': order.get_status_display()  
+        } for order in order_requests]
+
+        return render(request, 'app_company/list-order-request.html', { 'order_requests': order_requests_data})
+
+class OrderRequestDetailView(View):
+    def get(self, request, pk):
+        order_request = get_object_or_404(OrderRequest, pk=pk)
+        return render(request, 'app_company/order-request-detail.html', {'order_request': order_request})
+
+    def post(self, request, pk):
+        order_request = get_object_or_404(OrderRequest, pk=pk)
+        status = request.POST.get('status')
+        budget = request.POST.get('budget')
+        
+        if status == 'ACEITO' and budget:
+            order_request.status = status
+            order_request.budget = budget
+            order_request.save()
+            return redirect('company:create_os', pk=order_request.pk)
+        else:
+            order_request.status = status
+            order_request.save()
+            return redirect('company:order_request_details', pk=pk)
+
+class CreateSOView(View):
+    def get(self, request, pk):
+        order_request = get_object_or_404(OrderRequest, pk=pk)
+        if order_request.status != 'ACEITO':
+            return redirect('order-request-detail', pk=pk)
+        return render(request, 'app_company/create-os.html', {'order_request': order_request})
+
+    def post(self, request, pk):
+        order_request = get_object_or_404(OrderRequest, pk=pk)
+        detailed_problem_description = request.POST.get('detailed_problem_description')
+        necessary_parts = request.POST.get('necessary_parts')
+        budget = order_request.budget
+
+        if budget > 50000:
+            messages.error(request, "Orçamento não pode ser maior que R$50,000.00")
+            return redirect('company:create_os', pk=pk)
+
+        order_request.detailed_problem_description = detailed_problem_description
+        order_request.necessary_parts = necessary_parts
+        order_request.status = 'EM_REPARO'
+        order_request.save()
+
+        
+        
+
+        messages.success(request, "Solicitação transformada em ordem de serviço.")
+        return redirect('company:service_order_details', pk=order_request.pk)
+
+class ServiceOrderDetailView(View):
+    def get(self, request, pk):
+        service_order = get_object_or_404(OrderRequest, pk=pk)
+        return render(request, 'app_company/service-order.html', {'service_order': service_order})
