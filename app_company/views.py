@@ -141,9 +141,10 @@ class ConfigEmployeeView(View):
         user.set_password(new_password)
         user.password_was_changed = True
         user.save()
+        update_session_auth_hash(request, user)
 
         messages.success(request, "Senha alterada com sucesso")
-        return HttpResponse('Senha alterada com sucesso')
+        
         return redirect('company:employee_config')
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')
