@@ -10,14 +10,26 @@
 
 <div class="content">
     <div class="form-card">
-        <h2>Configurações</h2>
-        <form action="{% url 'company:employee_config' %}">
+        <h2>Alterar senha</h2>
+        {% if changed == 0 %}
+            <p>Por medidas de segurança, altere a sua senha</p>
+        {% endif %}
+        <form action="{% url 'company:employee_config' %}" method="POST">
             {% csrf_token %}
             <div class="form-group">
-                <label for="password">Alterar Senha: </label>
+                <label for="password">Senha atual: </label>
                 <input type="password" name="password" value="{{password}}" id="password" required>
+                <label for="password">Nova senha: </label>
+                <input type="password" name="new_password" value="{{password}}" id="password" required>
             </div>
-            <button type="submit">Registrar</button>
+            {% for message in messages %}
+                {% if "Senha alterada com sucesso" == message %}
+                    <p style="color: green; margin-bottom: 20px; margin-top: -20px;">{{message}}</p>
+                    {% else %}
+                    <p style="color: red; margin-bottom: 20px; margin-top: -20px;">{{message}}</p>
+                {% endif %}
+            {% endfor %}
+            <button type="submit">Alterar</button>
         </form>
 
     </div>

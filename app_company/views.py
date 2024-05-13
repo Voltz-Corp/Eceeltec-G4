@@ -11,6 +11,7 @@ from .utils import register, login,validate_inputs
 from django.contrib.auth import logout, update_session_auth_hash
 from rolepermissions.roles import assign_role
 from django.http import HttpResponse
+from django.contrib.auth.hashers import check_password
 
 from app_client.models import OrderRequest
 
@@ -39,7 +40,7 @@ class SignView(View):
             if login_result == 1:
                 return redirect('company:list_employees')
             elif login_result == 3:
-                return redirect('company:employee_template')
+                return redirect('company:order_request_list')
             elif login_result == 0:
                 messages.error(request, 'Usuário ou senha inválidos')
                 return redirect('company:sign')
@@ -115,25 +116,35 @@ class RegisterEmployeeView(View):
 @method_decorator(has_permission_decorator('config_p-user'), name='dispatch')
 class ConfigEmployeeView(View):
     def get(self, request):
-        return redirect('company:list_employees')
+        user = request.user
+
+        if user.password_was_changed == True:
+            return render(request, 'app_company/personalize-employee.html')
+        else:
+            return render(request, 'app_company/personalize-employee.html', {'changed': 0})
+
         # return render(request, 'app_company/personalize-employee.html')
     
     def post(self, request):
         old_password = request.POST.get('password')
         new_password = request.POST.get('new_password')
-        confirm = request.POST.get('confirm')
 
-        if not request.userr.check_password(old_password):
-            messages.error(request, 'Sua senha antiga foi digitada errado. Tente novamente!')
-        elif new_password != confirm:
-            messages.error(request, 'Por favor, digite sua senha igual ao escrito no primeiro campo.')
-        else:
-            request.user.password = make_password(new_password)
-            request.user.save()
-            update_session_auth_hash(request, request.user)
-            messages.sucess(request, 'Sua senha foi atualizada com sucesso!')
-            return redirect('company:employee_details')
-        return render(request, 'app_company/personalize-employee.html')
+        user = request.user
+
+        if not check_password(old_password, user.password):
+            messages.error(request, "Senha incorreta")
+            if user.password_was_changed == True:
+                return render(request, 'app_company/personalize-employee.html')
+            else:
+                return render(request, 'app_company/personalize-employee.html', {'changed': 0})
+        
+        user.set_password(new_password)
+        user.password_was_changed = True
+        user.save()
+
+        messages.success(request, "Senha alterada com sucesso")
+        return HttpResponse('Senha alterada com sucesso')
+        return redirect('company:employee_config')
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')
 class ListEmployeesView(View):
@@ -176,6 +187,7 @@ class EmployeeBasicView(View):
 class OrderRequestListView(View):
     def get(self, request):
         order_requests = OrderRequest.objects.all()
+        user = request.user
     
         order_requests_data = [{
             'id': order.id,
@@ -184,7 +196,11 @@ class OrderRequestListView(View):
             'status': order.get_status_display()  
         } for order in order_requests]
 
-        return render(request, 'app_company/list-order-request.html', { 'order_requests': order_requests_data})
+        if (user.password_was_changed == False):
+            return redirect('company:employee_config')
+        else:
+            return render(request, 'app_company/list-order-request.html', { 'order_requests': order_requests_data, 'user':user})
+        
 
 class OrderRequestDetailView(View):
     def get(self, request, pk):
@@ -227,9 +243,6 @@ class CreateSOView(View):
         order_request.necessary_parts = necessary_parts
         order_request.status = 'EM_REPARO'
         order_request.save()
-
-        
-        
 
         messages.success(request, "Solicitação transformada em ordem de serviço.")
         return redirect('company:service_order_details', pk=order_request.pk)

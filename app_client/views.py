@@ -97,11 +97,11 @@ class SignInView(View):
 
 class OrderViewView( View):
     def get(self, request):
-        
+
         orders = OrderRequest.objects.filter(userClient_id=request.user.id)
         ctx = {
             'orders': orders,
-            'user': request.user,
+            'user': request.user
         }
 
         return render(request, 'RequestOrder/orders.html', ctx)

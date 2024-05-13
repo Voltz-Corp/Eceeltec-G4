@@ -25,12 +25,16 @@
             Gavetas
           </a>
         </li>
+        {% if user %}
+        {% if user.role == 'A' %}
         <li class="employees {% if app_name == 'app_company' %}active{% endif %}">
-         <a href="{% url 'company:list_employees'%}">
-          <i data-lucide="users-round"></i>
-          Colaboradores
-         </a>
+          <a href="{% url 'company:list_employees'%}">
+            <i data-lucide="users-round"></i>
+            Colaboradores
+          </a>
         </li>
+        {% endif %}
+        {% endif %}
         <li class="configs {% if app_name == 'app_company' %}active{% endif %}">
           <a href="{% url 'company:employee_config' %}">
            <i data-lucide="settings"></i>
