@@ -10,7 +10,7 @@ class OrderRequest(models.Model):
         ('ACEITO', 'Aceito'),
         ('RECUSADO', 'Recusado'),
         ('CANCELADA', 'Cancelada'),
-         ('EM_REPARO', 'Em reparo'),
+        ('EM_REPARO', 'Em reparo'),
         ('AGUARDANDO_PECAS', 'Aguardando peças'),
         ('CONSERTO_FINALIZADO', 'Conserto finalizado'),
         ('CANCELADO', 'Cancelado'),
