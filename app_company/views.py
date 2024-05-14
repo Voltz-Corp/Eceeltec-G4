@@ -185,28 +185,48 @@ class EmployeeBasicView(View):
         
     #def post(self,request):
 
+@method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class OrderRequestListView(View):
     def get(self, request):
-        order_requests = OrderRequest.objects.all()
+        
         user = request.user
-    
-        order_requests_data = [{
-            'id': order.id,
-            'productType': order.productType,
-            'productModel': order.productModel,
-            'status': order.get_status_display()  
-        } for order in order_requests]
+        service_orders_statuses = ['EM_REPARO', 'AGUARDANDO_PECAS', 'CONSERTO_FINALIZADO', 'CANCELADO']
+        service_requests_statuses = ['EM_ANALISE', 'AGENDADO', 'AGUARDANDO_ORCAMENTO', 'AGUARDANDO_CONFIRMACAO', 'ACEITO', 'RECUSADO', 'CANCELADA']
+
+        service_orders = OrderRequest.objects.filter(status__in=service_orders_statuses)
+        service_requests = OrderRequest.objects.filter(status__in=service_requests_statuses)
+        service_orders_data = [{
+            'id': so.id,
+            'productType': so.productType,
+            'productModel': so.productModel,
+            'status': so.get_status_display()  
+        } for so in service_orders]
+        service_requests_data = [{
+            'id': request.id,
+            'productType': request.productType,
+            'productModel': request.productModel,
+            'status': request.get_status_display()  
+        } for request in service_requests]
+
 
         if (user.password_was_changed == False):
             return redirect('company:employee_config')
         else:
-            return render(request, 'app_company/list-order-request.html', { 'order_requests': order_requests_data, 'user':user})
+            return render(request, 'app_company/list-order-request.html', { 'service_orders': service_orders_data, 'service_requests':service_requests_data, 'user':user})
         
-
+@method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class OrderRequestDetailView(View):
     def get(self, request, pk):
         order_request = get_object_or_404(OrderRequest, pk=pk)
-        return render(request, 'app_company/order-request-detail.html', {'order_request': order_request})
+        order_request_data={
+            'id': order_request.id,
+            'productType': order_request.productType,
+            'productbrand':order_request.productbrand,
+            'productProblemDescription':order_request.productProblemDescription,
+            'productModel': order_request.productModel,
+            'status': order_request.get_status_display()  
+        }
+        return render(request, 'app_company/order-request-detail.html', {'order_request': order_request_data})
 
     def post(self, request, pk):
         order_request = get_object_or_404(OrderRequest, pk=pk)
@@ -223,12 +243,14 @@ class OrderRequestDetailView(View):
             order_request.save()
             return redirect('company:order_request_details', pk=pk)
 
+@method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class CreateSOView(View):
     def get(self, request, pk):
         order_request = get_object_or_404(OrderRequest, pk=pk)
-        if order_request.status != 'ACEITO':
-            return redirect('order-request-detail', pk=pk)
-        return render(request, 'app_company/create-os.html', {'order_request': order_request})
+        if order_request.status == 'ACEITO':
+            return render(request, 'app_company/create-os.html', {'order_request': order_request})
+        else:
+            return redirect('company:service_order_details', pk=pk)
 
     def post(self, request, pk):
         order_request = get_object_or_404(OrderRequest, pk=pk)
@@ -240,15 +262,26 @@ class CreateSOView(View):
             messages.error(request, "Orçamento não pode ser maior que R$50,000.00")
             return redirect('company:create_os', pk=pk)
 
-        order_request.detailed_problem_description = detailed_problem_description
-        order_request.necessary_parts = necessary_parts
+        order_request.detailedProblemDescription = detailed_problem_description
+        order_request.necessaryParts = necessary_parts
         order_request.status = 'EM_REPARO'
         order_request.save()
 
         messages.success(request, "Solicitação transformada em ordem de serviço.")
         return redirect('company:service_order_details', pk=order_request.pk)
 
+@method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class ServiceOrderDetailView(View):
     def get(self, request, pk):
         service_order = get_object_or_404(OrderRequest, pk=pk)
-        return render(request, 'app_company/service-order.html', {'service_order': service_order})
+        service_order_data={
+            'id': service_order.id,
+            'productType': service_order.productType,
+            'productbrand':service_order.productbrand,
+            'productModel': service_order.productModel,
+            'detailedProblemDescription':service_order.detailedProblemDescription,
+            'budget':service_order.budget,
+            'necessaryParts':service_order.necessaryParts,
+            'status': service_order.get_status_display()  
+        }
+        return render(request, 'app_company/service-order.html', {'service_order': service_order_data})

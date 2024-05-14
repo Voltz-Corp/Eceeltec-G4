@@ -9,20 +9,14 @@
 <div class="content">
     <h1>Solicitações</h1>
     <ul>
-        {% for order_request in order_requests %}
-            <li>
-                {{ order_request.productType }} - {{ order_request.productModel }} - {{ order_request.status }}
-                <a href="{% url 'company:order_request_details' pk=order_request.id %}">Ver solicitação</a>
-            </li>
+        {% for request in service_requests %}
+            <li>{{ request.productType }} - {{ request.productModel }} - {{ request.status }} <a href="{% url 'company:order_request_details' request.id %}">Ver solicitação</a></li>
         {% endfor %}
     </ul>
     <h1>Ordens de serviço</h1>
     <ul>
-        {% for order_request in order_requests %}
-            <li>
-                {{ order_request.productType }} - {{ order_request.productModel }} - {{ order_request.status }}
-                <a href="{% url 'company:service_order_details' pk=order_request.id %}">Ver ordem de serviço</a>
-            </li>
+        {% for order in service_orders %}
+            <li>{{ order.productType }} - {{ order.productModel }} - {{ order.status }} <a href="{% url 'company:service_order_details' order.id %}">Ver ordem de serviço</a></li>
         {% endfor %}
     </ul>
 </div>
