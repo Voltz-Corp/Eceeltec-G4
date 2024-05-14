@@ -26,6 +26,8 @@ class OrderRequest(models.Model):
     budget = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     detailedProblemDescription = models.TextField(blank=True, null=True)
     necessaryParts = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    scheduled_date = models.DateField(null=True, blank=True)
 
 
 
