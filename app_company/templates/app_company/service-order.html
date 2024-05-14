@@ -14,5 +14,16 @@
     <p>Partes necessárias: {{ service_order.necessaryParts }}</p>
     <p>Orçamento: R${{ service_order.budget }}</p>
     <p>Status: {{ service_order.status }}</p>
+    <form action="{% url 'company:service_order_details' service_order.id %}" method="post">
+        {% csrf_token %}
+        <label for="status">Atualizar status:</label>
+        <select name="status" id="status">
+            <option value="EM_REPARO">Em reparo</option>
+            <option value="AGUARDANDO_PECAS">Aguardando peças</option>
+            <option value="CONSERTO_FINALIZADO">Conserto finalizado</option>
+            <option value="CANCELADO">Cancelado</option>
+        </select>
+        <button type="submit">Atualizar</button>
+    </form>
 </div>
 {% endblock %}

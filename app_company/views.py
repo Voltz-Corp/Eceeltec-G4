@@ -285,3 +285,16 @@ class ServiceOrderDetailView(View):
             'status': service_order.get_status_display()  
         }
         return render(request, 'app_company/service-order.html', {'service_order': service_order_data})
+    def post(self, request, pk):
+        service_order = get_object_or_404(OrderRequest, pk=pk)
+        new_status = request.POST.get('status')
+        if new_status:
+            service_order.status = new_status
+            service_order.save()
+            messages.success(request, "Status atualizado.")
+        else:
+            messages.error(request, "Status inválido.")
+
+        
+
+        return redirect('company:service_order_details', pk=pk)

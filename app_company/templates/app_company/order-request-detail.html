@@ -13,7 +13,7 @@
     <p>Modelo: {{ order_request.productModel }}</p>
     <p>Descrição: {{ order_request.productProblemDescription }}</p>
     <p>Status: {{ order_request.status }}</p>
-    <form action="{% url 'company:order_request_details' pk=order_request.id %}" method="post">
+    <form action="{% url 'company:order_request_details' order_request.id %}" method="post">
         {% csrf_token %}
         <label for="status">Atualizar status:</label>
         <select name="status" id="status">
