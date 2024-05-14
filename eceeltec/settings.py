@@ -139,7 +139,7 @@ AUTH_USER_MODEL = 'app_company.Users'
 ROLEPERMISSIONS_MODULE = 'eceeltec.roles'
 
 #E-mails
-DEFAULT_FROM_EMAIL = "paulohenrique110803@gmail.com"
+DEFAULT_FROM_EMAIL = "voltzcorporation@gmail.com"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')

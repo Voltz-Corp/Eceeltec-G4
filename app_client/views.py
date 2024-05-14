@@ -140,11 +140,9 @@ class UpdateStatus(View):
         html_content = render_to_string('email/emailtemplate.html', ctx)
         text_content = strip_tags(html_content)
 
-        email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'paulohenrique110803@gmail.com', [user.username])
+        email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
         email.attach_alternative(html_content, 'text/html')
         email.send()
-
-        """ send_mail('SUA O STATUS DA SUA SOLICITAÇÃO FOI ATUALIZADO', f'O status da sua solicitação agora é {status_display}', 'paulohenrique110803@gmail.com', ['phrf@cesar.school']) """
 
         return redirect('client:view_orders')
 
