@@ -298,3 +298,20 @@ class ServiceOrderDetailView(View):
         
 
         return redirect('company:service_order_details', pk=pk)
+
+@method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
+class AssignOrderView(View):
+    def get(self, request, pk):
+        order = get_object_or_404(OrderRequest, pk=pk)
+        return render(request, 'assign_order.html', {'order': order})
+
+    def post(self, request, pk):
+        order = get_object_or_404(OrderRequest, pk=pk)
+        if order.status in ['ACEITO', 'EM_REPARO']:  
+            order.employee = request.user
+            order.save()
+            
+            return redirect('order_details', pk=order.pk)
+        else:
+            messages.error(request, "Não pode.")
+            return render(request, 'assign_order.html', {'order': order})
