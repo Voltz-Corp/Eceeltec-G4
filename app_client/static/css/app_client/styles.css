@@ -137,21 +137,6 @@ tbody td:first-child div {
   border-radius: 99999px;
 }
 
-.EM_ANALISE {
-  background-color: var(--yellow-100);
-  color: var(--yellow-700);
-}
-
-.ACEITO {
-  background-color: var(--green-500);
-  color: white;
-}
-
-.RECUSADO {
-  background-color: var(--red-700);
-  color: white;
-}
-
 @media (max-width: 1653px) {
   .card-list {
     grid-template-columns: repeat(3, 1fr);
@@ -170,4 +155,24 @@ tbody td:first-child div {
   .card-list {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+
+.EM_ANALISE, .AGUARDANDO_ORCAMENTO, .AGUARDANDO_PECAS {
+  background-color: #FFF59F;
+  color: #978217;
+}
+
+.ACEITO, .CONSERTO_FINALIZADO {
+  background-color: #E9FFDF;
+  color: #15803D;
+}
+
+.RECUSADO, .CANCELADA, .CANCELADO {
+  background-color: #FFEBEB;
+  color: #C92A2A;
+}
+
+.AGENDADO, .AGUARDANDO_CONFIRMACAO, .EM_REPARO {
+  background-color: #E8EDFF;
+  color: #1971C2;
 }

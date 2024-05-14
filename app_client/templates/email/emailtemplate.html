@@ -11,7 +11,7 @@
             padding: 0;
             text-align: center;
         }
-
+        
         img {
             width: 100px;
         }
@@ -25,28 +25,33 @@
             margin: auto;
             height: 8px;
         }
-
-        .EM_ANALISE {
-            background-color: #fef9c3;
-            color: var(--yellow-700);
-        }
-
-        .ACEITO {
-            background-color: #22c55e;
-            color: white;
-        }
-
-        .RECUSADO {
-            background-color: #b91c1c;
-            color: white;
-        }
-
+        
         #status {
             font-weight: 700;
             width: fit-content;
             padding: 8px 12px;
             border-radius: 99999px;
             display: inline;
+        }
+        
+        .EM_ANALISE, .AGUARDANDO_ORCAMENTO, .AGUARDANDO_PECAS {
+            background-color: #FFF59F;
+            color: #978217;
+        }
+        
+        .ACEITO, .CONSERTO_FINALIZADO {
+            background-color: #E9FFDF;
+            color: #15803D;
+        }
+        
+        .RECUSADO, .CANCELADA, .CANCELADO {
+            background-color: #FFEBEB;
+            color: #C92A2A;
+        }
+        
+        .AGENDADO, .AGUARDANDO_CONFIRMACAO, .EM_REPARO {
+            background-color: #E8EDFF;
+            color: #1971C2;
         }
 
     </style>
