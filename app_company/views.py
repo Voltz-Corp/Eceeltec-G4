@@ -179,12 +179,6 @@ class EmployeeBasicView(View):
         }
         return render(request, 'app_company/employee-temppage.html', ctx)
     
-#@method_decorator(has_permission_decorator('manage_os'), name='dispatch')
-#class ManageOrder(View):
-    #def get(self,request):
-        
-    #def post(self,request):
-
 @method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class OrderRequestListView(View):
     def get(self, request):
@@ -315,3 +309,37 @@ class AssignOrderView(View):
         else:
             messages.error(request, "Não pode.")
             return render(request, 'assign_order.html', {'order': order})
+        
+@method_decorator(has_permission_decorator('manage_os'), name='dispatch')
+class ManageOrder(View):
+    def get(self,request,pk):
+        order_request = get_object_or_404(OrderRequest, pk=pk)
+        return render(request, 'edit_order.html', {'order_request': order_request})
+    
+    def post(self,request,pk):
+        order_request = get_object_or_404(OrderRequest, pk=pk)
+        parts = request.POST.get("partes")
+        status = status = request.POST.get('status')
+        tec = request.POST.get("tecnico")
+        
+        if not parts and not tec:
+            order_request.status = status
+            order_request.save()
+            return render(request, 'edit_order.html', {'order_request': order_request})
+        
+        elif not parts:
+            order_request.status = status
+            order_request.tec = tec
+            order_request.save()
+            return render(request, 'edit_order.html', {'order_request': order_request})
+        
+        elif not tec:
+            order_request.status = status
+            order_request.parts = parts
+            order_request.save()
+            return render(request, 'edit_order.html', {'order_request': order_request})
+        
+        order_request.parts = parts
+        order_request.tec = tec
+        order_request.save()
+        return render(request, 'edit_order.html', {'order_request': order_request})
