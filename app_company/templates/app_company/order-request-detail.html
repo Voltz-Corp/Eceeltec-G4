@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <title></title>
+{% endblock %}
+
+{% block 'body' %}
+<div class="content">
+    <h1>Solicitação {{order_request.id}}</h1>
+    <p>Tipo: {{ order_request.productType }}</p>
+    <p>Marca: {{ order_request.productbrand }}</p>
+    <p>Modelo: {{ order_request.productModel }}</p>
+    <p>Descrição: {{ order_request.productProblemDescription }}</p>
+    <p>Status: {{ order_request.status }}</p>
+    <form action="{% url 'company:order_request_details' order_request.id %}" method="post">
+        {% csrf_token %}
+        <label for="status">Atualizar status:</label>
+        <select name="status" id="status">
+            <option value="EM_ANALISE">Em análise</option>
+            <option value="AGENDADO">Agendado</option>
+            <option value="AGUARDANDO_ORCAMENTO">Aguardando orçamento</option>
+            <option value="AGUARDANDO_CONFIRMACAO">Aguardando confirmação</option>
+            <option value="ACEITO">Aceito</option>
+            <option value="RECUSADO">Recusado</option>
+            <option value="CANCELADA">Cancelada</option>
+        </select>
+        <input type="number" name="budget" placeholder="Insira o valor do orçamento" value="{{ order_request.budget }}">
+        <button type="submit">Atualizar</button>
+    </form>
+</div>
+{% endblock %}

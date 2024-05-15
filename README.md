@@ -37,7 +37,7 @@
 
 <br/>
 <p align="center" style="">
-<a href="https://www.youtube.com/watch?v=VUxwg0lhavE">
+<a href="https://www.youtube.com/watch?v=2QUyt6u8P5Y&ab_channel=Voltz">
   <img src="https://img.shields.io/badge/screencast das histórias-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
 </a>
 <a href="https://www.youtube.com/watch?v=Z4pSNX_3fw4">

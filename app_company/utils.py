@@ -35,19 +35,20 @@ def register(username, email, password):
     return 1
 
 def login(request, email, password):
-    user = Users.objects.filter(email=email).first()
-   
+    user = authenticate(username=email, password=password)
+
     if len(email) < 1 or len(password) < 1:
         return 2
 
-    if not user:
-        return 0
+    if user is not None:
+        login_django(request, user)
 
-    auth_login(request, user)
-    if user.role == 'A':
-        return 1 
-    elif user.role == 'F':
-        return 3     
+        if user.role == 'A':
+            return 1 
+        elif user.role == 'F':
+            return 3
+    else:
+        return 0 
 
 def handle_validate_cpf(cpf):
     cpf = cpf.replace(".", "").replace("-", "")

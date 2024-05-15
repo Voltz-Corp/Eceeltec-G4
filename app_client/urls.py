@@ -9,4 +9,6 @@ urlpatterns = [
     path('iniciar_pedido/', views.RequestOrderView.as_view(), name="request_os"),
     path('perfil/', views.ProfileView.as_view(), name="profile"),
     path('perfil/editar/', views.EditProfileView.as_view(), name="edit_profile"),
+    path('visualizar/<int:id>/', views.ViewOrder.as_view(), name="view_order"),
+    path('editar_status/<int:id>', views.UpdateStatus.as_view(), name="update_status")
 ]

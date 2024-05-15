@@ -131,8 +131,6 @@ tbody td {
 }
 
 tbody td:first-child div {
-  background-color: var(--yellow-100);
-  color: var(--yellow-700);
   font-weight: 700;
   width: fit-content;
   padding: 8px 12px;
@@ -157,4 +155,24 @@ tbody td:first-child div {
   .card-list {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+
+.EM_ANALISE, .AGUARDANDO_ORCAMENTO, .AGUARDANDO_PECAS {
+  background-color: #FFF59F;
+  color: #978217;
+}
+
+.ACEITO, .CONSERTO_FINALIZADO {
+  background-color: #E9FFDF;
+  color: #15803D;
+}
+
+.RECUSADO, .CANCELADA, .CANCELADO {
+  background-color: #FFEBEB;
+  color: #C92A2A;
+}
+
+.AGENDADO, .AGUARDANDO_CONFIRMACAO, .EM_REPARO {
+  background-color: #E8EDFF;
+  color: #1971C2;
 }
