@@ -7,7 +7,7 @@ from rolepermissions.decorators import has_permission_decorator
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
-from .utils import register, login,validate_inputs
+from .utils import register, login,validate_inputs, authenticate
 from django.contrib.auth import logout, update_session_auth_hash
 from rolepermissions.roles import assign_role
 from django.http import HttpResponse
@@ -35,7 +35,10 @@ class SignView(View):
         
         if 'login' in request.POST: 
             email = request.POST.get('email')
-            
+            user = authenticate(username=email, password=password)
+            if user.role != 'F' and user.role != 'A':
+                messages.error(request, 'Você não tem permissão para acessar essa página')
+                return redirect('company:sign')
             login_result = login(request, email, password)
             if login_result == 1:
                 return redirect('company:list_employees')
@@ -48,9 +51,7 @@ class SignView(View):
                 ctx = {'usernameL': username}
                 messages.error(request, 'Preencha todos os campos')
                 return render(request, 'app_company/sign.html', ctx)
-                
-
-
+            
 @method_decorator(has_permission_decorator('register_employee'), name='dispatch')
 class RegisterEmployeeView(View):   
     def get(self, request):
@@ -150,9 +151,12 @@ class ConfigEmployeeView(View):
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')
 class ListEmployeesView(View):
     def get(self, request):
-        employees = Users.objects.filter(role='F')  
-        return render(request, 'app_company/list-employees.html', {'employees': employees})
-
+        employees = Users.objects.filter(role='F')
+        user = request.user
+        if (user.password_was_changed == False):
+            return redirect('company:employee_config')
+        else:
+            return render(request, 'app_company/list-employees.html', {'employees': employees})
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')    
 class DeleteEmployeeView(View):
@@ -276,39 +280,32 @@ class ServiceOrderDetailView(View):
             'detailedProblemDescription':service_order.detailedProblemDescription,
             'budget':service_order.budget,
             'necessaryParts':service_order.necessaryParts,
-            'status': service_order.get_status_display()  
+            'status': service_order.get_status_display() ,
+            'employee':service_order.employee
         }
         return render(request, 'app_company/service-order.html', {'service_order': service_order_data})
     def post(self, request, pk):
         service_order = get_object_or_404(OrderRequest, pk=pk)
         new_status = request.POST.get('status')
-        if new_status:
-            service_order.status = new_status
-            service_order.save()
-            messages.success(request, "Status atualizado.")
-        else:
+        assume_order = 'assume' in request.POST
+        if not new_status:
             messages.error(request, "Status inválido.")
+            return redirect('company:service_order_details', pk=pk)
+
+        service_order.status = new_status
+        service_order.save()
+        messages.success(request, "Status atualizado.")
+
+        if assume_order and service_order.status in ['ACEITO', 'EM_REPARO']:
+            service_order.employee = request.user
+            service_order.save()
+            messages.success(request, "Ordem de serviço atribuída a você.")
+        else:
+            messages.error(request, "Esta ordem não pode ser atribuída nesta fase.")
+
+        return redirect('company:service_order_details', pk=service_order.pk)
 
         
-
-        return redirect('company:service_order_details', pk=pk)
-
-@method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
-class AssignOrderView(View):
-    def get(self, request, pk):
-        order = get_object_or_404(OrderRequest, pk=pk)
-        return render(request, 'assign_order.html', {'order': order})
-
-    def post(self, request, pk):
-        order = get_object_or_404(OrderRequest, pk=pk)
-        if order.status in ['ACEITO', 'EM_REPARO']:  
-            order.employee = request.user
-            order.save()
-            
-            return redirect('order_details', pk=order.pk)
-        else:
-            messages.error(request, "Não pode.")
-            return render(request, 'assign_order.html', {'order': order})
         
 @method_decorator(has_permission_decorator('manage_os'), name='dispatch')
 class ManageOrder(View):
@@ -343,3 +340,4 @@ class ManageOrder(View):
         order_request.tec = tec
         order_request.save()
         return render(request, 'edit_order.html', {'order_request': order_request})
+
