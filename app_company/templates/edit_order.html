@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <title></title>
+{% endblock %}
+
+{% block 'body' %}
+<div class="content">
+    <h1></h1>
+    <form action="{% url 'company:manage_order' pk=1 %}" method="post">{% csrf_token %}
+    <p>Novo técnico:<input type="text" name="tecnico" placeholder="Técnico designado"></p>
+    <p>Modificar partes necessárias: <input type="text" name="partes" placeholder=""></p>
+    <button type="submit">Atualizar</button>
+    </form>
+</div>
+{% endblock %}

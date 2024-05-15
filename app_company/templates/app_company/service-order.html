@@ -25,5 +25,6 @@
         </select>
         <button type="submit">Atualizar</button>
     </form>
+    <a href="{% url 'company:manage_order' service_order.id  %}" ><button type="submit">Editar</button></a>
 </div>
 {% endblock %}
