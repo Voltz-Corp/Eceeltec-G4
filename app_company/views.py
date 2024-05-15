@@ -153,8 +153,12 @@ class ConfigEmployeeView(View):
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')
 class ListEmployeesView(View):
     def get(self, request):
-        employees = Users.objects.filter(role='F')  
-        return render(request, 'app_company/list-employees.html', {'employees': employees})
+        employees = Users.objects.filter(role='F')
+        user = request.user
+        if (user.password_was_changed == False):
+            return redirect('company:employee_config')
+        else:
+            return render(request, 'app_company/list-employees.html', {'employees': employees})
 
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')    
