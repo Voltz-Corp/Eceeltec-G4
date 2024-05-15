@@ -7,7 +7,7 @@ from rolepermissions.decorators import has_permission_decorator
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
-from .utils import register, login,validate_inputs
+from .utils import register, login,validate_inputs, authenticate
 from django.contrib.auth import logout, update_session_auth_hash
 from rolepermissions.roles import assign_role
 from django.http import HttpResponse
@@ -35,7 +35,7 @@ class SignView(View):
         
         if 'login' in request.POST: 
             email = request.POST.get('email')
-            user = request.user
+            user = authenticate(username=email, password=password)
             if user.role != 'F' or user.role != 'A':
                 messages.error(request, 'Você não tem permissão para acessar essa página')
                 return redirect('company:sign')
