@@ -302,10 +302,38 @@ class ServiceOrderDetailView(View):
         return redirect('company:service_order_details', pk=service_order.pk)
 
         
-
         
-
-
-
+@method_decorator(has_permission_decorator('manage_os'), name='dispatch')
+class ManageOrder(View):
+    def get(self,request,pk):
+        order_request = get_object_or_404(OrderRequest, pk=pk)
+        return render(request, 'edit_order.html', {'order_request': order_request})
     
-       
+    def post(self,request,pk):
+        order_request = get_object_or_404(OrderRequest, pk=pk)
+        parts = request.POST.get("partes")
+        status = status = request.POST.get('status')
+        tec = request.POST.get("tecnico")
+        
+        if not parts and not tec:
+            order_request.status = status
+            order_request.save()
+            return render(request, 'edit_order.html', {'order_request': order_request})
+        
+        elif not parts:
+            order_request.status = status
+            order_request.tec = tec
+            order_request.save()
+            return render(request, 'edit_order.html', {'order_request': order_request})
+        
+        elif not tec:
+            order_request.status = status
+            order_request.parts = parts
+            order_request.save()
+            return render(request, 'edit_order.html', {'order_request': order_request})
+        
+        order_request.parts = parts
+        order_request.tec = tec
+        order_request.save()
+        return render(request, 'edit_order.html', {'order_request': order_request})
+
