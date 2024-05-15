@@ -159,20 +159,20 @@ tbody td:first-child div {
 
 .EM_ANALISE, .AGUARDANDO_ORCAMENTO, .AGUARDANDO_PECAS {
   background-color: #FFF59F;
-  color: #978217;
+  color: #978217 !important;
 }
 
 .ACEITO, .CONSERTO_FINALIZADO {
   background-color: #E9FFDF;
-  color: #15803D;
+  color: #15803D !important;
 }
 
-.RECUSADO, .CANCELADA, .CANCELADO {
+.RECUSADO, .CANCELADA, .CANCELADO { 
   background-color: #FFEBEB;
-  color: #C92A2A;
+  color: #C92A2A !important;
 }
 
 .AGENDADO, .AGUARDANDO_CONFIRMACAO, .EM_REPARO {
   background-color: #E8EDFF;
-  color: #1971C2;
+  color: #1971C2 !important;
 }
