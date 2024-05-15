@@ -282,36 +282,36 @@ class ServiceOrderDetailView(View):
             'detailedProblemDescription':service_order.detailedProblemDescription,
             'budget':service_order.budget,
             'necessaryParts':service_order.necessaryParts,
-            'status': service_order.get_status_display()  
+            'status': service_order.get_status_display() ,
+            'employee':service_order.employee
         }
         return render(request, 'app_company/service-order.html', {'service_order': service_order_data})
     def post(self, request, pk):
         service_order = get_object_or_404(OrderRequest, pk=pk)
         new_status = request.POST.get('status')
-        if new_status:
-            service_order.status = new_status
-            service_order.save()
-            messages.success(request, "Status atualizado.")
-        else:
+        assume_order = 'assume' in request.POST
+        if not new_status:
             messages.error(request, "Status inválido.")
+            return redirect('company:service_order_details', pk=pk)
+
+        service_order.status = new_status
+        service_order.save()
+        messages.success(request, "Status atualizado.")
+
+        if assume_order and service_order.status in ['ACEITO', 'EM_REPARO']:
+            service_order.employee = request.user
+            service_order.save()
+            messages.success(request, "Ordem de serviço atribuída a você.")
+        else:
+            messages.error(request, "Esta ordem não pode ser atribuída nesta fase.")
+
+        return redirect('company:service_order_details', pk=service_order.pk)
 
         
 
-        return redirect('company:service_order_details', pk=pk)
+        
 
-@method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
-class AssignOrderView(View):
-    def get(self, request, pk):
-        order = get_object_or_404(OrderRequest, pk=pk)
-        return render(request, 'assign_order.html', {'order': order})
 
-    def post(self, request, pk):
-        order = get_object_or_404(OrderRequest, pk=pk)
-        if order.status in ['ACEITO', 'EM_REPARO']:  
-            order.employee = request.user
-            order.save()
-            
-            return redirect('order_details', pk=order.pk)
-        else:
-            messages.error(request, "Não pode.")
-            return render(request, 'assign_order.html', {'order': order})
+
+    
+       

@@ -24,6 +24,14 @@
             <option value="CANCELADO">Cancelado</option>
         </select>
         <button type="submit">Atualizar</button>
+        {% if not service_order.employee %}
+        <button type="submit" name="assume" value="true">Assumir OS</button>
+        {% endif %}
     </form>
+    {% if service_order.employee %}
+    <p>Responsabilidade de: {{ service_order.employee.get_full_name }}</p>
+    {% else %}
+    <p>Responsabilidade de: Não designada</p>
+    {% endif %}
 </div>
 {% endblock %}
