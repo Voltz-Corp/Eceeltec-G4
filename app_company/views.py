@@ -35,7 +35,10 @@ class SignView(View):
         
         if 'login' in request.POST: 
             email = request.POST.get('email')
-            
+            user = request.user
+            if user.role != 'F' or user.role != 'A':
+                messages.error(request, 'Você não tem permissão para acessar essa página')
+                return redirect('company:sign')
             login_result = login(request, email, password)
             if login_result == 1:
                 return redirect('company:list_employees')
