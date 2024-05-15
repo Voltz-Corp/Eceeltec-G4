@@ -36,7 +36,7 @@ class SignView(View):
         if 'login' in request.POST: 
             email = request.POST.get('email')
             user = authenticate(username=email, password=password)
-            if user.role != 'F' or user.role != 'A':
+            if user.role != 'F' and user.role != 'A':
                 messages.error(request, 'Você não tem permissão para acessar essa página')
                 return redirect('company:sign')
             login_result = login(request, email, password)
@@ -51,9 +51,7 @@ class SignView(View):
                 ctx = {'usernameL': username}
                 messages.error(request, 'Preencha todos os campos')
                 return render(request, 'app_company/sign.html', ctx)
-                
-
-
+            
 @method_decorator(has_permission_decorator('register_employee'), name='dispatch')
 class RegisterEmployeeView(View):   
     def get(self, request):
@@ -159,7 +157,6 @@ class ListEmployeesView(View):
             return redirect('company:employee_config')
         else:
             return render(request, 'app_company/list-employees.html', {'employees': employees})
-
 
 @method_decorator(has_permission_decorator('view_employees'), name='dispatch')    
 class DeleteEmployeeView(View):
