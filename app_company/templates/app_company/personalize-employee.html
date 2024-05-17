@@ -2,11 +2,22 @@
 {% load static %}
 
 {% block 'head' %}
-    <title></title>
     <link rel="stylesheet" href="{% static 'app_company\css\config-employee.css' %}">
+    <title>Configurações | Eceel-tec</title>
 {% endblock %}
 
 {% block 'body' %}
+
+{% for message in messages %}
+    <div id="toast" class="toast {{ message.tags }}">
+        {% if message.tags == 'success' %}
+            <i data-lucide="circle-check"></i>
+        {% else %}
+            <i data-lucide="circle-x"></i>
+        {% endif %}
+        {{message}}
+    </div>
+{% endfor %}
 
 <div class="content">
     <div class="form-card">
@@ -16,22 +27,19 @@
         {% endif %}
         <form action="{% url 'company:employee_config' %}" method="POST">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="password">Senha atual: </label>
-                <input type="password" name="password" value="{{password}}" id="password" required>
-                <label for="password">Nova senha: </label>
-                <input type="password" name="new_password" value="{{password}}" id="password" required>
-            </div>
-            {% for message in messages %}
-                {% if "Senha alterada com sucesso" == message %}
-                    <p style="color: green; margin-bottom: 20px; margin-top: -20px;">{{message}}</p>
-                    {% else %}
-                    <p style="color: red; margin-bottom: 20px; margin-top: -20px;">{{message}}</p>
-                {% endif %}
-            {% endfor %}
+                <div class="oldPassword">
+                    <label for="password">Senha atual: </label>
+                    <input type="password" name="password" value="{{password}}" id="password" required>
+                </div>
+                
+                <div class="newPassword">
+                    <label for="password">Nova senha: </label>
+                    <input type="password" name="new_password" value="{{password}}" id="new_password" required>
+                </div>
             <button type="submit">Alterar</button>
         </form>
-
     </div>
 </div>
+
+<script src="{% static 'app_company/js/config-employee.js' %}"></script>   
 {% endblock %}
