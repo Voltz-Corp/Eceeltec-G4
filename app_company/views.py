@@ -228,13 +228,19 @@ class OrderRequestDetailView(View):
         status = request.POST.get('status')
         budget = request.POST.get('budget')
         
-        if status == 'ACEITO' and budget:
+        
+        if status == 'ACEITO':
             order_request.status = status
-            order_request.budget = budget
+            order_request.isOs=True
             order_request.save()
             return redirect('company:create_os', pk=order_request.pk)
-        else:
+        elif status=='AGUARDANDO_CONFIRMACAO'  and budget:
             order_request.status = status
+            order_request.budget=budget
+            order_request.save()
+            return redirect('company:order_request_details', pk=pk)
+        else:
+            order_request.status=status
             order_request.save()
             return redirect('company:order_request_details', pk=pk)
 
