@@ -28,6 +28,7 @@ class OrderRequest(models.Model):
     necessaryParts = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     scheduled_date = models.DateField(null=True, blank=True)
+    isOs = models.BooleanField(default=False)
 
 
 

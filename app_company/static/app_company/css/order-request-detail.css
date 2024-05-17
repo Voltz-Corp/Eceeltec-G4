@@ -1,0 +1,119 @@
+:root {
+    --red-100: #fee2e2;
+    --red-600: #DC2626;
+    --red-700: #b91c1c;
+    --green-100: #dcfce7;
+    --green-500: #22c55e;
+    --green-700: #108519;
+    --white: #f7f7f7;
+    --gray-50: #f9fafb;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --blue-500: #155ec8;
+    --blue-200: #bfdbfe;
+    --yellow-700: #a16207;
+    --yellow-100: #fef9c3;
+}
+
+.EM_ANALISE, .AGUARDANDO_ORCAMENTO, .AGUARDANDO_PECAS {
+    background-color: #FFF59F;
+    color: #978217;
+}
+
+.ACEITO, .CONSERTO_FINALIZADO {
+    background-color: #E9FFDF;
+    color: #15803D;
+}
+
+.RECUSADO, .CANCELADA, .CANCELADO { 
+    background-color: #FFEBEB;
+    color: #C92A2A;
+}
+
+.AGENDADO, .AGUARDANDO_CONFIRMACAO, .EM_REPARO {
+    background-color: #E8EDFF;
+    color: #1971C2;
+}
+
+.content label {
+    display: block;
+    margin-bottom: 4px;
+    margin-top: 16px;
+    font-weight: 500;
+    color: var(--gray-800);
+}
+
+.content input, .content textarea, .content select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--gray-300);
+    border-radius: 4px;
+    background-color: transparent;
+    resize: none;
+    outline: none;
+}
+
+.infos input, .infos textarea {
+    cursor: not-allowed;
+}
+
+.serviceContentOverlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    z-index: 999;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.content {
+    background-color: var(--white);
+    border-radius: 4px;
+    padding: 32px;
+    margin: 15%;
+    margin-top: 5%;
+    overflow: scroll;
+    height: fit-content;
+    position: relative;
+}
+
+.content h1 {
+    font-size: 28px;
+    text-align: center;
+}
+
+.infosGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 16px;
+}
+
+.infos .status {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-weight: 600;
+    width: fit-content;
+    padding: 8px 12px;
+    border-radius: 99999px;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    background-color: var(--green-700);
+    color: var(--white);
+    font-weight: 600;
+    border-radius: 4px;
+    float: right;
+    margin-top: 32px;
+    transition: all .3s;
+}
+
+button:hover {
+    filter: brightness(0.9);
+}

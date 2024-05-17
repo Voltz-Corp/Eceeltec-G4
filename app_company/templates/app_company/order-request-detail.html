@@ -3,41 +3,71 @@
 
 {% block 'head' %}
     <title>Administrador - Gerenciar Solicitação</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'app_company\css\order-request-detal.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app_company\css\order-request-detail.css' %}">
 {% endblock %}
 
 {% block 'body' %}
-<section class="service_content">
-<div class="content">
-    <div class="infos">
-    <h1>Solicitação {{order_request.id}}</h1>
-    <p>Tipo: {{ order_request.productType }}</p>
-    <p>Marca: {{ order_request.productbrand }}</p>
-    <p>Modelo: {{ order_request.productModel }}</p>
-    <p>Descrição: {{ order_request.productProblemDescription }}</p>
-    <p>Status: {{ order_request.status }}</p>
-</div>
-    <div class ="inputs">
-    <form action="{% url 'company:order_request_details' order_request.id %}" method="post">
-        {% csrf_token %}
-        <label for="status">Atualizar status:</label>
-        <select name="status" id="status">
-            <option value="EM_ANALISE">Em análise</option>
-            <option value="AGENDADO">Agendado</option>
-            <option value="AGUARDANDO_ORCAMENTO">Aguardando orçamento</option>
-            <option value="AGUARDANDO_CONFIRMACAO">Aguardando confirmação</option>
-            <option value="ACEITO">Aceito</option>
-            <option value="RECUSADO">Recusado</option>
-            <option value="CANCELADA">Cancelada</option>
-        </select>
+<section class="serviceContentOverlay">
+    <div class="content">
+        <div class="infos">
+            <h1>Solicitação {{order_request.id}}</h1>
+            <p class="{{order_request.status}} status">Status: {{ order_request.get_status_display }}</p>
 
+            <div class="infosGrid">
+                <div class="productTypeContainer">
+                    <label for="productbrand">Tipo: </label>
+                    <input type="text" value={{ order_request.productType }} name="produtctType" disabled>
+                </div>
+    
+                <div class="productbrandContainer">
+                    <label for="productbrand">Marca: </label>
+                    <input type="text" value={{ order_request.productbrand }} name="productbrand" disabled>
+                </div>
+    
+                <div class="productModelContainer">
+                    <label for="productModel">Modelo: </label>
+                    <input type="text" value={{ order_request.productModel }} name="productModel" disabled>
+                </div>
+            </div>
 
-        <input type="number" name="budget" placeholder="Insira o valor do orçamento" value="{{ order_request.budget }}">
-    </div>
-        <div class="update_button">
-        <button type="submit">Atualizar</button>
+            <div class="productProblemDescriptionContainer">
+                <label for="productProblemDescription">Descrição: </label>
+                <textarea name="productProblemDescription" disabled>{{ order_request.productProblemDescription }}</textarea>
+            </div>
+
         </div>
-    </form>
-</div>
+        <form action="{% url 'company:order_request_details' order_request.id %}" method="post">
+            {% csrf_token %}
+            <label for="status">Atualizar status:</label>
+            <select name="status" id="status" selected={{ order_request.status }}>
+                <option value="EM_ANALISE" {% if order_request.status == "EM_ANALISE" %}selected{% endif %}>
+                    Em análise
+                </option>
+                <option value="AGENDADO" {% if order_request.status == "AGENDADO" %}selected{% endif %}>
+                    Agendado
+                </option>
+                <option value="AGUARDANDO_ORCAMENTO" {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}selected{% endif %}>
+                    Aguardando orçamento
+                </option>
+                <option value="AGUARDANDO_CONFIRMACAO"  {% if order_request.status == "AGUARDANDO_CONFIRMACAO" %}selected{% endif %}>
+                    Aguardando confirmação
+                </option>
+                <option value="ACEITO" {% if order_request.status == "ACEITO" %}selected{% endif %}>
+                    Aceito
+                </option>
+                <option value="RECUSADO" {% if order_request.status == "RECUSADO" %}selected{% endif %}>
+                    Recusado
+                </option>
+                <option value="CANCELADA" {% if order_request.status == "CANCELADA" %}selected{% endif %}>
+                    Cancelada
+                </option>
+            </select>
+            <div class="budgetContainer">
+                <label for="budget">Valor do orçamento: </label>
+                <input type="number" name="budget" placeholder="Insira o valor do orçamento" value="{{ order_request.budget }}">
+            </div>
+            <button type="submit">Atualizar</button>
+        </form>
+    </div>
 </section>
 {% endblock %}
