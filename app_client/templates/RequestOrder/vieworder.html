@@ -1,29 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div style="text-align: center;">
-        <h1> {{order.productType}} | {{order.productModel}}</h1>
-        <p>{{ order.get_status_display }}</p>
-        <form action="{% url 'client:update_status' order.id %}" method="POST">
-            {% csrf_token %}
-            <label for="status">Status: </label>
-            <select name="status" id="status">
-                <option value="EM_ANALISE">Em análise</option>
-                <option value="AGENDADO">Agendado</option>
-                <option value="AGUARDANDO_ORCAMENTO">Aguardando orçamento</option>
-                <option value="AGUARDANDO_CONFIRMACAO">Aguardando confirmação</option>
-                <option value="ACEITO">Aceito</option>
-                <option value="RECUSADO">Recusado</option>
-                <option value="CANCELADA">Cancelada</option>
-            </select>
-            <input type="submit" value="Alterar">
-        </form>
-    </div>
+{% extends "./orders.html" %}
 
-</body>
-</html>
+{% block 'modal' %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\view_order.css' %}">
+
+<div id="orderModal" class="modal">
+    <div class="modal-content">
+        <div id="head">
+            <h1>Tipo: <span>{{order.productType}}</span></h1>
+            <h1>Marca: <span>{{order.productbrand}}</span></h1>
+            <h1>Modelo: <span>{{order.productModel}}</span></h1>
+            <h1>Status: <span class="{{order.status}}">{{order.get_status_display}}</span></h1>
+        </div>
+        <div id="headiscription">
+            <h1>Descrição: <span>{{order.productProblemDescription}}</span></h1>
+        </div>
+        
+        <h1>Funcionário Responsável: <span>{{order.employee}}</span></h1>
+
+        <div class="waitingForm">
+            {% if order.status == "AGUARDANDO_CONFIRMACAO" %}
+                <h2>Orçamento finalizado - Aguardando confirmação</h2>
+                <h1>Valor: <span>R$ {{order.budget}}</span></h1>
+                <p>Você deseja prosseguir com o serviço?</p>
+                <form action="{% url 'client:view_order' order.id %}" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <input type="radio" id="yes" name="choise" value="yes" checked>
+                        <label for="yes">SIM</label><br>
+                        <input type="radio" id="no" name="choise" value="no">
+                        <label for="no" id="labelNo">NÃO</label><br>
+                    </div>
+                    <input type="submit" value="Confirmar" id="confirm">
+                </form>
+            {% endif %}
+        </div>
+
+        <a href="{% url 'client:view_orders' %}">
+            <span class="close" id="closeIcon">&times;</span>
+        </a>
+    </div>
+</div>
+
+{% endblock %}
+
+

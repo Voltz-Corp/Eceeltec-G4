@@ -110,12 +110,29 @@ class OrderViewView( View):
 class ViewOrder(View):
     def get(self, request, id):
         order = OrderRequest.objects.filter(id=id).first()
+        orders = OrderRequest.objects.filter(userClient_id=request.user.id)
 
         ctx = {
             "order": order,
+            "orders": orders,
         }
 
         return render(request, 'RequestOrder/vieworder.html', ctx)
+
+    def post(self, request, id):
+        order = OrderRequest.objects.filter(id=id).first()
+        chosen = request.POST.get('choise')
+        status_choices = OrderRequest.STATUS_CHOICES
+
+        if (chosen == "yes"):
+            order.status = status_choices[4][0]
+        else:
+            order.status = status_choices[5][0]
+
+        order.save()
+
+        return redirect('client:view_orders')
+
 class UpdateStatus(View):
     def post(self, request, id):
         order = OrderRequest.objects.filter(id=id).first()

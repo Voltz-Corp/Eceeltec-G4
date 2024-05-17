@@ -305,8 +305,6 @@ class ServiceOrderDetailView(View):
 
         return redirect('company:service_order_details', pk=service_order.pk)
 
-        
-        
 @method_decorator(has_permission_decorator('manage_os'), name='dispatch')
 class ManageOrder(View):
     def get(self,request,pk):
