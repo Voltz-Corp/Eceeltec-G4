@@ -326,7 +326,7 @@ class ManageOrder(View):
             order_request.save()
             return render(request, 'edit_order.html', {'order_request': order_request})
         
-        order_request.parts = parts
+        order_request.necessaryParts = parts
         order_request.tec = tec
         order_request.save()
         return render(request, 'edit_order.html', {'order_request': order_request})
