@@ -2,22 +2,85 @@
 {% load static %}
 
 {% block 'head' %}
-    <title></title>
+    <link rel="stylesheet" href="{% static 'app_company/css/list-order-request.css' %}">
+
+    <title>Gaveta | Eceel-tec</title>
 {% endblock %}
 
 {% block 'body' %}
 <div class="content">
-    <h1>Solicitações</h1>
-    <ul>
-        {% for request in service_requests %}
-            <li>{{ request.productType }} - {{ request.productModel }} - {{ request.status }} <a href="{% url 'company:order_request_details' request.id %}">Ver solicitação</a></li>
-        {% endfor %}
-    </ul>
-    <h1>Ordens de serviço</h1>
-    <ul>
-        {% for order in service_orders %}
-            <li>{{ order.productType }} - {{ order.productModel }} - {{ order.status }} <a href="{% url 'company:service_order_details' order.id %}">Ver ordem de serviço</a></li>
-        {% endfor %}
-    </ul>
+    <section class="listOrderRequestCompanyContainer">
+        <h1 class="title">Seus serviços</h1>
+    
+        <section class="tableContainer orders">
+            <div>
+                <h3>Ordens de Serviço</h3>
+            </div>
+    
+            <table>
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Identificação</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in service_orders %}
+                    <tr>
+                        <td>
+                            <div class="{{order.status}}"> {{order.get_status_display}} </div>
+                        </td>
+                        <td>{{order.productType}} | {{order.productModel}}</td>
+                        <td>
+                            <a href="{% url 'company:service_order_details' order.id %}">
+                                <i data-lucide="eye" width="28" height="28" color="#155ec8"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <section class="tableContainer requests">
+            <div>
+                <h3>Solicitações</h3>
+            </div>
+    
+            <table>
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Identificação</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in service_requests %}
+                    <tr>
+                        <td>
+                            <div class="{{request.status}}"> {{request.get_status_display}} </div>
+                        </td>
+                        <td>{{request.productType}} | {{request.productModel}}</td>
+                        <td>
+                            <a href="{% url 'company:order_request_details' request.id %}">
+                                <i data-lucide="eye" width="28" height="28" color="#155ec8"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </section>
 </div>
 {% endblock %}

@@ -181,9 +181,10 @@ class RequestOrderView(View):
         product_list = []
         
         errors = product_verify(productBrand, productType, productModel, productOther, productDescription, user_id)
-        ctx = {     'errors': errors,
-                    'app_name': 'client',
-                    }
+        ctx = {     
+            'errors': errors,
+            'app_name': 'client',
+        }
         if errors:
             if str(type(errors)) != "<class 'app_client.models.OrderRequest'>":
                 if 'other' not in errors:

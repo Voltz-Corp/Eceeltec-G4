@@ -193,24 +193,16 @@ class OrderRequestListView(View):
 
         service_orders = OrderRequest.objects.filter(status__in=service_orders_statuses)
         service_requests = OrderRequest.objects.filter(status__in=service_requests_statuses)
-        service_orders_data = [{
-            'id': so.id,
-            'productType': so.productType,
-            'productModel': so.productModel,
-            'status': so.get_status_display()  
-        } for so in service_orders]
-        service_requests_data = [{
-            'id': request.id,
-            'productType': request.productType,
-            'productModel': request.productModel,
-            'status': request.get_status_display()  
-        } for request in service_requests]
-
 
         if (user.password_was_changed == False):
             return redirect('company:employee_config')
         else:
-            return render(request, 'app_company/list-order-request.html', { 'service_orders': service_orders_data, 'service_requests':service_requests_data, 'user':user})
+            ctx = {
+                'service_orders': service_orders, 
+                'service_requests':service_requests, 
+                'user':user
+            }
+            return render(request, 'app_company/list-order-request.html', ctx)
         
 @method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class OrderRequestDetailView(View):

@@ -17,27 +17,12 @@
   --yellow-100: #fef9c3;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background-color: var(--green-500);
-  border-radius: 6px;
-}
-
-button {
-  border: none;
-}
-
 .title {
   padding-bottom: 20px;
   font-size: 40px;
 }
 
-.list-requests-container{
+.listOrderRequestCompanyContainer {
   background-color: var(--white);
   backdrop-filter: blur(120px);
   z-index: 999;
@@ -45,19 +30,6 @@ button {
 
   padding: 32px 64px;
   overflow: auto;
-}
-
- .new-request {
-  padding: 12px 20px;
-  
-  background-color: var(--gray-200);
-  border-radius: 4px;
-  font-weight: 600;
-  transition: all .3s;
-}
-
-.new-request:hover {
-  background-color: var(--gray-300); 
 }
 
 a {
@@ -135,24 +107,6 @@ tbody td:first-child div {
   width: fit-content;
   padding: 8px 12px;
   border-radius: 99999px;
-}
-
-@media (max-width: 1653px) {
-  .card-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 1333px) {
-  .card-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 1080px) {
-  .card-list {
-    grid-template-columns: repeat(1, 1fr);
-  }
 }
 
 .EM_ANALISE, .AGUARDANDO_ORCAMENTO, .AGUARDANDO_PECAS {
