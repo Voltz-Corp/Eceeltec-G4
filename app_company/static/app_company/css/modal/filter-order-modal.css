@@ -1,0 +1,87 @@
+:root {
+  --red-100: #fee2e2;
+  --red-600: #DC2626;
+  --red-700: #b91c1c;
+  --green-500: #22c55e;
+  --green-700: #108519;
+  --white: #f7f7f7;
+  --gray-50: #f9fafb;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --blue-500: #155ec8;
+  --blue-200: #bfdbfe;
+  --yellow-700: #a16207;
+  --yellow-100: #fef9c3;
+}
+
+.filterModal {
+  display: none;
+  position: absolute;
+  z-index: 9;
+  width: 300px;
+  background-color: var(--white);
+  padding: 24px 16px;
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+  border-radius: 4px;
+
+  right: 24px;
+  top: 64px;
+}
+
+.filterModal button {
+  border: none;
+  outline: none;
+  padding: 0;
+  background-color: transparent;
+}
+
+.filterModal label {
+  display: block;
+  color: var(--gray-800);
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.filterModal select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--gray-200);
+  border-radius: 4px;
+  background-color: transparent;
+  font-size: 14px;
+}
+
+.filterModal header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.filterModal header p {
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.filterModal header svg {
+  color: var(--gray-600);
+}
+
+.filterModal .actions button:last-child {
+  margin-top: 32px;
+  float: right;
+  background-color: var(--green-700);
+  padding: 8px 20px;
+  border-radius: 4px;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 14px;
+}

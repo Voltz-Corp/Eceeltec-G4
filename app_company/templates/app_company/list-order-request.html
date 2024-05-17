@@ -3,18 +3,66 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'app_company/css/list-order-request.css' %}">
+    <link rel="stylesheet" href="{% static 'app_company/css/modal/filter-order-modal.css' %}">
 
     <title>Gaveta | Eceel-tec</title>
 {% endblock %}
 
 {% block 'body' %}
 <div class="content">
+    <input type="hidden" value="{{ all_orders_formatted }}" id="allOrders">
     <section class="listOrderRequestCompanyContainer">
         <h1 class="title">Seus serviços</h1>
     
         <section class="tableContainer orders">
             <div>
-                <h3>Ordens de Serviço</h3>
+                <h3>Serviços</h3>
+
+                <button class="openFilterModalBtn">
+                    <i data-lucide="list-filter" width="20" height="20"></i>
+                    Filtrar
+                </button>
+
+                <section class="filterModal">
+                    <header>
+                        <p>
+                            Filtros 
+                        </p>
+                
+                        <button type="button" class="closeFilterModalBtn">
+                            <i data-lucide="x" width="20" height="20"></i>
+                        </button>
+                    </header>
+                
+                    <div class="filterModalContent">
+                        <div class="orderTypeContainer">
+                            <label for="orderType">Tipo de ordem</label>      
+                            <select name="orderType" id="orderType" selected={{ order_request.status }}>
+                                <option value="all">Todos</option>
+                                <option value="request">Solicitação</option>
+                                <option value="order">Ordem de Serviço</option>
+                            </select> 
+                        </div>
+                
+                        <div class="statusContainer">
+                            <label for="orderStatus">Tipo de status:</label>
+                            <select name="orderStatus" id="orderStatus">
+                                <option value="all">Todos</option>
+                                <option value="EM_ANALISE">Em análise</option>
+                                <option value="AGENDADO">Agendado</option>
+                                <option value="AGUARDANDO_ORCAMENTO">Aguardando orçamento</option>
+                                <option value="AGUARDANDO_CONFIRMACAO" >Aguardando confirmação</option>
+                                <option value="ACEITO">Aceito</option>
+                                <option value="RECUSADO">Recusado</option>
+                                <option value="CANCELADA">Cancelada</option>
+                            </select>
+                        </div>
+                    </div>
+                
+                    <div class="actions">
+                        <button>Aplicar</button>
+                    </div>
+                </section>
             </div>
     
             <table>
@@ -22,19 +70,21 @@
                 <tr>
                     <th>Status</th>
                     <th>Identificação</th>
+                    <th>Tipo</th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                {% for order in service_orders %}
+                {% for order in all_orders %}
                     <tr>
                         <td>
                             <div class="{{order.status}}"> {{order.get_status_display}} </div>
                         </td>
                         <td>{{order.productType}} | {{order.productModel}}</td>
+                        <td>{% if order.isOs %} Ordem de Serviço {% else %} Solicitação {% endif %}</td>
                         <td>
-                            <a href="{% url 'company:service_order_details' order.id %}">
+                            <a href="{% if order.isOs %} {% url 'company:service_order_details' order.id %} {% else %} {% url 'company:order_request_details' order.id %} {% endif %}">
                                 <i data-lucide="eye" width="28" height="28" color="#155ec8"></i>
                             </a>
                         </td>
@@ -47,7 +97,7 @@
             </table>
         </section>
 
-        <section class="tableContainer requests">
+        {% comment %} <section class="tableContainer requests">
             <div>
                 <h3>Solicitações</h3>
             </div>
@@ -80,7 +130,14 @@
                 {% endfor %}
                 </tbody>
             </table>
-        </section>
+        </section> {% endcomment %}
     </section>
 </div>
+
+<script src="{% static 'app_company/js/filter-order.js' %}"></script>
+<script>
+    const oi = "{{ all_orders_formatted }}"
+    const nice = JSON.parse(oi.replace(/&quot;/g, '"'))
+    console.log(nice)
+</script>
 {% endblock %}

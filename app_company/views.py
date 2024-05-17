@@ -1,3 +1,4 @@
+import json
 from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -12,6 +13,7 @@ from django.contrib.auth import logout, update_session_auth_hash
 from rolepermissions.roles import assign_role
 from django.http import HttpResponse
 from django.contrib.auth.hashers import check_password
+from django.core.serializers import serialize
 
 from app_client.models import OrderRequest
 
@@ -194,12 +196,19 @@ class OrderRequestListView(View):
         service_orders = OrderRequest.objects.filter(status__in=service_orders_statuses)
         service_requests = OrderRequest.objects.filter(status__in=service_requests_statuses)
 
+        all_orders = OrderRequest.objects.all()
+        serialized_all_orders = serialize("json", all_orders)
+        serialized_all_orders = json.dumps(serialized_all_orders)
+         
+
         if (user.password_was_changed == False):
             return redirect('company:employee_config')
         else:
             ctx = {
                 'service_orders': service_orders, 
                 'service_requests':service_requests, 
+                "all_orders": all_orders,
+                "all_orders_formatted": serialized_all_orders,
                 'user':user
             }
             return render(request, 'app_company/list-order-request.html', ctx)

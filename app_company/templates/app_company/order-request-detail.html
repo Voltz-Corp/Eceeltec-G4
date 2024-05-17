@@ -39,7 +39,7 @@
         <form action="{% url 'company:order_request_details' order_request.id %}" method="post">
             {% csrf_token %}
             <label for="status">Atualizar status:</label>
-            <select name="status" id="status" selected={{ order_request.status }}>
+            <select name="status" id="status">
                 <option value="EM_ANALISE" {% if order_request.status == "EM_ANALISE" %}selected{% endif %}>
                     Em análise
                 </option>

@@ -29,6 +29,4 @@ class OrderRequest(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     scheduled_date = models.DateField(null=True, blank=True)
     isOs = models.BooleanField(default=False)
-
-
-
+    closedAt = models.DateField(blank=True, null=True)
