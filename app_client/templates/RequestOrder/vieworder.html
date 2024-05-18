@@ -18,7 +18,6 @@
             <h1>Descrição: <span>{{order.productProblemDescription}}</span></h1>
         </div>
         {% if order.employee %}
-        <h1>Funcionário Responsável: <span>{{order.employee.first_name}}</span></h1>
         {% endif %}
         <div class="waitingForm">
             {% if order.status == "AGUARDANDO_CONFIRMACAO" %}
