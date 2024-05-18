@@ -301,6 +301,7 @@ class ServiceOrderDetailView(View):
 
         if assume_order and service_order.status in ['ACEITO', 'EM_REPARO']:
             service_order.employee = request.user
+            print(service_order.employee)
             service_order.save()
             messages.success(request, "Ordem de serviço atribuída a você.")
         else:
@@ -312,30 +313,30 @@ class ServiceOrderDetailView(View):
 class ManageOrder(View):
     def get(self, request, pk):
         order_request = get_object_or_404(OrderRequest, pk=pk)
-        return render(request, 'edit-order.html', {'order_request': order_request})
+        return render(request, 'app_company/edit-order.html', {'order_request': order_request})
     
     def post(self,request,pk):
         order_request = get_object_or_404(OrderRequest, pk=pk)
         parts = request.POST.get("partes")
-        status = status = request.POST.get('status')
+       
         tec = request.POST.get("tecnico")
         
         if not parts and not tec:
-            order_request.status = status
+          
             order_request.save()
-            return render(request, 'edit-order.html', {'order_request': order_request})
+            return render(request, 'app_company/edit-order.html', {'order_request': order_request})
         
         elif not parts:
-            order_request.status = status
+         
             order_request.tec = tec
             order_request.save()
-            return render(request, 'edit-order.html', {'order_request': order_request})
+            return render(request, 'app_company/edit-order.html', {'order_request': order_request})
         
         elif not tec:
-            order_request.status = status
+            
             order_request.parts = parts
             order_request.save()
-            return render(request, 'edit-order.html', {'order_request': order_request})
+            return render(request, 'app_company/edit-order.html', {'order_request': order_request})
         
         order_request.necessaryParts = parts
         order_request.tec = tec
