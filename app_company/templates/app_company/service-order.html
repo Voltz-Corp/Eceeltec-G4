@@ -1,40 +1,47 @@
-{% extends 'base.html' %}
+{% extends './list-order-request.html' %}
+{% block 'modal' %}
 {% load static %}
 
-{% block 'head' %}
-    <title></title>
-{% endblock %}
+<link rel="stylesheet" href="{% static 'app_company/css/view-so.css' %}">
 
-{% block 'body' %}
-<div class="content">
-    <h1></h1>
-    <p>Tipo do produto: {{ service_order.productType }}</p>
-    <p>Descrição do problema: {{ service_order.detailedProblemDescription }}</p>
-    <p>Marca: {{ service_order.productbrand }}</p>
-    <p>Partes necessárias: {{ service_order.necessaryParts }}</p>
-    <p>Orçamento: R${{ service_order.budget }}</p>
-    <p>Status: {{ service_order.status }}</p>
-    <form action="{% url 'company:service_order_details' service_order.id %}" method="post">
-        {% csrf_token %}
-        <label for="status">Atualizar status:</label>
-        <select name="status" id="status">
-            <option value="EM_REPARO">Em reparo</option>
-            <option value="AGUARDANDO_PECAS">Aguardando peças</option>
-            <option value="CONSERTO_FINALIZADO">Conserto finalizado</option>
-            <option value="CANCELADO">Cancelado</option>
-        </select>
-        <button type="submit">Atualizar</button>
-        {% if not service_order.employee %}
-        <button type="submit" name="assume" value="true">Assumir OS</button>
+
+<div id="orderModal" class="modal">
+    <div class="modal-content">
+        <a href="{% url 'company:order_request_list' %}">
+            <span class="close" id="closeIcon">&times;</span>
+        </a>
+        <div id="head">
+            <h1>Tipo: <span>{{ service_order.productType }}</span></h1>
+            <h1>Marca: <span>{{ service_order.productbrand }}</span></h1>
+            <h1>Modelo: <span>{{ service_order.productModel }}</span></h1>
+            <h1>Status: <span class="{{ service_order.status }}">{{ service_order.status }}</span></h1>
+        </div>
+        <div id="headescription">
+            <h1>Descrição: <span>{{ service_order.detailedProblemDescription }}</span></h1>
+        </div>
+        {% if service_order.employee %}
+        <h1>Funcionário Responsável: <span>{{ service_order.employee.first_name }}</span></h1>
+        {% else %}
+        <h1>Funcionário Responsável: <span>Não designada</span></h1>
         {% endif %}
-    </form>
+        <div class="waitingForm">
+            <form action="{% url 'company:service_order_details' service_order.id %}" method="post">
+                {% csrf_token %}
+                <label for="status">Atualizar status:</label>
+                <select name="status" id="status">
+                    <option value="EM_REPARO" {% if service_order.status == "EM_REPARO" %}selected{% endif %}>Em reparo</option>
+                    <option value="AGUARDANDO_PECAS" {% if service_order.status == "AGUARDANDO_PECAS" %}selected{% endif %}>Aguardando peças</option>
+                    <option value="CONSERTO_FINALIZADO" {% if service_order.status == "CONSERTO_FINALIZADO" %}selected{% endif %}>Conserto finalizado</option>
+                    <option value="CANCELADO" {% if service_order.status == "CANCELADO" %}selected{% endif %}>Cancelado</option>
+                </select>
+                <button type="submit">Atualizar</button>
+                {% if not service_order.employee %}
+                <button type="submit" name="assume" value="true">Assumir OS</button>
+                {% endif %}
+            </form>
+        </div>
 
-    {% if service_order.employee %}
-    <p>Responsabilidade de: {{ service_order.employee.get_full_name }}</p>
-    {% else %}
-    <p>Responsabilidade de: Não designada</p>
-    {% endif %}
-    <a href="{% url 'company:manage_order' service_order.id  %}" ><button type="submit">Editar</button></a>
-
+        <a href="{% url 'company:manage_order' service_order.id  %}" ><button type="submit">Editar</button></a>
+    </div>
 </div>
 {% endblock %}

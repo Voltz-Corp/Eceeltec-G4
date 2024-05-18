@@ -228,13 +228,21 @@ class OrderRequestDetailView(View):
         status = request.POST.get('status')
         budget = request.POST.get('budget')
         
-        if status == 'ACEITO' and budget:
+        
+        if status=='AGUARDANDO_CONFIRMACAO'  and budget:
             order_request.status = status
-            order_request.budget = budget
+            order_request.budget=budget
+            order_request.save()
+            return redirect('company:order_request_details', pk=pk)
+        
+        elif order_request.status == 'ACEITO':
+            order_request.status = status
+            order_request.isOs=True
             order_request.save()
             return redirect('company:create_os', pk=order_request.pk)
+        
         else:
-            order_request.status = status
+            order_request.status=status
             order_request.save()
             return redirect('company:order_request_details', pk=pk)
 
@@ -242,7 +250,7 @@ class OrderRequestDetailView(View):
 class CreateSOView(View):
     def get(self, request, pk):
         order_request = get_object_or_404(OrderRequest, pk=pk)
-        if order_request.status == 'ACEITO':
+        if order_request.isOs:
             return render(request, 'app_company/create-os.html', {'order_request': order_request})
         else:
             return redirect('company:service_order_details', pk=pk)
@@ -251,11 +259,9 @@ class CreateSOView(View):
         order_request = get_object_or_404(OrderRequest, pk=pk)
         detailed_problem_description = request.POST.get('detailed_problem_description')
         necessary_parts = request.POST.get('necessary_parts')
-        budget = order_request.budget
+        
 
-        if budget > 50000:
-            messages.error(request, "Orçamento não pode ser maior que R$50,000.00")
-            return redirect('company:create_os', pk=pk)
+        
 
         order_request.detailedProblemDescription = detailed_problem_description
         order_request.necessaryParts = necessary_parts
@@ -295,6 +301,7 @@ class ServiceOrderDetailView(View):
 
         if assume_order and service_order.status in ['ACEITO', 'EM_REPARO']:
             service_order.employee = request.user
+            
             service_order.save()
             messages.success(request, "Ordem de serviço atribuída a você.")
         else:
@@ -306,30 +313,30 @@ class ServiceOrderDetailView(View):
 class ManageOrder(View):
     def get(self, request, pk):
         order_request = get_object_or_404(OrderRequest, pk=pk)
-        return render(request, 'edit-order.html', {'order_request': order_request})
+        return render(request, 'app_company/edit-order.html', {'order_request': order_request})
     
     def post(self,request,pk):
         order_request = get_object_or_404(OrderRequest, pk=pk)
         parts = request.POST.get("partes")
-        status = status = request.POST.get('status')
+       
         tec = request.POST.get("tecnico")
         
         if not parts and not tec:
-            order_request.status = status
+          
             order_request.save()
-            return render(request, 'edit-order.html', {'order_request': order_request})
+            return render(request, 'app_company/edit-order.html', {'order_request': order_request})
         
         elif not parts:
-            order_request.status = status
+         
             order_request.tec = tec
             order_request.save()
-            return render(request, 'edit-order.html', {'order_request': order_request})
+            return render(request, 'app_company/edit-order.html', {'order_request': order_request})
         
         elif not tec:
-            order_request.status = status
+            
             order_request.parts = parts
             order_request.save()
-            return render(request, 'edit-order.html', {'order_request': order_request})
+            return render(request, 'app_company/edit-order.html', {'order_request': order_request})
         
         order_request.necessaryParts = parts
         order_request.tec = tec

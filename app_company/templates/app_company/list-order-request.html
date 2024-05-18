@@ -133,11 +133,14 @@
         </section> {% endcomment %}
     </section>
 </div>
+{% block 'modal' %}
+{% endblock %}
 
 <script src="{% static 'app_company/js/filter-order.js' %}"></script>
 <script>
     const oi = "{{ all_orders_formatted }}"
     const nice = JSON.parse(oi.replace(/&quot;/g, '"'))
     console.log(nice)
+    
 </script>
 {% endblock %}
