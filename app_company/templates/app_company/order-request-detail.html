@@ -12,7 +12,8 @@
         <div class="infos">
             <h1>Solicitação {{order_request.id}}</h1>
             <p class="{{order_request.status}} status">Status: {{ order_request.get_status_display }}</p>
-
+            
+             <a href="{% url 'company:order_request_list' %}"><p class="closebtn"><i data-lucide="x"></i></p></a>
             <div class="infosGrid">
                 <div class="productTypeContainer">
                     <label for="productbrand">Tipo: </label>

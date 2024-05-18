@@ -92,10 +92,16 @@
     grid-column-gap: 16px;
 }
 
+.closebtn{
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    color: var(--gray-800);
+}
 .infos .status {
     position: absolute;
     top: 24px;
-    right: 24px;
+    /* right: 24px; */
     font-weight: 600;
     width: fit-content;
     padding: 8px 12px;

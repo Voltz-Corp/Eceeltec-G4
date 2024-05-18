@@ -193,6 +193,8 @@ class OrderRequestListView(View):
         service_orders_statuses = ['EM_REPARO', 'AGUARDANDO_PECAS', 'CONSERTO_FINALIZADO', 'CANCELADO']
         service_requests_statuses = ['EM_ANALISE', 'AGENDADO', 'AGUARDANDO_ORCAMENTO', 'AGUARDANDO_CONFIRMACAO', 'ACEITO', 'RECUSADO', 'CANCELADA']
 
+       
+
         service_orders = OrderRequest.objects.filter(status__in=service_orders_statuses)
         service_requests = OrderRequest.objects.filter(status__in=service_requests_statuses)
 
@@ -209,7 +211,7 @@ class OrderRequestListView(View):
                 'service_requests':service_requests, 
                 "all_orders": all_orders,
                 "all_orders_formatted": serialized_all_orders,
-                'user':user
+                'user':user,
             }
             return render(request, 'app_company/list-order-request.html', ctx)
         
@@ -289,7 +291,7 @@ class ServiceOrderDetailView(View):
         service_order.save()
         messages.success(request, "Status atualizado.")
 
-        if assume_order and service_order.status in ['ACEITO', 'EM_REPARO']:
+        if assume_order and service_order.status in ['ACEITO', 'EM_REPARO', 'AGUARDANDO_PECAS']:
             service_order.employee = request.user
             
             service_order.save()
@@ -322,23 +324,7 @@ class ManageOrder(View):
        
         tec = request.POST.get("tecnico")
         
-        if not parts and not tec:
-          
-            order_request.save()
-            return render(request, 'app_company/edit-order.html', {'order_request': order_request})
-        
-        elif not parts:
-         
-            order_request.employee = tec
-            order_request.save()
-            return render(request, 'app_company/edit-order.html', {'order_request': order_request})
-        
-        elif not tec:
-            
-            order_request.necessaryParts = parts
-            order_request.save()
-            return render(request, 'app_company/edit-order.html', {'order_request': order_request})
-        
+
         order_request.necessaryParts = parts
         order_request.employee = tec
         order_request.save()
