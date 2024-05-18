@@ -232,20 +232,20 @@ class OrderRequestDetailView(View):
         budget = request.POST.get('budget')
         
         
-        if status=='AGUARDANDO_CONFIRMACAO'  and budget:
+        if (status == 'AGUARDANDO_CONFIRMACAO' or status == "AGUARDANDO_ORCAMENTO"):
             order_request.status = status
-            order_request.budget=budget
+            if (budget):
+                order_request.budget = float(budget.replace(",", "."))
             order_request.save()
             return redirect('company:order_request_details', pk=pk)
         
         elif order_request.status == 'ACEITO':
-            order_request.status = status
-            order_request.isOs=True
+            order_request.isOs = True
             order_request.save()
             return redirect('company:create_os', pk=order_request.pk)
         
         else:
-            order_request.status=status
+            order_request.status = status
             order_request.save()
             return redirect('company:order_request_details', pk=pk)
 
@@ -278,8 +278,15 @@ class CreateSOView(View):
 class ServiceOrderDetailView(View):
     def get(self, request, pk):
         service_order = get_object_or_404(OrderRequest, pk=pk)
-        
-        return render(request, 'app_company/service-order.html', {'service_order': service_order})
+        all_orders = OrderRequest.objects.all()
+
+        ctx = {
+            "all_orders": all_orders,
+            "service_order": service_order
+        }
+
+        return render(request, 'app_company/service-order.html', ctx)
+    
     def post(self, request, pk):
         service_order = get_object_or_404(OrderRequest, pk=pk)
         new_status = request.POST.get('status')
