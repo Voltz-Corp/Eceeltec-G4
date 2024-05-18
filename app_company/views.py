@@ -38,6 +38,9 @@ class SignView(View):
         if 'login' in request.POST: 
             email = request.POST.get('email')
             user = authenticate(username=email, password=password)
+            if user is None:
+                messages.error(request, 'Usuário ou senha inválidos')
+                return redirect('company:sign')
             if user.role != 'F' and user.role != 'A':
                 messages.error(request, 'Você não tem permissão para acessar essa página')
                 return redirect('company:sign')
