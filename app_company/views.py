@@ -302,9 +302,20 @@ class ServiceOrderDetailView(View):
 @method_decorator(has_permission_decorator('manage_os'), name='dispatch')
 class ManageOrder(View):
     def get(self, request, pk):
+        employees = Users.objects.filter(role='F')
         order_request = get_object_or_404(OrderRequest, pk=pk)
-        return render(request, 'app_company/edit-order.html', {'order_request': order_request})
-    
+        order_request = {
+            'id': order_request.id,
+            'productType': order_request.productType,
+            'productbrand':order_request.productbrand,
+            'productModel': order_request.productModel,
+            'detailedProblemDescription':order_request.detailedProblemDescription,
+            'budget':order_request.budget,
+            'necessaryParts':order_request.necessaryParts,
+            'status': order_request.get_status_display() ,
+            'employee':order_request.employee
+        }
+        return render(request, 'app_company/edit-order.html', {'order_request': order_request, 'employees': employees})
     def post(self,request,pk):
         order_request = get_object_or_404(OrderRequest, pk=pk)
         parts = request.POST.get("partes")
@@ -318,18 +329,18 @@ class ManageOrder(View):
         
         elif not parts:
          
-            order_request.tec = tec
+            order_request.employee = tec
             order_request.save()
             return render(request, 'app_company/edit-order.html', {'order_request': order_request})
         
         elif not tec:
             
-            order_request.parts = parts
+            order_request.necessaryParts = parts
             order_request.save()
             return render(request, 'app_company/edit-order.html', {'order_request': order_request})
         
         order_request.necessaryParts = parts
-        order_request.tec = tec
+        order_request.employee = tec
         order_request.save()
         return render(request, 'edit-order.html', {'order_request': order_request})
 
