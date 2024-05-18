@@ -101,7 +101,7 @@
                                 <i data-lucide="eye" width="24" height="24" color="#155ec8"></i>
                             </a>
                         </td>
-                        {% if order.status == 'CANCELADO' %}
+                        {% if order.status == 'CANCELADO' or order.status == 'RECUSADO' %}
                         <td>
                             <i data-lucide="trash" width="24" height="24" color="#DC2626"></i>
                         </td>

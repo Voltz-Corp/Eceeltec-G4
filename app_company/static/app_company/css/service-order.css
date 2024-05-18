@@ -40,6 +40,14 @@
     color: #1971C2;
 }
 
+.modal {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    z-index: 999;
+    overflow-y: scroll;
+    height: 100%;
+}
+
 .content label {
     display: block;
     margin-bottom: 4px;
@@ -58,18 +66,6 @@
     outline: none;
 }
 
-.infos input, .infos textarea {
-    cursor: not-allowed;
-}
-
-.serviceContentOverlay {
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(12px);
-    z-index: 999;
-    overflow-y: scroll;
-    height: 100%;
-}
-
 .content {
     background-color: var(--white);
     border-radius: 4px;
@@ -86,10 +82,21 @@
     text-align: center;
 }
 
-.infosGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 16px;
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+}
+  
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .closebtn{
@@ -99,17 +106,23 @@
     color: var(--gray-800);
 }
 
+.infosGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 16px;
+}
+
 .infos .status {
     position: absolute;
     top: 24px;
-    /* right: 24px; */
+    right: 24px;
     font-weight: 600;
     width: fit-content;
     padding: 8px 12px;
     border-radius: 99999px;
 }
 
-button {
+.update {
     padding: 8px 16px;
     border: none;
     background-color: var(--green-700);
@@ -121,6 +134,6 @@ button {
     transition: all .3s;
 }
 
-button:hover {
+.update:hover {
     filter: brightness(0.9);
 }
