@@ -280,11 +280,13 @@ class CreateSOView(View):
 class ServiceOrderDetailView(View):
     def get(self, request, pk):
         service_order = get_object_or_404(OrderRequest, pk=pk)
+        employees = Users.objects.filter(role='F')
         all_orders = OrderRequest.objects.all()
 
         ctx = {
             "all_orders": all_orders,
-            "service_order": service_order
+            "service_order": service_order,
+            "employees": employees
         }
 
         return render(request, 'app_company/service-order.html', ctx)
@@ -293,6 +295,9 @@ class ServiceOrderDetailView(View):
         service_order = get_object_or_404(OrderRequest, pk=pk)
         new_status = request.POST.get('status')
         assume_order = 'assume' in request.POST
+        update_necessary_parts = request.POST.get('necessary_parts')
+        update_detailed_problem_description = request.POST.get('detailed_problem_description')
+        
         if not new_status:
             messages.error(request, "Status inválido.")
             return redirect('company:service_order_details', pk=pk)
@@ -328,12 +333,11 @@ class ManageOrder(View):
             'employee':order_request.employee
         }
         return render(request, 'app_company/edit-order.html', {'order_request': order_request, 'employees': employees})
+    
     def post(self,request,pk):
         order_request = get_object_or_404(OrderRequest, pk=pk)
         parts = request.POST.get("partes")
-       
         tec = request.POST.get("tecnico")
-        
 
         order_request.necessaryParts = parts
         order_request.employee = tec
