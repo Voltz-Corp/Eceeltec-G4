@@ -14,7 +14,7 @@
             <h1>Tipo: <span>{{ service_order.productType }}</span></h1>
             <h1>Marca: <span>{{ service_order.productbrand }}</span></h1>
             <h1>Modelo: <span>{{ service_order.productModel }}</span></h1>
-            <h1>Status: <span class="{{ service_order.status }}">{{ service_order.status }}</span></h1>
+            <h1>Status: <span class="{{ service_order.status }}">{{ service_order.get_status_display }}</span></h1>
         </div>
         <div id="headescription">
             <h1>Descrição: <span>{{ service_order.detailedProblemDescription }}</span></h1>
