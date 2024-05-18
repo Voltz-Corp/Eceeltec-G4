@@ -98,41 +98,6 @@
                 </tbody>
             </table>
         </section>
-
-        {% comment %} <section class="tableContainer requests">
-            <div>
-                <h3>Solicitações</h3>
-            </div>
-    
-            <table>
-            <thead>
-                <tr>
-                    <th>Status</th>
-                    <th>Identificação</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for request in service_requests %}
-                    <tr>
-                        <td>
-                            <div class="{{request.status}}"> {{request.get_status_display}} </div>
-                        </td>
-                        <td>{{request.productType}} | {{request.productModel}}</td>
-                        <td>
-                            <a href="{% url 'company:order_request_details' request.id %}">
-                                <i data-lucide="eye" width="28" height="28" color="#155ec8"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </section> {% endcomment %}
     </section>
 </div>
 {% block 'modal' %}

@@ -59,11 +59,11 @@
                     Cancelada
                 </option>
             </select>
-            {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}
-            <div class="budgetContainer">
-                <label for="budget">Valor do orçamento: </label>
-                <input type="number" name="budget" placeholder="Insira o valor do orçamento" value="{{ order_request.budget }}">
-            </div>
+            {% if order_request.status == "AGUARDANDO_ORCAMENTO" or order_request.status == "AGUARDANDO_CONFIRMACAO" %}
+                <div class="budgetContainer">
+                    <label for="budget">Valor do orçamento: </label>
+                    <input type="{% if not order_request.budget %}number{% else %}text{% endif %}" name="budget" placeholder="Insira o valor do orçamento" value="{{ order_request.budget }}">
+                </div>
             {% endif %}
             {% if order_request.status != "ACEITO" %}
             <button type="submit">Atualizar</button>
