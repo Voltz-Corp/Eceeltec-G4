@@ -201,9 +201,9 @@ class OrderRequestListView(View):
         service_orders = OrderRequest.objects.filter(status__in=service_orders_statuses)
         service_requests = OrderRequest.objects.filter(status__in=service_requests_statuses)
 
-        all_orders = OrderRequest.objects.all()
+        all_orders = OrderRequest.objects.all()            
         serialized_all_orders = serialize("json", all_orders)
-        serialized_all_orders = json.dumps(serialized_all_orders)
+        serialized_all_orders = json.loads(serialized_all_orders)
          
 
         if (user.password_was_changed == False):

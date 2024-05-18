@@ -103,7 +103,7 @@ tbody td {
   color: var(--gray-500);
 }
 
-tbody td:first-child div {
+tbody td:nth-child(2) div {
   font-weight: 700;
   width: fit-content;
   padding: 8px 12px;

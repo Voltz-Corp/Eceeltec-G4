@@ -38,7 +38,7 @@
                         <div class="orderTypeContainer">
                             <label for="orderType">Tipo de ordem</label>      
                             <select name="orderType" id="orderType" selected={{ order_request.status }}>
-                                <option value="all">Todos</option>
+                                <option value="all" selected>Todos</option>
                                 <option value="request">Solicitação</option>
                                 <option value="order">Ordem de Serviço</option>
                             </select> 
@@ -47,37 +47,50 @@
                         <div class="statusContainer">
                             <label for="orderStatus">Tipo de status:</label>
                             <select name="orderStatus" id="orderStatus">
-                                <option value="all">Todos</option>
-                                <option value="EM_ANALISE">Em análise</option>
-                                <option value="AGENDADO">Agendado</option>
-                                <option value="AGUARDANDO_ORCAMENTO">Aguardando orçamento</option>
-                                <option value="AGUARDANDO_CONFIRMACAO" >Aguardando confirmação</option>
-                                <option value="ACEITO">Aceito</option>
-                                <option value="RECUSADO">Recusado</option>
-                                <option value="CANCELADA">Cancelada</option>
+                                <optgroup label="Solicitação">
+                                    <option value="all" selected>Todos</option>
+                                    <option value="EM_ANALISE">Em análise</option>
+                                    <option value="AGENDADO">Agendado</option>
+                                    <option value="AGUARDANDO_ORCAMENTO">Aguardando orçamento</option>
+                                    <option value="AGUARDANDO_CONFIRMACAO" >Aguardando confirmação</option>
+                                    <option value="RECUSADO">Recusado</option>
+                                    <option value="CANCELADA">Cancelada</option>
+                                    <option value="ACEITO">Aceito</option>
+                                </optgroup>
+
+                                <optgroup label="OSS">
+                                    <option value="EM_REPARO">Em reparo</option>
+                                    <option value="AGUARDANDO_PECAS">Aguardando peças</option>
+                                    <option value="CONSERTO_FINALIZADO">Conserto finalizado</option>
+                                    <option value="CANCELADO">Cancelado</option>
+                                </optgroup>
                             </select>
                         </div>
                     </div>
                 
                     <div class="actions">
-                        <button>Aplicar</button>
+                        <button type="button" class="applyFilters">Aplicar</button>
                     </div>
                 </section>
             </div>
     
             <table>
-            <thead>
-                <tr>
-                    <th>Status</th>
-                    <th>Identificação</th>
-                    <th>Tipo</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
+                <thead>
+                    <tr>
+                        <th>Data de Abertura</th>
+                        <th>Status</th>
+                        <th>Identificação</th>
+                        <th>Tipo</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
             <tbody>
                 {% for order in all_orders %}
                     <tr>
+                        <td>
+                            {{ order.created_at | date:"d/m/Y" }}
+                        </td>
                         <td>
                             <div class="{{order.status}}"> {{order.get_status_display}} </div>
                         </td>
@@ -85,12 +98,12 @@
                         <td>{% if order.isOs %} Ordem de Serviço {% else %} Solicitação {% endif %}</td>
                         <td>
                             <a href="{% if order.isOs %} {% url 'company:service_order_details' order.id %} {% else %} {% url 'company:order_request_details' order.id %} {% endif %}">
-                                <i data-lucide="eye" width="28" height="28" color="#155ec8"></i>
+                                <i data-lucide="eye" width="24" height="24" color="#155ec8"></i>
                             </a>
                         </td>
                         {% if order.status == 'CANCELADO' %}
                         <td>
-                            <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>
+                            <i data-lucide="trash" width="24" height="24" color="#DC2626"></i>
                         </td>
                         {% endif %}
                     </tr>
@@ -104,10 +117,4 @@
 {% endblock %}
 
 <script src="{% static 'app_company/js/filter-order.js' %}"></script>
-<script>
-    const oi = "{{ all_orders_formatted }}"
-    const nice = JSON.parse(oi.replace(/&quot;/g, '"'))
-    console.log(nice)
-    
-</script>
 {% endblock %}
