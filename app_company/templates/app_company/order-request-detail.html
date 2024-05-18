@@ -49,24 +49,26 @@
                 <option value="AGUARDANDO_ORCAMENTO" {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}selected{% endif %}>
                     Aguardando orçamento
                 </option>
+                {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}
                 <option value="AGUARDANDO_CONFIRMACAO"  {% if order_request.status == "AGUARDANDO_CONFIRMACAO" %}selected{% endif %}>
                     Aguardando confirmação
                 </option>
-                <option value="ACEITO" {% if order_request.status == "ACEITO" %}selected{% endif %}>
-                    Aceito
-                </option>
-                <option value="RECUSADO" {% if order_request.status == "RECUSADO" %}selected{% endif %}>
-                    Recusado
-                </option>
+                {% endif %}
                 <option value="CANCELADA" {% if order_request.status == "CANCELADA" %}selected{% endif %}>
                     Cancelada
                 </option>
             </select>
+            {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}
             <div class="budgetContainer">
                 <label for="budget">Valor do orçamento: </label>
                 <input type="number" name="budget" placeholder="Insira o valor do orçamento" value="{{ order_request.budget }}">
             </div>
+            {% endif %}
+            {% if order_request.status != "ACEITO" %}
             <button type="submit">Atualizar</button>
+            {% else %}
+            <button type="submit">Confirmar OS </button>
+            {% endif %}
         </form>
     </div>
 </section>
