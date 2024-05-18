@@ -12,6 +12,7 @@
             <h1>Marca: <span>{{order.productbrand}}</span></h1>
             <h1>Modelo: <span>{{order.productModel}}</span></h1>
             <h1>Status: <span class="{{order.status}}">{{order.get_status_display}}</span></h1>
+            <h1>Funcionario responsável: <span>{{order.employee.first_name}}</span></h1>
         </div>
         <div id="headiscription">
             <h1>Descrição: <span>{{order.productProblemDescription}}</span></h1>
