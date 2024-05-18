@@ -37,8 +37,10 @@
             </div>
 
         </div>
+       
         <form action="{% url 'company:order_request_details' order_request.id %}" method="post">
             {% csrf_token %}
+            {% if order_request.status != "ACEITO" %}
             <label for="status">Atualizar status:</label>
             <select name="status" id="status">
                 <option value="EM_ANALISE" {% if order_request.status == "EM_ANALISE" %}selected{% endif %}>
@@ -59,6 +61,7 @@
                     Cancelada
                 </option>
             </select>
+            {% endif %}
             {% if order_request.status == "AGUARDANDO_ORCAMENTO" or order_request.status == "AGUARDANDO_CONFIRMACAO" %}
                 <div class="budgetContainer">
                     <label for="budget">Valor do orçamento: </label>
@@ -68,9 +71,16 @@
             {% if order_request.status != "ACEITO" %}
             <button type="submit">Atualizar</button>
             {% else %}
-            <button type="submit">Confirmar OS </button>
+            <div class="works">    
+                <label for="detailed_problem_description">Descrição detalhada do problema:</label>
+                <textarea id="detailed_problem_description" name="detailed_problem_description" required></textarea>
+                <label for="necessary_parts">Partes necessárias:</label>
+                <textarea id="necessary_parts" name="necessary_parts" required></textarea>
+                <button type="submit">Gerar ordem de serviço.</button>
+        </div>
             {% endif %}
         </form>
+        
     </div>
 </section>
 {% endblock %}

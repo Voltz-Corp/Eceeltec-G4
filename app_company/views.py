@@ -242,9 +242,19 @@ class OrderRequestDetailView(View):
             return redirect('company:order_request_details', pk=pk)
         
         elif order_request.status == 'ACEITO':
+
+            order_request = get_object_or_404(OrderRequest, pk=pk)
             order_request.isOs = True
+            detailed_problem_description = request.POST.get('detailed_problem_description')
+            necessary_parts = request.POST.get('necessary_parts')
+            
+            order_request.detailedProblemDescription = detailed_problem_description
+            order_request.necessaryParts = necessary_parts
+            order_request.status = 'EM_REPARO'
             order_request.save()
-            return redirect('company:create_os', pk=order_request.pk)
+
+            messages.success(request, "Solicitação transformada em ordem de serviço.")
+            return redirect('company:order_request_list') # aqui
         
         else:
             order_request.status = status
@@ -252,29 +262,6 @@ class OrderRequestDetailView(View):
             return redirect('company:order_request_details', pk=pk)
 
 @method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
-class CreateSOView(View):
-    def get(self, request, pk):
-        order_request = get_object_or_404(OrderRequest, pk=pk)
-        if order_request.isOs:
-            return render(request, 'app_company/create-os.html', {'order_request': order_request})
-        else:
-            return redirect('company:service_order_details', pk=pk)
-
-    def post(self, request, pk):
-        order_request = get_object_or_404(OrderRequest, pk=pk)
-        detailed_problem_description = request.POST.get('detailed_problem_description')
-        necessary_parts = request.POST.get('necessary_parts')
-        
-
-        
-
-        order_request.detailedProblemDescription = detailed_problem_description
-        order_request.necessaryParts = necessary_parts
-        order_request.status = 'EM_REPARO'
-        order_request.save()
-
-        messages.success(request, "Solicitação transformada em ordem de serviço.")
-        return redirect('company:service_order_details', pk=order_request.pk)
 
 @method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class ServiceOrderDetailView(View):
