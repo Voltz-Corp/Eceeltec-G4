@@ -34,11 +34,12 @@
                     </div>
                     <input type="submit" value="Confirmar" id="confirm">
                 </form>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
 
         <a href="{% url 'client:view_orders' %}">
-            <span class="close" id="closeIcon">&times;</span>
+            {% comment %} <span class="close" id="closeIcon">&times;</span> {% endcomment %}
+            <span class="close" id="closeIcon"><i data-lucide="x"></i></span>
         </a>
     </div>
 </div>
