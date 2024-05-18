@@ -275,18 +275,8 @@ class CreateSOView(View):
 class ServiceOrderDetailView(View):
     def get(self, request, pk):
         service_order = get_object_or_404(OrderRequest, pk=pk)
-        service_order_data={
-            'id': service_order.id,
-            'productType': service_order.productType,
-            'productbrand':service_order.productbrand,
-            'productModel': service_order.productModel,
-            'detailedProblemDescription':service_order.detailedProblemDescription,
-            'budget':service_order.budget,
-            'necessaryParts':service_order.necessaryParts,
-            'status': service_order.get_status_display() ,
-            'employee':service_order.employee
-        }
-        return render(request, 'app_company/service-order.html', {'service_order': service_order_data})
+        
+        return render(request, 'app_company/service-order.html', {'service_order': service_order})
     def post(self, request, pk):
         service_order = get_object_or_404(OrderRequest, pk=pk)
         new_status = request.POST.get('status')
