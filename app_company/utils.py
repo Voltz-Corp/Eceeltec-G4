@@ -106,7 +106,17 @@ def validate_inputs(username, position, phone, identity_number, email, dob, cep,
         errors.append({
             'field': 'username',
             'message': "Este campo não pode ter mais de 100 caracteres."
-        })     
+        })
+    if not email.strip():    
+        errors.append({
+            'field': 'email',
+            'message': "Este campo não pode ser vazio."
+        })
+    elif not re.match(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}', email):
+        errors.append({
+            'field': 'email',
+            'message': "Email inválido."
+        })
     elif Users.objects.filter(email=email).exists():
         errors.append({
             'field': 'email',
@@ -123,13 +133,17 @@ def validate_inputs(username, position, phone, identity_number, email, dob, cep,
             'field': 'position',
             'message': "Este campo não pode ter mais de 50 caracteres."
         })     
-
-    if len(phone) != 15:
+    if not phone.strip():
+        errors.append({
+            'field': 'phone',
+            'message': "Este campo não pode ser vazio."
+        })
+    elif len(phone) != 15:
         errors.append({
             'field': 'phone',
             'message': "Número de telefone deve ter 11 dígitos."
         })
-    if phone.strip() and not re.match(r'^\(\d{2}\) \d{4,5}-\d{4}$', phone):
+    elif phone.strip() and not re.match(r'^\(\d{2}\) \d{4,5}-\d{4}$', phone):
         errors.append({
             'field': 'phone',
             'message': "Formato de telefone inválido."
@@ -146,7 +160,7 @@ def validate_inputs(username, position, phone, identity_number, email, dob, cep,
             'message': "Esse campo tem que ter 11 digitos."
         })
     elif identity_number.strip() and not re.match(r'^(\d{3})\.?(\d{3})\.?(\d{3})-?(\d{2})$', identity_number):
-        errors.append({
+        errors.append({ 
             'field': 'identity_number',
             'message': "Formato de CPF inválido."
         })
@@ -156,19 +170,22 @@ def validate_inputs(username, position, phone, identity_number, email, dob, cep,
             'message': "CPF inválido."
         })
 
-    if not re.match(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}', email):
+    if not dob.strip():
         errors.append({
-            'field': 'email',
-            'message': "Email inválido."
+            'field': 'dob',
+            'message': "Este campo não pode ser vazio."
         })
-
-    if dob.strip() and not re.match(r'^\d{4}-\d{2}-\d{2}$', dob):
+    elif dob.strip() and not re.match(r'^\d{4}-\d{2}-\d{2}$', dob):
         errors.append({
             'field': 'dob',
             'message': 'Formato de data inválido!'
         })
-
-    if len(cep) != 9:  
+    if not cep.strip():
+        errors.append({
+            'field': 'cep',
+            'message': "Este campo não pode ser vazio."
+        })
+    elif len(cep) != 9:  
         errors.append({
             'field': 'cep',
             'message': "Este campo deve ser uma sequência de 8 dígitos."
@@ -179,30 +196,43 @@ def validate_inputs(username, position, phone, identity_number, email, dob, cep,
             'message': "Formato de CEP inválido."
         })
 
-    if len(uf) > 2:
+    if not uf.strip():
         errors.append({
             'field': 'uf',
-            'message': "Estado não pode ter mais de 2 caracteres."
-        }) 
-    elif len(uf) < 2:
+            'message': "Este campo não pode ser vazio."
+        })
+    elif len(uf) > 2 or len(uf) < 2:
         errors.append({
             'field': 'uf',
-            'message': "Estado não pode ter menos de 2 caracteres."
-        }) 
-
-    if len(city) > 200:
+            'message': "Estado tem que ter exatamente 2 caracteres."
+        })
+   
+    if not city.strip():
+        errors.append({
+            'field': 'city',
+            'message': "Este campo não pode ser vazio."
+        })
+    elif len(city) > 200:
         errors.append({
             'field': 'city',
             'message': "Cidade não pode ter mais de 200 caracteres."
         }) 
-
-    if len(neighborhood) > 200:
+    if not neighborhood.strip():
+        errors.append({
+            'field': 'neighborhood',
+            'message': "Este campo não pode ser vazio."
+        })
+    elif len(neighborhood) > 200:
         errors.append({
             'field': 'neighborhood',
             'message': "Cidade não pode ter mais de 200 caracteres."
         }) 
-    
-    if len(address) > 200:
+    if not address.strip():
+        errors.append({
+            'field': 'address',
+            'message': "Este campo não pode ser vazio."
+        })
+    elif len(address) > 200:
         errors.append({
             'field': 'address',
             'message': "Cidade não pode ter mais de 200 caracteres."
@@ -211,9 +241,9 @@ def validate_inputs(username, position, phone, identity_number, email, dob, cep,
     if len(complement) > 75:
         errors.append({
             'field': 'complement',
-            'message': "Cidade não pode ter mais de 200 caracteres."
+            'message': "Cidade não pode ter mais de 75 caracteres."
         }) 
-
+    
     if not password.strip():
         errors.append({
             'field': 'password',

@@ -7,4 +7,5 @@ urlpatterns = [
     path('empresa/', include('app_company.urls')),
     path('cliente/', include('app_client.urls')),
     path('', views.HomeView.as_view(), name="home"),
+    path('acesso_negado', views.ForbiddenView.as_view(), name="Forbidden403"),
 ]

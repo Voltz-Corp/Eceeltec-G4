@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://eceel-tec.com.br/wp-content/uploads/2020/06/cropped-logo_favicon-192x192.png" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/Forbidden.css' %}">
+    <title>Acesso negado</title>
+</head>
+<body>
+    <main>
+    <section class="left">
+        <img src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
+        
+        <div class="messages">
+        <h1>Erro - 403</h1>
+        <h2>sua conta não tem acesso a essa parte do site</h2>
+        <p> por favor, retorne ao menu</p>
+        </div>
+    </section>
+    <section class="right">
+        
+        <a href="{% url 'home' %}"><button class="returnBTN">retornar ao login</button></a>
+   
+    </section>
+</main> 
+<footer>
+    <p>Eceel -Tec © 2024 | Desenvolvido por </p><a href="https://github.com/Voltz-Corp" target="_blank"><img src="https://pbs.twimg.com/media/GMCO868WEAAd0hn?format=png&name=900x900" alt="Logo Voltz"></a>
+</footer>
+</body>
+</html>

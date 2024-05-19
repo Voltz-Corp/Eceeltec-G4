@@ -43,7 +43,7 @@ class SignView(View):
                 return redirect('company:sign')
             if user.role != 'F' and user.role != 'A':
                 messages.error(request, 'Você não tem permissão para acessar essa página')
-                return redirect('company:sign')
+                return redirect('Forbidden403')
             login_result = login(request, email, password)
             if login_result == 1:
                 return redirect('company:list_employees')
@@ -232,11 +232,17 @@ class OrderRequestDetailView(View):
         order_request = get_object_or_404(OrderRequest, pk=pk)
         status = request.POST.get('status')
         budget = request.POST.get('budget')
+        scheduled_date = request.POST.get('scheduled_date')
         
         if (status == 'AGUARDANDO_CONFIRMACAO' or status == "AGUARDANDO_ORCAMENTO"):
             order_request.status = status
             if (budget):
                 order_request.budget = float(budget.replace(",", "."))
+            order_request.save()
+            return redirect('company:order_request_details', pk=pk)
+        if status=='AGENDADO':
+            order_request.status = status
+            order_request.scheduled_date=scheduled_date
             order_request.save()
             return redirect('company:order_request_details', pk=pk)
         
