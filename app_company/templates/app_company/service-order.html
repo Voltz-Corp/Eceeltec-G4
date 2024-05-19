@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block 'head' %}
-    <title>Vizualizar Ordem de Serviço</title>
+    <title>Visualizar Ordem de Serviço</title>
     <link rel="stylesheet" type="text/css" href="{% static 'app_company\css\service-order.css' %}">
 
 {% endblock %}
@@ -33,11 +33,7 @@
                     <label for="productModel">Modelo: </label>
                     <input type="text" value={{ service_order.productModel }} name="productModel" disabled>
                 </div>
-
-                
             </div>
-
-
         </div>
 
         <form action="{% url 'company:service_order_details' service_order.id %}" method="post">
@@ -45,12 +41,12 @@
 
             <div class="detailed_problem_description">
                 <label for="detailed_problem_description">Descrição detalhada do problema:</label>
-                <textarea id="detailed_problem_description" name="detailed_problem_description" >{{service_order.detailedProblemDescription}}</textarea>
+                <textarea id="detailed_problem_description" name="detailed_problem_description" >{% if service_order.detailedProblemDescription %}{{service_order.detailedProblemDescription}}{% endif %}</textarea>
             </div>
 
             <div>
                 <label for="necessary_parts">Peças necessárias:</label>
-                <textarea name="necessary_parts" id="necessary_parts">{{service_order.necessaryParts}}</textarea>
+                <textarea name="necessary_parts" id="necessary_parts">{% if service_order.necessaryParts %}{{service_order.necessaryParts}}{% endif %}</textarea>
             </div>
 
             <label for="status">Atualizar status:</label>
@@ -69,41 +65,35 @@
                 </option>
             </select>
 
-            {% if service_order.employee%}
+            {% if not service_order.employee %}
 
                 {% if user.role == 'A' %}
-                <br>
-                <label for="tecnician">Designar Técnico:</label>
-                <select name="tecnician" id="tecnician" placeholder="Escolher Técnico">
-                    <option value="" selected disabled>
-                        Escolher Técnico
-                    </option>
-                    {% for tec in employees %}
-                    <option value=" {{ tec.first_name }}">
-                        {{ tec.first_name }}
-                    </option>
-                    {% endfor %} 
-                </select>
+                    <div class="technicianContainer">
+                        <label for="tecnician">Designar Técnico:</label>
+                        <select name="tecnician" id="tecnician" placeholder="Escolher Técnico">
+                            <option value="" selected disabled>
+                                Escolher Técnico
+                            </option>
+                            {% for tec in employees %}
+                            <option value="{{ tec }}">
+                                {{ tec.first_name }}
+                            </option>
+                            {% endfor %} 
+                        </select>
+                    </div>
 
+                    <label>Deseja assumir a OS?</label> 
+                    <button type="button" name="assume" class="assume" value="true">Assumir OS</button>
                 {% else %}
-                
-                <p>Deseja assumir a OS?</p> <button type="submit" name="assume" value="true">Assumir OS</button>
-                
+                    <label>Deseja assumir a OS?</label> 
                 {% endif %}
 
             {% else %}
-            <br>
-            <p>Funcionário Responsável: <span>{{ service_order.employee.first_name }}</span> </p>
+                <p>Funcionário Responsável: <span>{{ service_order.employee.first_name }}</span> </p>
             {% endif %}
             <br>
-
-            
-
+            <button class="update" type="submit">Atualizar</button> 
         </form>
-            
-        <button class="update" type="submit">Atualizar</button>
-            
-        
     </div>
 </section>
 {% endblock  %}

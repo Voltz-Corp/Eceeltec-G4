@@ -232,7 +232,6 @@ class OrderRequestDetailView(View):
         order_request = get_object_or_404(OrderRequest, pk=pk)
         status = request.POST.get('status')
         budget = request.POST.get('budget')
-        scheduled_date = request.POST.get('scheduled_date')
         
         if (status == 'AGUARDANDO_CONFIRMACAO' or status == "AGUARDANDO_ORCAMENTO"):
             order_request.status = status
@@ -240,13 +239,6 @@ class OrderRequestDetailView(View):
                 order_request.budget = float(budget.replace(",", "."))
             order_request.save()
             return redirect('company:order_request_details', pk=pk)
-        
-        if status=='AGENDADO':
-            order_request.status = status
-            order_request.scheduled_date=scheduled_date
-            order_request.save()
-            return redirect('company:order_request_details', pk=pk)
-
         
         elif order_request.status == 'ACEITO':
 
@@ -286,9 +278,11 @@ class ServiceOrderDetailView(View):
         return render(request, 'app_company/service-order.html', ctx)
     
     def post(self, request, pk):
+        user = request.user
         service_order = get_object_or_404(OrderRequest, pk=pk)
         new_status = request.POST.get('status')
         assume_order = 'assume' in request.POST
+        employee = request.POST.get('tecnician')
         update_necessary_parts = request.POST.get('necessary_parts')
         update_detailed_problem_description = request.POST.get('detailed_problem_description')
         
@@ -297,11 +291,14 @@ class ServiceOrderDetailView(View):
             return redirect('company:service_order_details', pk=pk)
 
         service_order.status = new_status
+        service_order.necessaryParts = update_necessary_parts
+        service_order.detailedProblemDescription = update_detailed_problem_description
+
         service_order.save()
         messages.success(request, "Status atualizado.")
 
         if assume_order and service_order.status in ['ACEITO', 'EM_REPARO', 'AGUARDANDO_PECAS']:
-            service_order.employee = request.user
+            service_order.employee = user
             
             service_order.save()
             messages.success(request, "Ordem de serviço atribuída a você.")
