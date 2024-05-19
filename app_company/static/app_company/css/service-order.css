@@ -66,6 +66,10 @@
     outline: none;
 }
 
+.content button {
+    border: none;
+}
+
 .content {
     background-color: var(--white);
     border-radius: 4px;
@@ -83,27 +87,18 @@
 }
 
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    color: var(--gray-500);
     position: absolute;
     top: 10px;
-    right: 12px;
+    right: 4px;
+    transition: all .3s;
 }
   
 .close:hover,
 .close:focus {
-    color: black;
+    color: var(--gray-800);
     text-decoration: none;
     cursor: pointer;
-}
-
-.closebtn{
-    position: absolute;
-    right: 24px;
-    top: 24px;
-    color: var(--gray-800);
 }
 
 .infosGrid {
@@ -114,7 +109,7 @@
 
 .infos .status {
     position: absolute;
-    top: 24px;
+    top: 32px;
     right: 24px;
     font-weight: 600;
     width: fit-content;
@@ -124,7 +119,6 @@
 
 .update {
     padding: 8px 16px;
-    border: none;
     background-color: var(--green-700);
     color: var(--white);
     font-weight: 600;
@@ -136,4 +130,12 @@
 
 .update:hover {
     filter: brightness(0.9);
+}
+
+.assume {
+    background-color: var(--blue-500);
+    color: var(--white);
+    border-radius: 4px;
+    font-weight: 600;
+    padding: 8px 12px;
 }
