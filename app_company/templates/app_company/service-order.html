@@ -49,7 +49,7 @@
             </div>
 
             <div>
-                <label for="necessary_parts">Partes necessárias:</label>
+                <label for="necessary_parts">Peças necessárias:</label>
                 <textarea name="necessary_parts" id="necessary_parts">{{service_order.necessaryParts}}</textarea>
             </div>
 
@@ -92,8 +92,8 @@
                 {% endif %}
 
             {% else %}
-                <br>
-                <p>Funcionário Responsável: <span>{{ service_order.employee.first_name }}</span> </p>
+            <br>
+            <p>Funcionário Responsável: <span>{{ service_order.employee.first_name }}</span> </p>
             {% endif %}
             <br>
 

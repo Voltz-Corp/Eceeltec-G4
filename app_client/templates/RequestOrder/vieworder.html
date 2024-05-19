@@ -12,12 +12,17 @@
             <h1>Marca: <span>{{order.productbrand}}</span></h1>
             <h1>Modelo: <span>{{order.productModel}}</span></h1>
             <h1>Status: <span class="{{order.status}}">{{order.get_status_display}}</span></h1>
+            
         </div>
         <div id="headiscription">
             <h1>Descrição: <span>{{order.productProblemDescription}}</span></h1>
         </div>
         {% if order.employee %}
         <h1>Funcionário Responsável: <span>{{order.employee.first_name}}</span></h1>
+        {% endif %}
+        {% if order.scheduled_date %}
+        <h1>Data para entrega: <span>{{order.scheduled_date}}</span></h1>
+        <h1>Você tem até 7 dias após o dia estipulado para entregar seu produto.</h1>
         {% endif %}
         <div class="waitingForm">
             {% if order.status == "AGUARDANDO_CONFIRMACAO" %}
