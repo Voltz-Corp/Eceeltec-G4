@@ -43,7 +43,7 @@ class SignView(View):
                 return redirect('company:sign')
             if user.role != 'F' and user.role != 'A':
                 messages.error(request, 'Você não tem permissão para acessar essa página')
-                return redirect('company:sign')
+                return redirect('Forbidden403')
             login_result = login(request, email, password)
             if login_result == 1:
                 return redirect('company:list_employees')
