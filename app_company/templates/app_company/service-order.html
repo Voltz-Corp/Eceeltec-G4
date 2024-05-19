@@ -83,14 +83,14 @@
                     </div>
 
                     <label>Deseja assumir a OS?</label> 
-                    <button type="button" name="assume" class="assume" value="true">Assumir OS</button>
+                    <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
                 {% else %}
                     <label>Deseja assumir a OS?</label> 
-                    <button type="button" name="assume" class="assume" value="true">Assumir OS</button>
+                    <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
                 {% endif %}
 
             {% else %}
-                <p>Funcionário Responsável: <span>{{ service_order.employee.first_name }}</span> </p>
+                <p>Funcionário Responsável: <span>{{ service_order.employee }}</span> </p>
             {% endif %}
             <br>
             <button class="update" type="submit">Atualizar</button> 
