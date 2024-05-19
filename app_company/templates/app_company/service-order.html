@@ -92,18 +92,8 @@
                 {% endif %}
 
             {% else %}
-                <br>
-                <label for="status">Funcionário Responsável:</label>
-                <select name="status" id="status">
-                    <option value="" selected disabled>
-                        Escolher Funcionário
-                    </option>
-                    {% for tec in employees %}
-                    <option value=" {{ tec.first_name }}"> 
-                        {{ tec.first_name }}
-                    </option>
-                    {% endfor %}
-                </select>
+            <br>
+            <p>Funcionário Responsável: <span>{{ service_order.employee.first_name }}</span> </p>
             {% endif %}
             <br>
 
