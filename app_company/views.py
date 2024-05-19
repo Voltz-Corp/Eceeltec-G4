@@ -232,11 +232,17 @@ class OrderRequestDetailView(View):
         order_request = get_object_or_404(OrderRequest, pk=pk)
         status = request.POST.get('status')
         budget = request.POST.get('budget')
+        scheduled_date = request.POST.get('scheduled_date')
         
         if (status == 'AGUARDANDO_CONFIRMACAO' or status == "AGUARDANDO_ORCAMENTO"):
             order_request.status = status
             if (budget):
                 order_request.budget = float(budget.replace(",", "."))
+            order_request.save()
+            return redirect('company:order_request_details', pk=pk)
+        if status=='AGENDADO':
+            order_request.status = status
+            order_request.scheduled_date=scheduled_date
             order_request.save()
             return redirect('company:order_request_details', pk=pk)
         
