@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <title>Visualizar Ordem de Serviço</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'app_company\css\service-order.css' %}">
+
+{% endblock %}
+
+{% block 'body' %}
+<section class="modal">
+    <div class="content">
+        <a href="{% url 'company:order_request_list' %}">
+            <i data-lucide="x" class="close" id="closeIcon"></i>
+        </a>
+
+        <div class="infos">
+            <h1>Solicitação {{service_order.id}}</h1>
+            <p class="{{service_order.status}} status">Status: {{ service_order.get_status_display }}</p>
+
+            <div class="infosGrid">
+                <div class="productTypeContainer">
+                    <label for="productbrand">Tipo: </label>
+                    <input type="text" value={{ service_order.productType }} name="produtctType" disabled>
+                </div>
+    
+                <div class="productbrandContainer">
+                    <label for="productbrand">Marca: </label>
+                    <input type="text" value={{ service_order.productbrand }} name="productbrand" disabled>
+                </div>
+    
+                <div class="productModelContainer">
+                    <label for="productModel">Modelo: </label>
+                    <input type="text" value={{ service_order.productModel }} name="productModel" disabled>
+                </div>
+            </div>
+        </div>
+
+        <form action="{% url 'company:service_order_details' service_order.id %}" method="post">
+            {% csrf_token %}
+
+            <div class="detailed_problem_description">
+                <label for="detailed_problem_description">Descrição detalhada do problema:</label>
+                <textarea id="detailed_problem_description" name="detailed_problem_description" >{% if service_order.detailedProblemDescription %}{{service_order.detailedProblemDescription}}{% endif %}</textarea>
+            </div>
+
+            <div>
+                <label for="necessary_parts">Peças necessárias:</label>
+                <textarea name="necessary_parts" id="necessary_parts">{% if service_order.necessaryParts %}{{service_order.necessaryParts}}{% endif %}</textarea>
+            </div>
+
+            <label for="status">Atualizar status:</label>
+            <select name="status" id="status">
+                <option value="EM_REPARO" {% if service_order.status == "EM_REPARO" %}selected{% endif %}>
+                    Em reparo
+                </option>
+                <option value="AGUARDANDO_PECAS" {% if service_order.status == "AGUARDANDO_PECAS" %}selected{% endif %}>
+                    Aguardando peças
+                </option>
+                <option value="CONSERTO_FINALIZADO" {% if service_order.status == "CONSERTO_FINALIZADO" %}selected{% endif %}>
+                    Conserto finalizado
+                </option>
+                <option value="CANCELADO" {% if service_order.status == "CANCELADO" %}selected{% endif %}>
+                    Cancelado
+                </option>
+            </select>
+
+            {% if not service_order.employee %}
+
+                {% if user.role == 'A' %}
+                    <div class="technicianContainer">
+                        <label for="tecnician">Designar Técnico:</label>
+                        <select name="tecnician" id="tecnician" placeholder="Escolher Técnico">
+                            <option value="" selected disabled>
+                                Escolher Técnico
+                            </option>
+                            {% for tec in employees %}
+                            <option value="{{ tec }}">
+                                {{ tec.first_name }}
+                            </option>
+                            {% endfor %} 
+                        </select>
+                    </div>
+
+                    <label>Deseja assumir a OS?</label> 
+                    <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
+                {% else %}
+                    <label>Deseja assumir a OS?</label> 
+                    <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
+                {% endif %}
+
+            {% else %}
+                <p>Funcionário Responsável: <span>{{ service_order.employee }}</span> </p>
+            {% endif %}
+            <br>
+            <button class="update" type="submit">Atualizar</button> 
+        </form>
+    </div>
+</section>
+{% endblock  %}

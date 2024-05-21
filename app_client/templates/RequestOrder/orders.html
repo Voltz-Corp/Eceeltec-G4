@@ -20,26 +20,34 @@
 
     <section class="tableContainer">
         <div>
-          <h3>Suas solicitações</h3>
+        <h3>Suas solicitações</h3>
         </div>
 
         <table>
-          <thead>
+        <thead>
             <tr>
                 <th>Status</th>
                 <th>Identificação</th>
                 <th></th>
                 <th></th>
             </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
             {% for order in orders %}
                 <tr>
                     <td>
-                        <div> Em análise </div>
+                        <div class="{{order.status}}"> {{order.get_status_display}} </div>
                     </td>
                     <td>{{order.productType}} | {{order.productModel}}</td>
-                    <td><i data-lucide="search" width="28" height="28" color="#155ec8"></i></td>
+                    <td><a href="{% url 'client:view_order' order.id %}"><i data-lucide="eye" width="28" height="28" color="#155ec8"></i></a></td>
+                    {% comment %}
+                        // TROCAR O 'EM_ANALISE' PARA 'CONSERTO_FINALIZADO' DEPOIS, TA ASSIM SO PRA TESTAR
+                                            |
+                                            V
+                    {% endcomment %} 
+                    {% if order.status == 'EM_ANALISE' %}
+                    <td><a href="{% url 'client:rate_service' order.id %}"><i data-lucide="star" width="28" height="28" color="#d4c02a"></i></a></td>
+                    {% endif %}
                     <td><i data-lucide="trash" width="28" height="28" color="#DC2626"></i></td>
                 </tr>
             {% endfor %}
@@ -47,5 +55,9 @@
         </table>
     </section>
 </section>
-<script src="{% static 'sheets_app/js/sheet.js' %}"></script>
+
+{% block 'modal' %}
+{% endblock %}
+
+
 {% endblock %}

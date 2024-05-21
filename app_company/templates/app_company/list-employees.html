@@ -2,11 +2,10 @@
 {% load static %}
 
 {% block 'head' %}
-
-<link rel="stylesheet" href="{% static 'app_company/css/list-employees.css' %}"> 
-<title>
-    Eceel-tec | Colaboradores
-</title>
+    <link rel="stylesheet" href="{% static 'app_company/css/list-employees.css' %}"> 
+    <title>
+        Eceel-tec | Colaboradores
+    </title>
 {% endblock %}
 
 {% block 'body' %}
@@ -49,7 +48,7 @@
                     <td> {{ employee.position }} </td>
                     <td>
                         <a href="{% url 'company:employee_details' employee.id %}" class="info-link">
-                            <i class="file-text" data-lucide="user-search" width="28" height="28"></i>
+                            <i class="file-text" data-lucide="eye" width="28" height="28"></i>
                         </a>
                     </td>
                     <td>

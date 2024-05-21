@@ -1,0 +1,63 @@
+{% extends "./orders.html" %}
+
+{% block 'modal' %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\view_order.css' %}">
+
+<div id="orderModal" class="modal">
+    <div class="modal-content">
+        <div id="head">
+            <h1>Tipo: <span>{{order.productType}}</span></h1>
+            <h1>Marca: <span>{{order.productbrand}}</span></h1>
+            <h1>Modelo: <span>{{order.productModel}}</span></h1>
+            <h1>Status: <span class="{{order.status}}">{{order.get_status_display}}</span></h1>
+            
+        </div>
+        <div id="headiscription">
+            <h1>Descrição: <span>{{order.productProblemDescription}}</span></h1>
+        </div>
+        {% if rating.attendance %}
+            <h1>Atendimento: <span>{{rating.attendance}}</span></h1>
+        {% endif %}
+        {% if rating.service %}
+            <h1>Serviço: <span>{{rating.service}}</span></h1>
+        {% endif %}
+        {% if rating.time %}
+            <h1>Tempo: <span>{{rating.time}}</span></h1>
+        {% endif %}
+        {% if order.employee %}
+        <h1>Funcionário Responsável: <span>{{order.employee.first_name}}</span></h1>
+        {% endif %}
+        {% if order.scheduled_date %}
+        <h1>Data para entrega: <span>{{order.scheduled_date}}</span></h1>
+        <h1>Você tem até 7 dias após o dia estipulado para entregar seu produto.</h1>
+        {% endif %}
+        <div class="waitingForm">
+            {% if order.status == "AGUARDANDO_CONFIRMACAO" %}
+                <h2>Orçamento finalizado - Aguardando confirmação</h2>
+                <h1>Valor: <span>R$ {{order.budget}}</span></h1>
+                <p>Você deseja prosseguir com o serviço?</p>
+                <form action="{% url 'client:view_order' order.id %}" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <input type="radio" id="yes" name="choise" value="yes" checked>
+                        <label for="yes">SIM</label><br>
+                        <input type="radio" id="no" name="choise" value="no">
+                        <label for="no" id="labelNo">NÃO</label><br>
+                    </div>
+                    <input type="submit" value="Confirmar" id="confirm">
+                </form>
+            </div>
+        {% endif %}
+
+        <a href="{% url 'client:view_orders' %}">
+            {% comment %} <span class="close" id="closeIcon">&times;</span> {% endcomment %}
+            <span class="close" id="closeIcon"><i data-lucide="x"></i></span>
+        </a>
+    </div>
+</div>
+
+{% endblock %}
+
+

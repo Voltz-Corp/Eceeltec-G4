@@ -1,0 +1,109 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat';
+}
+:root {
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --red-950: #450a0a;
+  --green-500: #22c55e;
+  --green-700: #108519;
+  --white: #f7f7f7;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+}
+body {
+  overflow: hidden;
+}
+button {
+  cursor: pointer;
+  border: none;
+}
+button:hover {
+  transition: all 0.3s;
+}
+a {
+  text-decoration: none;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-end;
+}
+.left {
+  background-color: var(--gray-700);
+  width: 55%;
+  min-height: 100vh;
+  height: 100%;
+  padding: 5%;
+  text-align: center;
+}
+.left .messages {
+  background-color: var(--green-700);
+  position: relative;
+  font-size: 30px;
+  margin-bottom: 24px;
+  text-align: center;
+  padding: 40px 0px;
+}
+.left img {
+  width: 40%;
+  position: absolute;
+  top: 32px;
+  left: 32px;
+}
+.right {
+  background-color: var(--gray-800);
+  width: 55%;
+  min-height: 100vh;
+  height: 100%;
+  padding: 5%;
+  text-align: center;
+  align-items: center;
+}
+
+.right button {
+  width: 100%;
+  max-width: 50%;
+  height: 36px;
+  border-radius: 4px;
+  margin-top: 24px;
+  background-color: #10a91d;
+  color: var(--white);
+  font-weight: 100;
+}
+.right button:hover {
+  background-color: #15911f;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #374151;
+}
+
+footer img {
+  width: 90px;
+  transition: all 0.3s;
+  align-items: center;
+}
+
+footer a {
+  justify-content: center;
+  align-items: center;
+}
+
+footer img:hover {
+  transform: translateY(-4px);
+}

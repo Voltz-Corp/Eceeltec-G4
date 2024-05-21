@@ -2,6 +2,7 @@
   --red-600: #DC2626;
   --red-700: #b91c1c;
   --green-500: #22c55e;
+  --green-700: #108519;
   --white: #f7f7f7;
   --gray-50: #f9fafb;
   --gray-200: #e5e7eb;
@@ -17,27 +18,12 @@
   --yellow-100: #fef9c3;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background-color: var(--green-500);
-  border-radius: 6px;
-}
-
-button {
-  border: none;
-}
-
 .title {
   padding-bottom: 20px;
   font-size: 40px;
 }
 
-.list-requests-container{
+.listOrderRequestCompanyContainer {
   background-color: var(--white);
   backdrop-filter: blur(120px);
   z-index: 999;
@@ -45,19 +31,6 @@ button {
 
   padding: 32px 64px;
   overflow: auto;
-}
-
- .new-request {
-  padding: 12px 20px;
-  
-  background-color: var(--gray-200);
-  border-radius: 4px;
-  font-weight: 600;
-  transition: all .3s;
-}
-
-.new-request:hover {
-  background-color: var(--gray-300); 
 }
 
 a {
@@ -79,12 +52,20 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 20px 24px;
+  position: relative;
 }
 
-.tableContainer > div div {
+.tableContainer > div .openFilterModalBtn {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border: none;
+  border: 2px solid var(--gray-200);
+  background-color: var(--white);
+  border-radius: 4px;
+  color: var(--gray-800);
 }
 
 .tableContainer h3 {
@@ -113,14 +94,6 @@ thead th {
   padding: 12px 24px;
 }
 
-thead th:nth-child(3) {
-  color: var(--blue-500);
-}
-
-thead th:nth-child(3) {
-  color: var(--red-600);
-}
-
 table tbody tr:last-child {
   border-bottom: none;
 }
@@ -130,29 +103,11 @@ tbody td {
   color: var(--gray-500);
 }
 
-tbody td:first-child div {
+tbody td:nth-child(2) div {
   font-weight: 700;
   width: fit-content;
   padding: 8px 12px;
   border-radius: 99999px;
-}
-
-@media (max-width: 1653px) {
-  .card-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 1333px) {
-  .card-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 1080px) {
-  .card-list {
-    grid-template-columns: repeat(1, 1fr);
-  }
 }
 
 .EM_ANALISE, .AGUARDANDO_ORCAMENTO, .AGUARDANDO_PECAS {
@@ -173,18 +128,4 @@ tbody td:first-child div {
 .AGENDADO, .AGUARDANDO_CONFIRMACAO, .EM_REPARO {
   background-color: #E8EDFF;
   color: #1971C2 !important;
-}
-
-.rating-label{
-  padding: 10px;
-}
-
-.rating-input{
-  padding-top: 1000px;
-}
-
-.rating-submit{
-  margin-top: 10px;
-  padding: 3px;
-  border-radius: 4px;
 }

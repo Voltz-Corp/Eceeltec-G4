@@ -8,12 +8,17 @@ from django.contrib.auth.hashers import make_password
 from rolepermissions.decorators import has_permission_decorator
 from django.utils.decorators import method_decorator
 from django.contrib.auth.hashers import make_password
-from .models import OrderRequest
+from .models import OrderRequest, ServiceRating
 from rolepermissions.decorators import has_permission_decorator
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
 from .utils import product_verify
 from django.contrib.auth import authenticate, login as auth_login
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.conf import settings
 
 
 class SignUpClient(View): 
@@ -92,15 +97,73 @@ class SignInView(View):
 
 class OrderViewView( View):
     def get(self, request):
-        
+
         orders = OrderRequest.objects.filter(userClient_id=request.user.id)
         ctx = {
             'orders': orders,
-            'user': request.user,
+            'user': request.user
         }
 
         return render(request, 'RequestOrder/orders.html', ctx)
         # return render(request, 'RequestOrder/orders.html')
+
+class ViewOrder(View):
+    def get(self, request, id):
+        order = OrderRequest.objects.filter(id=id).first()
+        orders = OrderRequest.objects.filter(userClient_id=request.user.id)
+        rating = ServiceRating.objects.filter(id=id).first()
+
+        ctx = {
+            "order": order,
+            "orders": orders,
+            "rating": rating,
+        }
+
+        return render(request, 'RequestOrder/vieworder.html', ctx)
+
+    def post(self, request, id):
+        order = OrderRequest.objects.filter(id=id).first()
+        chosen = request.POST.get('choise')
+        status_choices = OrderRequest.STATUS_CHOICES
+
+        if (chosen == "yes"):
+            order.status = status_choices[4][0]
+        else:
+            order.status = status_choices[5][0]
+
+        order.save()
+
+        return redirect('client:view_orders')
+
+class UpdateStatus(View):
+    def post(self, request, id):
+        order = OrderRequest.objects.filter(id=id).first()
+
+        user = request.user
+
+        status = request.POST.get('status')
+
+        order.status = status
+        order.save()
+
+        status_display = order.get_status_display()
+
+        ctx = {
+            'name': user.first_name,
+            'type': order.productType,
+            'model': order.productModel,
+            'status': status_display,
+            'statusCode': status,
+        }
+
+        html_content = render_to_string('email/emailtemplate.html', ctx)
+        text_content = strip_tags(html_content)
+
+        email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
+        email.attach_alternative(html_content, 'text/html')
+        email.send()
+
+        return redirect('client:view_orders')
 
 class RequestOrderView(View):
     def get(self,request):
@@ -120,9 +183,10 @@ class RequestOrderView(View):
         product_list = []
         
         errors = product_verify(productBrand, productType, productModel, productOther, productDescription, user_id)
-        ctx = {     'errors': errors,
-                    'app_name': 'client',
-                    }
+        ctx = {     
+            'errors': errors,
+            'app_name': 'client',
+        }
         if errors:
             if str(type(errors)) != "<class 'app_client.models.OrderRequest'>":
                 if 'other' not in errors:
@@ -184,3 +248,20 @@ class EditProfileView(View):
         # user.save()
 
         # return redirect('client:profile')
+
+class RateService(View):
+    def get(self, request, id):
+        order = OrderRequest.objects.filter(id=id).first()
+        ctx = {"order": order}
+
+        return render(request, 'RequestOrder/rateservice.html', ctx)
+    def post(self, request, id):
+        attendance = request.POST.get('attendance')
+        service = request.POST.get('service')
+        time = request.POST.get('time')
+        notes = request.POST.get('notes')
+        
+        rating = ServiceRating(attendance = attendance, time = time, service = service, notes = notes, os_id = id)
+        rating.save()
+    
+        return redirect('client:view_orders')

@@ -1,9 +1,36 @@
-body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-color: #f4f4f9;
-    font-family: Arial, sans-serif;
+:root {
+    --red-600: #DC2626;
+    --red-700: #b91c1c;
+    --green-500: #22c55e;
+    --green-700: #108519;
+    --white: #f7f7f7;
+    --gray-50: #f9fafb;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --blue-500: #155ec8;
+    --blue-200: #bfdbfe;
+    --yellow-700: #a16207;
+    --yellow-100: #fef9c3;
+}
+
+.content label {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--gray-800);
+    font-weight: 500;
+}
+
+.content input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--gray-200);
+    border-radius: 4px;
+    background-color: transparent;
 }
 
 .content {
@@ -15,67 +42,85 @@ body {
 }
 
 .form-card {
-    max-height: 90vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 800px;
-    overflow-y:scroll
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 600px;
+}
+
+.form-card div {
+    margin-bottom: 24px;
 }
 
 h2 {
-    color: #333;
+    color: var(--gray-800);
     text-align: center;
     margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
+p {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .form-group { 
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
-}
-
-label {
-    flex: 0 0 120px; 
-    margin-right: 10px; 
-    text-align: right; 
-}
-
-input[type="password"] {
-    flex: 1; 
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    margin-bottom: 35px;
 }
 
 button {
     width: 100%; 
-    padding: 10px;
+    padding: 12px;
     background-color: #0056b3;
-    color: white;
+    color: var(--gray-200);
     border: none;
     border-radius: 4px;
-    cursor: pointer;
-    margin-top: 20px; 
+    cursor: pointer; 
+    font-weight: 600;
+    transition: all .3s;
 }
 
 button:hover {
     background-color: #004494;
 }
 
-.messages {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
+.toast {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 9999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: var(--white);
+    color: var(--gray-800);
+  
+    animation: slideInLeft ease .5s, fadeOut linear 1s .5s forwards;
 }
-
-.messages li {
-    color: #d9534f;
-    margin-bottom: 10px;
+  
+.success {
+    border-left: 4px solid var(--green-500);
+}
+  
+.success > svg {
+    color: var(--green-500);
+}
+  
+.error {
+    border-left: 4px solid var(--red-600);
+}
+  
+.error > svg {
+    color: var(--red-600);
 }

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <title>Gerenciar Ordem de Serviço</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'app_company\css\edit-order.css' %}">
+
+{% endblock %}
+
+{% block 'body' %}
+<section class="modal">
+    <div class="content">
+        <h1>OS {{order_request.id}}</h1>
+        <form action="{% url 'company:manage_order' order_request.id %}" method="post">
+            {% csrf_token %}
+            <label for="tecnician">Designar Técnico:</label>
+            <select name="tecnician" id="tecnician" placeholder="Escolher Técnico">
+                <option value="" selected disabled>
+                    Escolher Técnico
+                </option>
+                {% for tec in employees %}
+                <option value="">
+                    {{ tec.first_name }}
+                </option>
+                {% endfor %} 
+            </select>
+        
+            <p>Modificar partes necessárias:
+                <input type="text" name="parts" placeholder="">
+            </p>
+            <button type="submit">Atualizar</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
