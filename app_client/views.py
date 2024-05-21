@@ -8,7 +8,7 @@ from django.contrib.auth.hashers import make_password
 from rolepermissions.decorators import has_permission_decorator
 from django.utils.decorators import method_decorator
 from django.contrib.auth.hashers import make_password
-from .models import OrderRequest
+from .models import OrderRequest, ServiceRating
 from rolepermissions.decorators import has_permission_decorator
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
@@ -111,10 +111,12 @@ class ViewOrder(View):
     def get(self, request, id):
         order = OrderRequest.objects.filter(id=id).first()
         orders = OrderRequest.objects.filter(userClient_id=request.user.id)
+        rating = ServiceRating.objects.filter(id=id).first()
 
         ctx = {
             "order": order,
             "orders": orders,
+            "rating": rating,
         }
 
         return render(request, 'RequestOrder/vieworder.html', ctx)
@@ -246,3 +248,20 @@ class EditProfileView(View):
         # user.save()
 
         # return redirect('client:profile')
+
+class RateService(View):
+    def get(self, request, id):
+        order = OrderRequest.objects.filter(id=id).first()
+        ctx = {"order": order}
+
+        return render(request, 'RequestOrder/rateservice.html', ctx)
+    def post(self, request, id):
+        attendance = request.POST.get('attendance')
+        service = request.POST.get('service')
+        time = request.POST.get('time')
+        notes = request.POST.get('notes')
+        
+        rating = ServiceRating(attendance = attendance, time = time, service = service, notes = notes, os_id = id)
+        rating.save()
+    
+        return redirect('client:view_orders')

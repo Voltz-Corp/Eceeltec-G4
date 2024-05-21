@@ -1,0 +1,99 @@
+{% extends 'base_client.html' %}
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\choose-order.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\create_order.css' %}">
+<link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
+    <title>Eceel-Tec | Solicitar serviço</title>
+{% endblock %}
+
+{% block 'body' %}
+<section class="mainorder">
+    <section class="order">
+        <form action="{% url 'client:rate_service' order.id %}" method="POST">
+            {% csrf_token %}
+
+            <h1>Avaliação de serviço - </h1>
+            
+            <label>Atendimento:</label><br>
+            <input type="radio" name="attendance" class="rating-input" value="0">
+            <label for="zero" class="rating-label">0</label>
+            <input type="radio" name="attendance" class="rating-input" value="1">
+            <label for="one" class="rating-label">1</label>
+            <input type="radio" name="attendance" class="rating-input" value="2">
+            <label for="two" class="rating-label">2</label>
+            <input type="radio" name="attendance" class="rating-input" value="3">
+            <label for="three" class="rating-label">3</label>
+            <input type="radio" name="attendance" class="rating-input" value="4">
+            <label for="four" class="rating-label">4</label>
+            <input type="radio" name="attendance" class="rating-input" value="5">
+            <label for="five" class="rating-label">5</label>
+            <input type="radio" name="attendance" class="rating-input" value="6">
+            <label for="six" class="rating-label">6</label>
+            <input type="radio" name="attendance" class="rating-input" value="7">
+            <label for="seven" class="rating-label">7</label>
+            <input type="radio" name="attendance" class="rating-input" value="8">
+            <label for="eight" class="rating-label">8</label>
+            <input type="radio" name="attendance" class="rating-input" value="9">
+            <label for="nine" class="rating-label">9</label>
+            <input type="radio" name="attendance" class="rating-input" value="10">
+            <label for="ten" class="rating-label">10</label><br>
+            
+            <label>Serviço:</label><br>
+            <input type="radio" name="service" class="rating-input" value="0">
+            <label for="zero" class="rating-label">0</label>
+            <input type="radio" name="service" class="rating-input" value="1">
+            <label for="one" class="rating-label">1</label>
+            <input type="radio" name="service" class="rating-input" value="2">
+            <label for="two" class="rating-label">2</label>
+            <input type="radio" name="service" class="rating-input" value="3">
+            <label for="three" class="rating-label">3</label>
+            <input type="radio" name="service" class="rating-input" value="4">
+            <label for="four" class="rating-label">4</label>
+            <input type="radio" name="service" class="rating-input" value="5">
+            <label for="five" class="rating-label">5</label>
+            <input type="radio" name="service" class="rating-input" value="6">
+            <label for="six" class="rating-label">6</label>
+            <input type="radio" name="service" class="rating-input" value="7">
+            <label for="seven" class="rating-label">7</label>
+            <input type="radio" name="service" class="rating-input" value="8">
+            <label for="eight" class="rating-label">8</label>
+            <input type="radio" name="service" class="rating-input" value="9">
+            <label for="nine" class="rating-label">9</label>
+            <input type="radio" name="service" class="rating-input" value="10">
+            <label for="ten" class="rating-label">10</label><br>
+            
+            <label>Tempo:</label><br>
+            <input type="radio" name="time" class="rating-input" value="0">
+            <label for="zero" class="rating-label">0</label>
+            <input type="radio" name="time" class="rating-input" value="1">
+            <label for="one" class="rating-label">1</label>
+            <input type="radio" name="time" class="rating-input" value="2">
+            <label for="two" class="rating-label">2</label>
+            <input type="radio" name="time" class="rating-input" value="3">
+            <label for="three" class="rating-label">3</label>
+            <input type="radio" name="time" class="rating-input" value="4">
+            <label for="four" class="rating-label">4</label>
+            <input type="radio" name="time" class="rating-input" value="5">
+            <label for="five" class="rating-label">5</label>
+            <input type="radio" name="time" class="rating-input" value="6">
+            <label for="six" class="rating-label">6</label>
+            <input type="radio" name="time" class="rating-input" value="7">
+            <label for="seven" class="rating-label">7</label>
+            <input type="radio" name="time" class="rating-input" value="8">
+            <label for="eight" class="rating-label">8</label>
+            <input type="radio" name="time" class="rating-input" value="9">
+            <label for="nine" class="rating-label">9</label>
+            <input type="radio" name="time" class="rating-input" value="10">
+            <label for="ten" class="rating-label">10</label><br>
+
+            <label for="">Comentários adicionais:</label><br>
+            <input type="text" id="notes" name="notes"><br>
+
+            <button type="submit" class="rating-submit">Avaliar</button>
+        </form>
+        </section>
+    </section>
+{% endblock %}

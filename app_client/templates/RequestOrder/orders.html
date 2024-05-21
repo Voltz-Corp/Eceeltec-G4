@@ -40,6 +40,14 @@
                     </td>
                     <td>{{order.productType}} | {{order.productModel}}</td>
                     <td><a href="{% url 'client:view_order' order.id %}"><i data-lucide="eye" width="28" height="28" color="#155ec8"></i></a></td>
+                    {% comment %}
+                        // TROCAR O 'EM_ANALISE' PARA 'CONSERTO_FINALIZADO' DEPOIS, TA ASSIM SO PRA TESTAR
+                                            |
+                                            V
+                    {% endcomment %} 
+                    {% if order.status == 'EM_ANALISE' %}
+                    <td><a href="{% url 'client:rate_service' order.id %}"><i data-lucide="star" width="28" height="28" color="#d4c02a"></i></a></td>
+                    {% endif %}
                     <td><i data-lucide="trash" width="28" height="28" color="#DC2626"></i></td>
                 </tr>
             {% endfor %}
