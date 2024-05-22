@@ -17,6 +17,15 @@
         <div id="headiscription">
             <h1>Descrição: <span>{{order.productProblemDescription}}</span></h1>
         </div>
+        {% if rating.attendance %}
+            <h1>Atendimento: <span>{{rating.attendance}}</span></h1>
+        {% endif %}
+        {% if rating.service %}
+            <h1>Serviço: <span>{{rating.service}}</span></h1>
+        {% endif %}
+        {% if rating.time %}
+            <h1>Tempo: <span>{{rating.time}}</span></h1>
+        {% endif %}
         {% if order.employee %}
         <h1>Funcionário Responsável: <span>{{order.employee.first_name}}</span></h1>
         {% endif %}

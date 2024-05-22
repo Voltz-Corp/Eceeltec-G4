@@ -174,3 +174,17 @@ tbody td:first-child div {
   background-color: #E8EDFF;
   color: #1971C2 !important;
 }
+
+.rating-label{
+  padding: 10px;
+}
+
+.rating-input{
+  padding-top: 1000px;
+}
+
+.rating-submit{
+  margin-top: 10px;
+  padding: 3px;
+  border-radius: 4px;
+}
