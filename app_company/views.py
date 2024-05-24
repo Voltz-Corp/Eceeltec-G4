@@ -14,6 +14,10 @@ from rolepermissions.roles import assign_role
 from django.http import HttpResponse
 from django.contrib.auth.hashers import check_password
 from django.core.serializers import serialize
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 from app_client.models import OrderRequest
 
@@ -230,6 +234,9 @@ class OrderRequestDetailView(View):
 
     def post(self, request, pk):
         order_request = get_object_or_404(OrderRequest, pk=pk)
+
+        user = order_request.userClient
+
         status = request.POST.get('status')
         budget = request.POST.get('budget')
         scheduled_date = request.POST.get('scheduled_date')
@@ -239,11 +246,39 @@ class OrderRequestDetailView(View):
             if (budget):
                 order_request.budget = float(budget.replace(",", "."))
             order_request.save()
+            status_display = order_request.get_status_display()
+
+            ctx = {
+                'name': user.first_name,
+                'type': order_request.productType,
+                'model': order_request.productModel,
+                'status': status_display,
+                'statusCode': status,
+            }
+            html_content = render_to_string('email/emailtemplate.html', ctx)
+            text_content = strip_tags(html_content)
+            email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
+            email.attach_alternative(html_content, 'text/html')
+            email.send()
             return redirect('company:order_request_details', pk=pk)
         if status=='AGENDADO':
             order_request.status = status
             order_request.scheduled_date=scheduled_date
             order_request.save()
+            status_display = order_request.get_status_display()
+
+            ctx = {
+                'name': user.first_name,
+                'type': order_request.productType,
+                'model': order_request.productModel,
+                'status': status_display,
+                'statusCode': status,
+            }
+            html_content = render_to_string('email/emailtemplate.html', ctx)
+            text_content = strip_tags(html_content)
+            email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
+            email.attach_alternative(html_content, 'text/html')
+            email.send()
             return redirect('company:order_request_details', pk=pk)
         
         elif order_request.status == 'ACEITO':
@@ -258,12 +293,41 @@ class OrderRequestDetailView(View):
             order_request.status = 'EM_REPARO'
             order_request.save()
 
+            status_display = order_request.get_status_display()
+
+            ctx = {
+                'name': user.first_name,
+                'type': order_request.productType,
+                'model': order_request.productModel,
+                'status': status_display,
+                'statusCode': status,
+            }
+            html_content = render_to_string('email/emailtemplate.html', ctx)
+            text_content = strip_tags(html_content)
+            email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
+            email.attach_alternative(html_content, 'text/html')
+            email.send()
             messages.success(request, "Solicitação transformada em ordem de serviço.")
             return redirect('company:order_request_list') # aqui
         
         else:
             order_request.status = status
             order_request.save()
+
+            status_display = order_request.get_status_display()
+
+            ctx = {
+                'name': user.first_name,
+                'type': order_request.productType,
+                'model': order_request.productModel,
+                'status': status_display,
+                'statusCode': status,
+            }
+            html_content = render_to_string('email/emailtemplate.html', ctx)
+            text_content = strip_tags(html_content)
+            email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
+            email.attach_alternative(html_content, 'text/html')
+            email.send()
             return redirect('company:order_request_details', pk=pk)
 
 @method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
