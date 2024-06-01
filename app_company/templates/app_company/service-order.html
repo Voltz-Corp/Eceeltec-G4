@@ -91,6 +91,15 @@
 
             {% else %}
                 <p>Funcionário Responsável: <span>{{ service_order.employee }}</span> </p>
+                {% if rating.attendance %}
+                    <p>Atendimento: <span>{{rating.attendance}}</span></p>
+                {% endif %}
+                {% if rating.service %}
+                    <p>Serviço: <span>{{rating.service}}</span></p>
+                {% endif %}
+                {% if rating.time %}
+                    <p>Tempo: <span>{{rating.time}}</span></p>
+                {% endif %}
             {% endif %}
             <br>
             <button class="update" type="submit">Atualizar</button> 

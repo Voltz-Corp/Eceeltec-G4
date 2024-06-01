@@ -19,7 +19,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
-from app_client.models import OrderRequest
+from app_client.models import OrderRequest, ServiceRating
 
 
 class SignView(View):
@@ -336,13 +336,15 @@ class OrderRequestDetailView(View):
 class ServiceOrderDetailView(View):
     def get(self, request, pk):
         service_order = get_object_or_404(OrderRequest, pk=pk)
+        rating = get_object_or_404(ServiceRating, pk=pk)
         employees = Users.objects.filter(role='F')
         all_orders = OrderRequest.objects.all()
 
         ctx = {
             "all_orders": all_orders,
             "service_order": service_order,
-            "employees": employees
+            "employees": employees,
+            "rating": rating
         }
 
         return render(request, 'app_company/service-order.html', ctx)
