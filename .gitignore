@@ -5,6 +5,9 @@
 __pycache__
 media
 
+# NPM
+node_modules/
+
 # Backup files # 
 *.bak 
 

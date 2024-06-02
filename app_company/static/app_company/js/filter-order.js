@@ -9,7 +9,7 @@ const orderType = document.querySelector("#orderType");
 const orderStatus = document.querySelector("#orderStatus");
 
 const orders = document.querySelector("#allOrders").value;
-const allOrdersFormatted = JSON.parse(orders.replace(/'/g, '"').replace(/None/g, null).replace(/True/g, true));
+const allOrdersFormatted = JSON.parse(orders.replace(/'/g, '"').replace(/None/g, null).replace(/True/g, true).replace(/False/g,false));
 
 let filteredOrders = [];
 
