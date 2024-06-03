@@ -10,13 +10,26 @@
 {% block 'body' %}
 <section class="modal">
     <div class="content">
-        <a href="{% url 'company:order_request_list' %}">
+        <a href="{{ previous_url }}">
             <i data-lucide="x" class="close" id="closeIcon"></i>
         </a>
 
         <div class="infos">
             <h1>Solicitação {{service_order.id}}</h1>
             <p class="{{service_order.status}} status">Status: {{ service_order.get_status_display }}</p>
+
+            {% if service_order.employee %}
+                <p class="employee" >Funcionário Responsável: <span>{{ service_order.employee.first_name }}</span> </p>
+                {% if rating.attendance %}
+                    <p>Atendimento: <span>{{rating.attendance}}</span></p>
+                {% endif %}
+                {% if rating.service %}
+                    <p>Serviço: <span>{{rating.service}}</span></p>
+                {% endif %}
+                {% if rating.time %}
+                    <p>Tempo: <span>{{rating.time}}</span></p>
+                {% endif %}
+            {% endif %}
 
             <div class="infosGrid">
                 <div class="productTypeContainer">
@@ -87,18 +100,6 @@
                 {% else %}
                     <label>Deseja assumir a OS?</label> 
                     <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
-                {% endif %}
-
-            {% else %}
-                <p>Funcionário Responsável: <span>{{ service_order.employee.first_name }}</span> </p>
-                {% if rating.attendance %}
-                    <p>Atendimento: <span>{{rating.attendance}}</span></p>
-                {% endif %}
-                {% if rating.service %}
-                    <p>Serviço: <span>{{rating.service}}</span></p>
-                {% endif %}
-                {% if rating.time %}
-                    <p>Tempo: <span>{{rating.time}}</span></p>
                 {% endif %}
             {% endif %}
             <br>

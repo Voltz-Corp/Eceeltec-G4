@@ -40,6 +40,19 @@
     color: #1971C2;
 }
 
+.employee {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    font-weight: 600;
+    width: fit-content;
+    padding: 8px 12px;
+    border-radius: 99999px;
+
+    background-color: var(--gray-200);
+    color: var(--gray-700);
+}
+
 .modal {
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(12px);
@@ -110,7 +123,7 @@
 .infos .status {
     position: absolute;
     top: 32px;
-    right: 24px;
+    right: 32px;
     font-weight: 600;
     width: fit-content;
     padding: 8px 12px;
