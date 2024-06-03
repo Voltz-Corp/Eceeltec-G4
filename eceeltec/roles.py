@@ -16,7 +16,6 @@ class Funcionario(AbstractUserRole):
         'fazer_coisas': True,
         'config_p-user': True,
         'os&request_ops':True,
-        
     }
 
 class Cliente(AbstractUserRole):

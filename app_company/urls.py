@@ -13,4 +13,5 @@ urlpatterns = [
     path('solicitacao/<int:pk>/', views.OrderRequestDetailView.as_view(), name='order_request_details'),
     path('os/<int:pk>/', views.ServiceOrderDetailView.as_view(), name='service_order_details'),
     path('gerenciar_os/<int:pk>/', views.ManageOrder.as_view(), name='manage_order'),
+    path('seus_servicos/', views.YourServicesView.as_view(), name='your_services'),
 ]

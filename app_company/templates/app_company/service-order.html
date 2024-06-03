@@ -75,7 +75,7 @@
                                 Escolher Técnico
                             </option>
                             {% for tec in employees %}
-                            <option value="{{ tec }}">
+                            <option value="{{ tec.id }}">
                                 {{ tec.first_name }}
                             </option>
                             {% endfor %} 
@@ -90,7 +90,7 @@
                 {% endif %}
 
             {% else %}
-                <p>Funcionário Responsável: <span>{{ service_order.employee }}</span> </p>
+                <p>Funcionário Responsável: <span>{{ service_order.employee.first_name }}</span> </p>
                 {% if rating.attendance %}
                     <p>Atendimento: <span>{{rating.attendance}}</span></p>
                 {% endif %}

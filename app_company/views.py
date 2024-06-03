@@ -200,8 +200,6 @@ class OrderRequestListView(View):
         service_orders_statuses = ['EM_REPARO', 'AGUARDANDO_PECAS', 'CONSERTO_FINALIZADO', 'CANCELADO']
         service_requests_statuses = ['EM_ANALISE', 'AGENDADO', 'AGUARDANDO_ORCAMENTO', 'AGUARDANDO_CONFIRMACAO', 'ACEITO', 'RECUSADO', 'CANCELADA']
 
-       
-
         service_orders = OrderRequest.objects.filter(status__in=service_orders_statuses)
         service_requests = OrderRequest.objects.filter(status__in=service_requests_statuses)
 
@@ -218,7 +216,7 @@ class OrderRequestListView(View):
                 'service_requests':service_requests, 
                 "all_orders": all_orders,
                 "all_orders_formatted": serialized_all_orders,
-                'user':user,
+                'user': user,
             }
             return render(request, 'app_company/list-order-request.html', ctx)
         
@@ -331,21 +329,28 @@ class OrderRequestDetailView(View):
             return redirect('company:order_request_details', pk=pk)
 
 @method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
-
-@method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class ServiceOrderDetailView(View):
     def get(self, request, pk):
-        service_order = get_object_or_404(OrderRequest, pk=pk)
-        rating = get_object_or_404(ServiceRating, pk=pk)
         employees = Users.objects.filter(role='F')
         all_orders = OrderRequest.objects.all()
 
         ctx = {
             "all_orders": all_orders,
-            "service_order": service_order,
             "employees": employees,
-            "rating": rating
         }
+
+        try:
+            service_order = OrderRequest.objects.get(id=pk)
+            ctx['service_order'] = service_order
+        except:
+            print(None)
+
+        try:
+            rating = ServiceRating.objects.get(id=pk)
+            ctx['rating'] = rating
+        except:
+            print(None)
+
 
         return render(request, 'app_company/service-order.html', ctx)
     
@@ -365,6 +370,7 @@ class ServiceOrderDetailView(View):
         service_order.status = new_status
         service_order.necessaryParts = update_necessary_parts
         service_order.detailedProblemDescription = update_detailed_problem_description
+        service_order.employee_id = employee
 
         service_order.save()
         messages.success(request, "Status atualizado.")
@@ -407,3 +413,14 @@ class ManageOrder(View):
         order_request.save()
         return render(request, 'edit-order.html', {'order_request': order_request})
 
+@method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
+class YourServicesView(View):
+    def get(self, request):
+        user_id = request.user.id
+
+        orders = OrderRequest.objects.filter(employee_id=user_id)
+        ctx = {
+            "orders": orders
+        }
+
+        return render(request, 'app_company/your-services.html', ctx)
