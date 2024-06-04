@@ -200,3 +200,41 @@
   font-weight: 600;
 }
 
+input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: none;
+  margin: 0;
+
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid var(--gray-300);
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  transform: scale(0);
+  box-shadow: inset 1em 1em var(--green-500);
+  transition: 120ms transform ease-in-out;
+}
+
+.yes input[type="radio"]:first-child::before {
+  box-shadow: inset 1em 1em var(--green-500);
+}
+
+.no input[type="radio"]:last-child::before {
+  box-shadow: inset 1em 1em var(--red-600);
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
