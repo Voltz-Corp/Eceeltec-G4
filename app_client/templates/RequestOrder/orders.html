@@ -3,11 +3,49 @@
 
 {% block 'head' %}
     <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\toast.css' %}">
     <link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
     <title>Eccel-tec | Seus serviços</title>
 {% endblock %}
 
 {% block 'body' %}
+
+{% for message in messages %}
+    <div class="toast {{ message.tags }}">
+      {% if message.tags  == 'success' %}
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-circle-check"
+            ><circle cx="12" cy="12" r="10"/>
+            <path
+            d="m9 12 2 2 4-4"
+            />
+        </svg>
+      {% elif message.tags == 'error' %}
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-circle-alert"
+        ><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+      {% endif %}
+      <span>{{ message }}</span>
+    </div>
+{% endfor %}
 
 <section class="list-requests-container">
     <h1 class="title">Seus serviços</h1>
@@ -58,11 +96,13 @@
                             </a>
                         </td>
 
-                        <td>
-                            <a href="{% url 'client:reopen_service' order.id %}">
-                                <i data-lucide="rotate-ccw"></i>
-                            </a>
-                        </td>
+                         {% if not order.isReopen %}
+                            <td>
+                                <a href="{% url 'client:reopen_service' order.id %}">
+                                    <i data-lucide="rotate-ccw"></i>
+                                </a>
+                            </td>
+                        {% endif %}
                     {% endif %}
                     <td>
                         <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>

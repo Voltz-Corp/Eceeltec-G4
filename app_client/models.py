@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User,AbstractUser
 from app_company.models import Users
+
+from datetime import datetime, timedelta
 class OrderRequest(models.Model):
     STATUS_CHOICES = [
         ('EM_ANALISE', 'Em análise'),
@@ -32,6 +34,15 @@ class OrderRequest(models.Model):
     closedAt = models.DateField(blank=True, null=True)
     reopen_at = models.DateField(blank=True, null=True)
     isReopen = models.BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return self.name
+
+    def reopen_time(self):
+        actual_time = datetime.now().date()
+        days_difference = (actual_time - self.closedAt).days
+        if days_difference > 30:
+            self.isReopen = True
     
 class ServiceRating(models.Model):
     RATINGS = [
