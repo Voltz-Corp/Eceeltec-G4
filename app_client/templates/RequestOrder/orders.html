@@ -57,6 +57,12 @@
                                 <i data-lucide="star" width="28" height="28" color="#d4c02a"></i>
                             </a>
                         </td>
+
+                        <td>
+                            <a href="{% url 'client:reopen_service' order.id %}">
+                                <i data-lucide="rotate-ccw"></i>
+                            </a>
+                        </td>
                     {% endif %}
                     <td>
                         <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>

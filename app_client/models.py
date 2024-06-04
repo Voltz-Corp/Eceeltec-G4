@@ -30,7 +30,9 @@ class OrderRequest(models.Model):
     scheduled_date = models.DateField(null=True, blank=True)
     isOs = models.BooleanField(default=False)
     closedAt = models.DateField(blank=True, null=True)
-
+    reopen_at = models.DateField(blank=True, null=True)
+    isReopen = models.BooleanField(default=False)
+    
 class ServiceRating(models.Model):
     RATINGS = [
     (0, '0'),

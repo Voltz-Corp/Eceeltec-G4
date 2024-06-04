@@ -12,4 +12,5 @@ urlpatterns = [
     path('visualizar/<int:id>/', views.ViewOrder.as_view(), name="view_order"),
     path('editar_status/<int:id>', views.UpdateStatus.as_view(), name="update_status"),
     path('avaliar/<int:id>/', views.RateService.as_view(), name="rate_service"),
+    path('reabrir_serviço/<int:id>/', views.ReopenService.as_view(), name="reopen_service"),
 ]
