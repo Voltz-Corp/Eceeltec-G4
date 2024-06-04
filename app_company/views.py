@@ -20,9 +20,9 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-
+from django.urls import reverse
 from app_client.models import OrderRequest, ServiceRating
-
+from datetime import datetime, timedelta, date
 
 class SignView(View):
     def get(self, request):
@@ -240,7 +240,23 @@ class OrderRequestDetailView(View):
         status = request.POST.get('status')
         budget = request.POST.get('budget')
         scheduled_date = request.POST.get('scheduled_date')
-        
+        today = datetime.now().date()
+        max_date = today + timedelta(days=30)
+        if scheduled_date != None:
+            scheduled_date = date.fromisoformat(scheduled_date)
+            if scheduled_date < today or scheduled_date > max_date:
+                ctx = {
+                        "order_request": order_request,
+                        "error": {
+                        "message": f"A data precisa estar entre {today} e {max_date}!"
+                    }
+                }
+                return render(request, "app_company/order-request-detail.html", ctx)
+
+        # actual_time = datetime.now().date()
+        # days_difference = (actual_time - self.closedAt).days
+
+
         if (status == 'AGUARDANDO_CONFIRMACAO' or status == "AGUARDANDO_ORCAMENTO"):
             order_request.status = status
             if (budget):
