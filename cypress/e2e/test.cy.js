@@ -60,8 +60,10 @@ describe('home page', () => {
   it('passes', () => {
     cy.exec('python manage.py migrate')
     cy.DeleteAndCreateAdm()
-
     cy.visit('/');
+    cy.CreateEmployee()
+    cy.get('.logout > button').click()
+    cy.CreateSolicitation()
     
     //menuHamburger not defined!?
     cy.on("uncaught:exception", (e, runnable) => {
