@@ -28,6 +28,8 @@
             <tr>
                 <th>Status</th>
                 <th>Identificação</th>
+                <th>Data de agendamento</th>
+                <th></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -39,11 +41,26 @@
                         <div class="{{order.status}}"> {{order.get_status_display}} </div>
                     </td>
                     <td>{{order.productType}} | {{order.productModel}}</td>
-                    <td><a href="{% url 'client:view_order' order.id %}"><i data-lucide="eye" width="28" height="28" color="#155ec8"></i></a></td>
-                    {% if order.status == 'CONSERTO_FINALIZADO' %}
-                    <td><a href="{% url 'client:rate_service' order.id %}"><i data-lucide="star" width="28" height="28" color="#d4c02a"></i></a></td>
+                    {% if order.scheduled_date and order.status == 'AGENDADO' %}
+                        <td> {{ order.scheduled_date }} </td>
+                    {% else %}
+                        <td> - </td>
                     {% endif %}
-                    <td><i data-lucide="trash" width="28" height="28" color="#DC2626"></i></td>
+                    <td>
+                        <a href="{% url 'client:view_order' order.id %}">
+                            <i data-lucide="eye" width="28" height="28" color="#155ec8"></i>
+                        </a>
+                    </td>
+                    {% if order.status == 'CONSERTO_FINALIZADO' %}
+                        <td>
+                            <a href="{% url 'client:rate_service' order.id %}">
+                                <i data-lucide="star" width="28" height="28" color="#d4c02a"></i>
+                            </a>
+                        </td>
+                    {% endif %}
+                    <td>
+                        <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

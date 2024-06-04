@@ -372,7 +372,10 @@ class ServiceOrderDetailView(View):
         service_order.status = new_status
         service_order.necessaryParts = update_necessary_parts
         service_order.detailedProblemDescription = update_detailed_problem_description
-        service_order.employee_id = employee
+
+        if not service_order.employee and employee:
+            service_order.employee_id = employee
+
 
         service_order.save()
         messages.success(request, "Status atualizado.")
