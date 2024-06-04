@@ -26,8 +26,26 @@ Cypress.Commands.add('ClientLogout', () => {
 })
 
 Cypress.Commands.add('CreateEmployee', () => {
-
+  cy.get('#employee > a').click()
+  cy.get('#email').type('eceel-Tec@eceeltec.com')
+  cy.get('#password').type('obGWjpaTayKJWpBiFSMm')
+  cy.get('button').click()
+  cy.get('#password').type('obGWjpaTayKJWpBiFSMm')
+  cy.get('#new_password').type('obGWjpaTayKJWpBiFSMm')
+  cy.get('.form-card > form > button').click()
+  cy.get('.employees > a').click()
+  cy.get('.new-employee-button').click()
+  cy.get('#username').type('Andre Castro')
+  cy.get('#phone').type('81900028922')
+  cy.get('#email').type('Andre@gmail.com')
+  cy.get('#password').type('ViraPag')
+  cy.get('#cep').type('31980-230')
+  cy.get('#identity_number').type('861.776.720-00')
+  cy.get('#position').type('funcionario')
+  cy.get('#dob').invoke('removeAttr', 'type').type('2022-12-01')
+  cy.get('.new-employee-button').click()
 })
+
 describe('home page', () => {
   it('passes', () => {
     cy.exec('python manage.py migrate')
@@ -43,24 +61,5 @@ describe('home page', () => {
       return false;
       });
 
-      // cy.get('#employee > a').click()
-      // cy.get('#email').type('eceel-Tec@eceeltec.com')
-      // cy.get('#password').type('obGWjpaTayKJWpBiFSMm')
-      // cy.get('button').click()
-
-      // cy.get('#password').type('obGWjpaTayKJWpBiFSMm')
-      // cy.get('#new_password').type('obGWjpaTayKJWpBiFSMm')
-      // cy.get('.form-card > form > button').click()
-      // cy.get('.employees > a').click()
-      // cy.get('.new-employee-button').click()
-      // cy.get('#username').type('Gabriel Albuquerque')
-      // cy.get('#phone').type('81900028922')
-      // cy.get('#email').type('gael@gmail.com')
-      // cy.get('#password').type('GatoLindo')
-      // cy.get('#cep').type('31980-230')
-      // cy.get('#identity_number').type('861.776.720-00')
-      // cy.get('#position').type('funcionario')
-      // cy.get('#dob').click()
-      // cy.get('#dob').type('11')
           })
 })
