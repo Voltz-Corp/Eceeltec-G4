@@ -16,7 +16,7 @@
     "url": "https://github.com/Voltz-Corp/Eceeltec-G4/issues"
   },
   "homepage": "https://github.com/Voltz-Corp/Eceeltec-G4#readme",
-  "dependencies": {
+  "devDependencies": {
     "cypress": "^13.8.1"
   }
 }
