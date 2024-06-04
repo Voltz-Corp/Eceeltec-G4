@@ -79,6 +79,13 @@
                 <div class="scheduleDateContainer">
                     <label for="scheduled_date">Data para receber o produto: </label>
                     <input type="date" name="scheduled_date" value="{{ order_request.scheduled_date }}">
+                    
+                    {% if error %}
+                    <span>
+                        <i data-lucide="octagon-alert"></i>
+                        {{ error.message }}
+                    </span>
+                    {% endif %}
                 </div>
                 {% endif %}
             {% endif %}

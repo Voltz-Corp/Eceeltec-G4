@@ -13,4 +13,5 @@ urlpatterns = [
     path('editar_status/<int:id>', views.UpdateStatus.as_view(), name="update_status"),
     path('avaliar/<int:id>/', views.RateService.as_view(), name="rate_service"),
     path('reabrir_serviço/<int:id>/', views.ReopenService.as_view(), name="reopen_service"),
+    path('apagar_serviço/<int:id>/', views.DeleteService.as_view(), name="delete_service"),
 ]
