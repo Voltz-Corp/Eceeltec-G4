@@ -9,14 +9,6 @@
 <section class="modalOverlay">
     <div class="reopenContent">
 
-        {% comment %} {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li class="toast {{ message.tags }}">{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %} {% endcomment %}
-
         <a href="{% url 'client:view_orders' %}">
             <p class="closebtn">
                 <i data-lucide="x"></i>

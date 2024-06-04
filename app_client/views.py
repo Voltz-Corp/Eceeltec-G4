@@ -299,3 +299,22 @@ class ReopenService(View):
             
 
         return redirect('client:view_orders')
+
+class DeleteService(View):
+    def get(self, request, id):
+        order = OrderRequest.objects.filter(id=id).first()
+        orders_listing = OrderRequest.objects.filter(userClient_id=request.user.id)
+        ctx = {
+            "order": order,
+            "orders": orders_listing
+        }
+
+        return render(request, 'RequestOrder/delete-service.html', ctx) 
+
+    def post(self, request, id):
+
+        order = OrderRequest.objects.filter(id=id).first()
+
+        order.delete()
+        
+        return redirect('client:view_orders')

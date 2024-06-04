@@ -104,9 +104,14 @@
                             </td>
                         {% endif %}
                     {% endif %}
-                    <td>
-                        <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>
-                    </td>
+                    
+                    {% if order.closedAt or order.status == 'CANELADO'%}
+                        <td>
+                            <a href="{% url 'client:delete_service' order.id %}">
+                                <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>
+                            </a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>
