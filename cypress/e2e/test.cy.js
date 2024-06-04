@@ -46,6 +46,16 @@ Cypress.Commands.add('CreateEmployee', () => {
   cy.get('.new-employee-button').click()
 })
 
+Cypress.Commands.add('CreateSolicitation', () => {
+  cy.CreateClient()
+  cy.get('.new-request').click()
+  cy.get(':nth-child(2) > :nth-child(1) > input').type('Ventilador')
+  cy.get(':nth-child(3) > :nth-child(1) > input').type('Mondial')
+  cy.get(':nth-child(3) > :nth-child(2) > input').type('VSP40C')
+  cy.get('#description').type('Está com cheiro de queimado')
+  cy.get('#submit_button').click()
+})
+
 describe('home page', () => {
   it('passes', () => {
     cy.exec('python manage.py migrate')
