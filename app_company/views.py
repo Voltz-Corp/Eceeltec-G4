@@ -331,12 +331,14 @@ class OrderRequestDetailView(View):
 @method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class ServiceOrderDetailView(View):
     def get(self, request, pk):
+        previous_url = request.META.get('HTTP_REFERER', '/')
         employees = Users.objects.filter(role='F')
         all_orders = OrderRequest.objects.all()
 
         ctx = {
             "all_orders": all_orders,
             "employees": employees,
+            "previous_url": previous_url 
         }
 
         try:
