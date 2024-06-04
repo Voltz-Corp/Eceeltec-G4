@@ -1,5 +1,28 @@
+:root {
+  --red-100: #fee2e2;
+  --red-600: #DC2626;
+  --red-700: #b91c1c;
+  --red-900: #7f1d1d;
+  --green-100: #dcfce7;
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --green-900: #14532d;
+  --white: #f7f7f7;
+  --gray-50: #f9fafb;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --blue-500: #155ec8;
+  --blue-200: #bfdbfe;
+  --yellow-700: #a16207;
+  --yellow-100: #fef9c3;
+}
+
 .modal {
-  display: block;
   position: fixed;
   z-index: 999;
   left: 0;
@@ -8,112 +31,210 @@
   height: 100%;
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
-  text-align: center;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: var(--white);
   display: flex;
   flex-direction: column;
   margin: 10% auto 15% auto;
-  padding: 25px 20px;
+  padding: 24px 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 800px;
   height: fit-content;
   position: relative;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  text-align: center;
   justify-content: center;
 }
 
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+  color: var(--gray-500);
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 8px;
+  right: 8px;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: var(--gray-800);
   text-decoration: none;
   cursor: pointer;
 }
 
-.modal h1 {
-  margin-right: 20px;
-}
 
-#head {
+.modal .modal-content .product {
   display: flex;
-  text-align: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  margin-top: 24px;
 }
 
-.modal span {
-  padding: 5px;
-  border-radius: 8px;
+.modal .modal-content .product .productInfo {
+  background-color: #fff;
+  padding: 16px 12px 8px;
+  border: 4px;
+  width: 100%;
 }
 
-.modal h1 {
+.modal .modal-content .product .productInfo .attention {
+  color: var(--red-700);
+}
+
+.modal .modal-content .product p {
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 24px;
+  text-align: justify;
+}
+
+.modal .modal-content .product p span {
+  font-weight: 500;
   color: var(--gray-500);
 }
 
-.modal h1 span {
-  color: var(--gray-800);
+.status {
+  padding: 8px 12px;
+  border-radius: 999999999px;
   font-weight: 700;
 }
 
-#headiscription {
-  margin-top: 20px;
+.price {
   display: flex;
-  text-align: center;
+  align-items: center;
+  gap: 16px;
+
+  width: 100%;
+  height: fit-content;
+  padding: 8px;
+  background-color: #fff;
+}
+
+.price div {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  
+  background-color: var(--green-100);
+  color: var(--green-600);
+}
+
+.price span {
+  color: var(--green-900);
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .waitingForm {
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
-.waitingForm h1, h2, h3, p {
-  margin-top: 10px;
+.waitingForm > p {
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 16px;
 }
 
-.waitingForm form {
-  margin-top: 10px;
+
+.waitingForm label {
+  font-weight: 500;
+}
+
+.waitingForm .options {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
   align-items: center;
+  gap: 16px;
 }
 
-.waitingForm form #yes, #no {
-  margin-right: 10px;
-}
-
-.waitingForm div {
+.waitingForm .radioOption {
+  padding: 8px;
+  background-color: white;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.waitingForm .radioOption div {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
 }
 
-#no {
-  margin-left: 10px;
+.waitingForm .yes div {
+  background-color: var(--green-100);
+  color: var(--green-600);
 }
 
-#confirm {
-  width: min-content;
-  border: none;
-  padding: 5px;
-  border-radius: 6px;
+.waitingForm .yes label {
+  color: var(--green-900);
 }
 
-#confirm:hover {
-  cursor: pointer;
+.waitingForm .no div {
+  background-color: var(--red-100);
+  color: var(--red-600);
 }
+
+.waitingForm .no label {
+  color: var(--red-900);
+}
+
+.waitingForm button {
+  float: right;
+  margin-top: 32px;
+  padding: 8px 12px;
+  background-color: var(--green-600);
+  border-radius: 4px;
+  color: var(--white);
+  font-weight: 600;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: none;
+  margin: 0;
+
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid var(--gray-300);
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  transform: scale(0);
+  box-shadow: inset 1em 1em var(--green-500);
+  transition: 120ms transform ease-in-out;
+}
+
+.yes input[type="radio"]:first-child::before {
+  box-shadow: inset 1em 1em var(--green-500);
+}
+
+.no input[type="radio"]:last-child::before {
+  box-shadow: inset 1em 1em var(--red-600);
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
