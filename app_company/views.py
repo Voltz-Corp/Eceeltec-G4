@@ -1,4 +1,6 @@
 import json
+from datetime import datetime
+
 from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -376,6 +378,10 @@ class ServiceOrderDetailView(View):
 
         service_order.save()
         messages.success(request, "Status atualizado.")
+
+        if service_order.status in ['CONSERTO_FINALIZADO']:
+            service_order.closedAt = datetime.now()
+            service_order.save()
 
         if assume_order and service_order.status in ['ACEITO', 'EM_REPARO', 'AGUARDANDO_PECAS']:
             service_order.employee = user

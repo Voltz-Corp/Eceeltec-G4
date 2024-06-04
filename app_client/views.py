@@ -1,4 +1,6 @@
 import re
+from datetime import datetime
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
@@ -264,4 +266,32 @@ class RateService(View):
         rating = ServiceRating(attendance = attendance, time = time, service = service, notes = notes, os_id = id)
         rating.save()
     
+        return redirect('client:view_orders')
+
+class ReopenService(View):
+
+    def get(self, request, id):
+        order = OrderRequest.objects.filter(id=id).first()
+        orders_listing = OrderRequest.objects.filter(userClient_id=request.user.id)
+        ctx = {
+            "order": order,
+            "orders": orders_listing
+        }
+
+        return render(request, 'RequestOrder/reopen-service.html', ctx)
+    
+    def post(self, request, id):
+
+        order = OrderRequest.objects.filter(id=id).first()
+        status_choices = OrderRequest.STATUS_CHOICES
+
+        if not order.isReopen:
+            order.status = status_choices[7][0]
+            order.reopen_at = datetime.now()
+            order.isReopen = True
+            order.save()
+        # else:
+            # messages.error(request, "Essa solicitação já foi reaberta")
+            # return render(request, 'RequestOrder/reopen-service.html')
+
         return redirect('client:view_orders')
