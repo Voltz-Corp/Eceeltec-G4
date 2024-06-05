@@ -6,21 +6,21 @@ Cypress.Commands.add('CreateClient', ()=> {
     cy.get('#client > a').click()
     cy.get('a').click()
     cy.get('#toggleAddress').click()
-    cy.get('#name').type('Gabriel Albuquerque')
-    cy.get('#phone').type('81900028922')
-    cy.get('#email').type('gael@gmail.com')
+    cy.get('#name').type('Luan Kato')
+    cy.get('#phone').type('81991899586')
+    cy.get('#email').type('kato@gmail.com')
     cy.get('#password').type('GatoLindo')
     cy.get('#cep').type('31980-230')
     cy.get('#number').type('356')
     cy.get('button').click()
-    cy.get('#email').type('gael@gmail.com')
+    cy.get('#email').type('kato@gmail.com')
     cy.get('#password').type('GatoLindo')
     cy.get('button').click()
   })
 
 Cypress.Commands.add('GoToClient', () => {
     cy.get('#client > a').click()
-    cy.get('#email').type('gael@gmail.com')
+    cy.get('#email').type('kato@gmail.com')
     cy.get('#password').type('GatoLindo')
     cy.get('button').click()
 })
@@ -60,9 +60,9 @@ Cypress.Commands.add('CreateSolicitation', () => {
   cy.get('#submit_button').click()
 })
 
-  describe('home page', () => {
-    it('Definindo data com sucesso', () => {
-        cy.exec('python manage.py migrate')
+describe('HomePage', () => {
+  it('Transformação para OS com sucesso pelo administrador', () => {
+    cy.exec('python manage.py migrate')
         cy.DeleteAndCreateAdm()
         cy.visit('/')
         cy.on("uncaught:exception", (e, runnable) => {
@@ -78,44 +78,14 @@ Cypress.Commands.add('CreateSolicitation', () => {
         cy.CreateAdmin()
         cy.get(':nth-child(1) > a').click()
         cy.get(':nth-child(6) > a').click()
-        cy.get('.scheduleDateContainer > input').invoke('removeAttr', 'type').type('2024-06-18')
-        cy.get('.content > form > button').click()
-        cy.get('.logout > button').click()
-        cy.GoToClient()
-        cy.get('tbody > tr > :nth-child(3)').invoke('text').should('have.string', "18 de Junho de 2024")
-        cy.get('.AGENDADO').invoke('text').should('have.string', 'Agendado')
+        cy.get('#status').select('Aceito')
 
-     })
-
-    it('Definindo orçamento com sucesso', () => {
-        cy.exec('python manage.py migrate')
-        cy.DeleteAndCreateAdm()
-        cy.visit('/')
-        cy.on("uncaught:exception", (e, runnable) => {
-            console.log("error", e);
-            console.log("runnable", runnable);
-            console.log("error", e.message);
-            return false;
-            });
-
-        cy.CreateSolicitation()
-        cy.visit('/')
-        cy.ClientLogout()
-        cy.CreateAdmin()
-        cy.get(':nth-child(1) > a').click()
-        cy.get(':nth-child(6) > a').click()
-        cy.get('.scheduleDateContainer > input').invoke('removeAttr', 'type').type('2024-06-18')
-        cy.get('.content > form > button').click()
-        cy.get('#status').select('Aguardando orçamento')
-        cy.get('.content > form > button').click()
-        cy.get('.budgetContainer > input').type('50')
-        cy.get('.content > form > button').click()
-        cy.get('.logout > button').click()
-        cy.GoToClient()
-        cy.get(':nth-child(4) > a').click()
-        cy.get('.price > span').invoke('text').should('have.string', "50,00")
-        cy.get('.waitingForm > p').invoke('text').should('have.string', "Você deseja prosseguir com o serviço?")
-
-     })
+        
   })
-  
+  it('Transformação para OS com sucesso pelo funcionário', () => {
+    
+  })
+  it('Campos Vazios', () => {
+    
+  })
+})
