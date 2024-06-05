@@ -35,9 +35,9 @@ Cypress.Commands.add('CreateEmployee', () => {
   cy.get('.form-card > form > button').click()
   cy.get('.employees > a').click()
   cy.get('.new-employee-button').click()
-  cy.get('#username').type('Andre Castro')
+  cy.get('#username').type('Robson')
   cy.get('#phone').type('81900028922')
-  cy.get('#email').type('Andre@gmail.com')
+  cy.get('#email').type('robson@gmail.com')
   cy.get('#password').type('ViraPag')
   cy.get('#cep').type('31980-230')
   cy.get('#identity_number').type('861.776.720-00')
@@ -54,6 +54,15 @@ Cypress.Commands.add('CreateSolicitation', () => {
   cy.get(':nth-child(3) > :nth-child(2) > input').type('VSP40C')
   cy.get('#description').type('Está com cheiro de queimado')
   cy.get('#submit_button').click()
+})
+
+Cypress.Commands.add('createOrder', () => {
+  cy.changeToAdmin()
+  cy.get('ul > :nth-child(1) > a').click()
+  cy.get('ul > :nth-child(1) > a').click()
+  cy.get('#detailed_problem_description').type('Tá quebrado')
+  cy.get('#necessary_parts').type("Por enquanto, nenhuma")
+  cy.get('.works > button')
 })
 
 describe('home page', () => {
