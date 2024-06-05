@@ -117,5 +117,27 @@ Cypress.Commands.add('CreateSolicitation', () => {
         cy.get('.waitingForm > p').invoke('text').should('have.string', "Você deseja prosseguir com o serviço?")
 
      })
-  })
   
+      it('inserindo data inválida', () => {
+        cy.exec('python manage.py migrate')
+        cy.DeleteAndCreateAdm()
+        cy.visit('/')
+        cy.on("uncaught:exception", (e, runnable) => {
+            console.log("error", e);
+            console.log("runnable", runnable);
+            console.log("error", e.message);
+            return false;
+            });
+
+        cy.CreateSolicitation()
+        cy.visit('/')
+        cy.ClientLogout()
+        cy.CreateAdmin()
+        cy.get(':nth-child(1) > a').click()
+        cy.get(':nth-child(6) > a').click()
+        cy.get('.scheduleDateContainer > input').invoke('removeAttr', 'type').type('2020-01-12')
+        cy.get('.content > form > button').click()
+        cy.get('span').invoke('text').should('have.string','A data precisa estar entre 2024-06-05 e 2024-07-05!')
+       
+    })
+    })
