@@ -25,7 +25,7 @@
         <form action="{% url 'client:delete_service' order.id %}" method="POST">
             {% csrf_token %}
             <div class="actions">
-                <button type="button">Cancelar</button>
+                <a href="{% url 'client:view_orders'%}" class="cancel" role="button">Cancelar</a>
                 <button type="submit">Confirmar</button>
             </div>
         </form>
