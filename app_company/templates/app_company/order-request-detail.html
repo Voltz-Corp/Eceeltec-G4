@@ -58,7 +58,7 @@
                 <option value="AGUARDANDO_ORCAMENTO" {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}selected{% endif %}>
                     Aguardando orçamento
                 </option>
-                {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}
+                {% if order_request.status == "AGUARDANDO_CONFIRMACAO" %}
                 <option value="AGUARDANDO_CONFIRMACAO"  {% if order_request.status == "AGUARDANDO_CONFIRMACAO" %}selected{% endif %}>
                     Aguardando confirmação
                 </option>
@@ -68,14 +68,14 @@
                 </option>
             </select>
             {% endif %}
-            {% if order_request.status == "AGUARDANDO_ORCAMENTO" or order_request.status == "AGUARDANDO_CONFIRMACAO" %}
+            {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}
                 <div class="budgetContainer">
                     <label for="budget">Valor do orçamento: </label>
                     <input type="{% if not order_request.budget %}number{% else %}text{% endif %}" name="budget" placeholder="Insira o valor do orçamento" value="{{ order_request.budget }}">
                 </div>
             {% endif %}
             {% if not order_request.scheduled_date %}
-                {% if order_request.status == "AGENDADO" %}
+                {% if order_request.status == "EM_ANALISE" %}
                 <div class="scheduleDateContainer">
                     <label for="scheduled_date">Data para receber o produto: </label>
                     <input type="date" name="scheduled_date" value="{{ order_request.scheduled_date }}">
