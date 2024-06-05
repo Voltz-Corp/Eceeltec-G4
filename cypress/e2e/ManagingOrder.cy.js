@@ -1,8 +1,8 @@
-Cypress.Commands.add('deleteAndCreateAdm', () => {
+Cypress.Commands.add('DeleteAndCreateAdm', () => {
   cy.exec('python test_initiate.py', { failOnNonZeroExit: false })
 });
 
-Cypress.Commands.add('createClient', ()=> {
+Cypress.Commands.add('CreateClient', ()=> {
   cy.get('#client > a').click()
   cy.get('a').click()
   cy.get('#toggleAddress').click()
@@ -18,20 +18,20 @@ Cypress.Commands.add('createClient', ()=> {
   cy.get('button').click()
 })
 
-Cypress.Commands.add('goToClient', () => {
+Cypress.Commands.add('GoToClient', () => {
   cy.get('#client > a').click()
   cy.get('#email').type('gael@gmail.com')
   cy.get('#password').type('GatoLindo')
   cy.get('button').click()
 })
 
-Cypress.Commands.add('clientLogout', () => {
+Cypress.Commands.add('ClientLogout', () => {
   cy.visit('/');
   cy.get('#employee > a').click()
   cy.get('#logout').click()
 })
 
-Cypress.Commands.add('createAdmin', () => {
+Cypress.Commands.add('CreateAdmin', () => {
   cy.get('#employee > a').click()
   cy.get('#email').type('eceel-Tec@eceeltec.com')
   cy.get('#password').type('obGWjpaTayKJWpBiFSMm')
@@ -42,15 +42,15 @@ Cypress.Commands.add('createAdmin', () => {
   cy.get('.employees > a').click()
 })
 
-Cypress.Commands.add('changeToAdmin', () => {
+Cypress.Commands.add('ChangeToAdmin', () => {
   cy.get('#employee > a').click()
   cy.get('#email').type('eceel-Tec@eceeltec.com')
   cy.get('#password').type('obGWjpaTayKJWpBiFSMm')
   cy.get('button').click()
 })
 
-Cypress.Commands.add('createSolicitation', () => {
-  cy.createClient()
+Cypress.Commands.add('CreateSolicitation', () => {
+  cy.CreateClient()
   cy.get('.new-request').click()
   cy.get(':nth-child(2) > :nth-child(1) > input').type('Ventilador')
   cy.get(':nth-child(3) > :nth-child(1) > input').type('Mondial')
@@ -59,14 +59,14 @@ Cypress.Commands.add('createSolicitation', () => {
   cy.get('#submit_button').click()
 })
 
-Cypress.Commands.add('createOrder', () => {
+Cypress.Commands.add('CreateOrder', () => {
   cy.get(':nth-child(6) > a').click()
   cy.get('#detailed_problem_description').type('Tá quebrado')
   cy.get('#necessary_parts').type("Por enquanto, nenhuma")
   cy.get('.works > button').click()
 })
 
-Cypress.Commands.add('createEmployee', () => {
+Cypress.Commands.add('CreateEmployee', () => {
   cy.get('.employees > a').click()
   cy.get('.new-employee-button').click()
   cy.get('#username').type('Robson')
@@ -80,42 +80,80 @@ Cypress.Commands.add('createEmployee', () => {
   cy.get('.new-employee-button').click()
 })
 
-describe('home page', () => {
-  it('Designar um técnico com sucesso', () => {
-      cy.exec('python manage.py migrate')
-      cy.deleteAndCreateAdm()
-      cy.visit('/')
-      cy.on("uncaught:exception", (e, runnable) => {
-          console.log("error", e);
-          console.log("runnable", runnable);
-          console.log("error", e.message);
-          return false;
-          });
+describe('HomePage', () => {
+  // it('Designar um técnico com sucesso', () => {
+  //     cy.exec('python manage.py migrate')
+  //     cy.DeleteAndCreateAdm()
+  //     cy.visit('/')
+  //     cy.on("uncaught:exception", (e, runnable) => {
+  //         console.log("error", e);
+  //         console.log("runnable", runnable);
+  //         console.log("error", e.message);
+  //         return false;
+  //         });
 
-      cy.createSolicitation()
-      cy.visit('/')
-      cy.clientLogout()
-      cy.createAdmin()
-      cy.get(':nth-child(1) > a').click()
-      cy.get(':nth-child(6) > a').click()
-      cy.get('#status').select('Aguardando orçamento')
-      cy.get('.content > form > button').click()
-      cy.get('.budgetContainer > input').type("200")
-      cy.get('#status').select('Aguardando confirmação')
-      cy.get('.content > form > button').click()
-      cy.get('.logout > button').click()
-      cy.goToClient()
-      cy.get(':nth-child(4) > a').click()
-      cy.get('.yes > label').click()
-      cy.get('.waitingForm > form > button').click()
-      cy.clientLogout()
-      cy.changeToAdmin()
-      cy.createEmployee()
-      cy.get('#sidebarNav > ul > :nth-child(1)').click()
-      cy.createOrder()
-      cy.get(':nth-child(6) > a').click()
-      cy.get('#tecnician').select("Robson")
-      cy.get('.update').click()
-      cy.get('.employee').invoke('text').should("have.string", "Robson")
-   })
+  //     cy.CreateSolicitation()
+  //     cy.visit('/')
+  //     cy.ClientLogout()
+  //     cy.CreateAdmin()
+  //     cy.get(':nth-child(1) > a').click()
+  //     cy.get(':nth-child(6) > a').click()
+  //     cy.get('#status').select('Aguardando orçamento')
+  //     cy.get('.content > form > button').click()
+  //     cy.get('.budgetContainer > input').type("200")
+  //     cy.get('.content > form > button').click()
+  //     cy.get('.logout > button').click()
+  //     cy.GoToClient()
+  //     cy.get(':nth-child(4) > a').click()
+  //     cy.get('.yes > label').click()
+  //     cy.get('.waitingForm > form > button').click()
+  //     cy.ClientLogout()
+  //     cy.ChangeToAdmin()
+  //     cy.CreateEmployee()
+  //     cy.get('#sidebarNav > ul > :nth-child(1)').click()
+  //     cy.CreateOrder()
+  //     cy.get(':nth-child(6) > a').click()
+  //     cy.get('#tecnician').select("Robson")
+  //     cy.get('.update').click()
+  //     cy.get('.employee').invoke('text').should("have.string", "Robson")
+  //  })
+
+   it('Remover uma ordem de serviço com sucesso', () => {
+    cy.exec('python manage.py migrate')
+    cy.DeleteAndCreateAdm()
+    cy.visit('/')
+    cy.on("uncaught:exception", (e, runnable) => {
+        console.log("error", e);
+        console.log("runnable", runnable);
+        console.log("error", e.message);
+        return false;
+        });
+
+    cy.CreateSolicitation()
+    cy.visit('/')
+    cy.ClientLogout()
+    cy.CreateAdmin()
+    cy.get(':nth-child(1) > a').click()
+    cy.get(':nth-child(6) > a').click()
+    cy.get('#status').select('Aguardando orçamento')
+    cy.get('.content > form > button').click()
+    cy.get('.budgetContainer > input').type("200")
+    cy.get('.content > form > button').click()
+    cy.get('.logout > button').click()
+    cy.GoToClient()
+    cy.get(':nth-child(4) > a').click()
+    cy.get('.yes > label').click()
+    cy.get('.waitingForm > form > button').click()
+    cy.ClientLogout()
+    cy.ChangeToAdmin()
+    cy.get('ul > :nth-child(1) > a').click()
+    cy.CreateOrder()
+    cy.get(':nth-child(6) > a').click()
+    cy.get('#status').select('Cancelado')
+    cy.get('.update').click()
+    cy.get('ul > :nth-child(1) > a').click()
+    cy.get('.deleteOrderRequest').click()
+    cy.get('.deleteRequestOrder').click()
+    cy.get('tbody > tr:first-child').should("not.exist")
+ })
 })

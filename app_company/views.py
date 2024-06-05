@@ -455,3 +455,9 @@ class YourServicesView(View):
         }
 
         return render(request, 'app_company/your-services.html', ctx)
+
+class DeleteServiceOrder(View):
+    def post(self, request, pk):
+        order = OrderRequest.objects.get(id=pk)
+        order.delete()
+        return redirect('company:order_request_list')

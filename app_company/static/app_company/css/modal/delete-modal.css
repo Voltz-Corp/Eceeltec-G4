@@ -1,0 +1,92 @@
+:root {
+  --red-100: #fee2e2;
+  --red-600: #DC2626;
+  --red-700: #b91c1c;
+  --green-500: #22c55e;
+  --green-700: #108519;
+  --white: #f7f7f7;
+  --gray-50: #f9fafb;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --blue-500: #155ec8;
+  --blue-200: #bfdbfe;
+  --yellow-700: #a16207;
+  --yellow-100: #fef9c3;
+}
+
+#deleteModal {
+  display: none; 
+  position: fixed; 
+  z-index: 10000; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.4);
+}
+
+#deleteModal button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+
+  background-color: #fefefe;
+  margin: 15% auto; 
+  padding: 20px;
+  width: fit-content; 
+  height: fit-content;
+  border-radius: 4px;
+}
+
+.closeModalX {
+  align-self: flex-end;
+  background-color: transparent;
+  color: var(--gray-800);
+}
+
+.modal-content strong {
+  font-size: 20px;
+  color: var(--gray-700);
+}
+
+.modal-content p {
+  font-size: 18px;
+  color: var(--gray-500);
+  margin: 16px 0 28px;
+}
+
+.modal-content form {
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  gap: 16px;
+}
+
+.modal-content form button {
+  padding: 8px 12px;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.cancelBtn {
+  background-color: var(--gray-200);
+  color: var(--gray-700);
+}
+
+.deleteRequestOrder {
+  background-color: var(--red-100);
+  color: var(--red-700);
+}

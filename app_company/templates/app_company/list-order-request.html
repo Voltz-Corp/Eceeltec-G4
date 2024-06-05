@@ -4,11 +4,30 @@
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'app_company/css/list-order-request.css' %}">
     <link rel="stylesheet" href="{% static 'app_company/css/modal/filter-order-modal.css' %}">
-
+    <link rel="stylesheet" href="{% static 'app_company/css/modal/delete-modal.css' %}">
     <title>Gaveta | Eceel-tec</title>
 {% endblock %}
 
 {% block 'body' %}
+<section id="deleteModal" class="modal">
+    <div class="modal-content">
+        <button type="button" class="closeModalX">
+            <i data-lucide="x"></i>
+        </button>
+        <strong>Confirmar deleção</strong>
+        <p>Você tem certeza que deseja apagar essa solicitação/OS?</p>
+        <form id="confirmDeleteForm" method="POST" action="">
+            {% csrf_token %}
+            <button type="button" class="cancelBtn">
+                Cancelar
+            </button>
+            <button type="submit" class="deleteRequestOrder">
+                Confirmar
+            </button>
+        </form>
+    </div>
+</section>
+
 <div class="content">
     <input type="hidden" value="{{ all_orders_formatted }}" id="allOrders">
     <section class="listOrderRequestCompanyContainer">
@@ -109,9 +128,11 @@
                                 <i data-lucide="eye" width="24" height="24" color="#155ec8"></i>
                             </a>
                         </td>
-                        {% if order.status == 'CANCELADO' or order.status == 'RECUSADO' %}
+                        {% if order.status == 'CANCELADA' or order.status == 'RECUSADO' or order.status == 'CANCELADO' %}
                             <td>
-                                <i data-lucide="trash" width="24" height="24" color="#DC2626"></i>
+                                <button type="button" class="deleteOrderRequest" data-url="{% url 'company:delete_service_order' order.id %}">
+                                    <i data-lucide="trash" width="24" height="24" color="#DC2626"></i>
+                                </button>
                             </td>
                         {% endif %}
                     </tr>
@@ -125,4 +146,5 @@
 {% endblock %}
 
 <script src="{% static 'app_company/js/filter-order.js' %}"></script>
+<script src="{% static 'app_company/js/delete-order-request.js' %}"></script>
 {% endblock %}
