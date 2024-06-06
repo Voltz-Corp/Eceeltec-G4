@@ -182,14 +182,12 @@ tbody td:first-child div {
 }
 
 .view button, .delete button {
-  padding: 8px 16px;
+  padding: 4px 8px;
   border: none;
   background-color: var(--blue-500);
   color: var(--white);
   font-weight: 600;
   border-radius: 4px;
-  float: right;
-  margin-top: 32px;
   transition: all .3s;
 }
 
