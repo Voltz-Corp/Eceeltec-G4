@@ -5,7 +5,7 @@ Cypress.Commands.add('DeleteAndCreateAdm', () => {
   cy.exec('python test_initiate.py', { failOnNonZeroExit: false })
 });
 
-Cypress.Commands.add('CreateClient', (name = "Gabriel Albuquerque", email = "teste@teste.com") => {
+Cypress.Commands.add('CreateClient', (name = "Gustavo Mourato", email = "gustavo.teste@gmail.com") => {
   cy.get('#client > a').click()
   cy.get('a').click()
   cy.get('#toggleAddress').click()
@@ -22,7 +22,7 @@ Cypress.Commands.add('CreateClient', (name = "Gabriel Albuquerque", email = "tes
 })
 
 Cypress.Commands.add('CreateOrder', () => {
-  cy.get(':nth-child(6) > a').click()
+  cy.get(':nth-child(1) > :nth-child(6) > a').click()
   cy.get('#detailed_problem_description').type('Cabos corroídos')
   cy.get('#necessary_parts').type("5 cabos")
   cy.get('.works > button').click()
@@ -56,7 +56,7 @@ Cypress.Commands.add('ClientLogout', () => {
   cy.get('#logout').click()
 })
 
-Cypress.Commands.add('GoToClient', (email = "teste@teste.com", password = "GatoLindo") => {
+Cypress.Commands.add('GoToClient', (email = "gustavo.test@gmail.com", password = "GatoLindo") => {
   cy.get('#client > a').click()
   cy.get('#email').type(email)
   cy.get('#password').type(password)
