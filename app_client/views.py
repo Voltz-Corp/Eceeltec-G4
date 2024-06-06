@@ -137,36 +137,6 @@ class ViewOrder(View):
 
         return redirect('client:view_orders')
 
-class UpdateStatus(View):
-    def post(self, request, id):
-        order = OrderRequest.objects.filter(id=id).first()
-
-        user = request.user
-
-        status = request.POST.get('status')
-
-        order.status = status
-        order.save()
-
-        status_display = order.get_status_display()
-
-        ctx = {
-            'name': user.first_name,
-            'type': order.productType,
-            'model': order.productModel,
-            'status': status_display,
-            'statusCode': status,
-        }
-
-        html_content = render_to_string('email/emailtemplate.html', ctx)
-        text_content = strip_tags(html_content)
-
-        email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
-        email.attach_alternative(html_content, 'text/html')
-        email.send()
-
-        return redirect('client:view_orders')
-
 class RequestOrderView(View):
     def get(self,request):
 

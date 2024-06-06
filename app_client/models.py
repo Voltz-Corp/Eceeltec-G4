@@ -35,8 +35,7 @@ class OrderRequest(models.Model):
     reopen_at = models.DateField(blank=True, null=True)
     isReopen = models.BooleanField(default=False)
 
-    def __str__(self) -> str:
-        return self.name
+    
 
     def reopen_time(self):
         actual_time = datetime.now().date()
