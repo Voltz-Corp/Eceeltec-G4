@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User,AbstractUser
 from app_company.models import Users
-
 from datetime import datetime, timedelta
+
 class OrderRequest(models.Model):
     STATUS_CHOICES = [
         ('EM_ANALISE', 'EM ANÁLISE'),
@@ -39,7 +39,7 @@ class OrderRequest(models.Model):
 
     def reopen_time(self):
         actual_time = datetime.now().date()
-        days_difference = (actual_time - self.closedAt).days
+        days_difference = (actual_time - self.closedAt.date()).days
         if days_difference > 30:
             self.isReopen = True
     
