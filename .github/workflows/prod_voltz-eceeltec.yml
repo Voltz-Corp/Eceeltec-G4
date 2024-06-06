@@ -43,7 +43,6 @@ jobs:
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       - name: Cleaning testing files
         run: |
-          cd Eceeltec-G4/
           rm .env
           rm cypress.config.js
           rm package-lock.json
