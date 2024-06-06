@@ -23,9 +23,8 @@ function handleCloseFilterOrderModal() {
 }
 
 function formatStatusString(status) {
-  const lowerCasedStatus = status.toLowerCase();
 
-  const statusWithoutUnderline = lowerCasedStatus.replace(/_/g, ' ');
+  const statusWithoutUnderline = status.replace(/_/g, ' ');
 
   const statusCapitalized = statusWithoutUnderline.replace(/^\w/, function(match) {
     return match.toUpperCase();

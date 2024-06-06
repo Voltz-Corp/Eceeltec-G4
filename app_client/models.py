@@ -5,17 +5,17 @@ from app_company.models import Users
 from datetime import datetime, timedelta
 class OrderRequest(models.Model):
     STATUS_CHOICES = [
-        ('EM_ANALISE', 'Em análise'),
-        ('AGENDADO', 'Agendado'),
-        ('AGUARDANDO_ORCAMENTO', 'Aguardando orçamento'),
-        ('AGUARDANDO_CONFIRMACAO', 'Aguardando confirmação'),
-        ('ACEITO', 'Aceito'),
-        ('RECUSADO', 'Recusado'),
-        ('CANCELADA', 'Cancelada'),
-        ('EM_REPARO', 'Em reparo'),
-        ('AGUARDANDO_PECAS', 'Aguardando peças'),
-        ('CONSERTO_FINALIZADO', 'Conserto finalizado'),
-        ('CANCELADO', 'Cancelado'),
+        ('EM_ANALISE', 'EM ANÁLISE'),
+        ('AGENDADO', 'AGENDADO'),
+        ('AGUARDANDO_ORCAMENTO', 'ORÇAMENTO PENDENTE'),
+        ('AGUARDANDO_CONFIRMACAO', 'AGUARDANDO CONFIRMAÇÃO'),
+        ('ACEITO', 'ACEITO'),
+        ('RECUSADO', 'RECUSADO'),
+        ('CANCELADA', 'CANCELADA'),
+        ('EM_REPARO', 'EM REPARO'),
+        ('AGUARDANDO_PECAS', 'AGUARDANDO PEÇAS'),
+        ('CONSERTO_FINALIZADO', 'CONSERTO FINALIZADO'),
+        ('CANCELADO', 'CANCELDO'),
     ]
     productType = models.CharField(max_length=75)
     productbrand = models.CharField(max_length=75)
