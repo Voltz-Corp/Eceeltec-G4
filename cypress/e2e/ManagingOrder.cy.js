@@ -9,7 +9,7 @@ describe('HomePage', () => {
           console.log("error", e.message);
           return false;
           });
-
+          
       cy.CreateClient("Sophia Gallindo")
       cy.CreateSolicitation()
       cy.visit('/')

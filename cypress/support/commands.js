@@ -1,3 +1,6 @@
+/// <reference types="cypress" />
+/// <reference types="../support" />
+
 Cypress.Commands.add('DeleteAndCreateAdm', () => {
   cy.exec('python test_initiate.py', { failOnNonZeroExit: false })
 });
