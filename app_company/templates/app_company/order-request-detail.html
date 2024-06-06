@@ -72,6 +72,12 @@
                 <div class="budgetContainer">
                     <label for="budget">Valor do orçamento: </label>
                     <input type="{% if not order_request.budget %}number{% else %}text{% endif %}" name="budget" placeholder="Insira o valor do orçamento" value="{{ order_request.budget }}">
+                    {% if errors %}
+                    <span>
+                        <i data-lucide="octagon-alert"></i>
+                        {{ errors.message }}
+                    </span>
+                    {% endif %}
                 </div>
             {% endif %}
             {% if not order_request.scheduled_date %}
