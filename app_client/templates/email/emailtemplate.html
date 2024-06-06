@@ -112,8 +112,8 @@
                 <div>Leve o seu equipamento para a assistência entre os dias:<br><strong>{{date}}</strong> e <strong>{{finaldate}}</strong></div>
             {% endif %}
             {% if budget %}
-                <div>Orçamento definido: <strong id="budget">R$ {{budget}}</strong></div>
-                <a href="{% url 'company:order_request_details' order_id %}">Clique aqui para aceitar ou recusar o orçamento</a>
+                <div>Orçamento definido: <strong id="budget">R$ {{budget}},00</strong></div>
+                <a href="https://voltz-eceeltec.azurewebsites.net/cliente/visualizar/{order_id}/">Clique aqui para aceitar ou recusar o orçamento</a>
             {% endif %}
         </div>
         <p class="footer">Eceel-Tec © 2024</p>
