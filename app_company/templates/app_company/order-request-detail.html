@@ -90,15 +90,15 @@
                 {% endif %}
             {% endif %}
             {% if order_request.status != "ACEITO" %}
-            <button type="submit">Atualizar</button>
+                <button type="submit">Atualizar</button>
             {% else %}
-            <div class="works">    
-                <label for="detailed_problem_description">Descrição detalhada do problema:</label>
-                <textarea id="detailed_problem_description" name="detailed_problem_description" required></textarea>
-                <label for="necessary_parts">Partes necessárias:</label>
-                <textarea id="necessary_parts" name="necessary_parts" required></textarea>
-                <button type="submit">Gerar ordem de serviço.</button>
-        </div>
+                <div class="works">    
+                    <label for="detailed_problem_description">Descrição detalhada do problema:</label>
+                    <textarea id="detailed_problem_description" name="detailed_problem_description" required></textarea>
+                    <label for="necessary_parts">Partes necessárias:</label>
+                    <textarea id="necessary_parts" name="necessary_parts" required></textarea>
+                    <button type="submit">Gerar ordem de serviço.</button>
+                </div>
             {% endif %}
         </form>
         

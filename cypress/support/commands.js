@@ -20,20 +20,12 @@ Cypress.Commands.add('CreateClient', (name = "Gabriel Albuquerque", email = "tes
 
 Cypress.Commands.add('CreateOrder', () => {
   cy.get(':nth-child(6) > a').click()
-  cy.get('#detailed_problem_description').type('Tá quebrado')
-  cy.get('#necessary_parts').type("Por enquanto, nenhuma")
+  cy.get('#detailed_problem_description').type('Cabos corroídos')
+  cy.get('#necessary_parts').type("5 cabos")
   cy.get('.works > button').click()
 })
 
 Cypress.Commands.add('CreateEmployee', (name = "Robson", email = "robson@robson.com") => {
-  // cy.get('#employee > a').click()
-  // cy.get('#email').type('eceel-Tec@eceeltec.com')
-  // cy.get('#password').type('obGWjpaTayKJWpBiFSMm')
-  // cy.get('button').click()
-  // cy.get('#password').type('obGWjpaTayKJWpBiFSMm')
-  // cy.get('#new_password').type('obGWjpaTayKJWpBiFSMm')
-  // cy.get('.form-card > form > button').click()
-  // cy.get('.employees > a').click()
   cy.get('.new-employee-button').click()
   cy.get('#username').type(name)
   cy.get('#phone').type('81900028922')
@@ -54,7 +46,6 @@ Cypress.Commands.add('CreateSolicitation', () => {
   cy.get('#description').type('Está com cheiro de queimado')
   cy.get('#submit_button').click()
 })
-
 
 Cypress.Commands.add('ClientLogout', () => {
   cy.visit('/');

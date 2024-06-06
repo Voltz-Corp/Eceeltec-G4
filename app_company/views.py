@@ -405,7 +405,8 @@ class ServiceOrderDetailView(View):
 
         if not service_order.employee and employee:
             service_order.employee_id = employee
-
+        elif service_order.employee and employee and service_order.employee != employee:
+            service_order.employee_id = employee
 
         service_order.save()
         messages.success(request, "Status atualizado.")

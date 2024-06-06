@@ -78,29 +78,31 @@
                 </option>
             </select>
 
-            {% if not service_order.employee %}
-
-                {% if user.role == 'A' %}
-                    <div class="technicianContainer">
-                        <label for="tecnician">Designar Técnico:</label>
-                        <select name="tecnician" id="tecnician" placeholder="Escolher Técnico">
-                            <option value="" selected disabled>
-                                Escolher Técnico
-                            </option>
-                            {% for tec in employees %}
-                            <option value="{{ tec.id }}">
-                                {{ tec.first_name }}
-                            </option>
-                            {% endfor %} 
-                        </select>
-                    </div>
-
+            {% if not service_order.employee and user.role == 'F' %}
                     <label>Deseja assumir a OS?</label> 
                     <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
-                {% else %}
-                    <label>Deseja assumir a OS?</label> 
-                    <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
-                {% endif %}
+            {% else %}
+                <div class="technicianContainer">
+                    <label for="tecnician">Designar Técnico:</label>
+                    <select name="tecnician" id="tecnician" placeholder="Escolher Técnico">
+                        <option value="" selected disabled>
+                            Escolher Técnico
+                        </option>
+                        {% for tec in employees %}
+                        <option 
+                            value="{{ tec.id }}" 
+                            {% if service_order.employee and service_order.employee.first_name == tec.first_name %}
+                            selected
+                            {% endif %}
+                        >
+                            {{ tec.first_name }}
+                        </option>
+                        {% endfor %} 
+                    </select>
+                </div>
+
+                <label>Deseja assumir a OS?</label> 
+                <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
             {% endif %}
             <br>
             <button class="update" type="submit">Atualizar</button> 
