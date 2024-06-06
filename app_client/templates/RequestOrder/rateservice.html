@@ -40,6 +40,14 @@
             <label for="nine" class="rating-label">9</label>
             <input type="radio" name="attendance" class="rating-input" value="10">
             <label for="ten" class="rating-label">10</label><br>
+            {% for error in errors %}
+                    {% if error.field == 'attendance'%}
+                        <span>
+                            <i data-lucide="octagon-alert"></i>
+                            {{ error.message }}
+                        </span>
+                    {% endif %}
+            {% endfor %}
             
             <label>Serviço:</label><br>
             <input type="radio" name="service" class="rating-input" value="0">
@@ -64,6 +72,14 @@
             <label for="nine" class="rating-label">9</label>
             <input type="radio" name="service" class="rating-input" value="10">
             <label for="ten" class="rating-label">10</label><br>
+            {% for error in errors %}
+                    {% if error.field == 'service'%}
+                        <span>
+                            <i data-lucide="octagon-alert"></i>
+                            {{ error.message }}
+                        </span>
+                    {% endif %}
+            {% endfor %}
             
             <label>Tempo:</label><br>
             <input type="radio" name="time" class="rating-input" value="0">
@@ -88,9 +104,25 @@
             <label for="nine" class="rating-label">9</label>
             <input type="radio" name="time" class="rating-input" value="10">
             <label for="ten" class="rating-label">10</label><br>
+            {% for error in errors %}
+                    {% if error.field == 'time'%}
+                        <span>
+                            <i data-lucide="octagon-alert"></i>
+                            {{ error.message }}
+                        </span>
+                    {% endif %}
+            {% endfor %}
 
             <label for="">Comentários adicionais:</label><br>
             <input type="text" id="notes" name="notes"><br>
+            {% for error in errors %}
+                    {% if error.field == 'review_notes'%}
+                        <span>
+                            <i data-lucide="octagon-alert"></i>
+                            {{ error.message }}
+                        </span>
+                    {% endif %}
+            {% endfor %}
 
             <button type="submit" class="rating-submit">Avaliar</button>
         </form>
