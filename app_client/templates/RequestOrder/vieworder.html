@@ -65,7 +65,7 @@
                         </b>
 
                         <p>Algum problema?</p>
-                        <a href="{% url 'client:reopen_service' order.id %}">
+                        <a id="reopen" href="{% url 'client:reopen_service' order.id %}">
                             <p>Reabrir solicitação</p>
                         </a>
                         
@@ -100,7 +100,7 @@
                             <div>
                                 <i data-lucide="x" stroke-width="3"></i>
                             </div>
-                            <label for="no" id="labelNo">Não, suspender</label><br>
+                            <label for="no" id="labelNo">Não, cancelar</label><br>
                             <input type="radio" id="no" name="choise" value="no">
                         </div>
                     </div>
