@@ -39,7 +39,7 @@ class OrderRequest(models.Model):
 
     def reopen_time(self):
         actual_time = datetime.now().date()
-        days_difference = (actual_time - self.closedAt.date()).days
+        days_difference = (actual_time - self.closedAt).days
         if days_difference > 30:
             self.isReopen = True
     
