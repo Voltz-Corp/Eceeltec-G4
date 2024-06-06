@@ -72,6 +72,9 @@
   width: 100%;
   margin-top: 24px;
 }
+.modal .modal-content .product.ended {
+  flex-direction: column;
+}
 
 .modal .modal-content .product .productInfo {
   background-color: #fff;
@@ -238,3 +241,12 @@ input[type="radio"]:checked::before {
   transform: scale(1);
 }
 
+.finished{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.finished a{
+  text-decoration: underline;
+}

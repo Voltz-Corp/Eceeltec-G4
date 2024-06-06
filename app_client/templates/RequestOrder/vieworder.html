@@ -7,7 +7,11 @@
 
 <div id="orderModal" class="modal">
     <div class="modal-content">
+        {% if order.status == "CONSERTO_FINALIZADO" and not order.isReopen %}
+        <div class="product ended">
+        {% else %}
         <div class="product">
+        {% endif %}
             <div class="productInfo">
                 <p>
                     Status: <span class="{{order.status}} status">{{order.get_status_display}}</span>
@@ -42,6 +46,30 @@
                         <i data-lucide="dollar-sign"></i>
                     </div>
                     <span>R$ {{ order.budget }}</span>
+                </div>
+            {% endif %}
+
+            {% if order.status == "CONSERTO_FINALIZADO" %}
+            
+                <div class="finished">
+                
+                    <a href="{% url 'client:rate_service' order.id %}">
+                        {% comment %} <i data-lucide="star" width="28" height="28" color="#d4c02a"></i> {% endcomment %}
+                        <p>Avaliar o serviço prestado</p>
+                    </a>
+
+                    {% if not order.isReopen %}
+                        <p>Finalizado em {{order.closedAt}}.</p>
+                        <b>
+                            <p>Serviço com garantia até 30 dias após o serviço finalizado</p>
+                        </b>
+
+                        <p>Algum problema?</p>
+                        <a href="{% url 'client:reopen_service' order.id %}">
+                            <p>Reabrir solicitação</p>
+                        </a>
+                        
+                    {% endif %}
                 </div>
             {% endif %}
         </div>

@@ -92,3 +92,7 @@ Cypress.Commands.add('GoToEmployee', (email = "robson@robson.com", firstLogin = 
     cy.get('.form-card > form > button').click()
   }
 })
+
+Cypress.Commands.add('Logout', () => {
+  cy.get('.logout > button').click()
+})
