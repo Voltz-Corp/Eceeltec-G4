@@ -26,7 +26,7 @@ describe('HomePage', () => {
     cy.get('.content > form > button').click()
     cy.get('.logout > button').click()
     cy.GoToClient()
-    cy.get(':nth-child(4) > a').click()
+    cy.get('.view > button').click()
     cy.get('.yes > label').click()
     cy.get('.waitingForm > form > button').click()
     cy.ClientLogout()

@@ -60,7 +60,7 @@ function handleLoadFilteredHtml(order) {
         ${order.fields.isOs ? "Ordem de Serviço" : "Solicitação"}
       </td>
       <td>
-        <a href="${order.fields.isOs ? `/empresa/os/${order.pk}` : `/empresa/os/${order.pk}`}">
+        <a href="${order.fields.isOs ? `/empresa/os/${order.pk}` : `/empresa/solicitacao/${order.pk}`}">
           <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#155ec8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
         </a>
       </td>

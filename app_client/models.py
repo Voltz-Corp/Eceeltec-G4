@@ -7,7 +7,7 @@ class OrderRequest(models.Model):
     STATUS_CHOICES = [
         ('EM_ANALISE', 'EM ANÁLISE'),
         ('AGENDADO', 'AGENDADO'),
-        ('AGUARDANDO_ORCAMENTO', 'ORÇAMENTO PENDENTE'),
+        ('AGUARDANDO_ORCAMENTO', 'AGUARDANDO ORÇAMENTO'),
         ('AGUARDANDO_CONFIRMACAO', 'AGUARDANDO CONFIRMAÇÃO'),
         ('ACEITO', 'ACEITO'),
         ('RECUSADO', 'RECUSADO'),
@@ -39,7 +39,7 @@ class OrderRequest(models.Model):
 
     def reopen_time(self):
         actual_time = datetime.now().date()
-        days_difference = (actual_time - self.closedAt.date()).days
+        days_difference = (actual_time - self.closedAt).days
         if days_difference > 30:
             self.isReopen = True
     
