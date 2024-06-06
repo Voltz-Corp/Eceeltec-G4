@@ -290,7 +290,7 @@ class RateService(View):
                 }
             return render(request, 'RequestOrder/rateservice.html', ctx)
         else:
-            rating = ServiceRating(attendance = attendance, time = time, service = service, notes = notes, os_id = id)
+            rating = ServiceRating(attendance = attendance, time = time, service = service, notes = review_notes, os_id = id)
             rating.save()
     
             return redirect('client:view_orders')
