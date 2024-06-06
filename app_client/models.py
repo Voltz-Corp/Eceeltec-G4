@@ -7,7 +7,7 @@ class OrderRequest(models.Model):
     STATUS_CHOICES = [
         ('EM_ANALISE', 'EM ANÁLISE'),
         ('AGENDADO', 'AGENDADO'),
-        ('AGUARDANDO_ORCAMENTO', 'ORÇAMENTO PENDENTE'),
+        ('AGUARDANDO_ORCAMENTO', 'AGUARDANDO ORÇAMENTO'),
         ('AGUARDANDO_CONFIRMACAO', 'AGUARDANDO CONFIRMAÇÃO'),
         ('ACEITO', 'ACEITO'),
         ('RECUSADO', 'RECUSADO'),
