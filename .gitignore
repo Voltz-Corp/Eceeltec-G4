@@ -5,6 +5,9 @@
 __pycache__
 media
 
+# NPM
+node_modules/
+
 # Backup files # 
 *.bak 
 
@@ -97,9 +100,7 @@ celerybeat-schedule.*
 *.sage.py 
 
 # Environments  
-.venv
-.env 
-env/ 
+.venv  
 venv/ 
 ENV/ 
 env.bak/ 

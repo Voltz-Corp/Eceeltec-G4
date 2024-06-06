@@ -10,13 +10,26 @@
 {% block 'body' %}
 <section class="modal">
     <div class="content">
-        <a href="{% url 'company:order_request_list' %}">
+        <a href="{{ previous_url }}">
             <i data-lucide="x" class="close" id="closeIcon"></i>
         </a>
 
         <div class="infos">
             <h1>Solicitação {{service_order.id}}</h1>
             <p class="{{service_order.status}} status">Status: {{ service_order.get_status_display }}</p>
+
+            {% if service_order.employee %}
+                <p class="employee" >Funcionário Responsável: <span>{{ service_order.employee.first_name }}</span> </p>
+                {% if rating.attendance %}
+                    <p>Atendimento: <span>{{rating.attendance}}</span></p>
+                {% endif %}
+                {% if rating.service %}
+                    <p>Serviço: <span>{{rating.service}}</span></p>
+                {% endif %}
+                {% if rating.time %}
+                    <p>Tempo: <span>{{rating.time}}</span></p>
+                {% endif %}
+            {% endif %}
 
             <div class="infosGrid">
                 <div class="productTypeContainer">
@@ -66,31 +79,34 @@
             </select>
 
             {% if not service_order.employee %}
-
-                {% if user.role == 'A' %}
-                    <div class="technicianContainer">
-                        <label for="tecnician">Designar Técnico:</label>
-                        <select name="tecnician" id="tecnician" placeholder="Escolher Técnico">
-                            <option value="" selected disabled>
-                                Escolher Técnico
-                            </option>
-                            {% for tec in employees %}
-                            <option value="{{ tec }}">
-                                {{ tec.first_name }}
-                            </option>
-                            {% endfor %} 
-                        </select>
-                    </div>
-
-                    <label>Deseja assumir a OS?</label> 
-                    <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
-                {% else %}
+                {% if user.role == 'F' %}
                     <label>Deseja assumir a OS?</label> 
                     <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
                 {% endif %}
+            {% endif %}
 
-            {% else %}
-                <p>Funcionário Responsável: <span>{{ service_order.employee }}</span> </p>
+            {% if user.role == 'A' %}
+                <div class="technicianContainer">
+                    <label for="tecnician">Designar Técnico:</label>
+                    <select name="tecnician" id="tecnician" placeholder="Escolher Técnico">
+                        <option value="" selected disabled>
+                            Escolher Técnico
+                        </option>
+                        {% for tec in employees %}
+                        <option 
+                            value="{{ tec.id }}" 
+                            {% if service_order.employee and service_order.employee.first_name == tec.first_name %}
+                            selected
+                            {% endif %}
+                        >
+                            {{ tec.first_name }}
+                        </option>
+                        {% endfor %} 
+                    </select>
+                </div>
+
+                <label>Deseja assumir a OS?</label> 
+                <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
             {% endif %}
             <br>
             <button class="update" type="submit">Atualizar</button> 

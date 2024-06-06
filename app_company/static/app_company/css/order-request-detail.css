@@ -124,3 +124,12 @@ button {
 button:hover {
     filter: brightness(0.9);
 }
+
+span {
+    color: var(--red-600);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 8px;
+}

@@ -1,0 +1,36 @@
+{% extends "./orders.html" %}
+
+{% block 'modal' %}
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\delete-order.css' %}">
+
+
+<section class="modalOverlay">
+    <div class="deleteContent">
+        <a href="{% url 'client:view_orders' %}">
+            <p class="closebtn">
+                <i data-lucide="x"></i>
+            </p>
+        </a>
+
+        <h1>Solicitação N {{order.id}}°</h1><br>
+
+        <div class="infos">
+            <p>Deseja remover permanentemente a os?</p>
+            <p>Essa ação não poderá ser desfeita!</p>
+        </div>
+
+        <form action="{% url 'client:delete_service' order.id %}" method="POST">
+            {% csrf_token %}
+            <div class="actions">
+                <a href="{% url 'client:view_orders'%}" class="cancel" role="button">Cancelar</a>
+                <button type="submit">Confirmar</button>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+{% endblock %}

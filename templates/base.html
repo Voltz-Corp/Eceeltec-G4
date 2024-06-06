@@ -25,6 +25,12 @@
             Gavetas
           </a>
         </li>
+        <li class="drawers {% if app_name == 'app_company' %}active{% endif %}">
+          <a href="{% url 'company:your_services'%}">
+            <i data-lucide="book-marked"></i>
+            Seus serviços
+          </a>
+        </li>
         {% if user %}
         {% if user.role == 'A' %}
         <li class="employees {% if app_name == 'app_company' %}active{% endif %}">

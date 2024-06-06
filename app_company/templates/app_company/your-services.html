@@ -4,38 +4,19 @@
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'app_company/css/list-order-request.css' %}">
     <link rel="stylesheet" href="{% static 'app_company/css/modal/filter-order-modal.css' %}">
-    <link rel="stylesheet" href="{% static 'app_company/css/modal/delete-modal.css' %}">
+
     <title>Gaveta | Eceel-tec</title>
 {% endblock %}
 
 {% block 'body' %}
-<section id="deleteModal" class="modal">
-    <div class="modal-content">
-        <button type="button" class="closeModalX">
-            <i data-lucide="x"></i>
-        </button>
-        <strong>Confirmar deleção</strong>
-        <p>Você tem certeza que deseja apagar essa solicitação/OS?</p>
-        <form id="confirmDeleteForm" method="POST" action="">
-            {% csrf_token %}
-            <button type="button" class="cancelBtn">
-                Cancelar
-            </button>
-            <button type="submit" class="deleteRequestOrder">
-                Confirmar
-            </button>
-        </form>
-    </div>
-</section>
-
 <div class="content">
     <input type="hidden" value="{{ all_orders_formatted }}" id="allOrders">
     <section class="listOrderRequestCompanyContainer">
-        <h1 class="title">Serviços</h1>
+        <h1 class="title">Seus serviços</h1>
     
         <section class="tableContainer orders">
             <div>
-                <h3>Serviços</h3>
+                <h3>Seus serviços</h3>
 
                 <button class="openFilterModalBtn">
                     <i data-lucide="list-filter" width="20" height="20"></i>
@@ -106,7 +87,7 @@
                     </tr>
                 </thead>
             <tbody>
-                {% for order in all_orders %}
+                {% for order in orders %}
                     <tr>
                         <td>
                             {{ order.created_at | date:"d/m/Y" }}
@@ -128,12 +109,10 @@
                                 <i data-lucide="eye" width="24" height="24" color="#155ec8"></i>
                             </a>
                         </td>
-                        {% if order.status == 'CANCELADA' or order.status == 'RECUSADO' or order.status == 'CANCELADO' %}
-                            <td>
-                                <button type="button" class="deleteOrderRequest" data-url="{% url 'company:delete_service_order' order.id %}">
-                                    <i data-lucide="trash" width="24" height="24" color="#DC2626"></i>
-                                </button>
-                            </td>
+                        {% if order.status == 'CANCELADO' or order.status == 'RECUSADO' %}
+                        <td>
+                            <i data-lucide="trash" width="24" height="24" color="#DC2626"></i>
+                        </td>
                         {% endif %}
                     </tr>
                 {% endfor %}
@@ -146,5 +125,4 @@
 {% endblock %}
 
 <script src="{% static 'app_company/js/filter-order.js' %}"></script>
-<script src="{% static 'app_company/js/delete-order-request.js' %}"></script>
 {% endblock %}

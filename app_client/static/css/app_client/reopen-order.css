@@ -20,48 +20,7 @@
     --yellow-100: #fef9c3;
 }
 
-.EM_ANALISE, .AGUARDANDO_ORCAMENTO, .AGUARDANDO_PECAS {
-    background-color: #FFF59F;
-    color: #978217;
-}
-
-.ACEITO, .CONSERTO_FINALIZADO {
-    background-color: #E9FFDF;
-    color: #15803D;
-}
-
-.RECUSADO, .CANCELADA, .CANCELADO { 
-    background-color: #FFEBEB;
-    color: #C92A2A;
-}
-
-.AGENDADO, .AGUARDANDO_CONFIRMACAO, .EM_REPARO {
-    background-color: #E8EDFF;
-    color: #1971C2;
-}
-
-.employee {
-    position: absolute;
-    top: 32px;
-    left: 32px;
-    font-weight: 600;
-    width: fit-content;
-    padding: 8px 12px;
-    border-radius: 99999px;
-
-    background-color: var(--gray-200);
-    color: var(--gray-700);
-}
-
-.modal {
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(12px);
-    z-index: 999;
-    overflow-y: scroll;
-    height: 100%;
-}
-
-.content label {
+.reopenContent label {
     display: block;
     margin-bottom: 4px;
     margin-top: 16px;
@@ -69,7 +28,7 @@
     color: var(--gray-800);
 }
 
-.content input, .content textarea, .content select {
+.reopenContent input, .reopenContent textarea, .reopenContent select {
     width: 100%;
     padding: 12px;
     border: 1px solid var(--gray-300);
@@ -79,11 +38,21 @@
     outline: none;
 }
 
-.content button {
-    border: none;
+.modalOverlay {
+    display: flex;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    text-align: center;
+    justify-content: center;
 }
 
-.content {
+.reopenContent {
     background-color: var(--white);
     border-radius: 4px;
     padding: 32px;
@@ -94,24 +63,10 @@
     position: relative;
 }
 
-.content h1 {
+.reopenContent h1 {
     font-size: 28px;
     text-align: center;
-}
-
-.close {
-    color: var(--gray-500);
-    position: absolute;
-    top: 10px;
-    right: 4px;
-    transition: all .3s;
-}
-  
-.close:hover,
-.close:focus {
-    color: var(--gray-800);
-    text-decoration: none;
-    cursor: pointer;
+    /* color: var(--white); */
 }
 
 .infosGrid {
@@ -120,18 +75,33 @@
     grid-column-gap: 16px;
 }
 
+  
+.closebtn{
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    color: var(--gray-800);
+}
+
+.date{
+    display: flex;
+    position: absolute;
+    right: 50px;
+}
+
 .infos .status {
     position: absolute;
-    top: 32px;
-    right: 32px;
+    top: 24px;
+    /* right: 24px; */
     font-weight: 600;
     width: fit-content;
     padding: 8px 12px;
     border-radius: 99999px;
 }
 
-.update {
+.reopenContent button {
     padding: 8px 16px;
+    border: none;
     background-color: var(--green-700);
     color: var(--white);
     font-weight: 600;
@@ -141,14 +111,16 @@
     transition: all .3s;
 }
 
-.update:hover {
+.reopenContent button:hover {
     filter: brightness(0.9);
 }
 
-.assume {
-    background-color: var(--blue-500);
-    color: var(--white);
-    border-radius: 4px;
-    font-weight: 600;
-    padding: 8px 12px;
+.reopenContent .actions{
+    float: right;
+    display: flex;
+    gap: 16px;
+}
+
+.reopenContent .actions button:first-child{
+    background-color: var(--gray-600);
 }

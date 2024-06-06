@@ -1,4 +1,6 @@
 import json
+from datetime import datetime
+
 from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -18,9 +20,9 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-
-from app_client.models import OrderRequest
-
+from django.urls import reverse
+from app_client.models import OrderRequest, ServiceRating
+from datetime import datetime, timedelta, date
 
 class SignView(View):
     def get(self, request):
@@ -200,8 +202,6 @@ class OrderRequestListView(View):
         service_orders_statuses = ['EM_REPARO', 'AGUARDANDO_PECAS', 'CONSERTO_FINALIZADO', 'CANCELADO']
         service_requests_statuses = ['EM_ANALISE', 'AGENDADO', 'AGUARDANDO_ORCAMENTO', 'AGUARDANDO_CONFIRMACAO', 'ACEITO', 'RECUSADO', 'CANCELADA']
 
-       
-
         service_orders = OrderRequest.objects.filter(status__in=service_orders_statuses)
         service_requests = OrderRequest.objects.filter(status__in=service_requests_statuses)
 
@@ -218,10 +218,10 @@ class OrderRequestListView(View):
                 'service_requests':service_requests, 
                 "all_orders": all_orders,
                 "all_orders_formatted": serialized_all_orders,
-                'user':user,
+                'user': user,
             }
             return render(request, 'app_company/list-order-request.html', ctx)
-        
+
 @method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class OrderRequestDetailView(View):
     def get(self, request, pk):
@@ -240,21 +240,72 @@ class OrderRequestDetailView(View):
         status = request.POST.get('status')
         budget = request.POST.get('budget')
         scheduled_date = request.POST.get('scheduled_date')
-        
-        if (status == 'AGUARDANDO_CONFIRMACAO' or status == "AGUARDANDO_ORCAMENTO"):
+        today = datetime.now().date()
+        max_date = today + timedelta(days=30)
+        if status == "EM_ANALISE":
+            if scheduled_date != '':
+                scheduled_date = date.fromisoformat(scheduled_date)
+                if scheduled_date < today or scheduled_date > max_date:
+                    ctx = {
+                            "order_request": order_request,
+                            "error": {
+                            "message": f"A data precisa estar entre {today} e {max_date}!"
+                        }
+                    }
+                    return render(request, "app_company/order-request-detail.html", ctx)
+            else:
+                ctx = {
+                            "order_request": order_request,
+                            "error": {
+                            "message": f"A data precisa estar entre {today} e {max_date}!"
+                        }
+                    }
+                return render(request, "app_company/order-request-detail.html", ctx)
+
+            status = "AGENDADO"
+
+        # actual_time = datetime.now().date()
+        # days_difference = (actual_time - self.closedAt).days
+
+
+        if (status == "AGUARDANDO_ORCAMENTO" and order_request.status == "AGUARDANDO_ORCAMENTO"):
             order_request.status = status
-            if (budget):
-                order_request.budget = float(budget.replace(",", "."))
+            
+            if budget:
+                if (float(budget.replace(",", ".")) <= 50000):
+                    order_request.budget = float(budget.replace(",", "."))
+                    order_request.status = "AGUARDANDO_CONFIRMACAO"
+                else:
+                    ctx = {
+                            "order_request": order_request,
+                            "errors": {
+                            "message": f"O orçamento máximo é R$50.000!"
+                            }
+                        }
+                    return render(request, "app_company/order-request-detail.html", ctx)
+            else:
+                ctx = {
+                            "order_request": order_request,
+                            "errors": {
+                            "message": f"O orçamento não pode ser vazio"
+                            }
+                        }
+                return render(request, "app_company/order-request-detail.html", ctx)
+            
             order_request.save()
             status_display = order_request.get_status_display()
-
+        
             ctx = {
                 'name': user.first_name,
                 'type': order_request.productType,
                 'model': order_request.productModel,
                 'status': status_display,
                 'statusCode': status,
+                'order_id': order_request.id
             }
+            
+            if budget:
+                ctx["budget"] = budget
             html_content = render_to_string('email/emailtemplate.html', ctx)
             text_content = strip_tags(html_content)
             email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
@@ -266,14 +317,19 @@ class OrderRequestDetailView(View):
             order_request.scheduled_date=scheduled_date
             order_request.save()
             status_display = order_request.get_status_display()
-
             ctx = {
                 'name': user.first_name,
                 'type': order_request.productType,
                 'model': order_request.productModel,
                 'status': status_display,
                 'statusCode': status,
+                'date': order_request.scheduled_date,
             }
+            if order_request.scheduled_date:
+                final_date = order_request.scheduled_date + timedelta(days=7)
+                ctx['finaldate'] = final_date
+
+            
             html_content = render_to_string('email/emailtemplate.html', ctx)
             text_content = strip_tags(html_content)
             email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
@@ -331,19 +387,30 @@ class OrderRequestDetailView(View):
             return redirect('company:order_request_details', pk=pk)
 
 @method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
-
-@method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class ServiceOrderDetailView(View):
     def get(self, request, pk):
-        service_order = get_object_or_404(OrderRequest, pk=pk)
+        previous_url = request.META.get('HTTP_REFERER', '/')
         employees = Users.objects.filter(role='F')
         all_orders = OrderRequest.objects.all()
 
         ctx = {
             "all_orders": all_orders,
-            "service_order": service_order,
-            "employees": employees
+            "employees": employees,
+            "previous_url": previous_url 
         }
+
+        try:
+            service_order = OrderRequest.objects.get(id=pk)
+            ctx['service_order'] = service_order
+        except:
+            print(None)
+
+        try:
+            rating = ServiceRating.objects.get(id=pk)
+            ctx['rating'] = rating
+        except:
+            print(None)
+
 
         return render(request, 'app_company/service-order.html', ctx)
     
@@ -364,8 +431,17 @@ class ServiceOrderDetailView(View):
         service_order.necessaryParts = update_necessary_parts
         service_order.detailedProblemDescription = update_detailed_problem_description
 
+        if not service_order.employee and employee:
+            service_order.employee_id = employee
+        elif service_order.employee and employee and service_order.employee != employee:
+            service_order.employee_id = employee
+
         service_order.save()
         messages.success(request, "Status atualizado.")
+
+        if service_order.status in ['CONSERTO_FINALIZADO']:
+            service_order.closedAt = datetime.now()
+            service_order.save()
 
         if assume_order and service_order.status in ['ACEITO', 'EM_REPARO', 'AGUARDANDO_PECAS']:
             service_order.employee = user
@@ -405,3 +481,20 @@ class ManageOrder(View):
         order_request.save()
         return render(request, 'edit-order.html', {'order_request': order_request})
 
+@method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
+class YourServicesView(View):
+    def get(self, request):
+        user_id = request.user.id
+
+        orders = OrderRequest.objects.filter(employee_id=user_id)
+        ctx = {
+            "orders": orders
+        }
+
+        return render(request, 'app_company/your-services.html', ctx)
+
+class DeleteServiceOrder(View):
+    def post(self, request, pk):
+        order = OrderRequest.objects.get(id=pk)
+        order.delete()
+        return redirect('company:order_request_list')

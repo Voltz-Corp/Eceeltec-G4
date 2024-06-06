@@ -1,0 +1,67 @@
+{% extends "./orders.html" %}
+
+{% block 'modal' %}
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\reopen-order.css' %}">
+
+<section class="modalOverlay">
+    <div class="reopenContent">
+
+        <a href="{% url 'client:view_orders' %}">
+            <p class="closebtn">
+                <i data-lucide="x"></i>
+            </p>
+        </a>
+        
+        <h1>Reabrir Solicitação N {{order.id}}°</h1><br>
+        <p class="date">Data de fechamento:  {{order.closedAt}}</p><br>
+        <div class="infos">
+            
+            <div class="infosGrid">
+                <div class="productTypeContainer">
+                    <label for="productbrand">Tipo: </label>
+                    <input type="text" value={{ order.productType }} name="produtctType" disabled>
+                </div>
+    
+                <div class="productbrandContainer">
+                    <label for="productbrand">Marca: </label>
+                    <input type="text" value={{ order.productbrand }} name="productbrand" disabled>
+                </div>
+    
+                <div class="productModelContainer">
+                    <label for="productModel">Modelo: </label>
+                    <input type="text" value={{ order.productModel }} name="productModel" disabled>
+                </div>
+    
+                <div class="price">
+                    <label for="reopenPrice">Valor de reabertura: </label>
+                    <input type="text" value="R$ 0,00" name="reopenPrice" disabled>
+                </div>
+
+                <div class="productProblemDescriptionContainer">
+                    <label for="productProblemDescription">Descrição detalhada: </label>
+                    <textarea name="productProblemDescription" disabled>{{ order.detailedProblemDescription }}</textarea>
+                </div>
+
+            </div>
+
+            <div>
+                <br><br><br>
+                <p>Atenção! Após o pedido ter sido reaberto, você terá até 7 dias para levar o produto na assitência.</p>
+                <p>Caso tenha perdido o prazo, o pedido não poderá ser reaberto novamente.</p>
+            </div>
+        </div>
+
+        <form action="{% url 'client:reopen_service' order.id %}" method="POST">
+            {% csrf_token %}
+            <div class="actions">
+                <a href="{% url 'client:view_orders'%}" class="cancel" role="button" >Cancelar</a>
+                <button type="submit">Confirmar</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

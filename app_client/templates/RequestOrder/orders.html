@@ -3,11 +3,49 @@
 
 {% block 'head' %}
     <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\toast.css' %}">
     <link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
     <title>Eccel-tec | Seus serviços</title>
 {% endblock %}
 
 {% block 'body' %}
+
+{% for message in messages %}
+    <div class="toast {{ message.tags }}">
+      {% if message.tags  == 'success' %}
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-circle-check"
+            ><circle cx="12" cy="12" r="10"/>
+            <path
+            d="m9 12 2 2 4-4"
+            />
+        </svg>
+      {% elif message.tags == 'error' %}
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-circle-alert"
+        ><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+      {% endif %}
+      <span>{{ message }}</span>
+    </div>
+{% endfor %}
 
 <section class="list-requests-container">
     <h1 class="title">Seus serviços</h1>
@@ -28,6 +66,8 @@
             <tr>
                 <th>Status</th>
                 <th>Identificação</th>
+                <th>Data de agendamento</th>
+                <th></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -39,16 +79,36 @@
                         <div class="{{order.status}}"> {{order.get_status_display}} </div>
                     </td>
                     <td>{{order.productType}} | {{order.productModel}}</td>
-                    <td><a href="{% url 'client:view_order' order.id %}"><i data-lucide="eye" width="28" height="28" color="#155ec8"></i></a></td>
-                    {% comment %}
-                        // TROCAR O 'EM_ANALISE' PARA 'CONSERTO_FINALIZADO' DEPOIS, TA ASSIM SO PRA TESTAR
-                                            |
-                                            V
-                    {% endcomment %} 
-                    {% if order.status == 'EM_ANALISE' %}
-                    <td><a href="{% url 'client:rate_service' order.id %}"><i data-lucide="star" width="28" height="28" color="#d4c02a"></i></a></td>
+                    {% if order.scheduled_date and order.status == 'AGENDADO' %}
+                        <td> {{ order.scheduled_date }} </td>
+                    {% else %}
+                        <td> - </td>
                     {% endif %}
-                    <td><i data-lucide="trash" width="28" height="28" color="#DC2626"></i></td>
+                    <td>
+                        <a href="{% url 'client:view_order' order.id %}">
+                            <i data-lucide="eye" width="28" height="28" color="#155ec8"></i>
+                        </a>
+                    </td>
+
+                    {% comment %} 
+                    {% if order.status == 'CONSERTO_FINALIZADO' %}
+                        <td>
+                            <a href="{% url 'client:rate_service' order.id %}">
+                                <i data-lucide="star" width="28" height="28" color="#d4c02a"></i>
+                            </a>
+                        </td>
+
+                         
+                    {% endif %} 
+                    {% endcomment %}
+                    
+                    {% if order.closedAt or order.status == 'CANELADO'%}
+                        <td>
+                            <a href="{% url 'client:delete_service' order.id %}">
+                                <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>
+                            </a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

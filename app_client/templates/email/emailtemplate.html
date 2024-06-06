@@ -1,31 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Eceel-Tec Email</title>
     <style>
-
-        * {
+            * {
             margin: 0;
             padding: 0;
             text-align: center;
-        }
-        
+            color: #14532D;
+            font-size: 14px;
+            }
+
         img {
             width: 100px;
         }
 
-        .color {
-            background-color: green;
-            display: block;
-            color: green;
-            max-width: 34%;
-            align-items: center;
-            margin: auto;
-            height: 8px;
-        }
-        
         #status {
             font-weight: 700;
             width: fit-content;
@@ -33,44 +24,100 @@
             border-radius: 99999px;
             display: inline;
         }
-        
+
         .EM_ANALISE, .AGUARDANDO_ORCAMENTO, .AGUARDANDO_PECAS {
             background-color: #FFF59F;
             color: #978217;
         }
-        
+
         .ACEITO, .CONSERTO_FINALIZADO {
             background-color: #E9FFDF;
             color: #15803D;
         }
-        
+
         .RECUSADO, .CANCELADA, .CANCELADO {
             background-color: #FFEBEB;
             color: #C92A2A;
         }
-        
+
         .AGENDADO, .AGUARDANDO_CONFIRMACAO, .EM_REPARO {
             background-color: #E8EDFF;
             color: #1971C2;
         }
+        
+        .header {
+            background-color: #374151;
+            min-width: 500px; 
+            height: fit-content;
+            padding: 35px 40px;
+        }
 
+        .header img {
+            width: 150px;
+        }
+
+        .email {
+            align-items: center;
+            border: 5px solid #374151;
+            width: fit-content;
+            border-radius: 5px;
+            background-color: #374151;
+        }
+
+        strong {
+            color: #052E16;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .footer {
+            font-size: 12px;
+            background-color: #374151;
+            font-weight: 500;
+            color: #D8D8D8;
+            min-width: 560px;
+            padding: 10px;
+        }
+
+        .email-content {
+            border: 8px solid #374151;
+            border-radius: 10px;
+            background-color: white; 
+            padding: 50px 50px 100px 50px;
+        }
+
+        .budget {
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
     <br>
-    <div class="color"></div>
-    <br>
-    <h2>Olá, {{name}}</h2>
-    <br>
-    <p>O status da sua solicitação {{type}} | {{model}} foi atualizado</p>
-    <br>
-    <div>Status: <p class="{{statusCode}}" id="status">{{status}}</p></div>
-    <br>
-    <img src="https://i.imgur.com/FShMthn.png" alt="">
-    <br>
-    <br>
-    <p style="font-size: 12px;">Eceel-Tec © 2024</p>
-    <br>
-    <div class="color"></div>
+    <div class="email">
+        <div class="header">
+            <img src="https://i.imgur.com/FShMthn.png" alt="Logo Eceel-Tec">
+        </div>
+        <div class="email-content">
+            <h2>Olá, {{name}}</h2>
+            <br>
+            <p>O status da sua solicitação <strong>{{type}} | {{model}}</strong> foi atualizado</p>
+            <br>
+            <div>Status: <p class="{{statusCode}}" id="status">{{status}}</p></div>
+            <br>
+            <br>
+            {% if date %}
+                <div>Leve o seu equipamento para a assistência entre os dias:<br><strong>{{date}}</strong> e <strong>{{finaldate}}</strong></div>
+            {% endif %}
+            {% if budget %}
+                <div>Orçamento definido: <strong id="budget">R$ {{budget}}</strong></div>
+                <a href="{% url 'company:order_request_details' order_id %}">Clique aqui para aceitar ou recusar o orçamento</a>
+            {% endif %}
+        </div>
+        <p class="footer">Eceel-Tec © 2024</p>
+    </div>
+        
 </body>
 </html>
