@@ -270,7 +270,10 @@ class OrderRequestDetailView(View):
                 'model': order_request.productModel,
                 'status': status_display,
                 'statusCode': status,
+                'order_id': order_request.id
             }
+            if budget:
+                ctx["budget"] = budget
             html_content = render_to_string('email/emailtemplate.html', ctx)
             text_content = strip_tags(html_content)
             email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
@@ -282,14 +285,19 @@ class OrderRequestDetailView(View):
             order_request.scheduled_date=scheduled_date
             order_request.save()
             status_display = order_request.get_status_display()
-
             ctx = {
                 'name': user.first_name,
                 'type': order_request.productType,
                 'model': order_request.productModel,
                 'status': status_display,
                 'statusCode': status,
+                'date': order_request.scheduled_date,
             }
+            if order_request.scheduled_date:
+                final_date = order_request.scheduled_date + timedelta(days=7)
+                ctx['finaldate'] = final_date
+
+            
             html_content = render_to_string('email/emailtemplate.html', ctx)
             text_content = strip_tags(html_content)
             email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
