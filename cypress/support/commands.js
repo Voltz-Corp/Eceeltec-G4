@@ -41,12 +41,12 @@ Cypress.Commands.add('CreateEmployee', (name = "Robson", email = "robson@robson.
   cy.get('.new-employee-button').click()
 })
 
-Cypress.Commands.add('CreateSolicitation', () => {
+Cypress.Commands.add('CreateSolicitation', (product = 'Ventilador', brand = "Mondial", model = "VSP40C", description = "Está com cheiro de queimado") => {
   cy.get('.new-request').click()
-  cy.get(':nth-child(2) > :nth-child(1) > input').type('Ventilador')
-  cy.get(':nth-child(3) > :nth-child(1) > input').type('Mondial')
-  cy.get(':nth-child(3) > :nth-child(2) > input').type('VSP40C')
-  cy.get('#description').type('Está com cheiro de queimado')
+  cy.get(':nth-child(2) > :nth-child(1) > input').type(product)
+  cy.get(':nth-child(3) > :nth-child(1) > input').type(brand)
+  cy.get(':nth-child(3) > :nth-child(2) > input').type(model)
+  cy.get('#description').type(description)
   cy.get('#submit_button').click()
 })
 
