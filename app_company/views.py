@@ -221,7 +221,7 @@ class OrderRequestListView(View):
                 'user': user,
             }
             return render(request, 'app_company/list-order-request.html', ctx)
-        
+
 @method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class OrderRequestDetailView(View):
     def get(self, request, pk):
@@ -243,8 +243,7 @@ class OrderRequestDetailView(View):
         today = datetime.now().date()
         max_date = today + timedelta(days=30)
         if status == "EM_ANALISE":
-            if scheduled_date != None:
-                
+            if scheduled_date != '':
                 scheduled_date = date.fromisoformat(scheduled_date)
                 if scheduled_date < today or scheduled_date > max_date:
                     ctx = {
@@ -254,20 +253,48 @@ class OrderRequestDetailView(View):
                         }
                     }
                     return render(request, "app_company/order-request-detail.html", ctx)
+            else:
+                ctx = {
+                            "order_request": order_request,
+                            "error": {
+                            "message": f"A data precisa estar entre {today} e {max_date}!"
+                        }
+                    }
+                return render(request, "app_company/order-request-detail.html", ctx)
+
             status = "AGENDADO"
 
         # actual_time = datetime.now().date()
         # days_difference = (actual_time - self.closedAt).days
 
 
-        if (status == "AGUARDANDO_ORCAMENTO"):
+        if (status == "AGUARDANDO_ORCAMENTO" and order_request.status == "AGUARDANDO_ORCAMENTO"):
             order_request.status = status
-            if (budget):
-                order_request.budget = float(budget.replace(",", "."))
-                order_request.status = "AGUARDANDO_CONFIRMACAO"
+            
+            if budget:
+                if (float(budget.replace(",", ".")) <= 50000):
+                    order_request.budget = float(budget.replace(",", "."))
+                    order_request.status = "AGUARDANDO_CONFIRMACAO"
+                else:
+                    ctx = {
+                            "order_request": order_request,
+                            "errors": {
+                            "message": f"O orçamento máximo é R$50.000!"
+                            }
+                        }
+                    return render(request, "app_company/order-request-detail.html", ctx)
+            else:
+                ctx = {
+                            "order_request": order_request,
+                            "errors": {
+                            "message": f"O orçamento não pode ser vazio"
+                            }
+                        }
+                return render(request, "app_company/order-request-detail.html", ctx)
+            
             order_request.save()
             status_display = order_request.get_status_display()
-
+        
             ctx = {
                 'name': user.first_name,
                 'type': order_request.productType,
@@ -276,6 +303,7 @@ class OrderRequestDetailView(View):
                 'statusCode': status,
                 'order_id': order_request.id
             }
+            
             if budget:
                 ctx["budget"] = budget
             html_content = render_to_string('email/emailtemplate.html', ctx)
@@ -405,7 +433,8 @@ class ServiceOrderDetailView(View):
 
         if not service_order.employee and employee:
             service_order.employee_id = employee
-
+        elif service_order.employee and employee and service_order.employee != employee:
+            service_order.employee_id = employee
 
         service_order.save()
         messages.success(request, "Status atualizado.")

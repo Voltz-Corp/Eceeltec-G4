@@ -81,6 +81,7 @@
                         <th>Status</th>
                         <th>Identificação</th>
                         <th>Tipo</th>
+                        <th>Técnico designado</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -96,6 +97,13 @@
                         </td>
                         <td>{{order.productType}} | {{order.productModel}}</td>
                         <td>{% if order.isOs %} Ordem de Serviço {% else %} Solicitação {% endif %}</td>
+                        <td>
+                            {% if order.employee %}
+                                {{ order.employee.first_name }}
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
                         <td>
                             <a href="{% if order.isOs %} {% url 'company:service_order_details' order.id %} {% else %} {% url 'company:order_request_details' order.id %} {% endif %}">
                                 <i data-lucide="eye" width="24" height="24" color="#155ec8"></i>

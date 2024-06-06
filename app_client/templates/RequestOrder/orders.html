@@ -89,21 +89,16 @@
                             <i data-lucide="eye" width="28" height="28" color="#155ec8"></i>
                         </a>
                     </td>
-                    {% if order.status == 'CONSERTO_FINALIZADO' %}
+
+                    {% if order.status == 'EM_ANALISE' %}
                         <td>
                             <a href="{% url 'client:rate_service' order.id %}">
                                 <i data-lucide="star" width="28" height="28" color="#d4c02a"></i>
                             </a>
                         </td>
 
-                         {% if not order.isReopen %}
-                            <td>
-                                <a href="{% url 'client:reopen_service' order.id %}">
-                                    <i data-lucide="rotate-ccw"></i>
-                                </a>
-                            </td>
-                        {% endif %}
-                    {% endif %}
+                         
+                    {% endif %} 
                     
                     {% if order.closedAt or order.status == 'CANELADO'%}
                         <td>

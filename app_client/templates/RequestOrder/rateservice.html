@@ -2,98 +2,276 @@
 {% load static %}
 
 {% block 'head' %}
-<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\styles.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\choose-order.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css\app_client\create_order.css' %}">
+<link rel="stylesheet" href="{% static 'css/app_client/rating.css' %}">
 <link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
     <title>Eceel-Tec | Solicitar serviço</title>
 {% endblock %}
 
 {% block 'body' %}
-<section class="mainorder">
-    <section class="order">
+<section class="mainRating">
+    <section class="rating">
         <form action="{% url 'client:rate_service' order.id %}" method="POST">
             {% csrf_token %}
+            {% if rating %}
+                <input type="hidden" name="edit_rating">
+            {% endif %}
+            <input type="hidden" name="attendance" id="attendance" value="{{ rating.attendance }}">
+            <input type="hidden" name="service" id="service" value="{{ rating.service }}">
+            <input type="hidden" name="time" id="time" value="{{ rating.time }}">
 
-            <h1>Avaliação de serviço - </h1>
+            <h1>Avaliação de serviço</h1>
             
-            <label>Atendimento:</label><br>
-            <input type="radio" name="attendance" class="rating-input" value="0">
-            <label for="zero" class="rating-label">0</label>
-            <input type="radio" name="attendance" class="rating-input" value="1">
-            <label for="one" class="rating-label">1</label>
-            <input type="radio" name="attendance" class="rating-input" value="2">
-            <label for="two" class="rating-label">2</label>
-            <input type="radio" name="attendance" class="rating-input" value="3">
-            <label for="three" class="rating-label">3</label>
-            <input type="radio" name="attendance" class="rating-input" value="4">
-            <label for="four" class="rating-label">4</label>
-            <input type="radio" name="attendance" class="rating-input" value="5">
-            <label for="five" class="rating-label">5</label>
-            <input type="radio" name="attendance" class="rating-input" value="6">
-            <label for="six" class="rating-label">6</label>
-            <input type="radio" name="attendance" class="rating-input" value="7">
-            <label for="seven" class="rating-label">7</label>
-            <input type="radio" name="attendance" class="rating-input" value="8">
-            <label for="eight" class="rating-label">8</label>
-            <input type="radio" name="attendance" class="rating-input" value="9">
-            <label for="nine" class="rating-label">9</label>
-            <input type="radio" name="attendance" class="rating-input" value="10">
-            <label for="ten" class="rating-label">10</label><br>
-            
-            <label>Serviço:</label><br>
-            <input type="radio" name="service" class="rating-input" value="0">
-            <label for="zero" class="rating-label">0</label>
-            <input type="radio" name="service" class="rating-input" value="1">
-            <label for="one" class="rating-label">1</label>
-            <input type="radio" name="service" class="rating-input" value="2">
-            <label for="two" class="rating-label">2</label>
-            <input type="radio" name="service" class="rating-input" value="3">
-            <label for="three" class="rating-label">3</label>
-            <input type="radio" name="service" class="rating-input" value="4">
-            <label for="four" class="rating-label">4</label>
-            <input type="radio" name="service" class="rating-input" value="5">
-            <label for="five" class="rating-label">5</label>
-            <input type="radio" name="service" class="rating-input" value="6">
-            <label for="six" class="rating-label">6</label>
-            <input type="radio" name="service" class="rating-input" value="7">
-            <label for="seven" class="rating-label">7</label>
-            <input type="radio" name="service" class="rating-input" value="8">
-            <label for="eight" class="rating-label">8</label>
-            <input type="radio" name="service" class="rating-input" value="9">
-            <label for="nine" class="rating-label">9</label>
-            <input type="radio" name="service" class="rating-input" value="10">
-            <label for="ten" class="rating-label">10</label><br>
-            
-            <label>Tempo:</label><br>
-            <input type="radio" name="time" class="rating-input" value="0">
-            <label for="zero" class="rating-label">0</label>
-            <input type="radio" name="time" class="rating-input" value="1">
-            <label for="one" class="rating-label">1</label>
-            <input type="radio" name="time" class="rating-input" value="2">
-            <label for="two" class="rating-label">2</label>
-            <input type="radio" name="time" class="rating-input" value="3">
-            <label for="three" class="rating-label">3</label>
-            <input type="radio" name="time" class="rating-input" value="4">
-            <label for="four" class="rating-label">4</label>
-            <input type="radio" name="time" class="rating-input" value="5">
-            <label for="five" class="rating-label">5</label>
-            <input type="radio" name="time" class="rating-input" value="6">
-            <label for="six" class="rating-label">6</label>
-            <input type="radio" name="time" class="rating-input" value="7">
-            <label for="seven" class="rating-label">7</label>
-            <input type="radio" name="time" class="rating-input" value="8">
-            <label for="eight" class="rating-label">8</label>
-            <input type="radio" name="time" class="rating-input" value="9">
-            <label for="nine" class="rating-label">9</label>
-            <input type="radio" name="time" class="rating-input" value="10">
-            <label for="ten" class="rating-label">10</label><br>
-
-            <label for="">Comentários adicionais:</label><br>
-            <input type="text" id="notes" name="notes"><br>
+            <section class="ratingContent">
+                <div class="inputContainer">
+                    <label>Atendimento:</label>
+                    <div class="ratingAttendance">
+                        {% if rating.attendance >= 1 %}
+                            <button type="button" class="attendance active">
+                        {% else %}
+                            <button type="button" class="attendance">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                        {% if rating.attendance >= 2 %}
+                            <button type="button" class="attendance active">
+                        {% else %}
+                            <button type="button" class="attendance">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                        {% if rating.attendance >= 3 %}
+                            <button type="button" class="attendance active">
+                        {% else %}
+                            <button type="button" class="attendance">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                        {% if rating.attendance >= 4 %}
+                            <button type="button" class="attendance active">
+                        {% else %}
+                            <button type="button" class="attendance">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                        {% if rating.attendance >= 5 %}
+                            <button type="button" class="attendance active">
+                        {% else %}
+                            <button type="button" class="attendance">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="inputContainer">
+                    <label>Serviço:</label>
+                    <div class="ratingService">
+                        {% if rating.service >= 1 %}
+                            <button type="button" class="service active">
+                        {% else %}
+                            <button type="button" class="service">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                        {% if rating.service >= 2 %}
+                            <button type="button" class="service active">
+                        {% else %}
+                            <button type="button" class="service">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                        {% if rating.service >= 3 %}
+                            <button type="button" class="service active">
+                        {% else %}
+                            <button type="button" class="service">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                        {% if rating.service >= 4 %}
+                            <button type="button" class="service active">
+                        {% else %}
+                            <button type="button" class="service">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                        {% if rating.service >= 5 %}
+                            <button type="button" class="service active">
+                        {% else %}
+                            <button type="button" class="service">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="inputContainer">
+                    <label>Tempo:</label>
+                    <div class="ratingTime">
+                        {% if rating.time >= 1 %}
+                            <button type="button" class="time active">
+                        {% else %}
+                            <button type="button" class="time">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                        {% if rating.time >= 2 %}
+                            <button type="button" class="time active">
+                        {% else %}
+                            <button type="button" class="time">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                        {% if rating.time >= 3 %}
+                            <button type="button" class="time active">
+                        {% else %}
+                            <button type="button" class="time">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                        {% if rating.time >= 4 %}
+                            <button type="button" class="time active">
+                        {% else %}
+                            <button type="button" class="time">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                        {% if rating.time >= 5 %}
+                            <button type="button" class="time active">
+                        {% else %}
+                            <button type="button" class="time">
+                        {% endif %}
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 47.94 47.94" xml:space="preserve">
+                            <path d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                                c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                                c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                                c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                                c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                                C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+    
+                <label for="notes">Comentários adicionais:</label>
+                <textarea type="text" id="notes" name="notes">{{ rating.notes }}</textarea>
+            </section>
 
             <button type="submit" class="rating-submit">Avaliar</button>
         </form>
         </section>
     </section>
+<script src="{% static 'js/rating.js' %}" ></script>
 {% endblock %}

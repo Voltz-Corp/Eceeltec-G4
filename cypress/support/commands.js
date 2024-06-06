@@ -1,3 +1,6 @@
+/// <reference types="cypress" />
+/// <reference types="../support" />
+
 Cypress.Commands.add('DeleteAndCreateAdm', () => {
   cy.exec('python test_initiate.py', { failOnNonZeroExit: false })
 });
@@ -20,20 +23,12 @@ Cypress.Commands.add('CreateClient', (name = "Gabriel Albuquerque", email = "tes
 
 Cypress.Commands.add('CreateOrder', () => {
   cy.get(':nth-child(6) > a').click()
-  cy.get('#detailed_problem_description').type('Tá quebrado')
-  cy.get('#necessary_parts').type("Por enquanto, nenhuma")
+  cy.get('#detailed_problem_description').type('Cabos corroídos')
+  cy.get('#necessary_parts').type("5 cabos")
   cy.get('.works > button').click()
 })
 
 Cypress.Commands.add('CreateEmployee', (name = "Robson", email = "robson@robson.com") => {
-  // cy.get('#employee > a').click()
-  // cy.get('#email').type('eceel-Tec@eceeltec.com')
-  // cy.get('#password').type('obGWjpaTayKJWpBiFSMm')
-  // cy.get('button').click()
-  // cy.get('#password').type('obGWjpaTayKJWpBiFSMm')
-  // cy.get('#new_password').type('obGWjpaTayKJWpBiFSMm')
-  // cy.get('.form-card > form > button').click()
-  // cy.get('.employees > a').click()
   cy.get('.new-employee-button').click()
   cy.get('#username').type(name)
   cy.get('#phone').type('81900028922')
@@ -46,15 +41,14 @@ Cypress.Commands.add('CreateEmployee', (name = "Robson", email = "robson@robson.
   cy.get('.new-employee-button').click()
 })
 
-Cypress.Commands.add('CreateSolicitation', () => {
+Cypress.Commands.add('CreateSolicitation', (product = 'Ventilador', brand = "Mondial", model = "VSP40C", description = "Está com cheiro de queimado") => {
   cy.get('.new-request').click()
-  cy.get(':nth-child(2) > :nth-child(1) > input').type('Ventilador')
-  cy.get(':nth-child(3) > :nth-child(1) > input').type('Mondial')
-  cy.get(':nth-child(3) > :nth-child(2) > input').type('VSP40C')
-  cy.get('#description').type('Está com cheiro de queimado')
+  cy.get(':nth-child(2) > :nth-child(1) > input').type(product)
+  cy.get(':nth-child(3) > :nth-child(1) > input').type(brand)
+  cy.get(':nth-child(3) > :nth-child(2) > input').type(model)
+  cy.get('#description').type(description)
   cy.get('#submit_button').click()
 })
-
 
 Cypress.Commands.add('ClientLogout', () => {
   cy.visit('/');
@@ -85,4 +79,20 @@ Cypress.Commands.add('ChangeToAdmin', () => {
   cy.get('#email').type('eceel-Tec@eceeltec.com')
   cy.get('#password').type('obGWjpaTayKJWpBiFSMm')
   cy.get('button').click()
+})
+
+Cypress.Commands.add('GoToEmployee', (email = "robson@robson.com", firstLogin = true) => {
+  cy.get('#employee > a').click()
+  cy.get('#email').type(email)
+  cy.get('#password').type('ViraPag')
+  cy.get('button').click()
+  if (firstLogin) {
+    cy.get('#password').type('ViraPag')
+    cy.get('#new_password').type('ViraPag')
+    cy.get('.form-card > form > button').click()
+  }
+})
+
+Cypress.Commands.add('Logout', () => {
+  cy.get('.logout > button').click()
 })
