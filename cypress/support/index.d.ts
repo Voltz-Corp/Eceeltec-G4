@@ -13,5 +13,6 @@ declare namespace Cypress {
     CreateAdmin(): Chainable<any>;
     ChangeToAdmin(): Chainable<any>;
     GoToEmployee(email: string, firstLogin: boolean): Chainable<any>;
+    Logout(): Chainable<any>;
   }
 }
