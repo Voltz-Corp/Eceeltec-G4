@@ -90,8 +90,7 @@
                         </a>
                     </td>
 
-                    {% comment %} 
-                    {% if order.status == 'CONSERTO_FINALIZADO' %}
+                    {% if order.status == 'EM_ANALISE' %}
                         <td>
                             <a href="{% url 'client:rate_service' order.id %}">
                                 <i data-lucide="star" width="28" height="28" color="#d4c02a"></i>
@@ -100,7 +99,6 @@
 
                          
                     {% endif %} 
-                    {% endcomment %}
                     
                     {% if order.closedAt or order.status == 'CANELADO'%}
                         <td>

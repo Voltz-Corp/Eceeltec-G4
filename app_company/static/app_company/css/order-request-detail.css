@@ -21,23 +21,23 @@
 }
 
 .EM_ANALISE, .AGUARDANDO_ORCAMENTO, .AGUARDANDO_PECAS {
-    background-color: #FFF59F;
-    color: #978217;
+  background-color: var(--gray-500);
+  color: var(--white) !important;
 }
 
 .ACEITO, .CONSERTO_FINALIZADO {
-    background-color: #E9FFDF;
-    color: #15803D;
+  background-color: #15803D;
+  color: #E9FFDF !important;
 }
 
 .RECUSADO, .CANCELADA, .CANCELADO { 
-    background-color: #FFEBEB;
-    color: #C92A2A;
+  background-color: #C92A2A;
+  color:  #FFEBEB !important;
 }
 
 .AGENDADO, .AGUARDANDO_CONFIRMACAO, .EM_REPARO {
-    background-color: #E8EDFF;
-    color: #1971C2;
+  background-color: #1971C2;
+  color: #E8EDFF !important;
 }
 
 .content label {
