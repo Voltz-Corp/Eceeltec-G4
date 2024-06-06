@@ -15,7 +15,7 @@ class OrderRequest(models.Model):
         ('EM_REPARO', 'EM REPARO'),
         ('AGUARDANDO_PECAS', 'AGUARDANDO PEÇAS'),
         ('CONSERTO_FINALIZADO', 'CONSERTO FINALIZADO'),
-        ('CANCELADO', 'CANCELDO'),
+        ('CANCELADO', 'CANCELADO'),
     ]
     productType = models.CharField(max_length=75)
     productbrand = models.CharField(max_length=75)
