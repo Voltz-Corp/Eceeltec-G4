@@ -223,11 +223,38 @@ class EditProfileView(View):
 
 class RateService(View):
     def get(self, request, id):
-        order = OrderRequest.objects.filter(id=id).first()
-        ctx = {"order": order}
+        order = OrderRequest.objects.get(id=id)
+
+        ctx = {
+            "order": order,
+        }
+
+        try:
+            rating = ServiceRating.objects.get(os_id=order.id)
+            ctx['rating'] = rating
+        except:
+            print(None)
+
+
 
         return render(request, 'RequestOrder/rateservice.html', ctx)
     def post(self, request, id):
+        if 'edit_rating' in request.POST:
+            rating = ServiceRating.objects.get(os_id=id)
+
+            attendance = request.POST.get('attendance')
+            service = request.POST.get('service')
+            time = request.POST.get('time')
+            notes = request.POST.get('notes')
+
+            rating.attendance = attendance
+            rating.service = service
+            rating.time = time
+            rating.notes = notes
+
+            rating.save()
+            return redirect('client:view_orders')
+
         attendance = request.POST.get('attendance')
         service = request.POST.get('service')
         time = request.POST.get('time')
