@@ -20,7 +20,7 @@ describe('test suite status monitoring', () => {
         cy.get('.content > form > button').click();
         cy.get('.logout > button').click();
         cy.GoToClient();
-        cy.get(':nth-child(4) > a').click();
+        cy.get('.view > button').click();
         cy.get('.AGENDADO').invoke('text').should('have.string', 'AGENDADO')
     });
     it('Alterar o status de “Aceito” para “Em reparo”', () => {
@@ -48,7 +48,7 @@ describe('test suite status monitoring', () => {
         cy.get('.content > form > button').click()
         cy.get('.logout > button').click();
         cy.GoToClient();
-        cy.get(':nth-child(4) > a').click();
+        cy.get('.view > button').click();
         cy.get('.waitingForm > form > button').click()
         cy.ClientLogout();
         cy.get('#employee > a').click()

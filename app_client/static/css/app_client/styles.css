@@ -180,3 +180,23 @@ tbody td:first-child div {
   padding: 3px;
   border-radius: 4px;
 }
+
+.view button, .delete button {
+  padding: 8px 16px;
+  border: none;
+  background-color: var(--blue-500);
+  color: var(--white);
+  font-weight: 600;
+  border-radius: 4px;
+  float: right;
+  margin-top: 32px;
+  transition: all .3s;
+}
+
+.view, .delete button:hover {
+  filter: brightness(0.9);
+}
+
+.delete button {
+  background-color: var(--red-600);
+}

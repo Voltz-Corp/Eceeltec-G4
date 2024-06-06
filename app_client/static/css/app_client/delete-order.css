@@ -124,3 +124,7 @@
 .deleteContent .actions button:first-child{
     background-color: var(--gray-600);
 }
+
+a {
+    color: inherit;
+}
