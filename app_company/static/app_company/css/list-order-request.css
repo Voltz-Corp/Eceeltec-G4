@@ -110,6 +110,11 @@ tbody td:nth-child(2) div {
   border-radius: 99999px;
 }
 
+.deleteOrderRequest {
+  border: none;
+  background-color: transparent;
+}
+
 .EM_ANALISE, .AGUARDANDO_ORCAMENTO, .AGUARDANDO_PECAS {
   background-color: #FFF59F;
   color: #978217 !important;

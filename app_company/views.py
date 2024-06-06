@@ -242,25 +242,29 @@ class OrderRequestDetailView(View):
         scheduled_date = request.POST.get('scheduled_date')
         today = datetime.now().date()
         max_date = today + timedelta(days=30)
-        if scheduled_date != None:
-            scheduled_date = date.fromisoformat(scheduled_date)
-            if scheduled_date < today or scheduled_date > max_date:
-                ctx = {
-                        "order_request": order_request,
-                        "error": {
-                        "message": f"A data precisa estar entre {today} e {max_date}!"
+        if status == "EM_ANALISE":
+            if scheduled_date != None:
+                
+                scheduled_date = date.fromisoformat(scheduled_date)
+                if scheduled_date < today or scheduled_date > max_date:
+                    ctx = {
+                            "order_request": order_request,
+                            "error": {
+                            "message": f"A data precisa estar entre {today} e {max_date}!"
+                        }
                     }
-                }
-                return render(request, "app_company/order-request-detail.html", ctx)
+                    return render(request, "app_company/order-request-detail.html", ctx)
+            status = "AGENDADO"
 
         # actual_time = datetime.now().date()
         # days_difference = (actual_time - self.closedAt).days
 
 
-        if (status == 'AGUARDANDO_CONFIRMACAO' or status == "AGUARDANDO_ORCAMENTO"):
+        if (status == "AGUARDANDO_ORCAMENTO"):
             order_request.status = status
             if (budget):
                 order_request.budget = float(budget.replace(",", "."))
+                order_request.status = "AGUARDANDO_CONFIRMACAO"
             order_request.save()
             status_display = order_request.get_status_display()
 
@@ -459,3 +463,9 @@ class YourServicesView(View):
         }
 
         return render(request, 'app_company/your-services.html', ctx)
+
+class DeleteServiceOrder(View):
+    def post(self, request, pk):
+        order = OrderRequest.objects.get(id=pk)
+        order.delete()
+        return redirect('company:order_request_list')
