@@ -78,10 +78,14 @@
                 </option>
             </select>
 
-            {% if not service_order.employee and user.role == 'F' %}
+            {% if not service_order.employee %}
+                {% if user.role == 'F' %}
                     <label>Deseja assumir a OS?</label> 
                     <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
-            {% else %}
+                {% endif %}
+            {% endif %}
+
+            {% if user.role == 'A' %}
                 <div class="technicianContainer">
                     <label for="tecnician">Designar Técnico:</label>
                     <select name="tecnician" id="tecnician" placeholder="Escolher Técnico">

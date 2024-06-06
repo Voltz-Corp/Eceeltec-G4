@@ -77,3 +77,15 @@ Cypress.Commands.add('ChangeToAdmin', () => {
   cy.get('#password').type('obGWjpaTayKJWpBiFSMm')
   cy.get('button').click()
 })
+
+Cypress.Commands.add('GoToEmployee', (email = "robson@robson.com", firstLogin = true) => {
+  cy.get('#employee > a').click()
+  cy.get('#email').type(email)
+  cy.get('#password').type('ViraPag')
+  cy.get('button').click()
+  if (firstLogin) {
+    cy.get('#password').type('ViraPag')
+    cy.get('#new_password').type('ViraPag')
+    cy.get('.form-card > form > button').click()
+  }
+})
