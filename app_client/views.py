@@ -258,12 +258,42 @@ class RateService(View):
         attendance = request.POST.get('attendance')
         service = request.POST.get('service')
         time = request.POST.get('time')
-        notes = request.POST.get('notes')
-        
-        rating = ServiceRating(attendance = attendance, time = time, service = service, notes = notes, os_id = id)
-        rating.save()
+        review_notes = request.POST.get('notes')
+
+        errors = []
+        if attendance == None:
+            errors.append({
+            'field': 'attendance',
+            'message' : 'Este campo não pode ser vazio!'
+            })
+            print('oi!')
+        if service == None:
+            errors.append({
+            'field': 'service',
+            'message' : 'Este campo não pode ser vazio!'
+            })
+        if time == None:
+            errors.append({
+            'field': 'time',
+            'message' : 'Este campo não pode ser vazio!'
+            })
+        if len(str(review_notes)) > 200:
+            errors.append({
+            'field': 'review_notes',
+            'message' : 'Este campo não pode ser maior que 200 caractéres!'
+            })
+        if errors != '':
+            order = OrderRequest.objects.filter(id=id).first()
+            ctx = {
+                "order": order,
+                "errors": errors
+                }
+            return render(request, 'RequestOrder/rateservice.html', ctx)
+        else:
+            rating = ServiceRating(attendance = attendance, time = time, service = service, notes = notes, os_id = id)
+            rating.save()
     
-        return redirect('client:view_orders')
+            return redirect('client:view_orders')
 
 class ReopenService(View):
 
