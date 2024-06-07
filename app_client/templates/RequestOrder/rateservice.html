@@ -15,9 +15,31 @@
             {% if rating %}
                 <input type="hidden" name="edit_rating">
             {% endif %}
-            <input type="hidden" name="attendance" id="attendance" value="{{ rating.attendance }}">
-            <input type="hidden" name="service" id="service" value="{{ rating.service }}">
-            <input type="hidden" name="time" id="time" value="{{ rating.time }}">
+            
+            {% if rating.attendance %}
+                <input type="hidden" name="attendance" id="attendance" value="{{ rating.attendance }}">
+            {% elif rating.attendance and attendance %}
+                <input type="hidden" name="attendance" id="attendance" value="{{ attendance }}">
+            {% else %}
+                <input type="hidden" name="attendance" id="attendance" value="{{ attendance }}">
+            {% endif %}
+
+            {% if rating.service %}
+                <input type="hidden" name="service" id="service" value="{{ rating.service }}">
+            {% elif rating.service and service %}
+                <input type="hidden" name="service" id="service" value="{{ service }}">
+            {% else %}
+                <input type="hidden" name="service" id="service" value="{{ service }}">
+            {% endif %}
+
+            {% if rating.time %}
+                <input type="hidden" name="time" id="time" value="{{ rating.time }}">
+            {% elif rating.time and time %}
+                <input type="hidden" name="time" id="time" value="{{ time }}">
+            {% else %}
+                <input type="hidden" name="time" id="time" value="{{ time }}">
+            {% endif %}
+
 
             <h1>Avaliação de serviço</h1>
             
@@ -26,7 +48,8 @@
                     <label>Atendimento:</label>
                     <div class="starErrorContainer">
                         <div class="ratingAttendance">
-                            {% if rating.attendance >= 1 %}
+                            {{ rating.attendance }}
+                            {% if rating.attendance >= 1 or attendance >= 1 %}
                                 <button type="button" class="attendance active">
                             {% else %}
                                 <button type="button" class="attendance">
@@ -41,7 +64,7 @@
                                     C22.602,0.567,25.338,0.567,26.285,2.486z"/>
                                 </svg>
                             </button>
-                            {% if rating.attendance >= 2 %}
+                            {% if rating.attendance >= 2 or attendance >= 2 %}
                                 <button type="button" class="attendance active">
                             {% else %}
                                 <button type="button" class="attendance">
@@ -56,7 +79,7 @@
                                     C22.602,0.567,25.338,0.567,26.285,2.486z"/>
                                 </svg>
                             </button>
-                            {% if rating.attendance >= 3 %}
+                            {% if rating.attendance >= 3 or attendance >= 3 %}
                                 <button type="button" class="attendance active">
                             {% else %}
                                 <button type="button" class="attendance">
@@ -71,7 +94,7 @@
                                     C22.602,0.567,25.338,0.567,26.285,2.486z"/>
                                 </svg>
                             </button>
-                            {% if rating.attendance >= 4 %}
+                            {% if rating.attendance >= 4 or attendance >= 4 %}
                                 <button type="button" class="attendance active">
                             {% else %}
                                 <button type="button" class="attendance">
@@ -86,7 +109,7 @@
                                     C22.602,0.567,25.338,0.567,26.285,2.486z"/>
                                 </svg>
                             </button>
-                            {% if rating.attendance >= 5 %}
+                            {% if rating.attendance >= 5 or attendance >= 5 %}
                                 <button type="button" class="attendance active">
                             {% else %}
                                 <button type="button" class="attendance">
@@ -105,7 +128,7 @@
     
                         {% for error in errors %}
                             {% if error.field == 'attendance' %}
-                                <span>
+                                <span class="error-message">
                                     <i data-lucide="octagon-alert"></i>
                                     {{ error.message }}
                                 </span>
@@ -118,7 +141,7 @@
                     <label>Serviço:</label>
                     <div class="starErrorContainer">
                         <div class="ratingService">
-                            {% if rating.service >= 1 %}
+                            {% if rating.service >= 1 or service >= 1 %}
                                 <button type="button" class="service active">
                             {% else %}
                                 <button type="button" class="service">
@@ -133,7 +156,7 @@
                                     C22.602,0.567,25.338,0.567,26.285,2.486z"/>
                                 </svg>
                             </button>
-                            {% if rating.service >= 2 %}
+                            {% if rating.service >= 2 or service >= 2 %}
                                 <button type="button" class="service active">
                             {% else %}
                                 <button type="button" class="service">
@@ -148,7 +171,7 @@
                                     C22.602,0.567,25.338,0.567,26.285,2.486z"/>
                                 </svg>
                             </button>
-                            {% if rating.service >= 3 %}
+                            {% if rating.service >= 3 or service >= 3 %}
                                 <button type="button" class="service active">
                             {% else %}
                                 <button type="button" class="service">
@@ -163,7 +186,7 @@
                                     C22.602,0.567,25.338,0.567,26.285,2.486z"/>
                                 </svg>
                             </button>
-                            {% if rating.service >= 4 %}
+                            {% if rating.service >= 4 or service >= 4 %}
                                 <button type="button" class="service active">
                             {% else %}
                                 <button type="button" class="service">
@@ -178,7 +201,7 @@
                                     C22.602,0.567,25.338,0.567,26.285,2.486z"/>
                                 </svg>
                             </button>
-                            {% if rating.service >= 5 %}
+                            {% if rating.service >= 5 or service >= 5 %}
                                 <button type="button" class="service active">
                             {% else %}
                                 <button type="button" class="service">
@@ -197,7 +220,7 @@
     
                         {% for error in errors %}
                             {% if error.field == 'service' %}
-                                <span>
+                                <span class="error-message">
                                     <i data-lucide="octagon-alert"></i>
                                     {{ error.message }}
                                 </span>
@@ -210,7 +233,7 @@
                     <label>Tempo:</label>
                     <div class="starErrorContainer">
                         <div class="ratingTime">
-                            {% if rating.time >= 1 %}
+                            {% if rating.time >= 1 or time >= 1 %}
                                 <button type="button" class="time active">
                             {% else %}
                                 <button type="button" class="time">
@@ -225,7 +248,7 @@
                                     C22.602,0.567,25.338,0.567,26.285,2.486z"/>
                                 </svg>
                             </button>
-                            {% if rating.time >= 2 %}
+                            {% if rating.time >= 2 or time >= 2 %}
                                 <button type="button" class="time active">
                             {% else %}
                                 <button type="button" class="time">
@@ -240,7 +263,7 @@
                                     C22.602,0.567,25.338,0.567,26.285,2.486z"/>
                                 </svg>
                             </button>
-                            {% if rating.time >= 3 %}
+                            {% if rating.time >= 3 or time >= 3 %}
                                 <button type="button" class="time active">
                             {% else %}
                                 <button type="button" class="time">
@@ -255,7 +278,7 @@
                                     C22.602,0.567,25.338,0.567,26.285,2.486z"/>
                                 </svg>
                             </button>
-                            {% if rating.time >= 4 %}
+                            {% if rating.time >= 4 or time >= 4 %}
                                 <button type="button" class="time active">
                             {% else %}
                                 <button type="button" class="time">
@@ -270,7 +293,7 @@
                                     C22.602,0.567,25.338,0.567,26.285,2.486z"/>
                                 </svg>
                             </button>
-                            {% if rating.time >= 5 %}
+                            {% if rating.time >= 5 or time >= 5 %}
                                 <button type="button" class="time active">
                             {% else %}
                                 <button type="button" class="time">
@@ -290,7 +313,7 @@
     
                         {% for error in errors %}
                             {% if error.field == 'time' %}
-                                <span>
+                                <span class="error-message">
                                     <i data-lucide="octagon-alert"></i>
                                     {{ error.message }}
                                 </span>
@@ -299,8 +322,25 @@
                     </div>
                 </div>
     
-                <label for="notes">Comentários adicionais:</label>
-                <textarea type="text" id="notes" name="notes">{{ rating.notes }}</textarea>
+                <div class="textareaContainer">
+                    <label for="notes">Comentários adicionais:</label>
+                    {% if rating.notes %}
+                        <textarea type="text" id="notes" name="notes">{{ rating.notes }}</textarea>
+                    {% elif review_notes and rating.notes %}
+                        <textarea type="text" id="notes" name="notes">{{ review_notes }}</textarea>
+                    {% else %}
+                        <textarea type="text" id="notes" name="notes">{{ review_notes }}</textarea>
+                    {% endif %}
+
+                    {% for error in errors %}
+                        {% if error.field == 'review_notes' %}
+                            <span class="error-message">
+                                <i data-lucide="octagon-alert"></i>
+                                {{ error.message }}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </section>
 
             <button type="submit" class="rating-submit">Avaliar</button>
