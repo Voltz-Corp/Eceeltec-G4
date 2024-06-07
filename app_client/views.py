@@ -1,3 +1,4 @@
+import json
 import re
 from datetime import date, timedelta
 
@@ -21,6 +22,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
+from django.core.serializers import serialize
 
 
 class SignUpClient(View): 
@@ -99,11 +101,14 @@ class SignInView(View):
 
 class OrderViewView( View):
     def get(self, request):
-        orders = OrderRequest.objects.filter(userClient_id=request.user.id)        
+        orders = OrderRequest.objects.filter(userClient_id=request.user.id)  
+        serialized_your_orders = serialize("json", orders)
+        serialized_your_orders = json.loads(serialized_your_orders)      
 
         ctx = {
             'orders': orders,
-            'user': request.user
+            'user': request.user,
+            "your_orders_formatted": serialized_your_orders
         }
 
         return render(request, 'RequestOrder/orders.html', ctx)
