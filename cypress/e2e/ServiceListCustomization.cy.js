@@ -18,7 +18,7 @@ describe('Service filtering test', () =>{
         cy.get(':nth-child(3) > :nth-child(2) > input').type('CL Mod 02')
         cy.get('#description').type('Está com cheiro de queimado')
         cy.get('#submit_button').click()
-        cy.Logout()
+        cy.ClientLogout()
         cy.CreateAdmin()
         cy.CreateEmployee()
         cy.Logout()
@@ -32,6 +32,22 @@ describe('Service filtering test', () =>{
         cy.get('.content > form > button').click()
         cy.Logout()
         cy.GoToClient()
+        cy.get(':nth-child(1) > :nth-child(4) > .view > button').click()
+        cy.get('.waitingForm > form > button').click()
+        cy.ClientLogout()
+        cy.get('#employee > a').click()
+        cy.get('#email').type('robson@robson.com')
+        cy.get('#password').type('ViraPag')
+        cy.get('button').click()
+        cy.CreateOrder()
+        cy.get('.openFilterModalBtn').click()
+        cy.get('#orderType').select('Ordem de Serviço')
+        cy.get('#orderStatus').select('Em reparo')
+        cy.get('.applyFilters').click()
+
+        cy.get('tbody > tr > :nth-child(3)').invoke('text').should('have.string', 'Ventilador | VSP40C')
+        cy.get('table').contains('Ar condicionado | CL Mod 02').should('not.exist') 
+        
     })
 
     // it('successfully filtering services as admin', () => {
