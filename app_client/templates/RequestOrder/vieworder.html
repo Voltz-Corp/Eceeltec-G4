@@ -7,7 +7,7 @@
 
 <div id="orderModal" class="modal">
     <div class="modal-content">
-        {% if order.status == "CONSERTO_FINALIZADO" and not order.isReopen %}
+        {% if order.status == "CONSERTO_FINALIZADO" %}
         <div class="product ended">
         {% else %}
         <div class="product">
@@ -54,7 +54,6 @@
                 <div class="finished">
                 
                     <a id="rate" href="{% url 'client:rate_service' order.id %}">
-                        {% comment %} <i data-lucide="star" width="28" height="28" color="#d4c02a"></i> {% endcomment %}
                         <p>Avaliar o serviço prestado</p>
                     </a>
 

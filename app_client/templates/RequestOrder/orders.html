@@ -4,6 +4,7 @@
 {% block 'head' %}
     <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\styles.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css\app_client\toast.css' %}">
+    <link rel="stylesheet" href="{% static 'app_company/css/modal/filter-order-modal.css' %}">
     <link rel="shortcut icon" href="https://i.imgur.com/FShMthn.png" type="image/x-icon">
     <title>Eccel-tec | Seus serviços</title>
 {% endblock %}
@@ -48,6 +49,7 @@
 {% endfor %}
 
 <section class="list-requests-container">
+    <input type="hidden" value="{{ your_orders_formatted }}" id="allOrders">
     <h1 class="title">Seus serviços</h1>
 
     <a href="{% url 'client:request_os' %}" >
@@ -58,7 +60,49 @@
 
     <section class="tableContainer">
         <div>
-        <h3>Suas solicitações</h3>
+            <h3>Suas solicitações</h3>
+
+            <button class="openFilterModalBtn">
+                <i data-lucide="list-filter" width="20" height="20"></i>
+                Filtrar
+            </button>
+
+            <section class="filterModal">
+                <header>
+                    <p>
+                        Filtros 
+                    </p>
+            
+                    <button type="button" class="closeFilterModalBtn">
+                        <i data-lucide="x" width="20" height="20"></i>
+                    </button>
+                </header>
+            
+                <div class="filterModalContent">
+                    <div class="statusContainer">
+                        <label for="orderStatus">Tipo de status:</label>
+                        <select name="orderStatus" id="orderStatus">
+                            <option value="all" selected>Todos</option>
+                            <option value="EM_ANALISE">Em análise</option>
+                            <option value="AGENDADO">Agendado</option>
+                            <option value="AGUARDANDO_ORCAMENTO">Aguardando orçamento</option>
+                            <option value="AGUARDANDO_CONFIRMACAO" >Aguardando confirmação</option>
+                            <option value="RECUSADO">Recusado</option>
+                            <option value="CANCELADA">Cancelada</option>
+                            <option value="ACEITO">Aceito</option>
+
+                            <option value="EM_REPARO">Em reparo</option>
+                            <option value="AGUARDANDO_PECAS">Aguardando peças</option>
+                            <option value="CONSERTO_FINALIZADO">Conserto finalizado</option>
+                            <option value="CANCELADO">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+            
+                <div class="actions">
+                    <button type="button" class="applyFilters">Aplicar</button>
+                </div>
+            </section>
         </div>
 
         <table>
@@ -89,17 +133,8 @@
                             <button>Visualizar</button>
                         </a>
                     </td>
-
-                    {% if order.status == 'CONSERTO_FINALIZADO' %}
-                        <td>
-                            <a href="{% url 'client:rate_service' order.id %}">
-                                <i data-lucide="star" width="28" height="28" color="#d4c02a"></i>
-                            </a>
-                        </td>
-                    {% endif %} 
-
                     
-                    {% if order.closedAt or order.status == 'CANELADO'%}
+                    {% if order.closedAt or order.status == 'CANCELADO' %}
                         <td>
                             <a class="delete" href="{% url 'client:delete_service' order.id %}">
                                 <button>Remover</button>
@@ -113,8 +148,7 @@
     </section>
 </section>
 
-{% block 'modal' %}
-{% endblock %}
-
-
+    {% block 'modal' %}
+    {% endblock %}
+<script src="{% static 'js/filter-order-client.js' %}"></script>
 {% endblock %}

@@ -310,7 +310,7 @@ class OrderRequestDetailView(View):
             text_content = strip_tags(html_content)
             email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
             email.attach_alternative(html_content, 'text/html')
-            # email.send()
+            email.send()
             return redirect('company:order_request_details', pk=pk)
         if status=='AGENDADO':
             order_request.status = status
@@ -334,7 +334,7 @@ class OrderRequestDetailView(View):
             text_content = strip_tags(html_content)
             email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
             email.attach_alternative(html_content, 'text/html')
-            # email.send()
+            email.send()
             return redirect('company:order_request_details', pk=pk)
         
         elif order_request.status == 'ACEITO':
@@ -362,7 +362,7 @@ class OrderRequestDetailView(View):
             text_content = strip_tags(html_content)
             email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
             email.attach_alternative(html_content, 'text/html')
-            # email.send()
+            email.send()
             messages.success(request, "Solicitação transformada em ordem de serviço.")
             return redirect('company:order_request_list') # aqui
         
@@ -383,7 +383,7 @@ class OrderRequestDetailView(View):
             text_content = strip_tags(html_content)
             email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
             email.attach_alternative(html_content, 'text/html')
-            # email.send()
+            email.send()
             return redirect('company:order_request_details', pk=pk)
 
 @method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
@@ -487,8 +487,12 @@ class YourServicesView(View):
         user_id = request.user.id
 
         orders = OrderRequest.objects.filter(employee_id=user_id)
+        serialized_your_orders = serialize("json", orders)
+        serialized_your_orders = json.loads(serialized_your_orders)
+
         ctx = {
-            "orders": orders
+            "orders": orders,
+            "your_orders_formatted": serialized_your_orders,
         }
 
         return render(request, 'app_company/your-services.html', ctx)

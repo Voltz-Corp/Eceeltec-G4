@@ -1,5 +1,6 @@
+import json
 import re
-from datetime import datetime
+from datetime import date, timedelta
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -14,13 +15,14 @@ from .models import OrderRequest, ServiceRating
 from rolepermissions.decorators import has_permission_decorator
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
-from .utils import product_verify
+from .utils import product_verify, rating_treatment
 from django.contrib.auth import authenticate, login as auth_login
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
+from django.core.serializers import serialize
 
 
 class SignUpClient(View): 
@@ -99,27 +101,40 @@ class SignInView(View):
 
 class OrderViewView( View):
     def get(self, request):
+        orders = OrderRequest.objects.filter(userClient_id=request.user.id)  
+        serialized_your_orders = serialize("json", orders)
+        serialized_your_orders = json.loads(serialized_your_orders)      
 
-        orders = OrderRequest.objects.filter(userClient_id=request.user.id)
         ctx = {
             'orders': orders,
-            'user': request.user
+            'user': request.user,
+            "your_orders_formatted": serialized_your_orders
         }
 
         return render(request, 'RequestOrder/orders.html', ctx)
-        # return render(request, 'RequestOrder/orders.html')
 
 class ViewOrder(View):
     def get(self, request, id):
         order = OrderRequest.objects.filter(id=id).first()
         orders = OrderRequest.objects.filter(userClient_id=request.user.id)
-        rating = ServiceRating.objects.filter(id=id).first()
+
+        today = date.today()
 
         ctx = {
             "order": order,
             "orders": orders,
-            "rating": rating,
+            "today": today
         }
+
+        try:
+            rating = ServiceRating.objects.get(id=id)
+            ctx['rating'] = rating
+        except:
+            print(None)
+
+        if order.closedAt:
+            max_date = order.closedAt + timedelta(days=30)
+            ctx["max_date"] = max_date
 
         return render(request, 'RequestOrder/vieworder.html', ctx)
 
@@ -220,8 +235,6 @@ class RateService(View):
         except:
             print(None)
 
-
-
         return render(request, 'RequestOrder/rateservice.html', ctx)
     def post(self, request, id):
         if 'edit_rating' in request.POST:
@@ -232,52 +245,41 @@ class RateService(View):
             time = request.POST.get('time')
             notes = request.POST.get('notes')
 
-            rating.attendance = attendance
-            rating.service = service
-            rating.time = time
-            rating.notes = notes
+            errors = rating_treatment(attendance=attendance, service=service, time=time, review_notes=notes)
 
-            rating.save()
-            return redirect('client:view_orders')
+            if len(errors) > 0:
+                order = OrderRequest.objects.get(id=id)
+                ctx = {
+                    "order": order,
+                    "errors": errors
+                }
+                return render(request, 'RequestOrder/rateservice.html', ctx)
+            else:
+                rating.attendance = attendance
+                rating.service = service
+                rating.time = time
+                rating.notes = notes
+
+                rating.save()
+                return redirect('client:view_orders')
 
         attendance = request.POST.get('attendance')
         service = request.POST.get('service')
         time = request.POST.get('time')
         review_notes = request.POST.get('notes')
 
-        errors = []
-        if attendance == None:
-            errors.append({
-            'field': 'attendance',
-            'message' : 'Este campo não pode ser vazio!'
-            })
-            print('oi!')
-        if service == None:
-            errors.append({
-            'field': 'service',
-            'message' : 'Este campo não pode ser vazio!'
-            })
-        if time == None:
-            errors.append({
-            'field': 'time',
-            'message' : 'Este campo não pode ser vazio!'
-            })
-        if len(str(review_notes)) > 200:
-            errors.append({
-            'field': 'review_notes',
-            'message' : 'Este campo não pode ser maior que 200 caractéres!'
-            })
-        if errors != '':
+        errors = rating_treatment(attendance=attendance, service=service, time=time, review_notes=review_notes)
+
+        if len(errors) > 0:
             order = OrderRequest.objects.filter(id=id).first()
             ctx = {
                 "order": order,
                 "errors": errors
-                }
+            }
             return render(request, 'RequestOrder/rateservice.html', ctx)
         else:
             rating = ServiceRating(attendance = attendance, time = time, service = service, notes = review_notes, os_id = id)
             rating.save()
-    
             return redirect('client:view_orders')
 
 class ReopenService(View):
