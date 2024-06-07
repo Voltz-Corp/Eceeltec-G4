@@ -16,6 +16,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Set local time zone
+        run: sudo timedatectl set-timezone America/Sao_Paulo
 
       - name: Set up Python version
         uses: actions/setup-python@v1
