@@ -38,8 +38,8 @@ describe('Reopening Service Tests', () => {
       cy.get(':nth-child(6) > a').click()
       cy.get('.works > button').click()
 
-      cy.get('#detailed_problem_description').type('A')
-      cy.get('#necessary_parts').type('B')
+      cy.get('#detailed_problem_description').type('Muito pelo de gato dentro do motor está interferindo na ventilação interna')
+      cy.get('#necessary_parts').type('Nenhuma, apenas limpeza')
       cy.get('.works > button').click()
 
       cy.get(':nth-child(6) > a').click()
@@ -95,8 +95,8 @@ describe('Reopening Service Tests', () => {
       cy.get(':nth-child(6) > a').click()
       cy.get('.works > button').click()
 
-      cy.get('#detailed_problem_description').type('A')
-      cy.get('#necessary_parts').type('B')
+      cy.get('#detailed_problem_description').type('Muito pelo de gato dentro do motor está interferindo na ventilação interna')
+      cy.get('#necessary_parts').type('Nenhuma, apenas limpeza')
       cy.get('.works > button').click()
 
       cy.get(':nth-child(6) > a').click()
@@ -135,8 +135,8 @@ describe('Reopening Service Tests', () => {
       cy.get(':nth-child(6) > a').click()
       cy.get('.works > button').click()
 
-      cy.get('#detailed_problem_description').type('A')
-      cy.get('#necessary_parts').type('B')
+      cy.get('#detailed_problem_description').type('Muito pelo de gato dentro do motor está interferindo na ventilação interna')
+      cy.get('#necessary_parts').type('Nenhuma, apenas limpeza')
       cy.get('.works > button').click()
 
       cy.get(':nth-child(6) > a').click()
