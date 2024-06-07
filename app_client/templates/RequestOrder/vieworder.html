@@ -57,6 +57,7 @@
                         <p>Avaliar o serviço prestado</p>
                     </a>
 
+                    {% comment %} {% if not max_date <= today %} {% endcomment %}
                     {% if not order.isReopen %}
                         <p>Finalizado em {{order.closedAt}}.</p>
                         <b>

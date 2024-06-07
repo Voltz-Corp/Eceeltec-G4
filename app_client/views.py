@@ -1,5 +1,5 @@
 import re
-from datetime import datetime
+from datetime import date, timedelta
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -99,27 +99,37 @@ class SignInView(View):
 
 class OrderViewView( View):
     def get(self, request):
+        orders = OrderRequest.objects.filter(userClient_id=request.user.id)        
 
-        orders = OrderRequest.objects.filter(userClient_id=request.user.id)
         ctx = {
             'orders': orders,
             'user': request.user
         }
 
         return render(request, 'RequestOrder/orders.html', ctx)
-        # return render(request, 'RequestOrder/orders.html')
 
 class ViewOrder(View):
     def get(self, request, id):
         order = OrderRequest.objects.filter(id=id).first()
         orders = OrderRequest.objects.filter(userClient_id=request.user.id)
-        rating = ServiceRating.objects.filter(id=id).first()
+
+        today = date.today()
 
         ctx = {
             "order": order,
             "orders": orders,
-            "rating": rating,
+            "today": today
         }
+
+        try:
+            rating = ServiceRating.objects.get(id=id)
+            ctx['rating'] = rating
+        except:
+            print(None)
+
+        if order.closedAt:
+            max_date = order.closedAt + timedelta(days=30)
+            ctx["max_date"] = max_date
 
         return render(request, 'RequestOrder/vieworder.html', ctx)
 
