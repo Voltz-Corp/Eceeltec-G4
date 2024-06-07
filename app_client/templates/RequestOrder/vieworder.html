@@ -53,7 +53,8 @@
             
                 <div class="finished">
                 
-                    <a href="{% url 'client:rate_service' order.id %}">
+                    <a id="rate" href="{% url 'client:rate_service' order.id %}">
+                        {% comment %} <i data-lucide="star" width="28" height="28" color="#d4c02a"></i> {% endcomment %}
                         <p>Avaliar o serviço prestado</p>
                     </a>
 

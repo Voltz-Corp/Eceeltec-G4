@@ -90,13 +90,14 @@
                         </a>
                     </td>
 
-                    {% if order.status == 'EM_ANALISE' %}
+                    {% if order.status == 'CONSERTO_FINALIZADO' %}
                         <td>
                             <a href="{% url 'client:rate_service' order.id %}">
                                 <i data-lucide="star" width="28" height="28" color="#d4c02a"></i>
                             </a>
                         </td>
                     {% endif %} 
+
                     
                     {% if order.closedAt or order.status == 'CANELADO'%}
                         <td>
