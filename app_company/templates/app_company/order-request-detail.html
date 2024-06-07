@@ -42,6 +42,13 @@
             </div>
             {% endif %}
 
+            {% if order_request.budget %}
+            <div class="budgetWatingConfirmation">
+                <label for="budgetWatingConfirmation">Orçamento: </label>
+                <input name="budgetWatingConfirmation"  value="R$ {{ order_request.budget }}" disabled>
+            </div>
+            {% endif %}
+
         </div>
        
         <form action="{% url 'company:order_request_details' order_request.id %}" method="post">
@@ -68,6 +75,7 @@
                 </option>
             </select>
             {% endif %}
+
             {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}
                 <div class="budgetContainer">
                     <label for="budget">Valor do orçamento: </label>
@@ -79,7 +87,8 @@
                     </span>
                     {% endif %}
                 </div>
-            {% endif %}
+            {% endif %} 
+
             {% if not order_request.scheduled_date %}
                 {% if order_request.status == "EM_ANALISE" %}
                 <div class="scheduleDateContainer">
@@ -95,6 +104,7 @@
                 </div>
                 {% endif %}
             {% endif %}
+
             {% if order_request.status != "ACEITO" %}
                 <button type="submit">Atualizar</button>
             {% else %}
