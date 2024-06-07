@@ -85,27 +85,24 @@
                         <td> - </td>
                     {% endif %}
                     <td>
-                        <a href="{% url 'client:view_order' order.id %}">
-                            <i data-lucide="eye" width="28" height="28" color="#155ec8"></i>
+                        <a class="view" href="{% url 'client:view_order' order.id %}">
+                            <button>Visualizar</button>
                         </a>
                     </td>
 
-                    {% comment %} 
                     {% if order.status == 'CONSERTO_FINALIZADO' %}
                         <td>
                             <a href="{% url 'client:rate_service' order.id %}">
                                 <i data-lucide="star" width="28" height="28" color="#d4c02a"></i>
                             </a>
                         </td>
-
-                         
                     {% endif %} 
-                    {% endcomment %}
+
                     
                     {% if order.closedAt or order.status == 'CANELADO'%}
                         <td>
-                            <a href="{% url 'client:delete_service' order.id %}">
-                                <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>
+                            <a class="delete" href="{% url 'client:delete_service' order.id %}">
+                                <button>Remover</button>
                             </a>
                         </td>
                     {% endif %}

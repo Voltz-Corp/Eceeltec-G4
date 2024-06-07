@@ -5,7 +5,7 @@ Cypress.Commands.add('DeleteAndCreateAdm', () => {
   cy.exec('python test_initiate.py', { failOnNonZeroExit: false })
 });
 
-Cypress.Commands.add('CreateClient', (name = "Gabriel Albuquerque", email = "teste@teste.com") => {
+Cypress.Commands.add('CreateClient', (name = "Gustavo Mourato", email = "teste@teste.com") => {
   cy.get('#client > a').click()
   cy.get('a').click()
   cy.get('#toggleAddress').click()
@@ -22,7 +22,7 @@ Cypress.Commands.add('CreateClient', (name = "Gabriel Albuquerque", email = "tes
 })
 
 Cypress.Commands.add('CreateOrder', () => {
-  cy.get(':nth-child(6) > a').click()
+  cy.get(':nth-child(1) > :nth-child(6) > a').click()
   cy.get('#detailed_problem_description').type('Cabos corroídos')
   cy.get('#necessary_parts').type("5 cabos")
   cy.get('.works > button').click()
@@ -41,19 +41,19 @@ Cypress.Commands.add('CreateEmployee', (name = "Robson", email = "robson@robson.
   cy.get('.new-employee-button').click()
 })
 
-Cypress.Commands.add('CreateSolicitation', () => {
+Cypress.Commands.add('CreateSolicitation', (product = 'Ventilador', brand = "Mondial", model = "VSP40C", description = "Está com cheiro de queimado") => {
   cy.get('.new-request').click()
-  cy.get(':nth-child(2) > :nth-child(1) > input').type('Ventilador')
-  cy.get(':nth-child(3) > :nth-child(1) > input').type('Mondial')
-  cy.get(':nth-child(3) > :nth-child(2) > input').type('VSP40C')
-  cy.get('#description').type('Está com cheiro de queimado')
+  cy.get(':nth-child(2) > :nth-child(1) > input').type(product)
+  cy.get(':nth-child(3) > :nth-child(1) > input').type(brand)
+  cy.get(':nth-child(3) > :nth-child(2) > input').type(model)
+  cy.get('#description').type(description)
   cy.get('#submit_button').click()
 })
 
 Cypress.Commands.add('ClientLogout', () => {
   cy.visit('/');
   cy.get('#employee > a').click()
-  cy.get('#logout').click()
+  cy.get('#logout').click() 
 })
 
 Cypress.Commands.add('GoToClient', (email = "teste@teste.com", password = "GatoLindo") => {

@@ -66,7 +66,7 @@ const oneMonthFromToday = formatDate(new Date(today.getFullYear(), today.getMont
         cy.get('.content > form > button').click()
         cy.get('.logout > button').click()
         cy.GoToClient()
-        cy.get(':nth-child(4) > a').click()
+        cy.get('.view > button').click()
         cy.get('.price > span').invoke('text').should('have.string', "50,00")
         cy.get('.waitingForm > p').invoke('text').should('have.string', "Você deseja prosseguir com o serviço?")
      })

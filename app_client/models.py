@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User,AbstractUser
 from app_company.models import Users
-
 from datetime import datetime, timedelta
+
 class OrderRequest(models.Model):
     STATUS_CHOICES = [
         ('EM_ANALISE', 'EM ANÁLISE'),
         ('AGENDADO', 'AGENDADO'),
-        ('AGUARDANDO_ORCAMENTO', 'ORÇAMENTO PENDENTE'),
+        ('AGUARDANDO_ORCAMENTO', 'AGUARDANDO ORÇAMENTO'),
         ('AGUARDANDO_CONFIRMACAO', 'AGUARDANDO CONFIRMAÇÃO'),
         ('ACEITO', 'ACEITO'),
         ('RECUSADO', 'RECUSADO'),
@@ -15,7 +15,7 @@ class OrderRequest(models.Model):
         ('EM_REPARO', 'EM REPARO'),
         ('AGUARDANDO_PECAS', 'AGUARDANDO PEÇAS'),
         ('CONSERTO_FINALIZADO', 'CONSERTO FINALIZADO'),
-        ('CANCELADO', 'CANCELDO'),
+        ('CANCELADO', 'CANCELADO'),
     ]
     productType = models.CharField(max_length=75)
     productbrand = models.CharField(max_length=75)
@@ -45,18 +45,12 @@ class OrderRequest(models.Model):
     
 class ServiceRating(models.Model):
     RATINGS = [
-    (0, '0'),
-    (1, '1'),
-    (2, '2'),
-    (3, '3'),
-    (4, '4'),
-    (5, '5'),
-    (6, '6'),
-    (7, '7'),
-    (8, '8'),
-    (9, '9'),
-    (10, '10'),
-]
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    ]
     attendance = models.IntegerField(choices=RATINGS)
     service = models.IntegerField(choices=RATINGS)
     time = models.IntegerField(choices=RATINGS)

@@ -57,7 +57,18 @@
         <form action="{% url 'client:reopen_service' order.id %}" method="POST">
             {% csrf_token %}
             <div class="actions">
-                <a href="{% url 'client:view_orders'%}" class="cancel" role="button" >Cancelar</a>
+                
+                <button id="cancel "type="button">
+                    <a class="cancel" href="{% url 'client:view_orders'%}">Cancelar</a>
+                </button>
+                
+                <script>
+                    function disableButton() {
+                        const button = document.getElementById("cancel");
+                        button.disabled = true;
+                    }
+                </script>
+
                 <button type="submit">Confirmar</button>
             </div>
         </form>
