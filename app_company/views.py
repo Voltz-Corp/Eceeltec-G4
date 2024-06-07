@@ -487,8 +487,12 @@ class YourServicesView(View):
         user_id = request.user.id
 
         orders = OrderRequest.objects.filter(employee_id=user_id)
+        serialized_your_orders = serialize("json", orders)
+        serialized_your_orders = json.loads(serialized_your_orders)
+
         ctx = {
-            "orders": orders
+            "orders": orders,
+            "your_orders_formatted": serialized_your_orders,
         }
 
         return render(request, 'app_company/your-services.html', ctx)
