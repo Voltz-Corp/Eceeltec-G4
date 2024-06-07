@@ -101,9 +101,18 @@
 
 .inputContainer {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 20px;
+}
+
+.starErrorContainer span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--red-600);
+  margin-top: 16px;
 }
 
 .ratingContent textarea {

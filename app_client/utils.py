@@ -1,5 +1,6 @@
 from app_company.models import Users
 from .models import OrderRequest
+
 def product_verify(brand, type, model, other, description, user_id):
     errors = []
 
@@ -59,5 +60,30 @@ def product_verify(brand, type, model, other, description, user_id):
     product.save()
     return product
 
+def rating_treatment(attendance, service, time, review_notes):
+    errors = []
 
-        
+    if attendance == None or not attendance.strip():
+        errors.append({
+            'field': 'attendance',
+            'message' : 'Este campo não pode ser vazio!'
+        })
+    if service == None or not service.strip():
+        errors.append({
+            'field': 'service',
+            'message' : 'Este campo não pode ser vazio!'
+        })
+    if time == None or not time.strip():
+        errors.append({
+            'field': 'time',
+            'message' : 'Este campo não pode ser vazio!'
+        })
+    if len(str(review_notes)) > 200:
+        errors.append({
+            'field': 'review_notes',
+            'message' : 'Este campo não pode ser maior que 200 caractéres!'
+        })
+    
+    return errors
+
+            
