@@ -106,10 +106,9 @@
   margin-bottom: 20px;
 }
 
-.starErrorContainer span {
+.error-message {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 4px;
   color: var(--red-600);
   margin-top: 16px;
