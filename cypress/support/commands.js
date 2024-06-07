@@ -5,7 +5,7 @@ Cypress.Commands.add('DeleteAndCreateAdm', () => {
   cy.exec('python test_initiate.py', { failOnNonZeroExit: false })
 });
 
-Cypress.Commands.add('CreateClient', (name = "Gustavo Mourato", email = "gustavo.teste@gmail.com") => {
+Cypress.Commands.add('CreateClient', (name = "Gustavo Mourato", email = "teste@teste.com") => {
   cy.get('#client > a').click()
   cy.get('a').click()
   cy.get('#toggleAddress').click()
@@ -53,10 +53,10 @@ Cypress.Commands.add('CreateSolicitation', (product = 'Ventilador', brand = "Mon
 Cypress.Commands.add('ClientLogout', () => {
   cy.visit('/');
   cy.get('#employee > a').click()
-  cy.get('#logout').click()
+  cy.get('#logout').click() 
 })
 
-Cypress.Commands.add('GoToClient', (email = "gustavo.test@gmail.com", password = "GatoLindo") => {
+Cypress.Commands.add('GoToClient', (email = "teste@teste.com", password = "GatoLindo") => {
   cy.get('#client > a').click()
   cy.get('#email').type(email)
   cy.get('#password').type(password)
