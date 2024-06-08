@@ -81,7 +81,7 @@ def rating_treatment(attendance, service, time, review_notes):
     if len(str(review_notes)) > 200:
         errors.append({
             'field': 'review_notes',
-            'message' : 'Este campo não pode ser maior que 200 caractéres!'
+            'message' : 'O seu comentário não pode ultrapassar 200 caracteres!'
         })
     
     return errors
