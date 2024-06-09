@@ -132,16 +132,83 @@
 ![issue/bug tracker1](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/fed9a939-c3cc-44ae-9dc4-e8d9a5e75374)
 ![issue/bug tracker2](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/1f50399a-ac61-4552-ae7c-9cea3bfa801c)
 
-
-
 <br>
 
 - <strong>Diagrama de Atividades</strong>
 
 ![Diagrama de atividade (4)](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/b3c87b2a-130b-440d-92be-39388379c50f)
 
+---
+# Status Report 2
+<br>
 
+### Histórias de Usuário
+---
+- <strong>H1 - Cadastro de funcionários pelo Administrador </strong>
 
+<img width="3402" alt="h1" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/e7e64450-4a46-4638-a0b9-fc406517a7f1">
+
+<br>
+
+- <strong>H2 - Gerenciamento de Solicitações </strong>
+
+<img width="3540" alt="h2" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/56ea5b81-1c77-4bcf-88ca-198acb38a412">
+
+<br>
+
+- <strong>H3 - Criação de Ordem de Serviço </strong>
+
+<img width="3540" alt="h3" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/a6ce03f8-f457-4634-a822-24b2241f87a5">
+
+<br>
+
+- <strong>H4 - Solicitação de Serviço pelo Cliente </strong>
+
+<img width="3540" alt="h4" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/98ae5d62-ca92-4f7b-a332-3242cc9c0356">
+
+<br>
+
+- <strong>H5 - Acompanhamento de Status </strong>
+
+<img width="3540" alt="h5" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/6a7aa8b4-ddf8-43e2-91e7-06b406f9e1d6">
+
+<br>
+
+- <strong>H6 - Gerenciamento de Ordens de Serviço</strong>
+
+<img width="3540" alt="h6" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/2643b096-5966-4e26-b9c0-5fef1b347ac9">
+
+<br>
+
+- <strong>H7 - Personalização da Lista de Serviços</strong>
+
+<img width="3540" alt="h7" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/3f3a7b36-fd06-44f7-93b9-a8df7bcc0c3e">
+
+<br>
+
+- <strong>H8 - Gerenciamento de Atribuições pelo Funcionário</strong>
+
+<img width="3540" alt="h8" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/14cd85a5-8d1b-4ba9-aa87-f281a498df9b">
+
+<br>
+
+- <strong>H9 - Avaliação do Serviço</strong>
+
+<img width="3540" alt="h9" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/58d4f83f-865a-4ac7-a424-99c2eea9c078">
+
+<br>
+
+- <strong>H10 - Reabertura do Serviço</strong>
+
+<img width="3540" alt="h10" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/58281eed-fc22-4528-b295-924a2f7519e9">
+
+<br>
+
+- <strong>Diagrama de Atividades</strong>
+
+![diagrama](https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/c183e157-238c-44da-bebd-dca564aba559)
+
+<br>
 
 ---
 

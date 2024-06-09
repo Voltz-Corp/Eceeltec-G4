@@ -7,7 +7,7 @@ Cypress.Commands.add('DeleteAndCreateAdm', () => {
 
 Cypress.Commands.add('CreateClient', (name = "Gustavo Mourato", email = "teste@teste.com") => {
   cy.get('#client > a').click()
-  cy.get('a').click()
+  cy.get('.footer > a').click()
   cy.get('#toggleAddress').click()
   cy.get('#name').type(name)
   cy.get('#phone').type('81900028922')
@@ -52,8 +52,8 @@ Cypress.Commands.add('CreateSolicitation', (product = 'Ventilador', brand = "Mon
 
 Cypress.Commands.add('ClientLogout', () => {
   cy.visit('/');
-  cy.get('#employee > a').click()
-  cy.get('#logout').click() 
+  
+  
 })
 
 Cypress.Commands.add('GoToClient', (email = "teste@teste.com", password = "GatoLindo") => {

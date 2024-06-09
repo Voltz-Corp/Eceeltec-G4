@@ -35,7 +35,7 @@ describe('HomePage', () => {
     cy.get(':nth-child(6) > a').click()
     cy.get('.assume').click()
 
-    cy.get(':nth-child(2) > a').click()
+    cy.get('ul > :nth-child(2) > a').click()
     cy.get('tbody > tr:first-child > :nth-child(5)').invoke('text').should("have.string", 'Paulo')
    })
 })
