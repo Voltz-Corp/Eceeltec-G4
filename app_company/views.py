@@ -27,7 +27,9 @@ from datetime import datetime, timedelta, date
 class SignView(View):
     def get(self, request):
         user = request.user
-        if user.is_authenticated:
+        id = request.user.id
+        userobject = Users.objects.filter(id=id).first()
+        if user.is_authenticated and not userobject.role == 'C':
             return render(request, 'app_company/signed.html')
         else:
             return render(request, 'app_company/sign.html')

@@ -17,7 +17,9 @@
   <main class="{% if app_name == 'app_company' %}mainCompany{% endif %}">
     <button id="menuHamburguer">Menu</button>
     <nav id="sidebarNav">
-      <img class="logo" src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
+      <a href="{% url 'home' %}">
+        <img src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
+      </a>
       <ul>
         <li class="drawers {% if app_name == 'app_company' %}active{% endif %}">
           <a href="{% url 'company:order_request_list'%}">
