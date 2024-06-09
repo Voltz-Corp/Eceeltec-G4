@@ -27,7 +27,9 @@ from datetime import datetime, timedelta, date
 class SignView(View):
     def get(self, request):
         user = request.user
-        if user.is_authenticated:
+        id = request.user.id
+        userobject = Users.objects.filter(id=id).first()
+        if user.is_authenticated and not userobject.role == 'C':
             return render(request, 'app_company/signed.html')
         else:
             return render(request, 'app_company/sign.html')
@@ -343,7 +345,25 @@ class OrderRequestDetailView(View):
             order_request.isOs = True
             detailed_problem_description = request.POST.get('detailed_problem_description')
             necessary_parts = request.POST.get('necessary_parts')
-            
+
+            nule_detailed_problem_description = detailed_problem_description.strip()
+            nule_necessary_parts = necessary_parts.strip()
+            if not nule_detailed_problem_description or len(detailed_problem_description) <= 1:
+                ctx = {
+                        "order_request": order_request,
+                        "error": {
+                        "message": f"O campo não pode ser vazio!"
+                    }
+                }
+                return render(request, "app_company/order-request-detail.html", ctx)
+            if not nule_necessary_parts or len(necessary_parts) <= 1:
+                ctx = {
+                        "order_request": order_request,
+                        "error": {
+                        "message": f"O campo não pode ser vazio!"
+                    }
+                }
+                return render(request, "app_company/order-request-detail.html", ctx)
             order_request.detailedProblemDescription = detailed_problem_description
             order_request.necessaryParts = necessary_parts
             order_request.status = 'EM_REPARO'
