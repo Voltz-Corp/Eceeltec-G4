@@ -47,8 +47,8 @@ class SignUpClient(View):
         email_treated = email.strip()
         password_treated = password.strip()
         
-        if Users.objects.filter(first_name=name).exists():
-            messages.error(request, "Um usuário com esse nome já existe.")
+        if Users.objects.filter(username=email).exists():
+            messages.error(request, "Email já cadastrado.")
             return render(request, 'session/sign-up.html')
         
         if not name_treated:
