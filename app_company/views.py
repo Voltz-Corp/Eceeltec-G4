@@ -423,7 +423,9 @@ class ServiceOrderDetailView(View):
         ctx = {
             "all_orders": all_orders,
             "employees": employees,
-            "previous_url": request.session['previous_url'] 
+            "previous_url": request.session['previous_url'] ,
+            "debug_current_url": current_url, 
+            "debug_previous_url": previous_url 
         }
 
         try:
