@@ -123,7 +123,7 @@
                         <div class="{{order.status}}"> {{order.get_status_display}} </div>
                     </td>
                     <td>{{order.productType}} | {{order.productModel}}</td>
-                    {% if order.scheduled_date and order.status == 'AGENDADO' %}
+                    {% if order.scheduled_date %}
                         <td> {{ order.scheduled_date }} </td>
                     {% else %}
                         <td> - </td>
@@ -134,7 +134,7 @@
                         </a>
                     </td>
                     
-                    {% if order.closedAt or order.status == 'CANCELADO' %}
+                    {% if order.status == 'CANCELADO' or order.status == 'RECUSADO' or order.status == 'CANCELADA'%}
                         <td>
                             <a class="delete" href="{% url 'client:delete_service' order.id %}">
                                 <button>Remover</button>

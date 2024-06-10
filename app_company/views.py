@@ -245,6 +245,7 @@ class OrderRequestDetailView(View):
         today = datetime.now().date()
         max_date = today + timedelta(days=30)
         if status == "EM_ANALISE":
+            print("RESULTADO: EM ANALISE")
             if scheduled_date != '':
                 scheduled_date = date.fromisoformat(scheduled_date)
                 if scheduled_date < today or scheduled_date > max_date:
@@ -271,6 +272,7 @@ class OrderRequestDetailView(View):
 
 
         if (status == "AGUARDANDO_ORCAMENTO" and order_request.status == "AGUARDANDO_ORCAMENTO"):
+            print("RESULTADO: AGUARDANDO ORCAMENTO")
             order_request.status = status
             
             if budget:
@@ -315,6 +317,7 @@ class OrderRequestDetailView(View):
             email.send()
             return redirect('company:order_request_details', pk=pk)
         if status=='AGENDADO':
+            print("RESULTADO: AGENDADO")
             order_request.status = status
             order_request.scheduled_date=scheduled_date
             order_request.save()
@@ -340,6 +343,7 @@ class OrderRequestDetailView(View):
             return redirect('company:order_request_details', pk=pk)
         
         elif order_request.status == 'ACEITO':
+            print("RESULTADO: ACEITO")
 
             order_request = get_object_or_404(OrderRequest, pk=pk)
             order_request.isOs = True
@@ -370,6 +374,7 @@ class OrderRequestDetailView(View):
             order_request.save()
 
             status_display = order_request.get_status_display()
+            status = order_request.status
 
             ctx = {
                 'name': user.first_name,
@@ -378,6 +383,7 @@ class OrderRequestDetailView(View):
                 'status': status_display,
                 'statusCode': status,
             }
+            print("Display:" + status_display + "Code: " + status)
             html_content = render_to_string('email/emailtemplate.html', ctx)
             text_content = strip_tags(html_content)
             email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
@@ -387,6 +393,7 @@ class OrderRequestDetailView(View):
             return redirect('company:order_request_list') # aqui
         
         else:
+            print("RESULTADO: ELSE")
             order_request.status = status
             order_request.save()
 
@@ -433,7 +440,7 @@ class ServiceOrderDetailView(View):
             print(None)
 
         try:
-            rating = ServiceRating.objects.get(id=pk)
+            rating = ServiceRating.objects.get(os=pk)
             ctx['rating'] = rating
         except:
             print(None)
@@ -478,7 +485,28 @@ class ServiceOrderDetailView(View):
         else:
             messages.error(request, "Esta ordem não pode ser atribuída nesta fase.")
 
-        return redirect('company:service_order_details', pk=service_order.pk)
+        service_order.status = new_status
+        service_order.save()
+
+        status_display = service_order.get_status_display()
+
+        ctx = {
+            'name': user.first_name,
+            'type': service_order.productType,
+            'model': service_order.productModel,
+            'status': status_display,
+            'statusCode': new_status,
+        }
+
+        userId = service_order.userClient
+
+        html_content = render_to_string('email/emailtemplate.html', ctx)
+        text_content = strip_tags(html_content)
+        email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [userId])
+        email.attach_alternative(html_content, 'text/html')
+        email.send()
+
+        return redirect('company:service_order_details', pk=pk)
 
 @method_decorator(has_permission_decorator('manage_os'), name='dispatch')
 class ManageOrder(View):

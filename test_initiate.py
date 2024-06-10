@@ -18,9 +18,10 @@ def create_admin(username, email, password):
 
 
 username = "eceel-Tec@eceeltec.com"
+first_name = "Cláudio"
 email = "eceel-Tec@eceeltec.com"
 password = "obGWjpaTayKJWpBiFSMm"
 
 
-create_admin(username, email, password)
+create_admin(username, first_name, email, password)
 
