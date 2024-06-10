@@ -52,7 +52,7 @@ describe('HomePage', () => {
             });
 
         cy.CreateClient("Luan Kato", "kato@gmail.com")
-        cy.CreateSolicitation("Geladeira", "BRM56BK", "Brastemp", "Não tá gelando e ta com cheiro forte de queimado")
+        cy.CreateSolicitation("Geladeira", "BRM56BK", "Brastemp", "Não tá gelando e tá com cheiro forte de queimado")
         cy.visit('/')
         cy.ClientLogout()
         cy.CreateAdmin()
