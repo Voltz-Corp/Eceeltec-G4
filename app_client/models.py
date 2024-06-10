@@ -25,7 +25,7 @@ class OrderRequest(models.Model):
     userClient = models.ForeignKey(Users, on_delete=models.CASCADE)
     employee = models.ForeignKey(Users, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_orders')
     status = models.CharField(max_length=30, choices=STATUS_CHOICES, default='EM_ANALISE')
-    budget = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    budget = models.CharField(max_length=9, null=True, blank=True)
     detailedProblemDescription = models.TextField(blank=True, null=True)
     necessaryParts = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)

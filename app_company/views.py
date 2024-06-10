@@ -278,15 +278,25 @@ class OrderRequestDetailView(View):
             order_request.status = status
             
             if budget:
-                if (float(budget.replace(",", ".")) <= 50000):
-                    order_request.budget = float(budget.replace(",", "."))
-                    order_request.status = "AGUARDANDO_CONFIRMACAO"
-                else:
-                    ctx = {
-                            "order_request": order_request,
-                            "errors": {
-                            "message": f"O orçamento máximo é R$50.000!"
+                try:
+                    if (float(budget.replace(".", "").replace(",", ".")) <= 50000):
+                        order_request.budget = budget
+                        order_request.status = "AGUARDANDO_CONFIRMACAO"
+                    else:
+                        ctx = {
+                                "order_request": order_request,
+                                "errors": {
+                                "message": f"O orçamento máximo é R$50.000,00!"
+                                }
                             }
+                        return render(request, "app_company/order-request-detail.html", ctx)
+                except:
+                    print(budget, budget.replace(",", "."))
+                    ctx = {
+                                "order_request": order_request,
+                                "errors": {
+                                "message": f"Insira um valor válido"
+                                }
                         }
                     return render(request, "app_company/order-request-detail.html", ctx)
             else:
@@ -312,6 +322,8 @@ class OrderRequestDetailView(View):
             
             if budget:
                 ctx["budget"] = budget
+                if "," in str(budget):
+                    ctx["comma"] = 1
             html_content = render_to_string('email/emailtemplate.html', ctx)
             text_content = strip_tags(html_content)
             email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])

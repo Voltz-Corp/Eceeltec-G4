@@ -58,7 +58,7 @@
             {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}
                 <div class="budgetContainer">
                     <label for="budget">Valor do orçamento: </label>
-                    <input type="{% if not order_request.budget %}number{% else %}text{% endif %}" name="budget" placeholder="Insira o valor do orçamento" value="{{ order_request.budget }}">
+                    <input type="text" name="budget" placeholder="Insira o valor do orçamento"value="{% if order_request.budget %}{{order_request.budget}}{% endif %}">
                     {% if errors %}
                     <span>
                         <i data-lucide="octagon-alert"></i>
