@@ -410,13 +410,20 @@ class OrderRequestDetailView(View):
 class ServiceOrderDetailView(View):
     def get(self, request, pk):
         previous_url = request.META.get('HTTP_REFERER', '/')
+        current_url = request.build_absolute_uri()
         employees = Users.objects.filter(role='F')
         all_orders = OrderRequest.objects.all()
+
+        if current_url == previous_url:
+            request.session['previous_url'] = request.session['previous_url']
+        else:
+            request.session['previous_url'] = previous_url
+
 
         ctx = {
             "all_orders": all_orders,
             "employees": employees,
-            "previous_url": previous_url 
+            "previous_url": request.session['previous_url'] 
         }
 
         try:
