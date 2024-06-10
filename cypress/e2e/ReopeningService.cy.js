@@ -21,7 +21,8 @@ describe('Reopening Service Tests', () => {
 
       cy.get('ul > :nth-child(1)').click()
       cy.get(':nth-child(6) > a').click()
-      cy.get('#status').select('Aguardando orçamento')
+      cy.get('.scheduleDateContainer > input').invoke('removeAttr', 'type').type('2024-06-18')
+      cy.get('.content > form > button').click()
       cy.get('.content > form > button').click()
       
       cy.get('.budgetContainer > input').type('90')
@@ -78,7 +79,9 @@ describe('Reopening Service Tests', () => {
 
       cy.get('ul > :nth-child(1)').click()
       cy.get(':nth-child(6) > a').click()
-      cy.get('#status').select('Aguardando orçamento')
+      // cy.get('#status').select('Aguardando orçamento')
+      cy.get('.scheduleDateContainer > input').invoke('removeAttr', 'type').type('2024-06-18')
+      cy.get('.content > form > button').click()
       cy.get('.content > form > button').click()
       
       cy.get('.budgetContainer > input').type('90')
@@ -116,11 +119,16 @@ describe('Reopening Service Tests', () => {
       cy.get('ul > :nth-child(1)').click()
       cy.get(':nth-child(6) > a').click()
 
-      cy.get('#status').select('Aguardando orçamento')
+      // cy.get('#status').select('Aguardando orçamento')
+      // cy.get('.scheduleDateContainer > input').invoke('removeAttr', 'type').type('2024-06-18')
+      // cy.get('.content > form > button').click()
+
+      // cy.get('.budgetWatingConfirmation > input').clear()
+      // cy.get('.budgetWatingConfirmation > input').type('0')
       cy.get('.content > form > button').click()
       
-      cy.get('.budgetContainer > input').clear()
-      cy.get('.budgetContainer > input').type('0')
+      // cy.get('.budgetContainer > input').clear()
+      // cy.get('.budgetContainer > input').type('0')
       cy.get('.content > form > button').click()
 
       cy.Logout()

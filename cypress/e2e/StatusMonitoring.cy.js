@@ -42,7 +42,6 @@ describe('test suite status monitoring', () => {
         cy.get(':nth-child(6) > a').click();
         cy.get('.scheduleDateContainer > input').invoke('removeAttr', 'type').type('2024-06-18')
         cy.get('.content > form > button').click();
-        cy.get('#status').select('Aguardando orçamento')
         cy.get('.content > form > button').click()
         cy.get('.budgetContainer > input').type('50')
         cy.get('.content > form > button').click()

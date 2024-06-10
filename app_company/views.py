@@ -1,6 +1,5 @@
 import json
 import os
-from datetime import datetime
 
 from django.views import View
 from django.shortcuts import render, redirect
