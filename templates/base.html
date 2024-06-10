@@ -23,7 +23,8 @@
       <ul>
         <li class="drawers {% if app_name == 'app_company' %}active{% endif %}">
           <a href="{% url 'company:order_request_list'%}">
-            <i data-lucide="rows-3"></i>
+            {% comment %} <i data-lucide="rows-3"></i> {% endcomment %}
+            <img src="{% static 'svgs/icons-gavetas.svg' %}" width="auto" height="24" alt="">
             Gavetas
           </a>
         </li>
@@ -37,7 +38,8 @@
         {% if user.role == 'A' %}
         <li class="employees {% if app_name == 'app_company' %}active{% endif %}">
           <a href="{% url 'company:list_employees'%}">
-            <i data-lucide="users-round"></i>
+            {% comment %} <i data-lucide="users-round"></i> {% endcomment %}
+            <img src="{% static 'svgs/icons-colab.svg' %}" width="auto" height="24" alt="">
             Colaboradores
           </a>
         </li>
@@ -45,7 +47,8 @@
         {% endif %}
         <li class="configs {% if app_name == 'app_company' %}active{% endif %}">
           <a href="{% url 'company:employee_config' %}">
-           <i data-lucide="settings"></i>
+           {% comment %} <i data-lucide="settings"></i> {% endcomment %}
+           <img src="{% static 'svgs/icons-config.svg' %}" width="auto" height="24" alt="">
            Configurações
           </a>
          </li>

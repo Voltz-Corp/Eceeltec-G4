@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="PASTA" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #d7d7d7;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M60.9,38.75v17.01c0,4.16-4.88,7.56-10.84,7.56H13.94c-5.96,0-10.84-3.4-10.84-7.56v-28.35c0-2.43,2.85-4.41,6.32-4.41h14.45c3.48,0,6.32,1.98,6.32,4.41v3.78h19.87c5.96,0,10.84,3.4,10.84,7.56Z"/>
+  <path class="cls-1" d="M16.5,19.5v-11h32v18"/>
+</svg>
