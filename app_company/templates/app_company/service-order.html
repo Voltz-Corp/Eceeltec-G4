@@ -14,6 +14,9 @@
             <i data-lucide="x" class="close" id="closeIcon"></i>
         </a>
 
+        <h1> {{ debug_current_url }} </h1>
+        <h1> {{ debug_previous_url }} </h1>
+
         <div class="infos">
             <h1>Solicitação {{service_order.id}}</h1>
             <p class="{{service_order.status}} status">Status: {{ service_order.get_status_display }}</p>
