@@ -245,7 +245,9 @@ class OrderRequestDetailView(View):
         scheduled_date = request.POST.get('scheduled_date')
         today = datetime.now().date()
         max_date = today + timedelta(days=30)
-        if status == "EM_ANALISE":
+        if order_request.status == "AGENDADO":
+            status = "AGUARDANDO_ORCAMENTO"
+        elif status == "EM_ANALISE":
             print("RESULTADO: EM ANALISE")
             if scheduled_date != '':
                 scheduled_date = date.fromisoformat(scheduled_date)

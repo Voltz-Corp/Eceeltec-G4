@@ -53,28 +53,7 @@
        
         <form action="{% url 'company:order_request_details' order_request.id %}" method="post">
             {% csrf_token %}
-            {% if order_request.status != "ACEITO" %}
-            <label for="status">Atualizar status:</label>
-            <select name="status" id="status">
-                <option value="EM_ANALISE" {% if order_request.status == "EM_ANALISE" %}selected{% endif %}>
-                    Em análise
-                </option>
-                <option value="AGENDADO" {% if order_request.status == "AGENDADO" %}selected{% endif %}>
-                    Agendado
-                </option>
-                <option value="AGUARDANDO_ORCAMENTO" {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}selected{% endif %}>
-                    Aguardando orçamento
-                </option>
-                {% if order_request.status == "AGUARDANDO_CONFIRMACAO" %}
-                <option value="AGUARDANDO_CONFIRMACAO"  {% if order_request.status == "AGUARDANDO_CONFIRMACAO" %}selected{% endif %}>
-                    Aguardando confirmação
-                </option>
-                {% endif %}
-                <option value="CANCELADA" {% if order_request.status == "CANCELADA" %}selected{% endif %}>
-                    Cancelada
-                </option>
-            </select>
-            {% endif %}
+            <input type="hidden" name="status" value="{{ order_request.status }}">
 
             {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}
                 <div class="budgetContainer">
@@ -125,7 +104,7 @@
                         {{ error.message }}
                     </span>
                     {% endif %}
-                    <button type="submit">Gerar ordem de serviço</button>
+                    <button type="submit">Gerar ordem de serviço.</button>
                 </div>
             {% endif %}
         </form>
