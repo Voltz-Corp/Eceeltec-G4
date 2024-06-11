@@ -165,16 +165,16 @@
   <img src="https://img.shields.io/badge/Criação de ordem de serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
 <a href="https://scribehow.com/shared/Gerenciamento_de_Ordem_de_Servico__qjG1aBjDSiSysLSXyaSxqg?referrer=documents">
-  <img src="https://img.shields.io/badge/Gerenciamento de ordem de serviço-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+  <img src="https://img.shields.io/badge/Gerenciamento de ordem de serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
 <a href="https://scribehow.com/shared/Gerenciamento_de_solicitacoes__QKlqCv9bSCCM8a6J7CH-XA?referrer=documents">
-  <img src="https://img.shields.io/badge/Gerenciamento de solicitações-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+  <img src="https://img.shields.io/badge/Gerenciamento de solicitações-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
 <a href="https://scribehow.com/shared/Gerenciamento_de_atribuicoes_pelo_funcionarios__a2hXSd-oQquLiVeFHCvIMA?referrer=documents">
-  <img src="https://img.shields.io/badge/Gerenciamento de atribuições pelo funcionário-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+  <img src="https://img.shields.io/badge/Gerenciamento de atribuições pelo funcionário-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
 <a href="https://scribehow.com/shared/Personalizacao_de_lista_de_servicos_como_funcionarioadministrador__xJxm02zwRcuuYYjaZYMeNw?referrer=documents">
-  <img src="https://img.shields.io/badge/Personalizacao de lista de servicos como funcionario/administrador-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+  <img src="https://img.shields.io/badge/Personalizacao de lista de servicos como funcionario/administrador-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
 
 </p>
