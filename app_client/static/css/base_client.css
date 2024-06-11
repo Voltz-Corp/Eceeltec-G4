@@ -178,7 +178,6 @@ h1 {
     position: absolute;
     top: 16px;
     left: 16px;
-    border: 1px solid green;
     z-index: 99999;
   }
 }

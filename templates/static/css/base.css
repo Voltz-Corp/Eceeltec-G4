@@ -1,209 +1,207 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat';
-    font-size: 16px;
-  }
-  
-  :root {
-    --red-600: #dc2626;
-    --red-700: #b91c1c;
-    --red-950: #450a0a;
-    --green-500: #22c55e;
-    --white: #f7f7f7;
-    --gray-200: #e5e7eb;
-    --gray-300: #d1d5db;
-    --gray-400: #9ca3af;
-    --gray-500: #6b7280;
-    --gray-600: #4b5563;
-    --gray-700: #374151;
-    --gray-800: #1f2937;
-  }
-  
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat';
+  font-size: 16px;
+}
 
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
+:root {
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --red-950: #450a0a;
+  --green-500: #22c55e;
+  --white: #f7f7f7;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+}
 
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--gray-400);
-    border-radius: 6px;
-  }
+::-webkit-scrollbar {
+  width: 6px;
+}
 
-  button {
-    cursor: pointer;
-  }
-  
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--gray-400);
+  border-radius: 6px;
+}
+
+button {
+  cursor: pointer;
+}
+
+#sidebarNav {
+  width: 280px;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  min-height: 100vh;
+  height: 100%;
+  padding: 0 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+}
+.logo {
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+#sidebarNav img {
+  width: 70%;
+}
+
+#logoImg {
+  text-align: center;
+  margin-top: 40px;
+}
+
+#sidebarNav ul {
+  list-style-type: none;
+  margin-top: 24px;
+}
+
+#sidebarNav li {
+  width: 100%;
+  height: 56px;
+  text-align: center;
+  display: flex;
+
+  margin-bottom: 22px;
+  border-radius: 4px;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: all 0.3s;
+}
+
+#sidebarNav li a {
+  display: flex;
+  text-decoration: none;
+  color: #d7d7d7;
+  height: 100%;
+  padding: 16px;
+  float: left;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  align-content: center;
+}
+
+.drawers img {
+  margin-right: -2px;
+}
+
+.configs {
+  margin-left: -5px;
+}
+
+.configs img {
+  margin-right: -19px;
+}
+
+.my-services {
+  margin-left: -5px;
+}
+
+.my-services img {
+  margin-right: -18px;
+}
+
+.my-services a {
+  text-align: center;
+}
+
+.employees img {
+  margin-right: -17px;
+}
+
+#sidebarNav li:hover {
+  filter: brightness(0.8);
+}
+
+#sidebarNav li.active {
+  background-color: rgba(220, 38, 38, 0.2);
+}
+
+#sidebarNav li.active a {
+  color: var(--green-500);
+}
+
+#sidebarNav form:last-child {
+  position: absolute;
+  bottom: 16px;
+
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+#sidebarNav form:last-child button {
+  color: #d7d7d7;
+  background: transparent;
+  border: none;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--white);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+#menuHamburguer {
+  display: none;
+}
+
+.usuario {
+  text-align: center;
+  padding-right: 12px;
+  font-size: 18px;
+  color: var(--white);
+}
+
+h1 {
+  color: var(--gray-800);
+}
+
+@media (max-width: 800px) {
   #sidebarNav {
-    width: 280px;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(12px);
-    min-height: 100vh;
-    height: 100%;
-    padding: 0 20px;
-  
-    display: flex;
-    flex-direction: column;
-  
-    position: relative;
-  }
-  .logo{
-    margin-top: 32px;
-    margin-bottom: 16px;
-  }
-  #sidebarNav img {
-    width: 70%;
-  }
-
-  #logoImg {
-    text-align: center;
-    margin-top: 40px;
-  }
-  
-  #sidebarNav ul {
-    list-style-type: none;
-    margin-top: 24px;
-  }
-  
-  #sidebarNav li {
-    width: 100%;
-    height: 56px;
-    text-align: center;
-    display: flex;
-  
-    margin-bottom: 22px;
-    border-radius: 4px;
-  
-    font-weight: 600;
-    cursor: pointer;
-  
-    transition: all 0.3s;
-  }
-  
-  #sidebarNav li a {
-    display: flex;
-    text-decoration: none;
-    color: #d7d7d7;
-    height: 100%;
-    padding: 16px;
-    float: left;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: left;
-    justify-content: center;
-    align-content: center;
-  }
-
-  .drawers img {
-    margin-right: -2px;
-  }
-
-  .configs{
-    margin-left: -5px;
-  }
-
-  .configs img {
-    margin-right: -19px;
-  }
-
-  .my-services{
-    margin-left: -5px;
-  }
-
-  .my-services img {
-    margin-right: -18px;
-  }
-  
-  .my-services a {
-    text-align: center;
-  }
-
-  .employees img {
-    margin-right: -17px;
-  }
-
-  #sidebarNav li:hover {
-    filter: brightness(0.8);
-  }
-  
-  #sidebarNav li.active {
-    background-color: rgba(220,38, 38, 0.2);
-  }
-  
-  #sidebarNav li.active a {
-    color: var(--green-500);
-  }
-  
-  #sidebarNav form:last-child {
-    position: absolute;
-    bottom: 16px;
-  
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    text-align: center;
-  }
-  
-  #sidebarNav form:last-child button {
-    color: #d7d7d7;
-    background: transparent;
-    border: none;
-  }
-  
-  main {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--white);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    position: relative;
-  }
-  
-  #menuHamburguer {
     display: none;
   }
-  
-  .usuario {
-    text-align: center;
-    padding-right: 12px;
-    font-size: 18px;
-    color: var(--white);
+
+  #sidebarNav.active {
+    display: flex;
+    position: absolute;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.3);
   }
-  
-  h1 {
-    color: var(--gray-800);
+
+  main {
+    display: block;
   }
-  
-  @media (max-width: 800px) {
-    #sidebarNav {
-      display: none;
-    }
-  
-    #sidebarNav.active {
-      display: flex;
-      position: absolute;
-      z-index: 999;
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-  
-    main {
-      display: block;
-    }
-  
-    #menuHamburguer {
-      display: block;
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      border: 1px solid green;
-      z-index: 99999;
-    }
+
+  #menuHamburguer {
+    display: block;
+    position: absolute;
+    top: 16px;
+    left: 2px;
+    z-index: 99999;
   }
-  
+}
