@@ -15,13 +15,9 @@ def create_admin(username, first_name, email, password):
         user = Users.objects.create_user(username=username, first_name=first_name, email=email, password=password, role='A')
         user.save()
 
-
-
 username = "eceel-Tec@eceeltec.com"
 first_name = "Cláudio"
 email = "eceel-Tec@eceeltec.com"
 password = "obGWjpaTayKJWpBiFSMm"
 
-
 create_admin(username, first_name, email, password)
-
