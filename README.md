@@ -142,6 +142,44 @@
 # Status Report 2
 <br>
 
+- <strong> Instruções de acesso - Cliente </strong>
+
+<p align="center" style="">
+<a href="https://scribehow.com/shared/Avaliacao_do_servico__-_yjD5QpRguPbuyxeI9UOA?referrer=documents">
+  <img src="https://img.shields.io/badge/Reabertura de serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+<a href="https://scribehow.com/shared/Reabertura_de_servico__A9Vu1PloSKmxt7ieLhSl8Q?referrer=documents">
+  <img src="https://img.shields.io/badge/Avaliação do serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+<a href="https://scribehow.com/shared/Personalizacao_de_lista_de_servicos_como_cliente__wn0Uhk_uS5yWaqpFk0dRJw?referrer=documents">
+  <img src="https://img.shields.io/badge/Personalização de lista de serviço como cliente-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+
+</p>
+<br/>
+
+- <strong> Instruções de acesso - Administrador e funcionário </strong>
+
+<p align="center" style="">
+<a href="https://scribehow.com/shared/Criacao_de_Ordem_de_Servico__V1McQlwHQVG5SS8BqL9zCg?referrer=documents">
+  <img src="https://img.shields.io/badge/Criação de ordem de serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+<a href="https://scribehow.com/shared/Gerenciamento_de_Ordem_de_Servico__qjG1aBjDSiSysLSXyaSxqg?referrer=documents">
+  <img src="https://img.shields.io/badge/Gerenciamento de ordem de serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+<a href="https://scribehow.com/shared/Gerenciamento_de_solicitacoes__QKlqCv9bSCCM8a6J7CH-XA?referrer=documents">
+  <img src="https://img.shields.io/badge/Gerenciamento de solicitações-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+<a href="https://scribehow.com/shared/Gerenciamento_de_atribuicoes_pelo_funcionarios__a2hXSd-oQquLiVeFHCvIMA?referrer=documents">
+  <img src="https://img.shields.io/badge/Gerenciamento de atribuições pelo funcionário-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+<a href="https://scribehow.com/shared/Personalizacao_de_lista_de_servicos_como_funcionarioadministrador__xJxm02zwRcuuYYjaZYMeNw?referrer=documents">
+  <img src="https://img.shields.io/badge/Personalizacao de lista de servicos como funcionario/administrador-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+
+</p>
+<br/>
+
 ### Histórias de Usuário
 ---
 - <strong>H1 - Cadastro de funcionários pelo Administrador </strong>
