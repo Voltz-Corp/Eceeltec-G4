@@ -89,6 +89,7 @@
                         <label>Deseja assumir a OS?</label> 
                         <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
                     {% endif %}
+                {% endif %}
                 
 
                     {% if user.role == 'A' %}
@@ -110,12 +111,13 @@
                                 {% endfor %} 
                             </select>
                         </div>
-
+                        {% if not service_order.employee %}
                         <label>Deseja assumir a OS?</label> 
                         <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
+                        {% endif %}
                     {% endif %}
 
-                {% endif %}
+                
                 <br>
                 <button class="update" type="submit">Atualizar</button> 
 
