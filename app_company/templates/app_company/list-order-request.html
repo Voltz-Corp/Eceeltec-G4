@@ -13,7 +13,6 @@
     <div class="modal-content">
         <button type="button" class="closeModalX">
             <img src="{% static 'app_company/svgs/icons-x.svg' %}" width="auto" height="56" alt="">
-            {% comment %} <i data-lucide="x"></i> {% endcomment %}
         </button>
         <strong>Confirmar deleção</strong>
         <p>Você tem certeza que deseja apagar essa solicitação/OS?</p>
@@ -39,7 +38,7 @@
                 <h3>Serviços</h3>
 
                 <button class="openFilterModalBtn">
-                    <img src="{% static 'app_company/svgs/icons-filter.svg' %}" width="auto" height="24" alt="">
+                    <img src="{% static 'app_company/svgs/icons-filter.svg' %}" width="auto" height="28" alt="">
                     Filtrar
                 </button>
 
@@ -51,7 +50,6 @@
                 
                         <button type="button" class="closeFilterModalBtn">
                             <img src="{% static 'app_company/svgs/icons-x.svg' %}" width="auto" height="56" alt="">
-                            {% comment %} <i data-lucide="x" width="20" height="20"></i> {% endcomment %}
                         </button>
                     </header>
                 
@@ -127,14 +125,12 @@
                         </td>
                         <td>
                             <a href="{% if order.isOs %} {% url 'company:service_order_details' order.id %} {% else %} {% url 'company:order_request_details' order.id %} {% endif %}">
-                                {% comment %} <i data-lucide="eye" width="24" height="24" color="#155ec8"></i> {% endcomment %}
                                 <img src="{% static 'app_company/svgs/icons-vizsualizar.svg' %}" width="auto" height="32" alt="">
                             </a>
                         </td>
                         {% if order.status == 'CANCELADA' or order.status == 'RECUSADO' or order.status == 'CANCELADO' %}
                             <td>
                                 <button type="button" class="deleteOrderRequest" data-url="{% url 'company:delete_service_order' order.id %}">
-                                    {% comment %} <i data-lucide="trash" width="24" height="24" color="#DC2626"></i> {% endcomment %}
                                     <img src="{% static 'app_company/svgs/icons-lixo.svg' %}" width="auto" height="28" alt="">
                                 </button>
                             </td>

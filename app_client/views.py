@@ -188,7 +188,7 @@ class RequestOrderView(View):
                     ctx['productDescription'] = productDescription
                     return render(request, 'RequestOrder/create-OS.html', ctx)
                 print(ctx)
-            # print(ctx)
+            
             return redirect('client:view_orders')
 
 class ProfileView(View):

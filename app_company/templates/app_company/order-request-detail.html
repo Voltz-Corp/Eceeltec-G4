@@ -13,7 +13,7 @@
             <h1>Solicitação {{order_request.id}}</h1>
             <p class="{{order_request.status}} status">Status: {{ order_request.get_status_display }}</p>
             
-             <a href="{% url 'company:order_request_list' %}"  class="closebtn">
+             <a href="{% url 'company:order_request_list' %}"><p class="closebtn">
                 <img src="{% static 'svgs/icons-x.svg' %}" width="auto" height="56" alt="">
             </a>
             <div class="infosGrid">
