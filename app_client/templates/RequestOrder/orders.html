@@ -63,7 +63,8 @@
             <h3>Suas solicitações</h3>
 
             <button class="openFilterModalBtn">
-                <i data-lucide="list-filter" width="20" height="20"></i>
+                <img src="{% static 'app_company/svgs/icons-filter.svg' %}" width="auto" height="24" alt="">
+                {% comment %} <i data-lucide="list-filter" width="20" height="20"></i> {% endcomment %}
                 Filtrar
             </button>
 
@@ -74,7 +75,8 @@
                     </p>
             
                     <button type="button" class="closeFilterModalBtn">
-                        <i data-lucide="x" width="20" height="20"></i>
+                        <img src="{% static 'app_company/svgs/icons-x.svg' %}" width="auto" height="48" alt="">
+                        {% comment %} <i data-lucide="x" width="20" height="20"></i> {% endcomment %}
                     </button>
                 </header>
             
@@ -123,7 +125,7 @@
                         <div class="{{order.status}}"> {{order.get_status_display}} </div>
                     </td>
                     <td>{{order.productType}} | {{order.productModel}}</td>
-                    {% if order.scheduled_date and order.status == 'AGENDADO' %}
+                    {% if order.scheduled_date %}
                         <td> {{ order.scheduled_date }} </td>
                     {% else %}
                         <td> - </td>
@@ -134,7 +136,7 @@
                         </a>
                     </td>
                     
-                    {% if order.closedAt or order.status == 'CANCELADO' %}
+                    {% if order.status == 'CANCELADO' or order.status == 'RECUSADO' or order.status == 'CANCELADA'%}
                         <td>
                             <a class="delete" href="{% url 'client:delete_service' order.id %}">
                                 <button>Remover</button>

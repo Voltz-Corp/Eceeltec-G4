@@ -49,6 +49,10 @@ nav {
   position: relative;
 }
 
+.configs{
+  margin-left: -5px;
+}
+
 nav img {
   width: 70%;
   align-self: center;
@@ -80,6 +84,7 @@ nav li a {
   color: #d7d7d7;
   height: 100%;
   padding: 16px;
+  float: left;
 }
 
 nav li:hover {

@@ -94,8 +94,8 @@
 
 .closebtn{
     position: absolute;
-    right: 24px;
-    top: 24px;
+    right: 0px;
+    top: 0px;
     color: var(--gray-800);
 }
 

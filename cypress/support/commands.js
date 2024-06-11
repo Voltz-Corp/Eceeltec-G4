@@ -5,6 +5,10 @@ Cypress.Commands.add('DeleteAndCreateAdm', () => {
   cy.exec('python test_initiate.py', { failOnNonZeroExit: false })
 });
 
+Cypress.Commands.add('DefineClosedAtDate', () => {
+  cy.exec('python test_reopen.py', { failOnNonZeroExit: false })
+});
+
 Cypress.Commands.add('CreateClient', (name = "Gustavo Mourato", email = "teste@teste.com") => {
   cy.get('#client > a').click()
   cy.get('.footer > a').click()

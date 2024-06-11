@@ -15,8 +15,10 @@
     <section class="order">
         <div>
             <ul>
-                <a href="{% url 'client:edit_profile' %}" class="editProfileButton"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>Editar</a>
+                <a href="{% url 'client:edit_profile' %}" class="editProfileButton">
+                    {% comment %} <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> {% endcomment %}
+                    <img src="{% static 'svgs/icons-edit.svg' %}" width="auto" height="28" alt="">
+                    Editar</a>
                 <h1>Nome:</h1>
                 <div class="profileItems">
                     <li>{{user.first_name}}</li>

@@ -318,7 +318,10 @@ class ReopenService(View):
         if not order.isReopen:
             order.isOs = False
             order.status = status_choices[0][0]
-            order.reopen_at = datetime.now()
+            order.reopen_at = datetime.now().date()
+            order.scheduled_date = None
+            order.closedAt = None
+            order.budget = None
             order.isReopen = True
             order.save()
 

@@ -13,7 +13,10 @@
             <h1>Solicitação {{order_request.id}}</h1>
             <p class="{{order_request.status}} status">Status: {{ order_request.get_status_display }}</p>
             
-             <a href="{% url 'company:order_request_list' %}"><p class="closebtn"><i data-lucide="x"></i></p></a>
+             <a href="{% url 'company:order_request_list' %}"><p class="closebtn">
+                {% comment %} <i data-lucide="x"></i> {% endcomment %}
+                <img src="{% static 'svgs/icons-x.svg' %}" width="auto" height="56" alt="">
+            </p></a>
             <div class="infosGrid">
                 <div class="productTypeContainer">
                     <label for="productbrand">Tipo: </label>
@@ -53,33 +56,12 @@
        
         <form action="{% url 'company:order_request_details' order_request.id %}" method="post">
             {% csrf_token %}
-            {% if order_request.status != "ACEITO" %}
-            <label for="status">Atualizar status:</label>
-            <select name="status" id="status">
-                <option value="EM_ANALISE" {% if order_request.status == "EM_ANALISE" %}selected{% endif %}>
-                    Em análise
-                </option>
-                <option value="AGENDADO" {% if order_request.status == "AGENDADO" %}selected{% endif %}>
-                    Agendado
-                </option>
-                <option value="AGUARDANDO_ORCAMENTO" {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}selected{% endif %}>
-                    Aguardando orçamento
-                </option>
-                {% if order_request.status == "AGUARDANDO_CONFIRMACAO" %}
-                <option value="AGUARDANDO_CONFIRMACAO"  {% if order_request.status == "AGUARDANDO_CONFIRMACAO" %}selected{% endif %}>
-                    Aguardando confirmação
-                </option>
-                {% endif %}
-                <option value="CANCELADA" {% if order_request.status == "CANCELADA" %}selected{% endif %}>
-                    Cancelada
-                </option>
-            </select>
-            {% endif %}
+            <input type="hidden" name="status" value="{{ order_request.status }}">
 
             {% if order_request.status == "AGUARDANDO_ORCAMENTO" %}
                 <div class="budgetContainer">
                     <label for="budget">Valor do orçamento: </label>
-                    <input type="{% if not order_request.budget %}number{% else %}text{% endif %}" name="budget" placeholder="Insira o valor do orçamento" value="{{ order_request.budget }}">
+                    <input type="text" name="budget" placeholder="Insira o valor do orçamento"value="{% if order_request.budget %}{{order_request.budget}}{% endif %}">
                     {% if errors %}
                     <span>
                         <i data-lucide="octagon-alert"></i>
@@ -106,7 +88,7 @@
             {% endif %}
 
             {% if order_request.status != "ACEITO" %}
-                <button type="submit">Atualizar</button>
+                <button type="submit">  {% if order_request.status == "AGENDADO" %}Equipamento recebido{% else %}Atualizar{% endif %}</button>
             {% else %}
                 <div class="works">    
                     <label for="detailed_problem_description">Descrição detalhada do problema:</label>

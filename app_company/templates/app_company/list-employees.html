@@ -48,12 +48,14 @@
                     <td> {{ employee.position }} </td>
                     <td>
                         <a href="{% url 'company:employee_details' employee.id %}" class="info-link">
-                            <i class="file-text" data-lucide="eye" width="28" height="28"></i>
+                            {% comment %} <i class="file-text" data-lucide="eye" width="28" height="28"></i> {% endcomment %}
+                            <img src="{% static 'app_company/svgs/icons-vizsualizar.svg' %}" width="auto" height="32" alt="">
                         </a>
                     </td>
                     <td>
                         <button type="button" data-url="{% url 'company:delete_employee' employee.id %}" class="openDeleteModal">
-                            <i data-lucide="trash" width="28" height="28" color="#DC2626"></i>
+                            {% comment %} <i data-lucide="trash" width="28" height="28" color="#DC2626"></i> {% endcomment %}
+                            <img src="{% static 'app_company/svgs/icons-lixo.svg' %}" width="auto" height="28" alt="">
                         </button>
                     </td>
                 </tr>

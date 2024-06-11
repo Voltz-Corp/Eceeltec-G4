@@ -1,6 +1,5 @@
 import json
 import os
-from datetime import datetime
 
 from django.views import View
 from django.shortcuts import render, redirect
@@ -245,7 +244,10 @@ class OrderRequestDetailView(View):
         scheduled_date = request.POST.get('scheduled_date')
         today = datetime.now().date()
         max_date = today + timedelta(days=30)
-        if status == "EM_ANALISE":
+        if order_request.status == "AGENDADO":
+            status = "AGUARDANDO_ORCAMENTO"
+        elif status == "EM_ANALISE":
+            print("RESULTADO: EM ANALISE")
             if scheduled_date != '':
                 scheduled_date = date.fromisoformat(scheduled_date)
                 if scheduled_date < today or scheduled_date > max_date:
@@ -272,18 +274,29 @@ class OrderRequestDetailView(View):
 
 
         if (status == "AGUARDANDO_ORCAMENTO" and order_request.status == "AGUARDANDO_ORCAMENTO"):
+            print("RESULTADO: AGUARDANDO ORCAMENTO")
             order_request.status = status
             
             if budget:
-                if (float(budget.replace(",", ".")) <= 50000):
-                    order_request.budget = float(budget.replace(",", "."))
-                    order_request.status = "AGUARDANDO_CONFIRMACAO"
-                else:
-                    ctx = {
-                            "order_request": order_request,
-                            "errors": {
-                            "message": f"O orçamento máximo é R$50.000!"
+                try:
+                    if (float(budget.replace(".", "").replace(",", ".")) <= 50000):
+                        order_request.budget = budget
+                        order_request.status = "AGUARDANDO_CONFIRMACAO"
+                    else:
+                        ctx = {
+                                "order_request": order_request,
+                                "errors": {
+                                "message": f"O orçamento máximo é R$50.000,00!"
+                                }
                             }
+                        return render(request, "app_company/order-request-detail.html", ctx)
+                except:
+                    print(budget, budget.replace(",", "."))
+                    ctx = {
+                                "order_request": order_request,
+                                "errors": {
+                                "message": f"Insira um valor válido"
+                                }
                         }
                     return render(request, "app_company/order-request-detail.html", ctx)
             else:
@@ -309,6 +322,8 @@ class OrderRequestDetailView(View):
             
             if budget:
                 ctx["budget"] = budget
+                if "," in str(budget):
+                    ctx["comma"] = 1
             html_content = render_to_string('email/emailtemplate.html', ctx)
             text_content = strip_tags(html_content)
             email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
@@ -316,6 +331,7 @@ class OrderRequestDetailView(View):
             email.send()
             return redirect('company:order_request_details', pk=pk)
         if status=='AGENDADO':
+            print("RESULTADO: AGENDADO")
             order_request.status = status
             order_request.scheduled_date=scheduled_date
             order_request.save()
@@ -341,6 +357,7 @@ class OrderRequestDetailView(View):
             return redirect('company:order_request_details', pk=pk)
         
         elif order_request.status == 'ACEITO':
+            print("RESULTADO: ACEITO")
 
             order_request = get_object_or_404(OrderRequest, pk=pk)
             order_request.isOs = True
@@ -371,6 +388,7 @@ class OrderRequestDetailView(View):
             order_request.save()
 
             status_display = order_request.get_status_display()
+            status = order_request.status
 
             ctx = {
                 'name': user.first_name,
@@ -379,6 +397,7 @@ class OrderRequestDetailView(View):
                 'status': status_display,
                 'statusCode': status,
             }
+            print("Display:" + status_display + "Code: " + status)
             html_content = render_to_string('email/emailtemplate.html', ctx)
             text_content = strip_tags(html_content)
             email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [user.username])
@@ -388,6 +407,7 @@ class OrderRequestDetailView(View):
             return redirect('company:order_request_list') # aqui
         
         else:
+            print("RESULTADO: ELSE")
             order_request.status = status
             order_request.save()
 
@@ -410,7 +430,7 @@ class OrderRequestDetailView(View):
 @method_decorator(has_permission_decorator('os&request_ops'), name='dispatch')
 class ServiceOrderDetailView(View):
     def get(self, request, pk):
-        previous_url = request.META.get('HTTP_REFERER', '/') if os.environ['TARGET_ENV'] == 'Dev' else request.META.get('HTTP_REFERER', '/').replace("http", "https")
+        previous_url = request.META.get('HTTP_REFERER', '/') if os.environ['TARGET_ENV'] == 'Dev' else request.META.get('HTTP_REFERER', '/').replace("http:", "https:")
         current_url = request.build_absolute_uri()
         employees = Users.objects.filter(role='F')
         all_orders = OrderRequest.objects.all()
@@ -434,7 +454,7 @@ class ServiceOrderDetailView(View):
             print(None)
 
         try:
-            rating = ServiceRating.objects.get(id=pk)
+            rating = ServiceRating.objects.get(os=pk)
             ctx['rating'] = rating
         except:
             print(None)
@@ -479,7 +499,28 @@ class ServiceOrderDetailView(View):
         else:
             messages.error(request, "Esta ordem não pode ser atribuída nesta fase.")
 
-        return redirect('company:service_order_details', pk=service_order.pk)
+        service_order.status = new_status
+        service_order.save()
+
+        status_display = service_order.get_status_display()
+
+        ctx = {
+            'name': user.first_name,
+            'type': service_order.productType,
+            'model': service_order.productModel,
+            'status': status_display,
+            'statusCode': new_status,
+        }
+
+        userId = service_order.userClient
+
+        html_content = render_to_string('email/emailtemplate.html', ctx)
+        text_content = strip_tags(html_content)
+        email = EmailMultiAlternatives('Sua solicitação de serviço foi atualizada', text_content, 'voltzcorporation@gmail.com', [userId])
+        email.attach_alternative(html_content, 'text/html')
+        email.send()
+
+        return redirect('company:service_order_details', pk=pk)
 
 @method_decorator(has_permission_decorator('manage_os'), name='dispatch')
 class ManageOrder(View):

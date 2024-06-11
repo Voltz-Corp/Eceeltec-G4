@@ -11,7 +11,8 @@
 <section class="modal">
     <div class="content">
         <a href="{{ previous_url }}">
-            <i data-lucide="x" class="close" id="closeIcon"></i>
+            {% comment %} <i data-lucide="x" class="close" id="closeIcon"></i> {% endcomment %}
+            <img src="{% static 'svgs/icons-x.svg' %}" width="auto" height="56" alt="">
         </a>
 
         <h1> {{ debug_current_url }} </h1>
@@ -89,30 +90,34 @@
                         <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
                     {% endif %}
                 {% endif %}
+                
 
-                {% if user.role == 'A' %}
-                    <div class="technicianContainer">
-                        <label for="tecnician">Designar Técnico:</label>
-                        <select name="tecnician" id="tecnician" placeholder="Escolher Técnico">
-                            <option value="" selected disabled>
-                                Escolher Técnico
-                            </option>
-                            {% for tec in employees %}
-                            <option 
-                                value="{{ tec.id }}" 
-                                {% if service_order.employee and service_order.employee.first_name == tec.first_name %}
-                                selected
-                                {% endif %}
-                            >
-                                {{ tec.first_name }}
-                            </option>
-                            {% endfor %} 
-                        </select>
-                    </div>
+                    {% if user.role == 'A' %}
+                        <div class="technicianContainer">
+                            <label for="tecnician">Designar Técnico:</label>
+                            <select name="tecnician" id="tecnician" placeholder="Escolher Técnico">
+                                <option value="" selected disabled>
+                                    Escolher Técnico
+                                </option>
+                                {% for tec in employees %}
+                                <option 
+                                    value="{{ tec.id }}" 
+                                    {% if service_order.employee and service_order.employee.first_name == tec.first_name %}
+                                    selected
+                                    {% endif %}
+                                >
+                                    {{ tec.first_name }}
+                                </option>
+                                {% endfor %} 
+                            </select>
+                        </div>
+                        {% if not service_order.employee %}
+                        <label>Deseja assumir a OS?</label> 
+                        <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
+                        {% endif %}
+                    {% endif %}
 
-                    <label>Deseja assumir a OS?</label> 
-                    <button type="submit" name="assume" class="assume" value="true">Assumir OS</button>
-                {% endif %}
+                
                 <br>
                 <button class="update" type="submit">Atualizar</button> 
 
