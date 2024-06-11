@@ -109,7 +109,9 @@
         {% endif %}
 
         <a role="button" class="close" href="{% url 'client:view_orders' %}">
-            <i data-lucide="x"></i>
+            {% comment %} <i data-lucide="x"></i> {% endcomment %}
+            <img src="{% static 'svgs/icons-x.svg' %}" width="auto" height="56" alt="">
+            
         </a>
     </div>
 </div>

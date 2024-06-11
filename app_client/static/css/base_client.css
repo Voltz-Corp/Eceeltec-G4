@@ -49,6 +49,10 @@ nav {
   position: relative;
 }
 
+.configs{
+  margin-left: -5px;
+}
+
 nav img {
   width: 70%;
   align-self: center;
