@@ -20,7 +20,6 @@
 
                 <button class="openFilterModalBtn">
                     <img src="{% static 'app_company/svgs/icons-filter.svg' %}" width="auto" height="28" alt="">
-                    {% comment %} <i data-lucide="list-filter" width="20" height="20"></i> {% endcomment %}
                     Filtrar
                 </button>
 
@@ -31,7 +30,6 @@
                         </p>
                 
                         <button type="button" class="closeFilterModalBtn">
-                            {% comment %} <i data-lucide="x" width="20" height="20"></i> {% endcomment %}
                             <img src="{% static 'app_company/svgs/icons-x.svg' %}" width="auto" height="56" alt="">
                         </button>
                     </header>
@@ -108,13 +106,11 @@
                         </td>
                         <td>
                             <a href="{% if order.isOs %} {% url 'company:service_order_details' order.id %} {% else %} {% url 'company:order_request_details' order.id %} {% endif %}">
-                                {% comment %} <i data-lucide="eye" width="24" height="24" color="#155ec8"></i> {% endcomment %}
                                 <img src="{% static 'app_company/svgs/icons-vizsualizar.svg' %}" width="auto" height="32" alt="">
                             </a>
                         </td>
                         {% if order.status == 'CANCELADO' or order.status == 'RECUSADO' %}
                         <td>
-                            {% comment %} <i data-lucide="trash" width="24" height="24" color="#DC2626"></i> {% endcomment %}
                             <img src="{% static 'app_company/svgs/icons-lixo.svg' %}" width="auto" height="28" alt="">
                         </td>
                         {% endif %}
