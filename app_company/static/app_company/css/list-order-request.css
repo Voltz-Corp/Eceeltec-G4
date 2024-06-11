@@ -134,3 +134,10 @@ tbody td:nth-child(2) div {
   background-color: #1971C2;
   color: #E8EDFF !important;
 }
+
+@media (max-width: 1590px) {
+  .tableContainer {
+    width: 1190px;
+    overflow-y: auto;
+  }
+}

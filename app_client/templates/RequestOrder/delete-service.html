@@ -9,10 +9,8 @@
 
 <section class="modalOverlay">
     <div class="deleteContent">
-        <a href="{% url 'client:view_orders' %}">
-            <p class="closebtn">
-                <i data-lucide="x"></i>
-            </p>
+        <a href="{% url 'client:view_orders' %}" class="closebtn">
+            <img src="{% static 'svgs/icons-x.svg' %}" width="auto" height="48" alt="">
         </a>
 
         <h1>Solicitação N {{order.id}}°</h1><br>

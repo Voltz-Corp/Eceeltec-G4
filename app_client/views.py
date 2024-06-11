@@ -246,9 +246,9 @@ class RateService(View):
             notes = request.POST.get('notes')
 
             ctx = {
-                'attendance': int(attendance),
-                'service': int(service),
-                'time': int(time),
+                'attendance': int(attendance) if type(attendance) == 'int' else attendance,
+                'service': int(service) if type(service) == 'int' else service,
+                'time': int(time) if type(time) == 'int' else time,
                 'review_notes': notes,
             }
 
@@ -276,9 +276,9 @@ class RateService(View):
         review_notes = request.POST.get('notes')
 
         ctx = {
-            'attendance': int(attendance),
-            'service': int(service),
-            'time': int(time),
+            'attendance': int(attendance) if type(attendance) == 'int' else attendance,
+            'service': int(service) if type(service) == 'int' else service,
+            'time': int(time) if type(time) == 'int' else time,
             'review_notes': review_notes,
         }
 
