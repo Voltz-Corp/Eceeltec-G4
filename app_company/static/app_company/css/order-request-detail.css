@@ -139,3 +139,10 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+@media (max-width: 1590px) {
+    .tableContainer {
+        width: 1190px;
+        overflow-y: auto;
+    }
+}

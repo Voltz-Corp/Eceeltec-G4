@@ -57,6 +57,12 @@
   border-radius: 4px;
 }
 
+.close{
+  position: absolute;
+  top: 4px;
+  right: 0px;
+}
+
 .rating h1 {
   text-align: center;
   font-size: 28px;
@@ -81,8 +87,8 @@
 .rating button svg {
   color: transparent;
   fill: var(--gray-300);
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   transition: all .2s;
 }
 

@@ -23,21 +23,18 @@
         <li class="drawers {% if app_name == 'app_client' %}active{% endif %}">
           <a href="{% url 'client:profile' %}">
             <img src="{% static 'svgs/icons-perfil.svg' %}" width="auto" height="24" alt="">
-            {% comment %} <i data-lucide="users-round"></i> {% endcomment %}
             Perfil
           </a>
         </li>
         <li class="employees {% if app_name == 'app_client' %}active{% endif %}">
          <a href="{% url 'client:view_orders'%}">
           <img src="{% static 'svgs/icons-services.svg' %}" width="auto" height="32" alt="">
-          {% comment %} <i data-lucide="file-text"></i> {% endcomment %}
           Serviços
          </a>
         </li>
         <li class="configs {% if app_name == 'app_client' %}active{% endif %}">
           <a href="#">
             <img src="{% static 'svgs/icons-config.svg' %}" width="auto" height="32" alt="">
-           {% comment %} <i data-lucide="settings"></i> {% endcomment %}
            Configurações
           </a>
          </li>
@@ -46,7 +43,6 @@
         {% csrf_token %}
         <input type="hidden" name="logout">
         <button type="submit"> 
-          {% comment %} <i data-lucide="log-out" width='40' height='40'></i> {% endcomment %}
           <img src="{% static 'svgs/icons-logout.svg' %}" width="auto" height="80" alt="">
         </button>
       </form>

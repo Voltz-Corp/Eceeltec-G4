@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "css/menu.css" %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="shortcut icon" href="https://eceel-tec.com.br/wp-content/uploads/2020/06/cropped-logo_favicon-192x192.png" type="image/x-icon">
@@ -15,7 +16,11 @@
 </head>
 <body>
   <main class="{% if app_name == 'app_company' %}mainCompany{% endif %}">
-    <button id="menuHamburguer">Menu</button>
+    <button class="hamburger hamburger--collapse" id="menuHamburguer" type="button">
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
     <nav id="sidebarNav">
       <a href="{% url 'home' %}" id="logoImg">
         <img src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
@@ -23,7 +28,6 @@
       <ul>
         <li class="drawers {% if app_name == 'app_company' %}active{% endif %}">
           <a href="{% url 'company:order_request_list'%}">
-            {% comment %} <i data-lucide="rows-3"></i> {% endcomment %}
             <img src="{% static 'svgs/icons-gavetas.svg' %}" width="auto" height="24" alt="">
             Gavetas
           </a>
@@ -31,7 +35,6 @@
         <li class="my-services {% if app_name == 'app_company' %}active{% endif %}">
           <a href="{% url 'company:your_services'%}">
             <img src="{% static 'svgs/icons-services.svg' %}" width="auto" height="32" alt="">
-            {% comment %} <i data-lucide="book-marked"></i> {% endcomment %}
             Meus serviços
           </a>
         </li>
@@ -39,7 +42,6 @@
         {% if user.role == 'A' %}
         <li class="employees {% if app_name == 'app_company' %}active{% endif %}">
           <a href="{% url 'company:list_employees'%}">
-            {% comment %} <i data-lucide="users-round"></i> {% endcomment %}
             <img src="{% static 'svgs/icons-colab.svg' %}" width="auto" height="24" alt="">
             Colaboradores
           </a>
@@ -48,7 +50,6 @@
         {% endif %}
         <li class="configs {% if app_name == 'app_company' %}active{% endif %}">
           <a href="{% url 'company:employee_config' %}">
-           {% comment %} <i data-lucide="settings"></i> {% endcomment %}
            <img src="{% static 'svgs/icons-config.svg' %}" width="auto" height="32" alt="">
            Configurações
           </a>
@@ -59,7 +60,6 @@
         <input type="hidden" name="logout">
         <button type="submit"> 
           <img src="{% static 'svgs/icons-logout.svg' %}" width="auto" height="80" alt="">
-          {% comment %} <i data-lucide="log-out" width='40' height='40'></i> {% endcomment %}
         </button>
       </form>
     </nav>

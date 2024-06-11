@@ -21,6 +21,7 @@
 .title {
   padding-bottom: 20px;
   font-size: 40px;
+  color: var(--blue-500);
 }
 
 .listOrderRequestCompanyContainer {
@@ -133,4 +134,11 @@ tbody td:nth-child(2) div {
 .AGENDADO, .AGUARDANDO_CONFIRMACAO, .EM_REPARO {
   background-color: #1971C2;
   color: #E8EDFF !important;
+}
+
+@media (max-width: 1590px) {
+  .tableContainer {
+    width: 1190px;
+    overflow-y: auto;
+  }
 }
