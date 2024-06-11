@@ -156,6 +156,10 @@
   <img src="https://img.shields.io/badge/CI/CD com Build e Deployment Automatizad-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
 </a>
 
+<a href="#">
+  <img src="https://img.shields.io/badge/screencast dos testes-3C3744?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
+</a>
+
 <a href="https://docs.google.com/document/d/18NOUklwlPUHPYoXYBvkR8hp8xUGy1oOvBzqqz7yVbRM/edit?usp=sharing">
   <img src="https://img.shields.io/badge/relatório programação em par-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
