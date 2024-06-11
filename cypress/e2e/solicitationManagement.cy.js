@@ -121,6 +121,6 @@ const oneMonthFromToday = formatDate(new Date(today.getFullYear(), today.getMont
       cy.get('.content > form > button').click()
       cy.get('.budgetContainer > input').type('54000')
       cy.get('.content > form > button').click()
-      cy.get('span').invoke('text').should('have.string', "O orçamento máximo é R$50.000!")
+      cy.get('span').invoke('text').should('have.string', "O orçamento máximo é R$50.000,00!")
     })
 })
