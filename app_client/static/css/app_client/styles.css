@@ -47,7 +47,7 @@ button {
   overflow: auto;
 }
 
- .new-request {
+.new-request {
   padding: 12px 20px;
   
   background-color: var(--gray-200);
@@ -137,24 +137,6 @@ tbody td:first-child div {
   border-radius: 99999px;
 }
 
-@media (max-width: 1653px) {
-  .card-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 1333px) {
-  .card-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 1080px) {
-  .card-list {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
 .EM_ANALISE, .AGUARDANDO_ORCAMENTO, .AGUARDANDO_PECAS {
   background-color: var(--gray-500);
   color: var(--white) !important;
@@ -175,15 +157,15 @@ tbody td:first-child div {
   color: #E8EDFF !important;
 }
 
-.rating-label{
+.rating-label {
   padding: 10px;
 }
 
-.rating-input{
+.rating-input {
   padding-top: 1000px;
 }
 
-.rating-submit{
+.rating-submit {
   margin-top: 10px;
   padding: 3px;
   border-radius: 4px;
@@ -205,4 +187,29 @@ tbody td:first-child div {
 
 .delete button {
   background-color: var(--red-600);
+}
+
+@media (max-width: 1653px) {
+  .card-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1590px) {
+  .tableContainer {
+    width: 1190px;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 1333px) {
+  .card-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1080px) {
+  .card-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

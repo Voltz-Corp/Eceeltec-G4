@@ -89,7 +89,7 @@
     padding: 32px;
     margin: 15%;
     margin-top: 5%;
-    overflow: scroll;
+    overflow: hidden;
     height: fit-content;
     position: relative;
 }
@@ -102,8 +102,8 @@
 .close {
     color: var(--gray-500);
     position: absolute;
-    top: 10px;
-    right: 4px;
+    top: -4px;
+    right: -12px;
     transition: all .3s;
 }
   
@@ -151,4 +151,11 @@
     border-radius: 4px;
     font-weight: 600;
     padding: 8px 12px;
+}
+
+@media (max-width: 1590px) {
+    .tableContainer {
+      width: 1190px;
+      overflow-y: auto;
+    }
 }
