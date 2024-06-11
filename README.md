@@ -228,7 +228,7 @@
 
 - <strong>H2 - Gerenciamento de Solicitações </strong>
 
-<img width="3540" alt="h2" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/56ea5b81-1c77-4bcf-88ca-198acb38a412">
+<img width="3540" alt="h2" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/142417669/7105d5f6-b47f-414c-80b4-ac2e7ece605f">
 
 <br>
 
@@ -246,8 +246,7 @@
 
 - <strong>H5 - Acompanhamento de Status </strong>
 
-<img width="3540" alt="h5" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/6a7aa8b4-ddf8-43e2-91e7-06b406f9e1d6">
-
+<img width="3540" alt="h5" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/142417669/7fd9dc20-961d-486c-9a34-c1dffdcd0f37">
 <br>
 
 - <strong>H6 - Gerenciamento de Ordens de Serviço</strong>
