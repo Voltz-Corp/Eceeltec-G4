@@ -16,7 +16,9 @@
   <main class="{% if app_name == 'app_client' %}mainclient{% endif %}">
     <button id="menuHamburguer">Menu</button>
     <nav id="sidebarNav">
-      <img class="logo" src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
+      <a href="{% url 'home' %}" id="logoImg">
+        <img src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
+      </a>
       <ul>
         <li class="drawers {% if app_name == 'app_client' %}active{% endif %}">
           <a href="{% url 'client:profile' %}">

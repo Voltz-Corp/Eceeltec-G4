@@ -76,6 +76,11 @@ nav li {
   transition: all 0.3s;
 }
 
+#logoImg {
+  text-align: center;
+  margin-top: 40px;
+}
+
 nav li a {
   display: flex;
   align-items: center;
@@ -114,6 +119,10 @@ nav form:last-child button {
   color: #d7d7d7;
   background: transparent;
   border: none;
+}
+
+.employees {
+  margin-left: -4px;
 }
 
 main {

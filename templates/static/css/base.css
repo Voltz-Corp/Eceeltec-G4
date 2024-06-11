@@ -57,7 +57,11 @@
   }
   #sidebarNav img {
     width: 70%;
-    align-self: center;
+  }
+
+  #logoImg {
+    text-align: center;
+    margin-top: 40px;
   }
   
   #sidebarNav ul {
@@ -68,6 +72,8 @@
   #sidebarNav li {
     width: 100%;
     height: 56px;
+    text-align: center;
+    display: flex;
   
     margin-bottom: 22px;
     border-radius: 4px;
@@ -80,23 +86,46 @@
   
   #sidebarNav li a {
     display: flex;
-    align-items: center;
-    gap: 12px;
     text-decoration: none;
     color: #d7d7d7;
     height: 100%;
     padding: 16px;
     float: left;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .drawers img {
+    margin-right: -2px;
   }
 
   .configs{
     margin-left: -5px;
   }
 
+  .configs img {
+    margin-right: -19px;
+  }
+
   .my-services{
-    margin-left: -22px;
+    margin-left: -5px;
+  }
+
+  .my-services img {
+    margin-right: -18px;
   }
   
+  .my-services a {
+    text-align: center;
+  }
+
+  .employees img {
+    margin-right: -17px;
+  }
+
   #sidebarNav li:hover {
     filter: brightness(0.8);
   }
