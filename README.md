@@ -279,6 +279,16 @@
 
 <br>
 
+- <strong>Issue/Bug tracker</strong>
+![issue-bug-tracker-1](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/00d7ae74-934d-4a7e-912a-e07a3a55da01)
+![issue-bug-tracker-2](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/b4bcbd6b-25d7-4712-837a-c58e533ac35d)
+![issue-bug-tracker-3](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/266cca27-a391-4dae-b64f-a87a589e9130)
+![issue-bug-tracker-4](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/67dded90-e336-4e79-86bd-09246cfdda22)
+![issue-bug-tracker-5](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/20918c4b-e8d9-48cc-bb73-4a2e3ac3e102)
+
+
+<br>
+
 - <strong>Diagrama de Atividades</strong>
 
 ![diagrama](https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/c183e157-238c-44da-bebd-dca564aba559)
