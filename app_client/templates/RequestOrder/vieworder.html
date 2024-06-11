@@ -45,7 +45,12 @@
                     <div>
                         <i data-lucide="dollar-sign"></i>
                     </div>
+                    
+                    {% if comma %}
                     <span>R$ {{ order.budget }}</span>
+                    {% else %} 
+                    <span>R$ {{ order.budget }},00</span>
+                    {% endif %}
                 </div>
             {% endif %}
 
