@@ -134,6 +134,29 @@ span {
     margin-top: 8px;
 }
 
+span svg {
+    width: 32px;
+}
+
+ span svg .cls-1 {
+    fill: none;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    stroke-width: 63px;
+}
+  
+span svg .cls-2 {
+    fill: var(--red-600);
+}
+
+span svg .cls-2, .cls-3 {
+    stroke-width: 0px;
+}
+
+span svg .cls-3 {
+    fill: #fff;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 63px;
+      }
+
+      .cls-2 {
+        fill: #070707;
+      }
+
+      .cls-2, .cls-3 {
+        stroke-width: 0px;
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <circle class="cls-2" cx="552.05" cy="594.76" r="313.14"/>
+  <g>
+    <line class="cls-1" x1="548.89" y1="385.43" x2="550.67" y2="692.99"/>
+    <ellipse class="cls-3" cx="549.78" cy="768.54" rx="34.67" ry="35.56"/>
+  </g>
+</svg>
