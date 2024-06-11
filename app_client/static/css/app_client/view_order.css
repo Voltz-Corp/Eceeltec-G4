@@ -129,6 +129,23 @@
   color: var(--green-600);
 }
 
+.price div svg {
+  margin-bottom: 3px;
+  margin-left: -2px;
+}
+
+.price div svg .cls-1 {
+  fill: transparent;
+}
+
+.price div svg .cls-1, .price div svg .cls-2 {
+  stroke-width: 0px;
+}
+
+.price div svg .cls-2 {
+  fill: var(--green-600);
+}
+
 .price span {
   color: var(--green-900);
   font-weight: 600;
@@ -180,6 +197,18 @@
   color: var(--green-600);
 }
 
+.waitingForm .yes div svg .cls-1 {
+  fill: none;
+  stroke: var(--green-600);
+  stroke-miterlimit: 10;
+  stroke-width: 63px;
+}
+
+.waitingForm .yes div svg {
+  margin-top: -4px;
+  margin-left: -2px;
+}
+
 .waitingForm .yes label {
   color: var(--green-900);
 }
@@ -187,6 +216,30 @@
 .waitingForm .no div {
   background-color: var(--red-100);
   color: var(--red-600);
+}
+
+.waitingForm .no div svg {
+  width: 80px;
+  margin-left: 2px;
+}
+
+.waitingForm .no div svg .cls-1 {
+  fill: #fff;
+}
+
+.waitingForm .no div svg .cls-1, .cls-2 {
+  stroke: var(--red-600);
+  stroke-miterlimit: 10;
+  stroke-width: 63px;
+}
+
+.waitingForm .no div svg .cls-2 {
+  fill: var(--red-600);
+}
+
+.waitingForm .yes div svg {
+  margin-top: -4px;
+  margin-left: -2px;
 }
 
 .waitingForm .no label {

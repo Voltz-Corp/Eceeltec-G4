@@ -11,9 +11,46 @@
 {% for message in messages %}
     <div id="toast" class="toast {{ message.tags }}">
         {% if message.tags == 'success' %}
-            <i data-lucide="circle-check"></i>
+        <svg id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+            <defs>
+              <style>
+                .cls-1 {
+                  fill: none;
+                  stroke: #fff;
+                  stroke-miterlimit: 10;
+                  stroke-width: 63px;
+                }
+          
+                .cls-2 {
+                  fill: #16a34a;
+                  stroke-width: 0px;
+                }
+              </style>
+            </defs>
+            <circle class="cls-2" cx="552.05" cy="612.64" r="313.14"/>
+            <polyline class="cls-1" points="355.11 621.78 486.67 746.22 746.22 483.11"/>
+          </svg>
         {% else %}
-            <i data-lucide="circle-x"></i>
+            <svg id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+                <defs>
+                <style>
+                    .cls-1 {
+                    fill: #DC2626;
+                    stroke-width: 0px;
+                    }
+            
+                    .cls-2 {
+                    fill: none;
+                    stroke: #fff;
+                    stroke-miterlimit: 10;
+                    stroke-width: 63px;
+                    }
+                </style>
+                </defs>
+                <circle class="cls-1" cx="501.11" cy="563.67" r="277.78"/>
+                <line class="cls-2" x1="373" y1="441.44" x2="625.44" y2="691.22"/>
+                <line class="cls-2" x1="369.61" y1="693.17" x2="621.72" y2="443.05"/>
+            </svg>
         {% endif %}
         {{message}}
     </div>
