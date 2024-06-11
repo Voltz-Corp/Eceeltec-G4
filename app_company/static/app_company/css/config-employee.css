@@ -76,7 +76,7 @@ p {
     margin-bottom: 35px;
 }
 
-button {
+.form-card button {
     width: 100%; 
     padding: 12px;
     background-color: #0056b3;
