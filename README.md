@@ -142,15 +142,49 @@
 # Status Report 2
 <br>
 
+<br/>
+<p align="center" style="">
+<a href="https://youtu.be/xb-dFE1uJJ8?si=IxET4SPOycSyncHb">
+  <img src="https://img.shields.io/badge/screencast das histórias implementadas-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
+</a>
+
+<a href="#">
+  <img src="https://img.shields.io/badge/screencast dos protótipos-3C3744?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
+</a>
+
+<a href="https://youtu.be/Yrs4vnt5XBI?si=iNwdKYPTcT6-KOd5">
+  <img src="https://img.shields.io/badge/CI/CD com Build e Deployment Automatizad-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
+</a>
+
+<a href="https://docs.google.com/document/d/18NOUklwlPUHPYoXYBvkR8hp8xUGy1oOvBzqqz7yVbRM/edit?usp=sharing">
+  <img src="https://img.shields.io/badge/relatório programação em par-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+
+<a href="https://voltz-eceeltec.azurewebsites.net/">
+  <img src="https://img.shields.io/badge/site na azure-F46036?style=for-the-badge&logo=microsoft-azure&logoColor=white" height="35px"/>
+</a>
+
+<a href="https://www.figma.com/design/0cuK26YcZAQFn6WInb5wPB/Prototipa%C3%A7%C3%A3o-Interativa-Projeto-02?node-id=0-1&t=HpVSODTXwnFXblFG-1">
+<img src="https://img.shields.io/badge/figma com os protótipos de média-3C3744?style=for-the-badge&logo=figma&logoColor=white" height="35px"/>
+</a>
+
+<a href="https://www.figma.com/board/ASOQFjfb6QsIUk4RQ92xiB/Hist%C3%B3rias?node-id=0-1&t=LbHTbQHpqApD4gBu-1">
+<img src="https://img.shields.io/badge/figma com as histórias-F46036?style=for-the-badge&logo=figma&logoColor=white" height="35px"/>
+</a>
+
+</p>
+
 - <strong> Instruções de acesso - Cliente </strong>
 
 <p align="center" style="">
 <a href="https://scribehow.com/shared/Avaliacao_do_servico__-_yjD5QpRguPbuyxeI9UOA?referrer=documents">
   <img src="https://img.shields.io/badge/Reabertura de serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
+  
 <a href="https://scribehow.com/shared/Reabertura_de_servico__A9Vu1PloSKmxt7ieLhSl8Q?referrer=documents">
   <img src="https://img.shields.io/badge/Avaliação do serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
+
 <a href="https://scribehow.com/shared/Personalizacao_de_lista_de_servicos_como_cliente__wn0Uhk_uS5yWaqpFk0dRJw?referrer=documents">
   <img src="https://img.shields.io/badge/Personalização de lista de serviço como cliente-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
