@@ -11,7 +11,8 @@
 <section class="modal">
     <div class="content">
         <a href="{{ previous_url }}">
-            <i data-lucide="x" class="close" id="closeIcon"></i>
+            {% comment %} <i data-lucide="x" class="close" id="closeIcon"></i> {% endcomment %}
+            <img src="{% static 'svgs/icons-x.svg' %}" width="auto" height="56" alt="">
         </a>
 
         <h1> {{ debug_current_url }} </h1>

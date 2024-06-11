@@ -53,8 +53,8 @@
 .close {
   color: var(--gray-500);
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: -2px;
+  right: -2px;
 }
 
 .close:hover,

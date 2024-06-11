@@ -88,6 +88,14 @@
     padding: 16px;
     float: left;
   }
+
+  .configs{
+    margin-left: -5px;
+  }
+
+  .my-services{
+    margin-left: -22px;
+  }
   
   #sidebarNav li:hover {
     filter: brightness(0.8);
