@@ -189,6 +189,10 @@
   <img src="https://img.shields.io/badge/Avaliação do serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
 
+<a href="https://scribehow.com/shared/Acompanhamento_de_status__Z_90ZlmzQU-wk3aWYA_Ayg?editmode=true">
+  <img src="https://img.shields.io/badge/Acompanhamento de status-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+
 <a href="https://scribehow.com/shared/Personalizacao_de_lista_de_servicos_como_cliente__wn0Uhk_uS5yWaqpFk0dRJw?referrer=documents">
   <img src="https://img.shields.io/badge/Personalização de lista de serviço como cliente-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
 </a>
