@@ -32,14 +32,16 @@
         <div id="users">
             <div id="employee">
                 <a href="{% url 'company:sign' %}">
-                    <i data-lucide="user-cog" width="200" height="200" stroke-width="1.2"></i>
+                    <img src="{% static 'svgs/icons-func.svg' %}" width="200" height="200" alt="">
+                    {% comment %} <i data-lucide="user-cog" width="200" height="200" stroke-width="1.2"></i> {% endcomment %}
                     <span>Sou colaborador</span>
-                </a>
-            </div>
-            <div id="div">.</div>
+                    </a>
+                    </div>
+                    <div id="div">.</div>
             <div id="client">
                 <a href="{% url 'client:sign_in' %}">
-                    <i data-lucide="user" width="200" height="200" stroke-width="1.2"></i>
+                    <img src="{% static 'svgs/icons-client.svg' %}" width="200" height="200" alt="">
+                    {% comment %} <i data-lucide="user" width="200" height="200" stroke-width="1.2"></i> {% endcomment %}
                     <span>Sou cliente</span>
                 </a>
             </div>

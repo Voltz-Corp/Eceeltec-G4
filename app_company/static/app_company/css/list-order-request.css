@@ -21,6 +21,7 @@
 .title {
   padding-bottom: 20px;
   font-size: 40px;
+  color: var(--blue-500);
 }
 
 .listOrderRequestCompanyContainer {

@@ -142,6 +142,82 @@
 # Status Report 2
 <br>
 
+<br/>
+<p align="center" style="">
+<a href="https://youtu.be/xb-dFE1uJJ8?si=IxET4SPOycSyncHb">
+  <img src="https://img.shields.io/badge/screencast das histórias implementadas-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
+</a>
+
+<a href="#">
+  <img src="https://img.shields.io/badge/screencast dos protótipos-3C3744?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
+</a>
+
+<a href="https://youtu.be/Yrs4vnt5XBI?si=iNwdKYPTcT6-KOd5">
+  <img src="https://img.shields.io/badge/CI/CD com Build e Deployment Automatizad-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
+</a>
+
+<a href="#">
+  <img src="https://img.shields.io/badge/screencast dos testes-3C3744?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
+</a>
+
+<a href="https://docs.google.com/document/d/18NOUklwlPUHPYoXYBvkR8hp8xUGy1oOvBzqqz7yVbRM/edit?usp=sharing">
+  <img src="https://img.shields.io/badge/relatório programação em par-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+
+<a href="https://voltz-eceeltec.azurewebsites.net/">
+  <img src="https://img.shields.io/badge/site na azure-F46036?style=for-the-badge&logo=microsoft-azure&logoColor=white" height="35px"/>
+</a>
+
+<a href="https://www.figma.com/design/0cuK26YcZAQFn6WInb5wPB/Prototipa%C3%A7%C3%A3o-Interativa-Projeto-02?node-id=0-1&t=HpVSODTXwnFXblFG-1">
+<img src="https://img.shields.io/badge/figma com os protótipos de média-3C3744?style=for-the-badge&logo=figma&logoColor=white" height="35px"/>
+</a>
+
+<a href="https://www.figma.com/board/ASOQFjfb6QsIUk4RQ92xiB/Hist%C3%B3rias?node-id=0-1&t=LbHTbQHpqApD4gBu-1">
+<img src="https://img.shields.io/badge/figma com as histórias-F46036?style=for-the-badge&logo=figma&logoColor=white" height="35px"/>
+</a>
+
+</p>
+
+- <strong> Instruções de acesso - Cliente </strong>
+
+<p align="center" style="">
+<a href="https://scribehow.com/shared/Avaliacao_do_servico__-_yjD5QpRguPbuyxeI9UOA?referrer=documents">
+  <img src="https://img.shields.io/badge/Reabertura de serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+  
+<a href="https://scribehow.com/shared/Reabertura_de_servico__A9Vu1PloSKmxt7ieLhSl8Q?referrer=documents">
+  <img src="https://img.shields.io/badge/Avaliação do serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+
+<a href="https://scribehow.com/shared/Personalizacao_de_lista_de_servicos_como_cliente__wn0Uhk_uS5yWaqpFk0dRJw?referrer=documents">
+  <img src="https://img.shields.io/badge/Personalização de lista de serviço como cliente-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+
+</p>
+<br/>
+
+- <strong> Instruções de acesso - Administrador e funcionário </strong>
+
+<p align="center" style="">
+<a href="https://scribehow.com/shared/Criacao_de_Ordem_de_Servico__V1McQlwHQVG5SS8BqL9zCg?referrer=documents">
+  <img src="https://img.shields.io/badge/Criação de ordem de serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+<a href="https://scribehow.com/shared/Gerenciamento_de_Ordem_de_Servico__qjG1aBjDSiSysLSXyaSxqg?referrer=documents">
+  <img src="https://img.shields.io/badge/Gerenciamento de ordem de serviço-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+<a href="https://scribehow.com/shared/Gerenciamento_de_solicitacoes__QKlqCv9bSCCM8a6J7CH-XA?referrer=documents">
+  <img src="https://img.shields.io/badge/Gerenciamento de solicitações-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+<a href="https://scribehow.com/shared/Gerenciamento_de_atribuicoes_pelo_funcionarios__a2hXSd-oQquLiVeFHCvIMA?referrer=documents">
+  <img src="https://img.shields.io/badge/Gerenciamento de atribuições pelo funcionário-F46036?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+<a href="https://scribehow.com/shared/Personalizacao_de_lista_de_servicos_como_funcionarioadministrador__xJxm02zwRcuuYYjaZYMeNw?referrer=documents">
+  <img src="https://img.shields.io/badge/Personalizacao de lista de servicos como funcionario/administrador-3C3744?style=for-the-badge&logo=googledocs&logoColor=white" height="35px"/>
+</a>
+
+</p>
+<br/>
+
 ### Histórias de Usuário
 ---
 - <strong>H1 - Cadastro de funcionários pelo Administrador </strong>
@@ -152,7 +228,7 @@
 
 - <strong>H2 - Gerenciamento de Solicitações </strong>
 
-<img width="3540" alt="h2" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/56ea5b81-1c77-4bcf-88ca-198acb38a412">
+<img width="3540" alt="h2" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/142417669/7105d5f6-b47f-414c-80b4-ac2e7ece605f">
 
 <br>
 
@@ -170,8 +246,7 @@
 
 - <strong>H5 - Acompanhamento de Status </strong>
 
-<img width="3540" alt="h5" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/6a7aa8b4-ddf8-43e2-91e7-06b406f9e1d6">
-
+<img width="3540" alt="h5" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/142417669/7fd9dc20-961d-486c-9a34-c1dffdcd0f37">
 <br>
 
 - <strong>H6 - Gerenciamento de Ordens de Serviço</strong>
@@ -201,6 +276,16 @@
 - <strong>H10 - Reabertura do Serviço</strong>
 
 <img width="3540" alt="h10" src="https://github.com/Voltz-Corp/Eceeltec-G4/assets/117609505/fad484c1-112f-4351-bb25-7259e0d25b46">
+
+<br>
+
+- <strong>Issue/Bug tracker</strong>
+![issue-bug-tracker-1](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/00d7ae74-934d-4a7e-912a-e07a3a55da01)
+![issue-bug-tracker-2](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/b4bcbd6b-25d7-4712-837a-c58e533ac35d)
+![issue-bug-tracker-3](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/266cca27-a391-4dae-b64f-a87a589e9130)
+![issue-bug-tracker-4](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/67dded90-e336-4e79-86bd-09246cfdda22)
+![issue-bug-tracker-5](https://github.com/Voltz-Corp/Eceeltec-G4/assets/142419823/20918c4b-e8d9-48cc-bb73-4a2e3ac3e102)
+
 
 <br>
 

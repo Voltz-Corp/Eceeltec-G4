@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "css/menu.css" %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="shortcut icon" href="https://eceel-tec.com.br/wp-content/uploads/2020/06/cropped-logo_favicon-192x192.png" type="image/x-icon">
@@ -15,7 +16,11 @@
 </head>
 <body>
   <main class="{% if app_name == 'app_company' %}mainCompany{% endif %}">
-    <button id="menuHamburguer">Menu</button>
+    <button class="hamburger hamburger--collapse" id="menuHamburguer" type="button">
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
     <nav id="sidebarNav">
       <a href="{% url 'home' %}" id="logoImg">
         <img src="https://i.imgur.com/FShMthn.png" alt="Logo Eccel-tec">
