@@ -148,15 +148,15 @@
   <img src="https://img.shields.io/badge/screencast das histórias implementadas-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
 </a>
 
-<a href="#">
+<a href="https://youtu.be/92k6QyKRMoA?si=OfD_HLQPp94QtIRo">
   <img src="https://img.shields.io/badge/screencast dos protótipos-3C3744?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
 </a>
 
 <a href="https://youtu.be/Yrs4vnt5XBI?si=iNwdKYPTcT6-KOd5">
-  <img src="https://img.shields.io/badge/CI/CD com Build e Deployment Automatizad-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
+  <img src="https://img.shields.io/badge/CI/CD com Build e Deployment Automatizado-F46036?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
 </a>
 
-<a href="#">
+<a href="https://youtu.be/Rc_jRnigqS8?si=HTr25LMDazJT7kng">
   <img src="https://img.shields.io/badge/screencast dos testes-3C3744?style=for-the-badge&logo=youtube&logoColor=white" height="35px"/>
 </a>
 
